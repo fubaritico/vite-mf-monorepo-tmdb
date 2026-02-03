@@ -1,0 +1,414 @@
+# vite-mf-monorepo Project Rules
+
+## Development Environment
+
+- **IDE**: IntelliJ IDEA (WebStorm)
+- **Package Manager**: pnpm (version 10.8.1)
+- **Operating System**: macOS
+- **Node Version**: >= 22.11.0
+
+## Code Generation Rules for AI
+
+**CRITICAL**: All code generated must be compliant with the project's ESLint and Prettier configuration.
+
+### When generating code, ALWAYS:
+- Sort imports alphabetically with proper groups (builtin, external, internal, parent, sibling, index, object, type)
+- Add newlines between import groups
+- Use functional React components only
+- Never use `console.log` (only `console.warn` or `console.error`)
+- Never use explicit `any` type
+- Follow BEM-like CSS naming with context prefixes
+- Use strict TypeScript types
+- Add proper JSDoc comments when needed
+- Ensure no unused variables or imports
+- Use single quotes for strings (per Prettier config)
+- Use 2 spaces for indentation
+- Add semicolons at end of statements
+
+### React Component Patterns
+
+**How to identify which pattern to use:**
+- **Reusable Component**: If the request mentions "component", "UI", "reusable", "button", "input", "card", "modal", or any UI element without data fetching
+- **Page Component**: If the request mentions "page", "route", "loader", "data fetching", "TanStack Query", or needs to fetch data from an API
+
+#### 1. Reusable Components (UI Components)
+
+**File structure:**
+```
+ComponentName/
+├── ComponentName.tsx
+├── ComponentName.css
+└── ComponentName.test.tsx (if applicable)
+```
+
+**Component template:**
+```typescript
+import clsx from 'clsx'
+
+import './ComponentName.css'
+
+import type { FC, HTMLAttributes } from 'react'
+
+export interface ComponentNameProps extends HTMLAttributes<HTMLDivElement> {
+  /* Component prop description */
+  propName?: string
+  /* Size variant */
+  size?: 'sm' | 'md' | 'lg'
+  /* Visual variant */
+  variant?: 'primary' | 'secondary'
+}
+
+const ComponentName: FC<ComponentNameProps> = ({
+  className,
+  propName,
+  size = 'md',
+  variant = 'primary',
+  ...rest
+}) => {
+  return (
+    <div
+      className={clsx('ComponentName', size, variant, className)}
+      {...rest}
+    >
+      {/* Component content */}
+    </div>
+  )
+}
+
+export default ComponentName
+```
+
+**Reusable component rules:**
+- Use `clsx` for conditional class names
+- Extend appropriate HTML attributes (HTMLAttributes, ButtonHTMLAttributes, etc.)
+- Destructure props with defaults
+- Spread remaining props with `{...rest}`
+- Export interface as named export
+- Export component as default
+- Add JSDoc comments for all props
+- Use PascalCase for root className
+- Colocate CSS file
+
+#### 2. Page Components (Route Components with Data Loading)
+
+**File structure:**
+```
+PageName/
+├── PageName.tsx
+├── PageName.css
+└── PageName.test.tsx (if applicable)
+```
+
+**Component template:**
+```typescript
+import { QueryClient } from '@tanstack/react-query'
+import { useLoaderData, useQuery } from 'react-router-dom'
+
+import './PageName.css'
+
+import type { FC } from 'react'
+
+// Type definitions
+export type RouteComponent = FC & {
+  loader: (queryClient: QueryClient) => () => Promise<DataType>
+}
+
+interface PageNameProps {
+  // Props if needed
+}
+
+// Query definition
+const query = () => ({
+  queryKey: ['queryName'],
+  queryFn: async () => {
+    // Fetch logic
+  },
+})
+
+// Loader for React Router
+const loader = (queryClient: QueryClient) => async () => {
+  return queryClient.ensureQueryData(query())
+}
+
+// Component
+const PageName: RouteComponent = (props: PageNameProps) => {
+  const initialData = useLoaderData<DataType>()
+
+  const { data, error, isLoading } = useQuery<DataType>({
+    ...query(),
+    initialData,
+  })
+
+  if (isLoading) {
+    return <div className="loading">Loading...</div>
+  }
+
+  if (error) {
+    return <div className="error">{error.message}</div>
+  }
+
+  return (
+    <div className="page-name">
+      {/* Page content */}
+    </div>
+  )
+}
+
+export default PageName
+
+// Attach loader to component
+PageName.loader = loader
+```
+
+**Page component rules:**
+- Use RouteComponent pattern for components with loaders
+- Handle loading and error states explicitly
+- Use kebab-case for root className
+- Colocate CSS file
+- Export RouteComponent type as named export
+- Attach loader to component after export
+
+**CSS naming convention (both types):**
+- Root class: PascalCase for reusable components (`.Button`), kebab-case for pages (`.page-name`)
+- Child elements: `.ComponentName-element` or `.page-name-element`
+- Modifiers: Use clsx with variant props instead of BEM modifiers
+- Context prefix for domain-specific components (e.g., `.movie-grid-card`)
+
+**General component rules:**
+- Always use functional components with arrow functions
+- Export component as default
+- Export types and interfaces as named exports
+- Use data-testid attributes for testable elements
+- Never use inline styles unless absolutely necessary
+
+## Tech Stack
+
+### Architecture
+- **Monorepo**: Lerna 8.2.2 + pnpm workspaces (pnpm 10.8.1)
+- **Micro-frontends**: Module Federation with @module-federation/vite 1.2.6
+- **Build**: Vite 6.2
+- **Node**: >= 22.11.0
+
+### Frontend
+- **Framework**: React 19.0.0
+- **Routing**: React Router 7.5.2
+- **Data fetching**: TanStack Query 5.74.4
+- **Styling**: Native CSS (no Tailwind for now, no CSS Modules)
+- **TypeScript**: 5.7.2
+
+### Quality
+- **Linting**: ESLint 9 (flat config) + Prettier 3.5.3
+- **Tests**: Vitest 3.1.2 + React Testing Library 16.3.0 + jsdom 26.1.0
+- **Git hooks**: Husky 9.1.7 + commitlint + lint-staged
+- **Coverage**: @vitest/coverage-v8 3.1.2
+
+### Module Federation
+- **Types**: @module-federation/native-federation-typescript 0.6.0
+- **CSS injection**: vite-plugin-css-injected-by-js 3.5.2
+- **Top-level await**: vite-plugin-top-level-await 1.5.0
+
+### Production
+- **Server**: Express 5.1.0 with CORS
+- **External API**: TMDB API (key in .env.local)
+
+## Project Structure
+
+### Packages
+- `apps/host`: Host application (port 3000) that consumes remotes
+- `packages/list`: Remote for movie list (port 3001, route `/`)
+- `packages/detail`: Remote for movie detail (port 3002, route `/detail/:id`)
+- `packages/shared`: Shared utilities (healthCheck, retry)
+
+### Ports (defined in .env)
+- HOST_PORT=3000
+- REMOTE_LIST_PORT=3001
+- REMOTE_DETAIL_PORT=3002
+
+## Code Conventions
+
+### TypeScript
+- Strict mode enabled
+- No explicit `any` (ESLint error)
+- No unused variables (ESLint error)
+- strictTypeChecked + stylisticTypeChecked configuration
+
+### React
+- Functional components only
+- Hooks are mandatory (react-hooks/rules-of-hooks: error)
+- No `console.log` (only `console.warn` and `console.error`)
+- React 19 without explicit React import (automatic JSX transform)
+
+### Imports
+- Alphabetical sorting with groups: builtin, external, internal, parent, sibling, index, object, type
+- Newlines between groups
+- Sort-imports enabled with ignoreDeclarationSort
+
+### CSS
+- BEM-like naming with context prefixes
+- No CSS Modules
+- Styles colocated with components
+- `index.css` duplicated in each package for standalone mode
+- Dynamic injection via vite-plugin-css-injected-by-js in remotes
+
+### Commits
+- Conventional commits format mandatory
+- Allowed types: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test
+- Type in lowercase
+- Subject without trailing period
+- Max 100 characters for header
+
+## Git Workflow
+
+### Pre-commit Hook
+Automatically runs before each commit:
+1. `pnpm run type-check` - TypeScript validation
+2. `pnpm run lint` - ESLint check
+3. `pnpm run test` - Vitest tests
+
+All checks must pass before the commit is allowed.
+
+### Commit Message Hook
+- Uses commitlint to validate commit message format
+- Enforces conventional commits standard
+- Validates type, scope, and subject format
+
+### Commit Message Format
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+**Examples:**
+- `feat(list): add pagination to movie grid`
+- `fix(detail): resolve image loading issue`
+- `chore(deps): update vite to 6.2.0`
+- `docs(readme): update installation instructions`
+
+**Rules:**
+- Type must be one of: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test
+- Type must be lowercase
+- Scope is optional but recommended (list, detail, host, shared)
+- Subject must not end with a period
+- Subject must be lowercase (no PascalCase, UPPER_CASE, or sentence-case)
+- Header (type + scope + subject) must not exceed 100 characters
+- Body and footer are optional
+
+## Module Federation Architecture
+
+### Bootstrap Pattern
+- Entry point: `main.tsx` → `await import('./bootstrap')`
+- Allows Module Federation initialization before application code
+
+### Standalone Remotes
+- Each remote can function autonomously
+- Dual configuration: standalone routes + MF exposition
+- Bootstrap creates its own router and QueryClient
+- Different App wrapper in standalone vs consumed by host
+
+### Type Generation
+- NativeFederationTypeScriptRemote plugin in remotes (dev only)
+- NativeFederationTypeScriptHost plugin in host (dev only)
+- Types generated in `@mf-types/` and resolved via tsconfig paths
+- RouteComponent pattern to expose typed loaders
+
+### Health Checks
+- `checkRemoteHealth` utility in packages/shared
+- Retry with backoff (5 attempts, 1s delay)
+- 5s timeout per attempt
+- `/health` endpoint in each Express server
+
+### Shared Dependencies
+- react, react-dom, react-router-dom, @tanstack/react-query as singletons
+- Strict versions defined in MF config
+
+## Scripts
+
+### Development
+- `pnpm dev`: Launch all packages in parallel
+- `pnpm dev:ordered`: Launch in order list → detail → host
+- `pnpm [package]:dev`: Launch a specific package
+
+### Production
+- `pnpm prod`: Build and launch in production mode with Express servers
+- Each remote exposes an Express server with CORS and /health endpoint
+
+### Quality
+- `pnpm lint`: ESLint on entire project
+- `pnpm lint:fix`: ESLint with auto-fix
+- `pnpm type-check`: TypeScript check without emission
+- `pnpm test`: Vitest tests
+- `pnpm coverage`: Tests with coverage
+
+## Tests
+
+### Configuration
+- Workspace mode on `packages/*`
+- Globals enabled (no need to import describe, it, expect)
+- Setup file: vitest.setup.ts with @testing-library/jest-dom
+- Coverage on `packages/*/src/**/*`
+
+### Structure
+- Tests colocated with components
+- Using React Testing Library
+- Mocks in `src/mocks/`
+
+## Forbidden
+
+### Code
+- ❌ No `console.log` (use console.warn or console.error)
+- ❌ No explicit `any` in TypeScript
+- ❌ No unused variables/parameters
+- ❌ No unsorted imports
+- ❌ No CSS Modules (use classic classes)
+- ❌ No CSS-in-JS
+
+### Commits
+- ❌ No commits without conventional type
+- ❌ No subject in PascalCase, UPPER_CASE, or sentence-case
+- ❌ No trailing period in subject
+- ❌ No header > 100 characters
+
+### Architecture
+- ❌ Never modify shared dependencies without synchronizing host and remotes
+- ❌ Never delete index.css files (required for standalone mode)
+- ❌ Never disable cssInjectedByJsPlugin in remotes
+
+## Best Practices
+
+### Module Federation
+- Always test in standalone AND integrated in host
+- Verify types are generated in @mf-types/ in dev
+- Ensure health checks work before starting host
+- Expose loaders with RouteComponent pattern
+
+### CSS
+- Prefix classes by context (movie-grid-, movie-detail-, etc.)
+- Keep index.css synchronized across all packages
+- Use relativeCSSInjection: true in cssInjectedByJsPlugin
+
+### Tests
+- Add data-testid on tested elements
+- Use React Testing Library queries (getByRole, getByTestId, etc.)
+- Mock API calls in tests
+
+### Performance
+- Use lazy loading for remotes in host
+- Configure staleTime and refetch in QueryClient
+- Singleton for shared dependencies
+
+## Known Issues
+
+### Dev Mode
+- A refresh is required to load remotes on first startup
+- Production and standalone modes work correctly
+
+## Future Enhancements
+
+- Migration to Tailwind CSS for styling
+- E2E tests with Vitest in browser mode
+- People package for talent details
+- More tests for error cases
+- Test utils in shared package
