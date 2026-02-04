@@ -30,6 +30,6 @@
       "*": ["./@mf-types/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "./@mf-types/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

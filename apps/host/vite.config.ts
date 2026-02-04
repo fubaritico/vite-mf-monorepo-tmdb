@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { federation } from '@module-federation/vite'
-import { NativeFederationTypeScriptHost } from '@module-federation/native-federation-typescript/vite'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -55,19 +54,12 @@ const moduleFederationConfig2 = {
       requiredVersion: '^5.74.4',
     },
   },
+  dts: false,
 }
 
 export default defineConfig(({ mode }) => {
   return {
     plugins: [
-      ...(mode !== 'production'
-        ? [
-            NativeFederationTypeScriptHost({
-              moduleFederationConfig,
-              deleteTypesFolder: true,
-            }),
-          ]
-        : []),
       federation(moduleFederationConfig2),
       react(),
     ],

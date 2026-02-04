@@ -12,12 +12,12 @@
     "lint:fix": "eslint ./src --fix"
   },
   "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-router-dom": "^7.5.2"
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router-dom": "catalog:"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
-    "typescript": "~5.7.2"
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
   }
 }

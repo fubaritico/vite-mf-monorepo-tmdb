@@ -21,9 +21,6 @@
     "noFallthroughCasesInSwitch": true,
 
     "baseUrl": ".",
-    "paths": {
-      "@junie-monorepo/shared": ["./packages/shared/src"]
-    }
   },
   "include": ["src", "packages/shared/src"],
   "references": [{ "path": "./tsconfig.node.json" }],

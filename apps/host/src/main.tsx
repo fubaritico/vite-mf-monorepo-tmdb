@@ -1,4 +1,4 @@
-import { init } from '@module-federation/runtime'
+import { createInstance } from '@module-federation/runtime'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -10,7 +10,7 @@ import ErrorBoundary from './components/ErrorBoundary'
 import { queryClient, router } from './router'
 
 // Initialize module federation runtime
-init({
+createInstance({
   name: 'host',
   remotes: [
     {

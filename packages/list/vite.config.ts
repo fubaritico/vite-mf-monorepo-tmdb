@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import topLevelAwait from 'vite-plugin-top-level-await'
 import { federation } from '@module-federation/vite'
-import { NativeFederationTypeScriptRemote } from '@module-federation/native-federation-typescript/vite'
 import dotenv from 'dotenv'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 
@@ -36,6 +35,7 @@ const remoteConfig: ModuleFederationOptions = {
       requiredVersion: '^5.74.4',
     },
   },
+  dts: false,
 }
 
 const proxyOptions: CommonServerOptions = {
@@ -61,17 +61,6 @@ const proxyOptions: CommonServerOptions = {
 export default defineConfig(({ mode }) => {
   return {
     plugins: [
-      ...(mode === 'development'
-        ? [
-            NativeFederationTypeScriptRemote({
-              tsConfigPath: './tsconfig.json',
-              moduleFederationConfig: remoteConfig,
-              deleteTypesFolder: true,
-              typesFolder: '@mf-types',
-              compilerInstance: 'tsc',
-            }),
-          ]
-        : []),
       federation({
         ...remoteConfig,
       }),
