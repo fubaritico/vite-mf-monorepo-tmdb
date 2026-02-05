@@ -28,11 +28,19 @@ const router = createBrowserRouter([
       {
         path: 'detail/:id',
         async lazy() {
-          // Lazy load the Detail component from the 'detail' remote
-          const { default: Detail } = (await import('detail/Detail')) as {
-            default: RouteComponent
+          // Lazy load the Detail component and ErrorBoundary from the 'detail' remote
+          const [{ default: Detail }, { default: DetailErrorBoundary }] =
+            await Promise.all([
+              import('detail/Detail') as Promise<{ default: RouteComponent }>,
+              import('detail/DetailErrorBoundary') as Promise<{
+                default: React.FC
+              }>,
+            ])
+          return {
+            Component: Detail,
+            loader: Detail.loader(queryClient),
+            ErrorBoundary: DetailErrorBoundary,
           }
-          return { Component: Detail, loader: Detail.loader(queryClient) }
         },
       },
     ],

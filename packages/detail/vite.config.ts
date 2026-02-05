@@ -23,6 +23,7 @@ const remoteConfig: ModuleFederationOptions = {
   filename: 'remoteEntry.js',
   exposes: {
     './Detail': './src/components/Detail',
+    './DetailErrorBoundary': './src/components/DetailErrorBoundary',
     './routes': './src/routes',
   },
   shared: {

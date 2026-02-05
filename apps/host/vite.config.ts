@@ -62,7 +62,10 @@ const moduleFederationConfig2 = {
       requiredVersion: catalog['@tanstack/react-query'],
     },
   },
-  dts: false,
+  dts: {
+    generateTypes: false,
+    consumeTypes: true,
+  },
 }
 
 export default defineConfig(({ mode }) => {

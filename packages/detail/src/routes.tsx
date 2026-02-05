@@ -3,6 +3,7 @@ import { RouteObject } from 'react-router-dom'
 
 import App from './App'
 import Detail from './components/Detail'
+import DetailErrorBoundary from './components/DetailErrorBoundary'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -24,6 +25,7 @@ export const routes: RouteObject[] = [
         path: 'detail/:id',
         element: <Detail />,
         loader: Detail.loader(queryClient),
+        errorElement: <DetailErrorBoundary />,
       },
     ],
   },
