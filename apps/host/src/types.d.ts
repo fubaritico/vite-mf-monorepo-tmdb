@@ -1,3 +1,10 @@
+declare const __MF_VERSIONS__: {
+  react: string
+  'react-dom': string
+  'react-router-dom': string
+  '@tanstack/react-query': string
+}
+
 declare module '@vite-mf-monorepo/shared' {
   export interface HealthCheckOptions {
     maxRetries?: number

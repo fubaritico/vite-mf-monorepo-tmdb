@@ -24,48 +24,50 @@ createInstance({
       entry: `http://localhost:${import.meta.env.VITE_REMOTE_DETAIL_PORT as string}/remoteEntry.js`,
     },
   ],
+  /* eslint-disable @typescript-eslint/dot-notation -- consistent bracket notation for all keys */
   shared: {
     react: [
       {
-        version: '19.0.0',
+        version: __MF_VERSIONS__['react'],
         scope: 'default',
         shareConfig: {
           singleton: true,
-          requiredVersion: '^19.0.0',
+          requiredVersion: __MF_VERSIONS__['react'],
         },
       },
     ],
     'react-dom': [
       {
-        version: '19.0.0',
+        version: __MF_VERSIONS__['react-dom'],
         scope: 'default',
         shareConfig: {
           singleton: true,
-          requiredVersion: '^19.0.0',
+          requiredVersion: __MF_VERSIONS__['react-dom'],
         },
       },
     ],
     'react-router-dom': [
       {
-        version: '7.0.0',
+        version: __MF_VERSIONS__['react-router-dom'],
         scope: 'default',
         shareConfig: {
           singleton: true,
-          requiredVersion: '^7.0.0',
+          requiredVersion: __MF_VERSIONS__['react-router-dom'],
         },
       },
     ],
     '@tanstack/react-query': [
       {
-        version: '5.74.4',
+        version: __MF_VERSIONS__['@tanstack/react-query'],
         scope: 'default',
         shareConfig: {
           singleton: true,
-          requiredVersion: '^5.74.4',
+          requiredVersion: __MF_VERSIONS__['@tanstack/react-query'],
         },
       },
     ],
   },
+  /* eslint-enable @typescript-eslint/dot-notation */
 })
 
 const root = document.getElementById('root')

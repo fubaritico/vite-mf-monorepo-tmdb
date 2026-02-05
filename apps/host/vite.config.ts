@@ -1,9 +1,17 @@
+import { readFileSync } from 'fs'
+import { resolve } from 'path'
+
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { federation } from '@module-federation/vite'
 import dotenv from 'dotenv'
+import { parse } from 'yaml'
 
 dotenv.config()
+
+// Read versions from pnpm catalog (single source of truth)
+const workspace = parse(readFileSync(resolve(__dirname, '../../pnpm-workspace.yaml'), 'utf-8'))
+const catalog = workspace.catalog
 
 const moduleFederationConfig = {
   name: 'host',
@@ -39,32 +47,34 @@ const moduleFederationConfig2 = {
   shared: {
     react: {
       singleton: true,
-      requiredVersion: '^19.0.0',
+      requiredVersion: catalog['react'],
     },
     'react-dom': {
       singleton: true,
-      requiredVersion: '^19.0.0',
+      requiredVersion: catalog['react-dom'],
     },
     'react-router-dom': {
       singleton: true,
-      requiredVersion: '^7.0.0',
+      requiredVersion: catalog['react-router-dom'],
     },
     '@tanstack/react-query': {
       singleton: true,
-      requiredVersion: '^5.74.4',
+      requiredVersion: catalog['@tanstack/react-query'],
     },
   },
-  dts: {
-    generateTypes: false,
-    consumeTypes: {
-      consumeAPITypes: false,
-      abortOnError: false,
-    },
-  },
+  dts: false,
 }
 
 export default defineConfig(({ mode }) => {
   return {
+    define: {
+      __MF_VERSIONS__: JSON.stringify({
+        react: catalog['react'],
+        'react-dom': catalog['react-dom'],
+        'react-router-dom': catalog['react-router-dom'],
+        '@tanstack/react-query': catalog['@tanstack/react-query'],
+      }),
+    },
     plugins: [
       federation(moduleFederationConfig2),
       react(),

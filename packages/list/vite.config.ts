@@ -1,11 +1,19 @@
+import { readFileSync } from 'fs'
+import { resolve } from 'path'
+
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import topLevelAwait from 'vite-plugin-top-level-await'
 import { federation } from '@module-federation/vite'
 import dotenv from 'dotenv'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
+import { parse } from 'yaml'
 
 dotenv.config()
+
+// Read versions from pnpm catalog (single source of truth)
+const workspace = parse(readFileSync(resolve(__dirname, '../../pnpm-workspace.yaml'), 'utf-8'))
+const catalog = workspace.catalog
 
 import type { ModuleFederationOptions } from '@module-federation/vite/lib/utils/normalizeModuleFederationOptions'
 import type { CommonServerOptions } from 'vite'
@@ -20,19 +28,19 @@ const remoteConfig: ModuleFederationOptions = {
   shared: {
     react: {
       singleton: true,
-      requiredVersion: '19.0.0',
+      requiredVersion: catalog['react'],
     },
     'react-dom': {
       singleton: true,
-      requiredVersion: '19.0.0',
+      requiredVersion: catalog['react-dom'],
     },
     'react-router-dom': {
       singleton: true,
-      requiredVersion: '7.0.0',
+      requiredVersion: catalog['react-router-dom'],
     },
     '@tanstack/react-query': {
       singleton: true,
-      requiredVersion: '^5.74.4',
+      requiredVersion: catalog['@tanstack/react-query'],
     },
   },
   dts: {
