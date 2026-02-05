@@ -12,7 +12,7 @@ import { parse } from 'yaml'
 import type { ModuleFederationOptions } from '@module-federation/vite/lib/utils/normalizeModuleFederationOptions'
 import type { CommonServerOptions } from 'vite'
 
-dotenv.config()
+dotenv.config({ path: resolve(__dirname, '../../.env') })
 
 // Read versions from pnpm catalog (single source of truth)
 const workspace = parse(readFileSync(resolve(__dirname, '../../pnpm-workspace.yaml'), 'utf-8'))
@@ -76,6 +76,7 @@ const proxyOptions: CommonServerOptions = {
 }
 
 export default defineConfig(({ mode }) => ({
+  envDir: resolve(__dirname, '../..'),
   plugins: [
     federation({
       ...remoteConfig,

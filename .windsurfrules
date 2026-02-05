@@ -7,6 +7,27 @@
 - **Operating System**: macOS
 - **Node Version**: >= 22.11.0
 
+## AI Assistant Workflow Rules
+
+**CRITICAL**: These rules must be followed at all times without exception.
+
+### Before any code modification:
+1. **Ask for explicit confirmation** before modifying any code, config, or file
+2. **Explain step by step** what will be modified and why
+3. **Never hallucinate or invent** - if uncertain, say so and verify via code reading/tools
+4. **Provide sources** (links/docs/issues) when reasoning relies on external information
+5. **Ask permission** before fetching information from the internet
+
+### Terminal commands:
+- **The user executes all terminal commands** - propose commands but never execute them
+- Only exception: safe read-only commands like `git status`, `ls`, `cat`
+
+### Debug logs:
+- When adding debug logs (`console.warn`/`console.error`) for investigation, **remove them** once the investigation is complete
+
+### Language:
+- All code, comments, documentation, and README files must be in **English**
+
 ## Code Generation Rules for AI
 
 **CRITICAL**: All code generated must be compliant with the project's ESLint and Prettier configuration.
