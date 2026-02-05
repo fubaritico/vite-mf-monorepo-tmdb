@@ -1,4 +1,4 @@
-import { checkRemoteHealth } from '@junie-monorepo/shared'
+import { checkRemoteHealth } from '@vite-mf-monorepo/shared'
 import { createRoot } from 'react-dom/client'
 
 const LIST_REMOTE_URL = `http://localhost:${import.meta.env.VITE_REMOTE_LIST_PORT as string}/health`

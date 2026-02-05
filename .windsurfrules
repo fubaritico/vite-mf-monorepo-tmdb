@@ -185,7 +185,7 @@ PageName.loader = loader
 
 ### Architecture
 - **Monorepo**: Lerna 8.2.2 + pnpm workspaces (pnpm 10.8.1)
-- **Micro-frontends**: Module Federation with @module-federation/vite 1.2.6
+- **Micro-frontends**: Module Federation with @module-federation/vite 1.11.0
 - **Build**: Vite 6.2
 - **Node**: >= 22.11.0
 
@@ -203,7 +203,8 @@ PageName.loader = loader
 - **Coverage**: @vitest/coverage-v8 3.1.2
 
 ### Module Federation
-- **Types**: @module-federation/native-federation-typescript 0.6.0
+- **Runtime**: @module-federation/runtime 0.24.1
+- **DTS Plugin**: @module-federation/dts-plugin 0.24.1
 - **CSS injection**: vite-plugin-css-injected-by-js 3.5.2
 - **Top-level await**: vite-plugin-top-level-await 1.5.0
 
@@ -308,11 +309,13 @@ All checks must pass before the commit is allowed.
 - Bootstrap creates its own router and QueryClient
 - Different App wrapper in standalone vs consumed by host
 
-### Type Generation
-- NativeFederationTypeScriptRemote plugin in remotes (dev only)
-- NativeFederationTypeScriptHost plugin in host (dev only)
-- Types generated in `@mf-types/` and resolved via tsconfig paths
+### Type Hinting Generation (DTS)
+- Built-in DTS in @module-federation/vite 1.11.0 with @module-federation/dts-plugin 0.24.1
+- Remotes: `dts.generateTypes` generates types in `dist/.dev-server/@mf-types.zip`
+- Host: `dts.consumeTypes` downloads and extracts types to `@mf-types/`
+- Types resolved via tsconfig paths: `"*": ["./@mf-types/*"]`
 - RouteComponent pattern to expose typed loaders
+- `apps/host/@mf-types/` is gitignored (auto-generated)
 
 ### Health Checks
 - `checkRemoteHealth` utility in packages/shared
@@ -330,6 +333,12 @@ All checks must pass before the commit is allowed.
 - `pnpm dev`: Launch all packages in parallel
 - `pnpm dev:ordered`: Launch in order list → detail → host
 - `pnpm [package]:dev`: Launch a specific package
+
+### Project Reset
+- `pnpm reset`: Clean install simulating a fresh clone
+  - Removes: node_modules, dist, .__mf__temp, @mf-types
+  - Reinstalls with `pnpm install --frozen-lockfile`
+  - Use this to test onboarding experience for new developers
 
 ### Production
 - `pnpm prod`: Build and launch in production mode with Express servers
@@ -402,8 +411,8 @@ All checks must pass before the commit is allowed.
 ## Known Issues
 
 ### Dev Mode
-- A refresh is required to load remotes on first startup
 - Production and standalone modes work correctly
+- DTS types are generated automatically on dev server start
 
 ## Future Enhancements
 

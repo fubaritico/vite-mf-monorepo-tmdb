@@ -1,4 +1,4 @@
-declare module '@junie-monorepo/shared' {
+declare module '@vite-mf-monorepo/shared' {
   export interface HealthCheckOptions {
     maxRetries?: number
     retryDelay?: number

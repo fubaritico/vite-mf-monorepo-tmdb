@@ -54,7 +54,13 @@ const moduleFederationConfig2 = {
       requiredVersion: '^5.74.4',
     },
   },
-  dts: false,
+  dts: {
+    generateTypes: false,
+    consumeTypes: {
+      consumeAPITypes: false,
+      abortOnError: false,
+    },
+  },
 }
 
 export default defineConfig(({ mode }) => {

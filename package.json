@@ -1,21 +1,22 @@
 {
-  "name": "vite-mf-monorepo-with-junie",
+  "name": "vite-mf-monorepo-tmdb",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "lerna run --stream --parallel dev",
-    "dev:ordered": "lerna run --stream dev --scope @junie-monorepo/list --scope @junie-monorepo/detail --scope @junie-monorepo/host",
+    "dev:ordered": "lerna run --stream dev --scope @vite-mf-monorepo/list --scope @vite-mf-monorepo/detail --scope @vite-mf-monorepo/host",
     "prod": "lerna run --stream prod",
-    "prod:ordered": "lerna run --stream prod --scope @junie-monorepo/list --scope @junie-monorepo/detail --scope @junie-monorepo/host",
-    "list:dev": "pnpm --filter @junie-monorepo/list dev",
-    "detail:dev": "pnpm --filter @junie-monorepo/detail dev",
-    "host:dev": "pnpm --filter @junie-monorepo/host dev",
+    "prod:ordered": "lerna run --stream prod --scope @vite-mf-monorepo/list --scope @vite-mf-monorepo/detail --scope @vite-mf-monorepo/host",
+    "list:dev": "pnpm --filter @vite-mf-monorepo/list dev",
+    "detail:dev": "pnpm --filter @vite-mf-monorepo/detail dev",
+    "host:dev": "pnpm --filter @vite-mf-monorepo/host dev",
     "type-check": "tsc -p ./ --noEmit",
     "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
     "lint:fix": "eslint --ext .ts,.tsx,.js,.jsx . --fix",
     "test": "vitest run",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "reset": "./scripts/reset-project.sh"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",

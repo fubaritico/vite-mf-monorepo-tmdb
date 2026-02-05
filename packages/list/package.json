@@ -1,5 +1,5 @@
 {
-  "name": "@junie-monorepo/list",
+  "name": "@vite-mf-monorepo/list",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
-    "@module-federation/native-federation-typescript": "catalog:",
+    "@module-federation/dts-plugin": "catalog:",
     "@module-federation/runtime": "catalog:",
     "@module-federation/vite": "catalog:",
     "@tanstack/react-query": "catalog:",

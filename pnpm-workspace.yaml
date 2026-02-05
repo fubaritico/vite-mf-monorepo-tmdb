@@ -11,7 +11,7 @@ catalog:
   # Module Federation
   '@module-federation/vite': 1.11.0
   '@module-federation/runtime': 0.24.1
-  '@module-federation/native-federation-typescript': 0.6.0
+  '@module-federation/dts-plugin': 0.24.1
 
   # TanStack Query
   '@tanstack/react-query': 5.74.4

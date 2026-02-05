@@ -35,7 +35,16 @@ const remoteConfig: ModuleFederationOptions = {
       requiredVersion: '^5.74.4',
     },
   },
-  dts: false,
+  dts: {
+    generateTypes: {
+      compileInChildProcess: true,
+      generateAPITypes: false,
+      extractThirdParty: false,
+      extractRemoteTypes: false,
+      abortOnError: false,
+    },
+    consumeTypes: false,
+  },
 }
 
 const proxyOptions: CommonServerOptions = {

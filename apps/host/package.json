@@ -1,5 +1,5 @@
 {
-  "name": "@junie-monorepo/host",
+  "name": "@vite-mf-monorepo/host",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -12,14 +12,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@junie-monorepo/shared": "workspace:*",
+    "@vite-mf-monorepo/shared": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router-dom": "catalog:"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
-    "@module-federation/native-federation-typescript": "catalog:",
+    "@module-federation/dts-plugin": "catalog:",
     "@module-federation/runtime": "catalog:",
     "@module-federation/vite": "catalog:",
     "@tanstack/react-query": "catalog:",
