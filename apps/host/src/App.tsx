@@ -1,16 +1,20 @@
 import { Link, Outlet } from 'react-router-dom'
-import './App.css'
 
 function App() {
   return (
-    <div className="app-container">
-      <header>
-        <h1>Movie Explorer</h1>
-        <nav>
-          <Link to="/">Home</Link>
+    <div className="mx-auto max-w-[1200px] p-8">
+      <header className="mb-8 text-center">
+        <h1 className="mb-4 text-4xl text-foreground">Movie Explorer</h1>
+        <nav className="mb-4 flex justify-center">
+          <Link
+            to="/"
+            className="mx-2 rounded bg-secondary px-4 py-2 font-medium text-secondary-foreground transition-colors hover:bg-red"
+          >
+            Home
+          </Link>
         </nav>
       </header>
-      <main>
+      <main className="rounded-lg bg-card p-6 shadow-md">
         <Outlet />
       </main>
     </div>
