@@ -3,6 +3,7 @@ import { resolve } from 'path'
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 import { federation } from '@module-federation/vite'
 import dotenv from 'dotenv'
 import { parse } from 'yaml'
@@ -10,21 +11,12 @@ import { parse } from 'yaml'
 dotenv.config()
 
 // Read versions from pnpm catalog (single source of truth)
-const workspace = parse(readFileSync(resolve(__dirname, '../../pnpm-workspace.yaml'), 'utf-8'))
+const workspace = parse(
+  readFileSync(resolve(__dirname, '../../pnpm-workspace.yaml'), 'utf-8')
+)
 const catalog = workspace.catalog
 
 const moduleFederationConfig = {
-  name: 'host',
-  exposes: {},
-  filename: 'remoteEntry.js',
-  remotes: {
-    list: `list@http://localhost:${process.env.REMOTE_LIST_PORT}/mf-manifest.json`,
-    detail: `detail@http://localhost:${process.env.REMOTE_DETAIL_PORT}/mf-manifest.json`,
-  },
-  shared: ['react', 'react-dom', 'react-router-dom'],
-}
-
-const moduleFederationConfig2 = {
   name: 'host',
   exposes: {},
   filename: 'remoteEntry.js',
@@ -78,10 +70,7 @@ export default defineConfig(({ mode }) => {
         '@tanstack/react-query': catalog['@tanstack/react-query'],
       }),
     },
-    plugins: [
-      federation(moduleFederationConfig2),
-      react(),
-    ],
+    plugins: [tailwindcss(), federation(moduleFederationConfig), react()],
     build: {
       target: 'esnext',
     },

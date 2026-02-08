@@ -12,12 +12,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vite-mf-monorepo/shared": "workspace:*",
     "clsx": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router-dom": "catalog:"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "catalog:",
+    "tailwindcss": "catalog:",
     "@eslint/js": "catalog:",
     "@module-federation/dts-plugin": "catalog:",
     "@module-federation/runtime": "catalog:",

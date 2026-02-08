@@ -3,6 +3,7 @@ import { resolve } from 'path'
 
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 import topLevelAwait from 'vite-plugin-top-level-await'
 import { federation } from '@module-federation/vite'
 import dotenv from 'dotenv'
@@ -79,6 +80,7 @@ const proxyOptions: CommonServerOptions = {
 export default defineConfig(({ mode }) => ({
   envDir: resolve(__dirname, '../..'),
   plugins: [
+    tailwindcss(),
     federation({
       ...remoteConfig,
     }),
