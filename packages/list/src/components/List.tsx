@@ -3,8 +3,6 @@ import { Link, useLoaderData } from 'react-router-dom'
 
 import { fetchPopularMovies, getImageUrl } from '../services/api'
 
-import './List.css'
-
 import type { FC } from 'react'
 
 export type RouteComponent = FC & {
@@ -36,25 +34,35 @@ const List: RouteComponent = () => {
   })
 
   if (error) {
-    return <div className="error">{error.message}</div>
+    return (
+      <div className="p-8 text-center text-xl text-destructive">
+        {error.message}
+      </div>
+    )
   }
 
   return (
-    <div data-testid="movie-grid-list" className="movie-grid-list">
+    <div
+      data-testid="movie-grid-list"
+      className="grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] gap-8"
+    >
       {movies.results.map((movie) => (
         <Link
           to={`/detail/${movie.id.toString()}`}
           key={movie.id}
-          className="movie-grid-card"
+          className="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
           data-testid="movie-grid-card"
         >
-          <div className="movie-grid-poster">
+          <div className="relative aspect-[2/3] overflow-hidden">
             <img
               src={getImageUrl(movie.poster_path)}
               alt={`${movie.title} poster`}
+              className="h-full w-full object-cover"
             />
           </div>
-          <div className="movie-grid-title">{movie.title}</div>
+          <div className="p-4 text-center font-medium text-foreground">
+            {movie.title}
+          </div>
         </Link>
       ))}
     </div>

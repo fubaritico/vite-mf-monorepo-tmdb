@@ -25,3 +25,6 @@ apps/host/@mf-types/
 
 # Vitest coverage
 coverage
+
+# Files and sources
+files
