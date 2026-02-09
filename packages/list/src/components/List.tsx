@@ -53,6 +53,7 @@ const List: RouteComponent = () => {
           className="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
           data-testid="movie-grid-card"
         >
+          test
           <div className="relative aspect-[2/3] overflow-hidden">
             <img
               src={getImageUrl(movie.poster_path)}

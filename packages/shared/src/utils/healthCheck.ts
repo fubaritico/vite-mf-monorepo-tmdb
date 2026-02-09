@@ -1,4 +1,4 @@
-import { RetryOptions, retry } from './retry'
+import { RetryOptions, retry } from './retry.js'
 
 export interface HealthCheckOptions {
   maxRetries?: number

@@ -19,6 +19,7 @@
     "react-router-dom": "catalog:"
   },
   "devDependencies": {
+    "@antdevx/vite-plugin-hmr-sync": "catalog:",
     "@tailwindcss/vite": "catalog:",
     "tailwindcss": "catalog:",
     "@eslint/js": "catalog:",

@@ -4,6 +4,7 @@ import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { listenForRemoteRebuilds } from '@antdevx/vite-plugin-hmr-sync'
 import { federation } from '@module-federation/vite'
 import dotenv from 'dotenv'
 import { parse } from 'yaml'
@@ -70,7 +71,33 @@ export default defineConfig(({ mode }) => {
         '@tanstack/react-query': catalog['@tanstack/react-query'],
       }),
     },
-    plugins: [tailwindcss(), federation(moduleFederationConfig), react()],
+    plugins: [
+      tailwindcss(),
+      federation(moduleFederationConfig),
+      react(),
+      /**
+       * HMR Sync: Listen for rebuild notifications from remotes.
+       *
+       * In Module Federation, HMR doesn't work between host and remotes because
+       * the WebSocket connection is only established by the host. This plugin
+       * creates an HTTP endpoint that remotes can call to trigger a full page
+       * reload in the browser.
+       *
+       * Remotes use the custom `notifyHostOnHmr` plugin from @vite-mf-monorepo/shared
+       * to send notifications when files change.
+       *
+       * @see packages/shared/src/vite/notifyHostOnHmr.ts - Remote-side plugin
+       * @see files/HMR-SYNC.md - Full documentation
+       */
+      listenForRemoteRebuilds({
+        allowedApps: ['list', 'detail'],
+        endpoint: '/on-child-rebuild',
+        hotPayload: { type: 'full-reload', path: '*' },
+        onRebuild: (appName) => {
+          console.warn(`[host] 🔁 Reload triggered by: ${appName}`)
+        },
+      }),
+    ],
     build: {
       target: 'esnext',
     },

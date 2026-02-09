@@ -9,6 +9,7 @@ import { federation } from '@module-federation/vite'
 import dotenv from 'dotenv'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 import { parse } from 'yaml'
+import { notifyHostOnHmr } from '@vite-mf-monorepo/shared'
 
 dotenv.config({ path: resolve(__dirname, '../../.env') })
 
@@ -90,6 +91,20 @@ export default defineConfig(({ mode }) => {
         relativeCSSInjection: true,
       }),
       topLevelAwait(),
+      /**
+       * HMR Sync: Notify host when files change in this remote.
+       *
+       * Sends an HTTP request to the host's /on-child-rebuild endpoint
+       * on every HMR update, triggering a full page reload in the browser.
+       *
+       * @see packages/shared/src/vite/notifyHostOnHmr.ts - Plugin implementation
+       * @see files/HMR-SYNC.md - Full documentation
+       */
+      notifyHostOnHmr({
+        appName: 'list',
+        hostUrl: `http://localhost:${process.env.HOST_PORT}`,
+        endpoint: '/on-child-rebuild',
+      }),
     ],
     build: {
       modulePreload: false,
