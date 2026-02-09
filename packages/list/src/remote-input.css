@@ -1,0 +1,9 @@
+/**
+ * Input CSS for remote consumption (without preflight).
+ * This file is processed by Tailwind CLI to generate remote.css.
+ * The host already has Tailwind preflight, so we only include theme + utilities.
+ */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "@vite-mf-monorepo/shared/src/tailwind/theme.css";

@@ -9,7 +9,7 @@ import { federation } from '@module-federation/vite'
 import dotenv from 'dotenv'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 import { parse } from 'yaml'
-import { notifyHostOnHmr } from '@vite-mf-monorepo/shared'
+import { notifyHostOnHmr, tailwindRemoteCss } from '@vite-mf-monorepo/shared'
 
 import type { ModuleFederationOptions } from '@module-federation/vite/lib/utils/normalizeModuleFederationOptions'
 import type { CommonServerOptions } from 'vite'
@@ -81,6 +81,15 @@ const proxyOptions: CommonServerOptions = {
 export default defineConfig(({ mode }) => ({
   envDir: resolve(__dirname, '../..'),
   plugins: [
+    /**
+     * Generate remote.css (without preflight) for host consumption.
+     * Must run before other plugins to ensure CSS is available.
+     */
+    tailwindRemoteCss({
+      input: './src/remote-input.css',
+      output: './src/remote.css',
+      content: './src/**/*.tsx',
+    }),
     tailwindcss(),
     federation({
       ...remoteConfig,

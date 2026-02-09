@@ -15,7 +15,6 @@ dist-ssr
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-.idea
 .DS_Store
 *.suo
 *.ntvs*
@@ -33,3 +32,6 @@ gen
 
 # module federation hidden folder
 .__mf__temp
+
+# Generated CSS for remote consumption (without preflight)
+src/remote.css

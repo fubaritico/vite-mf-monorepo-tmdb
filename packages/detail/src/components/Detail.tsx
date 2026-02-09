@@ -6,9 +6,7 @@ import { fetchMovieDetail, getImageUrl } from '../services/api'
 import type { FC } from 'react'
 import type { Params } from 'react-router-dom'
 
-// Static CSS imports to be shared to host
-import './Detail.css'
-import '../index.css'
+import '../remote.css'
 
 type ThisComponent = FC & {
   loader: (
@@ -37,50 +35,62 @@ const Detail: ThisComponent = () => {
   })
 
   if (error) {
-    return <div className="error">{error.message}</div>
+    return (
+      <div className="p-8 text-center text-xl text-destructive">
+        {error.message}
+      </div>
+    )
   }
 
   return (
-    <div className="movie-detail">
-      <div className="movie-poster">
+    <div className="flex flex-col gap-8 md:flex-row">
+      <div className="flex-shrink-0 md:w-[300px]">
         <img
           src={getImageUrl(movie.poster_path)}
           alt={`${movie.title} poster`}
+          className="w-full rounded-lg shadow-lg"
         />
       </div>
-      <div className="movie-info">
-        <h2 className="movie-title">{movie.title}</h2>
-        {movie.tagline && <p className="movie-tagline">{movie.tagline}</p>}
-        <div className="movie-meta">
+      <div className="flex-1">
+        <h2 className="mb-2 text-4xl text-foreground">{movie.title}</h2>
+        {movie.tagline && (
+          <p className="mb-4 italic text-muted-foreground">{movie.tagline}</p>
+        )}
+        <div className="mb-4 flex gap-4 text-muted-foreground">
           <span>{new Date(movie.release_date).getFullYear()}</span>
           {movie.runtime && <span>{movie.runtime} min</span>}
           <span>{movie.vote_average.toFixed(1)} / 10</span>
         </div>
-        <div className="movie-genres">
+        <div className="mb-6 flex flex-wrap gap-2">
           {movie.genres?.map((genre) => (
-            <span key={genre.id} className="genre-tag">
+            <span
+              key={genre.id}
+              className="rounded-full bg-secondary px-3 py-1 text-sm text-secondary-foreground"
+            >
               {genre.name}
             </span>
           ))}
         </div>
-        <div className="movie-overview">
-          <h3>Overview</h3>
-          <p>{movie.overview}</p>
+        <div className="mb-6">
+          <h3 className="mb-2 text-xl font-medium text-foreground">Overview</h3>
+          <p className="leading-relaxed text-muted-foreground">
+            {movie.overview}
+          </p>
         </div>
         {(movie.budget ?? movie.revenue) && (
-          <div className="movie-stats">
+          <div className="mt-4 flex flex-col gap-2">
             {movie.budget && movie.budget > 0 && (
-              <div className="stat">
-                <span className="stat-label">Budget:</span>
-                <span className="stat-value">
+              <div className="flex gap-2">
+                <span className="font-medium text-foreground">Budget:</span>
+                <span className="text-muted-foreground">
                   ${movie.budget.toLocaleString()}
                 </span>
               </div>
             )}
             {movie.revenue && movie.revenue > 0 && (
-              <div className="stat">
-                <span className="stat-label">Revenue:</span>
-                <span className="stat-value">
+              <div className="flex gap-2">
+                <span className="font-medium text-foreground">Revenue:</span>
+                <span className="text-muted-foreground">
                   ${movie.revenue.toLocaleString()}
                 </span>
               </div>

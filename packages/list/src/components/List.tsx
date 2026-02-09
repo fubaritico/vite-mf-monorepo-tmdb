@@ -5,6 +5,8 @@ import { fetchPopularMovies, getImageUrl } from '../services/api'
 
 import type { FC } from 'react'
 
+import '../remote.css'
+
 export type RouteComponent = FC & {
   loader: (queryClient: QueryClient) => () => Promise<MovieListResponse>
 }
@@ -53,7 +55,6 @@ const List: RouteComponent = () => {
           className="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
           data-testid="movie-grid-card"
         >
-          test
           <div className="relative aspect-[2/3] overflow-hidden">
             <img
               src={getImageUrl(movie.poster_path)}
@@ -61,7 +62,7 @@ const List: RouteComponent = () => {
               className="h-full w-full object-cover"
             />
           </div>
-          <div className="p-4 text-center font-medium text-foreground">
+          <div className="text-foreground p-4 text-center font-medium">
             {movie.title}
           </div>
         </Link>
