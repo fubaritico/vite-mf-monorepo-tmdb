@@ -1,0 +1,6 @@
+@import "tailwindcss" prefix(ui);
+@import "@vite-mf-monorepo/shared/src/tailwind/theme.css";
+
+@layer base {
+  /* Disable preflight - host app handles reset */
+}
