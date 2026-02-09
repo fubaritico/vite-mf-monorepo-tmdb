@@ -186,6 +186,5 @@ This is **Live Reload** (full page refresh), not true HMR. True HMR would preser
 
 ## See Also
 
-- `files/HMR-SYNC.md` - Full HMR sync documentation
 - `apps/host/vite.config.ts` - Host-side plugin configuration
 - `packages/list/vite.config.ts` - Remote-side plugin configuration
