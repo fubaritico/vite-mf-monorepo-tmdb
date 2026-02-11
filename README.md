@@ -35,29 +35,66 @@ It's a work in progress, so many future enhancements are planned.
 2. Subscribe to TMDB API and get your API key
 3. Create a `.env.local` file in the root of the project and add your API key
    ```bash
-   VITE_API_KEY=your_api_key
+   VITE_TMDB_API_TOKEN=your_bearer_token
    ```
-3. Install dependencies
+4. Install dependencies
    ```bash
    pnpm install
    ```
-4. Start the development server
+5. Start the development server
    ```bash
-    pnpm dev
-    ```
-5. Open your browser and navigate to `http://localhost:3000`
+   pnpm dev
+   ```
+6. Open your browser and navigate to `http://localhost:3000`
 
-6. Open the `packages` folder to see the different micro frontends
+### Reset Scenario
+
+If you need to reset the project (clean install, clear caches):
+
+```bash
+# Full reset: removes node_modules, dist folders, and reinstalls
+pnpm reset
+
+# Then start dev
+pnpm dev
+```
+
+### Useful Commands
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start all apps with watch mode for packages |
+| `pnpm reset` | Full reset: clean + install |
+| `pnpm kill-ports` | Kill processes on ports 3000, 3001, 3002, 6006 |
+| `pnpm test` | Run tests |
+| `pnpm lint` | Run ESLint |
+| `pnpm type-check` | Run TypeScript type checking |
+
+### Storybook
+
+To run Storybook for the design system:
+
+```bash
+pnpm --filter @vite-mf-monorepo/storybook storybook
+```
+
+Open http://localhost:6006
 
 ### Project Structure
 
-The project consists of two remotes and one host application:
-
-- `apps/host`: The host application that loads the micro frontends
-- `packages/list`: The list of movies, displayed at '/' route
-- `packages/detail`: The detail page of a movie, displayed at '/movie/:id' route
-- `packages/people`: The detail of a talent taking part in a movie, displayed at '/people/:id' route (to be implemented)
-- `packages/shared`: Shared utils, Tailwind theme, and Vite plugins
+```
+vite-mf-monorepo/
+├── apps/
+│   ├── host/          # Host application (port 3000)
+│   ├── list/          # List remote - movies grid (port 3001)
+│   └── detail/        # Detail remote - movie page (port 3002)
+├── packages/
+│   ├── shared/        # Shared utils, Vite plugins, Tailwind theme
+│   ├── ui/            # Design system (Button, Card, etc.)
+│   ├── http-client/   # TMDB API client (heyAPI + TanStack Query)
+│   └── storybook/     # Storybook for UI components
+└── scripts/           # Utility scripts (reset, kill-ports)
+```
 
 ### Project features
 
