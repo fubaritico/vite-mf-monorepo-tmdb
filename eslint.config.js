@@ -36,6 +36,8 @@ export default tseslint.config(
       '**/.__mf__temp/**',
       '**/scripts/**',
       'packages/http-client/src/client/**',
+      'packages/storybook/.storybook/**',
+      'packages/storybook/storybook-static/**',
       'coverage/**',
       'pnpm-lock.yaml',
       'pnpm-workspace.yaml',
