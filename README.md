@@ -144,3 +144,7 @@ No issues for now
 - Add e2e tests with vitest in browser mode
 - Add a detail page for the talent (people) taking part in a movie
 - For DX, add a .vscode and .cursor rules for Cursor users
+
+### Acknowledgments
+
+Special thanks to [Nsttt](https://github.com/Nsttt) for his work on the DTS (TypeScript declarations) plugin integration with `@module-federation/vite`. His contributions to the Module Federation ecosystem made it possible to have proper type generation between remotes and host in dev mode, which is essential for a good DX in a micro-frontend architecture.
