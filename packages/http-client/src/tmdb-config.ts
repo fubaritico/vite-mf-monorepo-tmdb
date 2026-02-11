@@ -28,11 +28,18 @@ const TMDB_API_TOKEN = import.meta.env.VITE_TMDB_API_TOKEN as string
  * @param config - The default configuration from heyAPI
  * @returns The merged configuration with TMDB-specific settings
  */
-export const createClientConfig = <T extends Config>(config: T): T => ({
-  ...config,
-  baseUrl: 'https://api.themoviedb.org',
-  headers: {
-    ...config.headers,
-    Authorization: `Bearer ${TMDB_API_TOKEN}`,
-  },
-})
+export const createClientConfig = <T extends Config>(config: T): T => {
+  const existingHeaders =
+    config.headers && !Array.isArray(config.headers)
+      ? (config.headers as Record<string, string>)
+      : {}
+
+  return {
+    ...config,
+    baseUrl: 'https://api.themoviedb.org',
+    headers: {
+      ...existingHeaders,
+      Authorization: `Bearer ${TMDB_API_TOKEN}`,
+    },
+  }
+}

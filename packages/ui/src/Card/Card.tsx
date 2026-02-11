@@ -20,8 +20,7 @@ const Card: FC<CardProps> = ({
         {
           'ui:bg-card ui:text-card-foreground ui:shadow-md':
             variant === 'default',
-          'ui:border ui:border-border ui:bg-transparent':
-            variant === 'outline',
+          'ui:border ui:border-border ui:bg-transparent': variant === 'outline',
         },
         className
       )}

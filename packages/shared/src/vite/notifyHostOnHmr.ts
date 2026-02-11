@@ -82,11 +82,11 @@ export function notifyHostOnHmr(options: NotifyHostOnHmrOptions): Plugin {
           console.warn(`[${appName}] 🔔 Notified host of HMR update`)
         } else {
           console.warn(
-            `[${appName}] ⚠️ Failed to notify host: ${response.status}`
+            `[${appName}] ⚠️ Failed to notify host: ${String(response.status)}`
           )
         }
       }
-    } catch (error) {
+    } catch {
       if (!suppressLogs) {
         console.warn(`[${appName}] ⚠️ Could not reach host at ${hostUrl}`)
       }

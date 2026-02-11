@@ -31,12 +31,18 @@ export function tailwindRemoteCss(options: TailwindRemoteCssOptions): Plugin {
 
     try {
       execSync(
-        'npx tailwindcss -i "' + inputPath + '" -o "' + outputPath + '" --content "' + content + '"',
+        'npx tailwindcss -i "' +
+          inputPath +
+          '" -o "' +
+          outputPath +
+          '" --content "' +
+          content +
+          '"',
         { cwd, stdio: 'pipe' }
       )
       log('[OK] Generated ' + output)
     } catch (error) {
-      log('[ERROR] Failed to generate CSS: ' + error)
+      log('[ERROR] Failed to generate CSS: ' + String(error))
     }
   }
 
@@ -48,9 +54,12 @@ export function tailwindRemoteCss(options: TailwindRemoteCssOptions): Plugin {
       'npx',
       [
         'tailwindcss',
-        '-i', inputPath,
-        '-o', outputPath,
-        '--content', content,
+        '-i',
+        inputPath,
+        '-o',
+        outputPath,
+        '--content',
+        content,
         '--watch',
       ],
       { cwd, stdio: 'pipe', shell: true }
