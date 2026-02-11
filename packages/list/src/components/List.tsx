@@ -1,37 +1,35 @@
 import { QueryClient, useQuery } from '@tanstack/react-query'
+import { moviePopularListOptions } from '@vite-mf-monorepo/tmdb-client'
 import { Link, useLoaderData } from 'react-router-dom'
 
-import { fetchPopularMovies, getImageUrl } from '../services/api'
-
+import type { MoviePopularListResponse } from '@vite-mf-monorepo/tmdb-client'
 import type { FC } from 'react'
 
 import '../remote.css'
 
-export type RouteComponent = FC & {
-  loader: (queryClient: QueryClient) => () => Promise<MovieListResponse>
+const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p'
+
+/**
+ * Constructs the full image URL for TMDB images.
+ */
+const getImageUrl = (path: string | null, size = 'w500'): string => {
+  if (!path) return ''
+  return `${IMAGE_BASE_URL}/${size}${path}`
 }
 
-const query = () => ({
-  queryKey: ['getMovies'],
-  queryFn: async () => {
-    try {
-      return await fetchPopularMovies()
-    } catch (error) {
-      console.error('Error fetching popular movies:', error)
-      throw error
-    }
-  },
-})
+export type RouteComponent = FC & {
+  loader: (queryClient: QueryClient) => () => Promise<MoviePopularListResponse>
+}
 
 const loader = (queryClient: QueryClient) => async () => {
-  return queryClient.ensureQueryData(query())
+  return queryClient.ensureQueryData(moviePopularListOptions())
 }
 
 const List: RouteComponent = () => {
-  const initialData = useLoaderData<MovieListResponse>()
+  const initialData = useLoaderData<MoviePopularListResponse>()
 
-  const { data: movies, error } = useQuery<MovieListResponse>({
-    ...query(),
+  const { data: movies, error } = useQuery({
+    ...moviePopularListOptions(),
     initialData,
   })
 
@@ -48,17 +46,17 @@ const List: RouteComponent = () => {
       data-testid="movie-grid-list"
       className="grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] gap-8"
     >
-      {movies.results.map((movie) => (
+      {movies.results?.map((movie) => (
         <Link
-          to={`/detail/${movie.id.toString()}`}
+          to={`/detail/${String(movie.id)}`}
           key={movie.id}
           className="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
           data-testid="movie-grid-card"
         >
           <div className="relative aspect-[2/3] overflow-hidden">
             <img
-              src={getImageUrl(movie.poster_path)}
-              alt={`${movie.title} poster`}
+              src={getImageUrl(movie.poster_path ?? null)}
+              alt={`${movie.title ?? 'Movie'} poster`}
               className="h-full w-full object-cover"
             />
           </div>

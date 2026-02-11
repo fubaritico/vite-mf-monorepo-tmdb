@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@vite-mf-monorepo/shared": "workspace:*",
+    "@vite-mf-monorepo/tmdb-client": "workspace:*",
     "clsx": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",

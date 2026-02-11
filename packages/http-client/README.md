@@ -48,14 +48,14 @@ const { data: movie } = useQuery(movieDetailsOptions({ path: { movie_id: 550 } }
 The client is configured in `src/tmdb-config.ts`:
 
 - **Base URL**: `https://api.themoviedb.org`
-- **Authentication**: Bearer token from `VITE_TMDB_API_KEY` environment variable
+- **Authentication**: Bearer token from `VITE_TMDB_API_TOKEN` environment variable
 
 ### Environment Variables
 
 Create a `.env.local` file at the monorepo root:
 
 ```env
-VITE_TMDB_API_KEY=your_tmdb_api_key_here
+VITE_TMDB_API_TOKEN=your_tmdb_bearer_token_here
 ```
 
 ## Regenerating the Client

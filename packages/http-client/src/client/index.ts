@@ -2,3 +2,4 @@
 // @ts-nocheck
 export * from './types.gen'
 export * from './sdk.gen'
+export * from './@tanstack/react-query.gen'

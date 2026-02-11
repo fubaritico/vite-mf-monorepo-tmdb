@@ -1,36 +1,47 @@
 import { QueryClient, useQuery } from '@tanstack/react-query'
+import { movieDetailsOptions } from '@vite-mf-monorepo/tmdb-client'
 import { useLoaderData, useParams } from 'react-router-dom'
 
-import { fetchMovieDetail, getImageUrl } from '../services/api'
-
+import type { MovieDetailsResponse } from '@vite-mf-monorepo/tmdb-client'
 import type { FC } from 'react'
 import type { Params } from 'react-router-dom'
 
 import '../remote.css'
 
+const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p'
+
+/**
+ * Constructs the full image URL for TMDB images.
+ */
+const getImageUrl = (
+  path: string | null | undefined,
+  size = 'w500'
+): string => {
+  if (!path) return ''
+  return `${IMAGE_BASE_URL}/${size}${path}`
+}
+
 type ThisComponent = FC & {
   loader: (
     queryClient: QueryClient
-  ) => ({ params }: { params: Params<'id'> }) => Promise<Movie>
+  ) => ({ params }: { params: Params<'id'> }) => Promise<MovieDetailsResponse>
 }
-
-const query = (id?: string) => ({
-  queryKey: ['movieDetail', id],
-  queryFn: async () => fetchMovieDetail(id),
-})
 
 const loader =
   (queryClient: QueryClient) =>
   ({ params }: { params: Params<'id'> }) => {
-    return queryClient.ensureQueryData(query(params.id))
+    const movieId = Number(params.id)
+    return queryClient.ensureQueryData(
+      movieDetailsOptions({ path: { movie_id: movieId } })
+    )
   }
 
 const Detail: ThisComponent = () => {
-  const initialData = useLoaderData<Movie>()
+  const initialData = useLoaderData<MovieDetailsResponse>()
   const { id } = useParams<{ id: string }>()
 
-  const { data: movie, error } = useQuery<Movie>({
-    ...query(id),
+  const { data: movie, error } = useQuery({
+    ...movieDetailsOptions({ path: { movie_id: Number(id) } }),
     initialData,
   })
 
@@ -47,7 +58,7 @@ const Detail: ThisComponent = () => {
       <div className="flex-shrink-0 md:w-[300px]">
         <img
           src={getImageUrl(movie.poster_path)}
-          alt={`${movie.title} poster`}
+          alt={`${movie.title ?? 'Movie'} poster`}
           className="w-full rounded-lg shadow-lg"
         />
       </div>
@@ -57,9 +68,13 @@ const Detail: ThisComponent = () => {
           <p className="mb-4 italic text-muted-foreground">{movie.tagline}</p>
         )}
         <div className="mb-4 flex gap-4 text-muted-foreground">
-          <span>{new Date(movie.release_date).getFullYear()}</span>
+          {movie.release_date && (
+            <span>{new Date(movie.release_date).getFullYear()}</span>
+          )}
           {movie.runtime && <span>{movie.runtime} min</span>}
-          <span>{movie.vote_average.toFixed(1)} / 10</span>
+          {movie.vote_average !== undefined && (
+            <span>{movie.vote_average.toFixed(1)} / 10</span>
+          )}
         </div>
         <div className="mb-6 flex flex-wrap gap-2">
           {movie.genres?.map((genre) => (

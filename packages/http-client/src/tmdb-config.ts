@@ -5,7 +5,7 @@
  * `runtimeConfigPath` option in `openapi-ts.config.ts`.
  *
  * It provides the base URL and authentication headers for all TMDB API requests.
- * The API key is read from the environment variable `VITE_TMDB_API_KEY`.
+ * The API token is read from the environment variable `VITE_TMDB_API_TOKEN`.
  *
  * @see https://heyapi.dev/openapi-ts/clients/fetch#runtime-api
  */
@@ -15,7 +15,7 @@ import type { Config } from '@hey-api/client-fetch'
  * TMDB API Bearer token from environment variables.
  * Must be set in `.env.local` at the monorepo root.
  */
-const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY as string
+const TMDB_API_TOKEN = import.meta.env.VITE_TMDB_API_TOKEN as string
 
 /**
  * Creates the client configuration for TMDB API requests.
@@ -33,6 +33,6 @@ export const createClientConfig = <T extends Config>(config: T): T => ({
   baseUrl: 'https://api.themoviedb.org',
   headers: {
     ...config.headers,
-    Authorization: `Bearer ${TMDB_API_KEY}`,
+    Authorization: `Bearer ${TMDB_API_TOKEN}`,
   },
 })
