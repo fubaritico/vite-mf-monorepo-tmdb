@@ -26,14 +26,13 @@ export default defineConfig({
   input: 'https://developer.themoviedb.org/openapi/tmdb-api.json',
   output: {
     path: './src/client',
-    format: 'prettier',
   },
   plugins: [
     '@hey-api/typescript',
     '@hey-api/sdk',
     {
       name: '@hey-api/client-fetch',
-      runtimeConfigPath: './src/tmdb-config.ts',
+      runtimeConfigPath: '../tmdb-config.ts',
     },
     {
       name: '@tanstack/react-query',

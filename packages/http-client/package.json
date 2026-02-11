@@ -21,12 +21,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@hey-api/client-fetch": "^0.9.0",
     "@tanstack/react-query": "catalog:"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
-    "@hey-api/openapi-ts": "^0.66.0",
+    "@hey-api/openapi-ts": "^0.92.3",
     "eslint": "^9.0.0",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:",

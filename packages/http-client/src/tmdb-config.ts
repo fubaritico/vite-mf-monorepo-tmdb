@@ -9,7 +9,7 @@
  *
  * @see https://heyapi.dev/openapi-ts/clients/fetch#runtime-api
  */
-import type { Config } from '@hey-api/client-fetch'
+import type { Config } from './client/client/types.gen'
 
 /**
  * TMDB API Bearer token from environment variables.

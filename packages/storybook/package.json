@@ -5,7 +5,7 @@
   "description": "Storybook for vite-mf-monorepo design system",
   "type": "module",
   "scripts": {
-    "dev": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006",
     "build": "storybook build",
     "lint": "eslint . --max-warnings 0"
   },
