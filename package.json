@@ -4,7 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "lerna run --stream --parallel dev",
+    "build:packages": "pnpm --filter @vite-mf-monorepo/shared build && pnpm --filter @vite-mf-monorepo/ui build",
+    "dev:packages": "concurrently -n shared,ui \"pnpm --filter @vite-mf-monorepo/shared dev\" \"pnpm --filter @vite-mf-monorepo/ui dev\"",
+    "dev:apps": "lerna run --stream --parallel dev --ignore @vite-mf-monorepo/storybook --ignore @vite-mf-monorepo/shared --ignore @vite-mf-monorepo/ui",
+    "dev": "pnpm build:packages && concurrently -n packages,apps \"pnpm dev:packages\" \"wait-on packages/shared/dist/index.js packages/ui/dist/index.js && pnpm dev:apps\"",
     "dev:ordered": "lerna run --stream dev --scope @vite-mf-monorepo/list --scope @vite-mf-monorepo/detail --scope @vite-mf-monorepo/host",
     "prod": "lerna run --stream prod",
     "prod:ordered": "lerna run --stream prod --scope @vite-mf-monorepo/list --scope @vite-mf-monorepo/detail --scope @vite-mf-monorepo/host",
@@ -16,16 +19,18 @@
     "lint:fix": "eslint --ext .ts,.tsx,.js,.jsx . --fix",
     "test": "vitest run",
     "coverage": "vitest run --coverage",
-    "reset": "./scripts/reset-project.sh"
+    "reset": "./scripts/reset-project.sh",
+    "kill-ports": "./scripts/kill-ports.sh"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
-    "@vitejs/plugin-react": "^4.3.4",
     "@eslint/js": "^9.21.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "@vitest/coverage-v8": "3.1.2",
+    "concurrently": "^9.2.1",
     "eslint": "^9.21.0",
     "eslint-config-prettier": "^10.1.2",
     "eslint-config-react": "^1.1.7",
@@ -44,6 +49,7 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
     "vitest": "^3.1.2",
+    "wait-on": "^9.0.3",
     "yaml": "^2.8.0"
   },
   "engines": {

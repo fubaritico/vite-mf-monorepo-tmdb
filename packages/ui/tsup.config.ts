@@ -1,6 +1,6 @@
 import { defineConfig } from 'tsup'
 
-export default defineConfig({
+export default defineConfig((options) => ({
   entry: [
     'src/index.ts',
     'src/Button/index.ts',
@@ -9,12 +9,12 @@ export default defineConfig({
   ],
   format: ['esm'],
   dts: true,
-  clean: true,
+  clean: !options.watch,
   treeshake: true,
   splitting: true,
   sourcemap: true,
   external: ['react', 'react-dom'],
-  esbuildOptions(options) {
-    options.jsx = 'automatic'
+  esbuildOptions(esbuildOpts) {
+    esbuildOpts.jsx = 'automatic'
   },
-})
+}))
