@@ -211,11 +211,16 @@ PageName.loader = loader
 - **Node**: >= 22.11.0
 
 ### Frontend
-- **Framework**: React 19.0.0
+- **Framework**: React 19.1.0
 - **Routing**: React Router 7.5.2
 - **Data fetching**: TanStack Query 5.74.4
-- **Styling**: Native CSS (no Tailwind for now, no CSS Modules)
+- **Styling**: Tailwind CSS 4.1.0 with @tailwindcss/vite plugin
 - **TypeScript**: 5.7.2
+
+### API Client
+- **Generator**: heyAPI 0.71.0 (OpenAPI to TypeScript)
+- **HTTP Client**: @hey-api/client-fetch 0.10.0
+- **Integration**: TanStack Query hooks auto-generated
 
 ### Quality
 - **Linting**: ESLint 9 (flat config) + Prettier 3.5.3
@@ -235,11 +240,15 @@ PageName.loader = loader
 
 ## Project Structure
 
-### Packages
+### Apps (Micro-frontends)
 - `apps/host`: Host application (port 3000) that consumes remotes
-- `packages/list`: Remote for movie list (port 3001, route `/`)
-- `packages/detail`: Remote for movie detail (port 3002, route `/detail/:id`)
-- `packages/shared`: Shared utilities (healthCheck, retry)
+- `apps/list`: Remote for movie list (port 3001, route `/`)
+- `apps/detail`: Remote for movie detail (port 3002, route `/detail/:id`)
+
+### Packages (Shared libraries)
+- `packages/shared`: Shared utilities (healthCheck, retry), Vite plugins (notifyHostOnHmr, tailwindRemoteCss), Tailwind theme
+- `packages/ui`: Design system components (Button, Card) with Tailwind v4 and `ui:` prefix
+- `packages/http-client`: TMDB API client generated with heyAPI, exported as @vite-mf-monorepo/tmdb-client
 
 ### Ports (defined in .env)
 - HOST_PORT=3000
@@ -265,11 +274,13 @@ PageName.loader = loader
 - Newlines between groups
 - Sort-imports enabled with ignoreDeclarationSort
 
-### CSS
-- BEM-like naming with context prefixes
-- No CSS Modules
-- Styles colocated with components
-- `index.css` duplicated in each package for standalone mode
+### CSS / Tailwind
+- Tailwind CSS v4 with CSS-first configuration (no tailwind.config.js)
+- Shared theme in `packages/shared/src/tailwind/theme.css` with OKLCH colors
+- Host: Full Tailwind with preflight
+- Remotes: Use `tailwindRemoteCss` plugin to generate CSS without preflight (avoids duplication)
+- Remotes import `remote.css` (generated) instead of `index.css` for exposed components
+- packages/ui uses `ui:` prefix for style isolation
 - Dynamic injection via vite-plugin-css-injected-by-js in remotes
 
 ### Commits
@@ -392,8 +403,9 @@ All checks must pass before the commit is allowed.
 - ❌ No explicit `any` in TypeScript
 - ❌ No unused variables/parameters
 - ❌ No unsorted imports
-- ❌ No CSS Modules (use classic classes)
+- ❌ No CSS Modules
 - ❌ No CSS-in-JS
+- ❌ No custom CSS when Tailwind utilities exist
 
 ### Commits
 - ❌ No commits without conventional type
@@ -405,6 +417,7 @@ All checks must pass before the commit is allowed.
 - ❌ Never modify shared dependencies without synchronizing host and remotes
 - ❌ Never delete index.css files (required for standalone mode)
 - ❌ Never disable cssInjectedByJsPlugin in remotes
+- ❌ Never manually edit generated files in packages/http-client/src/client/ (regenerate with `pnpm generate`)
 
 ## Best Practices
 
@@ -414,9 +427,11 @@ All checks must pass before the commit is allowed.
 - Ensure health checks work before starting host
 - Expose loaders with RouteComponent pattern
 
-### CSS
-- Prefix classes by context (movie-grid-, movie-detail-, etc.)
-- Keep index.css synchronized across all packages
+### Tailwind CSS
+- Use Tailwind utility classes, avoid custom CSS when possible
+- Shared theme tokens defined in packages/shared/src/tailwind/theme.css
+- Remotes: import `../remote.css` in exposed components (not index.css)
+- packages/ui: use `ui:` prefix for all classes
 - Use relativeCSSInjection: true in cssInjectedByJsPlugin
 
 ### Tests
@@ -437,8 +452,11 @@ All checks must pass before the commit is allowed.
 
 ## Future Enhancements
 
-- Migration to Tailwind CSS for styling
-- E2E tests with Vitest in browser mode
+- E2E tests with Playwright or Vitest browser mode
 - People package for talent details
+- More Tier 1 primitives in packages/ui (Image, Rating, Badge, Carousel, Input, IconButton, Skeleton)
+- Storybook for component documentation
+- Style Dictionary for design token management
+- Dark mode support
 - More tests for error cases
 - Test utils in shared package
