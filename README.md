@@ -26,8 +26,10 @@ It's a work in progress, so many future enhancements are planned.
 - React Router
 - React Query
 - Tailwind CSS v4 (shared theme across remote/host)
+- Style Dictionary (design tokens)
 - React Testing Library
 - Vitest
+- Storybook
 
 ### Getting Started
 
@@ -70,6 +72,17 @@ pnpm dev
 | `pnpm lint` | Run ESLint |
 | `pnpm type-check` | Run TypeScript type checking |
 
+### Design Tokens
+
+This project uses [Style Dictionary](https://styledictionary.com/) to manage design tokens. Tokens are defined in JSON format following the [DTCG specification](https://tr.designtokens.org/format/) and are automatically compiled to CSS custom properties and Tailwind CSS theme.
+
+The tokens package generates:
+- **CSS variables** for use in any CSS
+- **Tailwind @theme** for Tailwind v4 integration
+- **JavaScript/TypeScript exports** for programmatic access
+
+See [packages/tokens/README.md](./packages/tokens/README.md) for detailed documentation.
+
 ### Storybook
 
 To run Storybook for the design system:
@@ -91,6 +104,7 @@ vite-mf-monorepo/
 ├── packages/
 │   ├── shared/        # Shared utils, Vite plugins, Tailwind theme
 │   ├── ui/            # Design system (Button, Card, etc.)
+│   ├── tokens/        # Design tokens (Style Dictionary)
 │   ├── http-client/   # TMDB API client (heyAPI + TanStack Query)
 │   └── storybook/     # Storybook for UI components
 └── scripts/           # Utility scripts (reset, kill-ports)

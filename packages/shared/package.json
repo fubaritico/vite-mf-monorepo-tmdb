@@ -12,6 +12,7 @@
     "lint:fix": "eslint ./src --fix"
   },
   "dependencies": {
+    "@vite-mf-monorepo/tokens": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router-dom": "catalog:"

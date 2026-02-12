@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:packages": "pnpm --filter @vite-mf-monorepo/shared build && pnpm --filter @vite-mf-monorepo/ui build",
+    "build:packages": "pnpm --filter @vite-mf-monorepo/tokens build && pnpm --filter @vite-mf-monorepo/shared build && pnpm --filter @vite-mf-monorepo/ui build",
     "dev:packages": "concurrently -n shared,ui \"pnpm --filter @vite-mf-monorepo/shared dev\" \"pnpm --filter @vite-mf-monorepo/ui dev\"",
-    "dev:apps": "lerna run --stream --parallel dev --ignore @vite-mf-monorepo/storybook --ignore @vite-mf-monorepo/shared --ignore @vite-mf-monorepo/ui",
+    "dev:apps": "lerna run --stream --parallel dev --ignore @vite-mf-monorepo/storybook --ignore @vite-mf-monorepo/shared --ignore @vite-mf-monorepo/ui --ignore @vite-mf-monorepo/tokens",
     "dev": "pnpm build:packages && concurrently -n packages,apps \"pnpm dev:packages\" \"wait-on packages/shared/dist/index.js packages/ui/dist/index.js && pnpm dev:apps\"",
     "dev:ordered": "lerna run --stream dev --scope @vite-mf-monorepo/list --scope @vite-mf-monorepo/detail --scope @vite-mf-monorepo/host",
     "prod": "lerna run --stream prod",
