@@ -1,10 +1,8 @@
 {
   "font": {
-    "family": {
-      "$description": "Font families",
-      "sans": { "$value": "ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'", "$type": "fontFamily" },
-      "mono": { "$value": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace", "$type": "fontFamily" }
-    },
+    "roboto": { "$value": "'Roboto', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'", "$type": "fontFamily" },
+    "roboto-condensed": { "$value": "'Roboto Condensed', 'Roboto', ui-sans-serif, system-ui, sans-serif", "$type": "fontFamily" },
+    "inter": { "$value": "'Inter', 'Roboto', ui-sans-serif, system-ui, sans-serif", "$type": "fontFamily" },
     "size": {
       "$description": "Font size scale",
       "xs": { "$value": "0.75rem", "$type": "dimension" },

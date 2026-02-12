@@ -18,6 +18,9 @@
     "react-router-dom": "catalog:"
   },
   "devDependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/roboto": "^5.2.9",
+    "@fontsource/roboto-condensed": "^5.2.8",
     "@types/node": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"

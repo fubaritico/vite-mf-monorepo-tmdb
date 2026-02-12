@@ -7,4 +7,7 @@
  * Short aliases (--color-background, --color-primary, etc.) are included.
  */
 
+/* Fonts must be imported before tokens */
+@import '../fonts/fonts.css';
+
 @import '@vite-mf-monorepo/tokens/tailwind';
