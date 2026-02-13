@@ -1,4 +1,5 @@
 import { QueryClient, useQuery } from '@tanstack/react-query'
+import { getImageUrl } from '@vite-mf-monorepo/shared'
 import { moviePopularListOptions } from '@vite-mf-monorepo/tmdb-client'
 import { Link, useLoaderData } from 'react-router-dom'
 
@@ -6,16 +7,6 @@ import type { MoviePopularListResponse } from '@vite-mf-monorepo/tmdb-client'
 import type { FC } from 'react'
 
 import '../remote.css'
-
-const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p'
-
-/**
- * Constructs the full image URL for TMDB images.
- */
-const getImageUrl = (path: string | null, size = 'w500'): string => {
-  if (!path) return ''
-  return `${IMAGE_BASE_URL}/${size}${path}`
-}
 
 export type RouteComponent = FC & {
   loader: (queryClient: QueryClient) => () => Promise<MoviePopularListResponse>
@@ -55,7 +46,7 @@ const Home: RouteComponent = () => {
         >
           <div className="relative aspect-[2/3] overflow-hidden">
             <img
-              src={getImageUrl(movie.poster_path ?? null)}
+              src={getImageUrl(movie.poster_path)}
               alt={`${movie.title ?? 'Movie'} poster`}
               className="h-full w-full object-cover"
             />

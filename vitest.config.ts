@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   test: {
     globals: true,
-    workspace: ['packages/*'],
+    projects: ['packages/*', 'apps/*'],
     setupFiles: ['./vitest.setup.ts'],
     disableConsoleIntercept: true,
     coverage: {

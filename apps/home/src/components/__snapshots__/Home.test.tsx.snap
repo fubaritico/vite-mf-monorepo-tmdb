@@ -1,0 +1,431 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Home > should render the list of movies 1`] = `
+<div>
+  <div
+    class="grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] gap-8"
+    data-testid="movie-grid-list"
+  >
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/668489"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Havoc poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/r46leE6PSzLR3pnVzaxx5Q30yUF.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Havoc
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/1197306"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="A Working Man poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/xUkUZ8eOnrOnnJAfusZUqKYZiDu.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        A Working Man
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/1233069"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Exterritorial poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/qWTfHG8KdXwr0bqypYbNZLenh0J.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Exterritorial
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/950387"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="A Minecraft Movie poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/iPPTGh2OXuIv6d7cwuoPkw8govp.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        A Minecraft Movie
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/1471014"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Van Gogh by Vincent poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/z73X4WKZghBh5fri31o8P6vBEB2.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Van Gogh by Vincent
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/1276073"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Bullet Train Explosion poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/qkTKtOHK9JEEOHgPQZ0dFtzs5ML.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Bullet Train Explosion
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/324544"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="In the Lost Lands poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/dDlfjR7gllmr8HTeN6rfrYhTdwX.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        In the Lost Lands
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/1225915"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Jewel Thief: The Heist Begins poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/eujLbO0kf1eqWC8XpHUJdtAVW2J.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Jewel Thief: The Heist Begins
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/986056"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Thunderbolts* poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/hqcexYHbiTBfDIdDWxrxPtVndBX.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Thunderbolts*
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/822119"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Captain America: Brave New World poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/pzIddUEMWhWzfvLI3TwxUG2wGoi.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Captain America: Brave New World
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/1180906"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Desert Dawn poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/S21BfLrJSD9njucBfY3CKqp8rD.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Desert Dawn
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/1233413"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Sinners poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/jYfMTSiFFK7ffbY2lay4zyvTkEk.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Sinners
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/1124620"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="The Monkey poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/yYa8Onk9ow7ukcnfp2QWVvjWYel.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        The Monkey
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/1153714"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Death of a Unicorn poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/lXR32JepFwD1UHkplWqtBP1K79z.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Death of a Unicorn
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/1092899"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="The Siege poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/hVh4hMzkXNLnScudbid6hDvjMPk.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        The Siege
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/1414048"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Day of Reckoning poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/cVSjSQryFUERYSdOmdgJ2m0eBte.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Day of Reckoning
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/348"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Alien poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/vfrQk5IPloGg1v9Rzbh2Eg3VGyM.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Alien
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/335984"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Blade Runner 2049 poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Blade Runner 2049
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/931349"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Ash poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/5Oz39iyRuztiA8XqCNVDBuy2Ut3.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Ash
+      </div>
+    </a>
+    <a
+      class="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+      data-discover="true"
+      data-testid="movie-grid-card"
+      href="/movie/374720"
+    >
+      <div
+        class="relative aspect-[2/3] overflow-hidden"
+      >
+        <img
+          alt="Dunkirk poster"
+          class="h-full w-full object-cover"
+          src="https://image.tmdb.org/t/p/w500/b4Oe15CGLL61Ped0RAS9JpqdmCt.jpg"
+        />
+      </div>
+      <div
+        class="text-foreground p-4 text-center font-medium"
+      >
+        Dunkirk
+      </div>
+    </a>
+  </div>
+</div>
+`;

@@ -78,43 +78,42 @@ const proxyOptions: CommonServerOptions = {
   },
 }
 
-export default defineConfig(({ mode }) => ({
-  envDir: resolve(__dirname, '../..'),
-  plugins: [
-    /**
-     * Generate remote.css (without preflight) for host consumption.
-     * Must run before other plugins to ensure CSS is available.
-     */
-    tailwindRemoteCss({
-      input: './src/remote-input.css',
-      output: './src/remote.css',
-      content: './src/**/*.tsx',
-    }),
-    tailwindcss(),
-    federation({
-      ...remoteConfig,
-    }),
-    react(),
-    // Allow CSS to be injected in host app
-    cssInjectedByJsPlugin({
-      relativeCSSInjection: true,
-    }),
-    topLevelAwait(),
-    /**
-     * HMR Sync: Notify host when files change in this remote.
-     *
-     * Sends an HTTP request to the host's /on-child-rebuild endpoint
-     * on every HMR update, triggering a full page reload in the browser.
-     *
-     * @see packages/shared/src/vite/notifyHostOnHmr.ts - Plugin implementation
-     * @see files/HMR-SYNC.md - Full documentation
-     */
-    notifyHostOnHmr({
-      appName: 'movie',
-      hostUrl: `http://localhost:${process.env.HOST_PORT}`,
-      endpoint: '/on-child-rebuild',
-    }),
-  ],
+export default defineConfig(({ mode }) => {
+  const isTest = process.env.VITEST === 'true'
+
+  return {
+    envDir: resolve(__dirname, '../..'),
+    plugins: [
+      /**
+       * Generate remote.css (without preflight) for host consumption.
+       * Must run before other plugins to ensure CSS is available.
+       * Skip in test mode - use pre-generated CSS.
+       */
+      // Skip build-time plugins in test mode
+      ...(isTest
+        ? []
+        : [
+            tailwindRemoteCss({
+              input: './src/remote-input.css',
+              output: './src/remote.css',
+              content: './src/**/*.tsx',
+            }),
+            federation({
+              ...remoteConfig,
+            }),
+            cssInjectedByJsPlugin({
+              relativeCSSInjection: true,
+            }),
+            topLevelAwait(),
+            notifyHostOnHmr({
+              appName: 'movie',
+              hostUrl: `http://localhost:${process.env.HOST_PORT}`,
+              endpoint: '/on-child-rebuild',
+            }),
+          ]),
+      tailwindcss(),
+      react(),
+    ],
   build: {
     modulePreload: false,
     target: 'esnext',
@@ -139,4 +138,5 @@ export default defineConfig(({ mode }) => ({
         },
       }
     : {}),
-}))
+  }
+})

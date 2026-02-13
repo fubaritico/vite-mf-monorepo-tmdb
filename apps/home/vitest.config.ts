@@ -2,9 +2,9 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
-    name: 'list',
+    name: 'home',
     environment: 'jsdom',
-    include: ['./**/*.test.tsx'],
+    include: ['src/**/*.test.tsx'],
     disableConsoleIntercept: true,
     coverage: {
       provider: 'istanbul',

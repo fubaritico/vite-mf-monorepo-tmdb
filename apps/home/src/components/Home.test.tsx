@@ -1,21 +1,25 @@
 import { cleanup, screen, waitFor, within } from '@testing-library/react'
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import moviesData from '../mocks/data/popular'
 import { renderReactQueryWithRouter } from '../mocks/react-router'
-import * as mod from '../services/api'
 
 import Home from './Home'
 
-// Spying to assert calls to the API
-const fetchPopularMovies = vi.spyOn(mod, 'fetchPopularMovies')
-const getImageUrl = vi.spyOn(mod, 'getImageUrl')
-
-// fetchPopularMovies locale mock
-vi.mock('../services/api', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('../services/api')>()),
-  fetchPopularMovies: vi.fn(async () => Promise.resolve(moviesData)),
-}))
+vi.mock('@vite-mf-monorepo/tmdb-client', async (importOriginal) => {
+  const original =
+    await importOriginal<typeof import('@vite-mf-monorepo/tmdb-client')>()
+  // Import mock data inside the factory
+  const { default: mockData } = await import('../mocks/data/popular')
+  return {
+    ...original,
+    // Mock moviePopularListOptions to return mock data directly
+    moviePopularListOptions: () => ({
+      queryKey: ['moviePopularList'],
+      queryFn: () => Promise.resolve(mockData),
+    }),
+  }
+})
 
 /**
  * Helper function to flush promises, so that any pending promises are resolved
@@ -28,24 +32,14 @@ function flushPromises() {
 }
 
 describe('Home', () => {
-  beforeEach(() => {
-    fetchPopularMovies.mockClear()
-    getImageUrl.mockClear()
-  })
-
   // cleanup after each test, vitest doesn't perform any automatic DOM cleanup
   afterEach(() => {
     cleanup()
   })
 
-  /**
-   * Because the init is async, some extra assertion is to be performed to ensure
-   * there are no memory leaks between tests regarding spy clearing.
-   */
   it('should render the list of movies', async () => {
     const { container } = renderReactQueryWithRouter(Home)
-    // testing API call on init
-    expect(fetchPopularMovies).toHaveBeenCalledTimes(1)
+
     // testing any rendered element to be sure that the component is mounted and rendered
     const element = await waitFor(() => screen.getByText('Havoc'))
 
@@ -55,27 +49,8 @@ describe('Home', () => {
     await flushPromises()
   })
 
-  it('should call "fetchPopularMovies" one time on init', async () => {
-    renderReactQueryWithRouter(Home)
-
-    expect(fetchPopularMovies).toHaveBeenCalledTimes(1)
-
-    await flushPromises()
-  })
-
-  // Testing the same to verify that each test is properly isolated
-  it('should call "fetchPopularMovies" one time on init a second time', async () => {
-    renderReactQueryWithRouter(Home)
-
-    expect(fetchPopularMovies).toHaveBeenCalledTimes(1)
-
-    await flushPromises()
-  })
-
   it('should display the right amount of cards in the movie grid', async () => {
     renderReactQueryWithRouter(Home)
-
-    expect(fetchPopularMovies).toHaveBeenCalledTimes(1)
 
     await waitFor(() => {
       expect(screen.getAllByTestId('movie-grid-card').length).toEqual(
@@ -97,18 +72,11 @@ describe('Home', () => {
     async (title, poster_path, index) => {
       renderReactQueryWithRouter(Home)
 
-      expect(fetchPopularMovies).toHaveBeenCalledTimes(1)
-
       await waitFor(() => {
         expect(
           screen.getAllByTestId('movie-grid-card')[index as number]
         ).toBeTruthy()
       })
-
-      expect(getImageUrl).toHaveBeenCalledTimes(moviesData.results.length)
-      expect(getImageUrl).toHaveBeenCalledWith(
-        moviesData.results[index as number].poster_path
-      )
 
       const card = screen.getAllByTestId('movie-grid-card')[index as number]
 

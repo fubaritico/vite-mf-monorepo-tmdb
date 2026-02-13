@@ -1,4 +1,5 @@
 import { QueryClient, useQuery } from '@tanstack/react-query'
+import { getImageUrl } from '@vite-mf-monorepo/shared'
 import { movieDetailsOptions } from '@vite-mf-monorepo/tmdb-client'
 import { useLoaderData, useParams } from 'react-router-dom'
 
@@ -7,19 +8,6 @@ import type { FC } from 'react'
 import type { Params } from 'react-router-dom'
 
 import '../remote.css'
-
-const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p'
-
-/**
- * Constructs the full image URL for TMDB images.
- */
-const getImageUrl = (
-  path: string | null | undefined,
-  size = 'w500'
-): string => {
-  if (!path) return ''
-  return `${IMAGE_BASE_URL}/${size}${path}`
-}
 
 export type RouteComponent = FC & {
   loader: (
