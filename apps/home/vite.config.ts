@@ -21,10 +21,10 @@ import type { ModuleFederationOptions } from '@module-federation/vite/lib/utils/
 import type { CommonServerOptions } from 'vite'
 
 const remoteConfig: ModuleFederationOptions = {
-  name: 'list',
+  name: 'home',
   filename: 'remoteEntry.js',
   exposes: {
-    './List': './src/components/List',
+    './Home': './src/components/Home',
     './routes': './src/routes',
   },
   shared: {
@@ -60,17 +60,17 @@ const remoteConfig: ModuleFederationOptions = {
 const proxyOptions: CommonServerOptions = {
   proxy: {
     '/@mf-types.zip': {
-      target: `http://localhost:${process.env.REMOTE_LIST_PORT}`,
+      target: `http://localhost:${process.env.REMOTE_HOME_PORT}`,
       changeOrigin: true,
       rewrite: () => `/@fs/${process.cwd()}/dist/@mf-types.zip`,
     },
     '/remoteEntry.js': {
-      target: `http://localhost:${process.env.REMOTE_LIST_PORT}`,
+      target: `http://localhost:${process.env.REMOTE_HOME_PORT}`,
       changeOrigin: true,
       rewrite: () => `/@fs/${process.cwd()}/dist/remoteEntry.js`,
     },
     '/mf-manifest.json': {
-      target: `http://localhost:${process.env.REMOTE_LIST_PORT}`,
+      target: `http://localhost:${process.env.REMOTE_HOME_PORT}`,
       changeOrigin: true,
       rewrite: () => `/@fs/${process.cwd()}/dist/mf-manifest.json`,
     },
@@ -110,7 +110,7 @@ export default defineConfig(({ mode }) => {
        * @see files/HMR-SYNC.md - Full documentation
        */
       notifyHostOnHmr({
-        appName: 'list',
+        appName: 'home',
         hostUrl: `http://localhost:${process.env.HOST_PORT}`,
         endpoint: '/on-child-rebuild',
       }),
@@ -130,7 +130,7 @@ export default defineConfig(({ mode }) => {
     ...(mode === 'development'
       ? {
           server: {
-            port: parseInt(process.env.REMOTE_LIST_PORT),
+            port: parseInt(process.env.REMOTE_HOME_PORT),
             strictPort: true,
             ...proxyOptions,
             fs: {

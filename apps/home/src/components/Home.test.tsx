@@ -5,7 +5,7 @@ import moviesData from '../mocks/data/popular'
 import { renderReactQueryWithRouter } from '../mocks/react-router'
 import * as mod from '../services/api'
 
-import List from './List'
+import Home from './Home'
 
 // Spying to assert calls to the API
 const fetchPopularMovies = vi.spyOn(mod, 'fetchPopularMovies')
@@ -27,7 +27,7 @@ function flushPromises() {
   })
 }
 
-describe('List', () => {
+describe('Home', () => {
   beforeEach(() => {
     fetchPopularMovies.mockClear()
     getImageUrl.mockClear()
@@ -43,7 +43,7 @@ describe('List', () => {
    * there are no memory leaks between tests regarding spy clearing.
    */
   it('should render the list of movies', async () => {
-    const { container } = renderReactQueryWithRouter(List)
+    const { container } = renderReactQueryWithRouter(Home)
     // testing API call on init
     expect(fetchPopularMovies).toHaveBeenCalledTimes(1)
     // testing any rendered element to be sure that the component is mounted and rendered
@@ -56,7 +56,7 @@ describe('List', () => {
   })
 
   it('should call "fetchPopularMovies" one time on init', async () => {
-    renderReactQueryWithRouter(List)
+    renderReactQueryWithRouter(Home)
 
     expect(fetchPopularMovies).toHaveBeenCalledTimes(1)
 
@@ -65,7 +65,7 @@ describe('List', () => {
 
   // Testing the same to verify that each test is properly isolated
   it('should call "fetchPopularMovies" one time on init a second time', async () => {
-    renderReactQueryWithRouter(List)
+    renderReactQueryWithRouter(Home)
 
     expect(fetchPopularMovies).toHaveBeenCalledTimes(1)
 
@@ -73,7 +73,7 @@ describe('List', () => {
   })
 
   it('should display the right amount of cards in the movie grid', async () => {
-    renderReactQueryWithRouter(List)
+    renderReactQueryWithRouter(Home)
 
     expect(fetchPopularMovies).toHaveBeenCalledTimes(1)
 
@@ -95,7 +95,7 @@ describe('List', () => {
   ])(
     'should display a card with a title "%s" and a poster with src equals to "%s"',
     async (title, poster_path, index) => {
-      renderReactQueryWithRouter(List)
+      renderReactQueryWithRouter(Home)
 
       expect(fetchPopularMovies).toHaveBeenCalledTimes(1)
 

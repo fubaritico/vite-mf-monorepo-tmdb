@@ -25,7 +25,7 @@ const loader = (queryClient: QueryClient) => async () => {
   return queryClient.ensureQueryData(moviePopularListOptions())
 }
 
-const List: RouteComponent = () => {
+const Home: RouteComponent = () => {
   const initialData = useLoaderData<MoviePopularListResponse>()
 
   const { data: movies, error } = useQuery({
@@ -69,6 +69,6 @@ const List: RouteComponent = () => {
   )
 }
 
-export default List
+export default Home
 
-List.loader = loader
+Home.loader = loader

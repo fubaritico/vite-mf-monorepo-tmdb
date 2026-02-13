@@ -4,7 +4,7 @@ import { RouterProvider, createMemoryRouter } from 'react-router-dom'
 
 import { ReactQueryWrapper } from './react-query'
 
-import type { RouteComponent } from '../components/List'
+import type { RouteComponent } from '../components/Home'
 import type { RenderOptions } from '@testing-library/react'
 
 /**

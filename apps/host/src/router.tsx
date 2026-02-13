@@ -18,11 +18,11 @@ const router = createBrowserRouter([
       {
         index: true,
         async lazy() {
-          // Lazy load the List component from the 'list' remote
-          const { default: List } = (await import('list/List')) as {
+          // Lazy load the Home component from the 'home' remote
+          const { default: Home } = (await import('home/Home')) as {
             default: RouteComponent
           }
-          return { Component: List, loader: List.loader(queryClient) }
+          return { Component: Home, loader: Home.loader(queryClient) }
         },
       },
       {

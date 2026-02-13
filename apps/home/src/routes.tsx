@@ -2,7 +2,7 @@ import { QueryClient } from '@tanstack/react-query'
 import { RouteObject } from 'react-router-dom'
 
 import App from './App'
-import List from './components/List'
+import Home from './components/Home'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,8 +22,8 @@ export const routes: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <List />,
-        loader: List.loader(queryClient),
+        element: <Home />,
+        loader: Home.loader(queryClient),
       },
     ],
   },

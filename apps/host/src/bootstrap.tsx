@@ -1,18 +1,18 @@
 import { checkRemoteHealth } from '@vite-mf-monorepo/shared'
 import { createRoot } from 'react-dom/client'
 
-const LIST_REMOTE_URL = `http://localhost:${import.meta.env.VITE_REMOTE_LIST_PORT as string}/health`
+const HOME_REMOTE_URL = `http://localhost:${import.meta.env.VITE_REMOTE_HOME_PORT as string}/health`
 const DETAIL_REMOTE_URL = `http://localhost:${import.meta.env.VITE_REMOTE_DETAIL_PORT as string}/health`
 
 async function bootstrap() {
   try {
     // Check health of remote applications
-    const [listHealthy, detailHealthy] = await Promise.all([
-      checkRemoteHealth(LIST_REMOTE_URL),
+    const [homeHealthy, detailHealthy] = await Promise.all([
+      checkRemoteHealth(HOME_REMOTE_URL),
       checkRemoteHealth(DETAIL_REMOTE_URL),
     ])
 
-    if (!listHealthy || !detailHealthy) {
+    if (!homeHealthy || !detailHealthy) {
       throw new Error('Remote applications are not healthy')
     }
 

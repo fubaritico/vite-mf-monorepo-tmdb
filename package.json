@@ -8,10 +8,10 @@
     "dev:packages": "concurrently -n shared,ui \"pnpm --filter @vite-mf-monorepo/shared dev\" \"pnpm --filter @vite-mf-monorepo/ui dev\"",
     "dev:apps": "lerna run --stream --parallel dev --ignore @vite-mf-monorepo/storybook --ignore @vite-mf-monorepo/shared --ignore @vite-mf-monorepo/ui --ignore @vite-mf-monorepo/tokens",
     "dev": "pnpm build:packages && concurrently -n packages,apps \"pnpm dev:packages\" \"wait-on packages/shared/dist/index.js packages/ui/dist/index.js && pnpm dev:apps\"",
-    "dev:ordered": "lerna run --stream dev --scope @vite-mf-monorepo/list --scope @vite-mf-monorepo/detail --scope @vite-mf-monorepo/host",
+    "dev:ordered": "lerna run --stream dev --scope @vite-mf-monorepo/home --scope @vite-mf-monorepo/detail --scope @vite-mf-monorepo/host",
     "prod": "lerna run --stream prod",
-    "prod:ordered": "lerna run --stream prod --scope @vite-mf-monorepo/list --scope @vite-mf-monorepo/detail --scope @vite-mf-monorepo/host",
-    "list:dev": "pnpm --filter @vite-mf-monorepo/list dev",
+    "prod:ordered": "lerna run --stream prod --scope @vite-mf-monorepo/home --scope @vite-mf-monorepo/detail --scope @vite-mf-monorepo/host",
+    "home:dev": "pnpm --filter @vite-mf-monorepo/home dev",
     "detail:dev": "pnpm --filter @vite-mf-monorepo/detail dev",
     "host:dev": "pnpm --filter @vite-mf-monorepo/host dev",
     "type-check": "tsc -p ./ --noEmit",
@@ -23,6 +23,7 @@
     "kill-ports": "./scripts/kill-ports.sh"
   },
   "devDependencies": {
+    "@tailwindcss/cli": "catalog:",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@eslint/js": "^9.21.0",

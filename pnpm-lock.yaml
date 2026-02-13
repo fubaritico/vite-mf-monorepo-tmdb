@@ -21,6 +21,9 @@ catalogs:
     '@module-federation/vite':
       specifier: 1.11.0
       version: 1.11.0
+    '@tailwindcss/cli':
+      specifier: 4.1.0
+      version: 4.1.0
     '@tailwindcss/postcss':
       specifier: 4.1.0
       version: 4.1.0
@@ -122,6 +125,9 @@ importers:
       '@eslint/js':
         specifier: ^9.21.0
         version: 9.39.2
+      '@tailwindcss/cli':
+        specifier: 'catalog:'
+        version: 4.1.0
       '@testing-library/jest-dom':
         specifier: ^6.6.3
         version: 6.9.1
@@ -289,83 +295,7 @@ importers:
         specifier: 'catalog:'
         version: 1.5.0(rollup@4.57.1)(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
 
-  apps/host:
-    dependencies:
-      '@vite-mf-monorepo/shared':
-        specifier: workspace:*
-        version: link:../../packages/shared
-      react:
-        specifier: 'catalog:'
-        version: 19.1.0
-      react-dom:
-        specifier: 'catalog:'
-        version: 19.1.0(react@19.1.0)
-      react-router-dom:
-        specifier: 'catalog:'
-        version: 7.5.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-    devDependencies:
-      '@antdevx/vite-plugin-hmr-sync':
-        specifier: 'catalog:'
-        version: 1.1.2
-      '@eslint/js':
-        specifier: 'catalog:'
-        version: 9.21.0
-      '@module-federation/dts-plugin':
-        specifier: 'catalog:'
-        version: 0.24.1(typescript@5.7.2)
-      '@module-federation/runtime':
-        specifier: 'catalog:'
-        version: 0.24.1
-      '@module-federation/vite':
-        specifier: 'catalog:'
-        version: 1.11.0(rollup@4.57.1)(typescript@5.7.2)(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
-      '@tailwindcss/vite':
-        specifier: 'catalog:'
-        version: 4.1.0(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
-      '@tanstack/react-query':
-        specifier: 'catalog:'
-        version: 5.74.4(react@19.1.0)
-      '@types/express':
-        specifier: 'catalog:'
-        version: 5.0.1
-      '@types/node':
-        specifier: 'catalog:'
-        version: 22.14.0
-      '@types/react':
-        specifier: 'catalog:'
-        version: 19.1.0
-      '@types/react-dom':
-        specifier: 'catalog:'
-        version: 19.1.0(@types/react@19.1.0)
-      '@vitejs/plugin-react':
-        specifier: 'catalog:'
-        version: 4.3.4(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
-      cors:
-        specifier: 'catalog:'
-        version: 2.8.5
-      dotenv:
-        specifier: 'catalog:'
-        version: 16.5.0
-      express:
-        specifier: 'catalog:'
-        version: 5.1.0
-      tailwindcss:
-        specifier: 'catalog:'
-        version: 4.1.0
-      typescript:
-        specifier: 'catalog:'
-        version: 5.7.2
-      typescript-eslint:
-        specifier: 'catalog:'
-        version: 8.24.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.7.2)
-      vite:
-        specifier: 'catalog:'
-        version: 6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2)
-      vite-plugin-top-level-await:
-        specifier: 'catalog:'
-        version: 1.5.0(rollup@4.57.1)(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
-
-  apps/list:
+  apps/home:
     dependencies:
       '@vite-mf-monorepo/shared':
         specifier: workspace:*
@@ -452,6 +382,82 @@ importers:
       vite-plugin-css-injected-by-js:
         specifier: 'catalog:'
         version: 3.5.2(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
+      vite-plugin-top-level-await:
+        specifier: 'catalog:'
+        version: 1.5.0(rollup@4.57.1)(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
+
+  apps/host:
+    dependencies:
+      '@vite-mf-monorepo/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      react:
+        specifier: 'catalog:'
+        version: 19.1.0
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.1.0(react@19.1.0)
+      react-router-dom:
+        specifier: 'catalog:'
+        version: 7.5.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+    devDependencies:
+      '@antdevx/vite-plugin-hmr-sync':
+        specifier: 'catalog:'
+        version: 1.1.2
+      '@eslint/js':
+        specifier: 'catalog:'
+        version: 9.21.0
+      '@module-federation/dts-plugin':
+        specifier: 'catalog:'
+        version: 0.24.1(typescript@5.7.2)
+      '@module-federation/runtime':
+        specifier: 'catalog:'
+        version: 0.24.1
+      '@module-federation/vite':
+        specifier: 'catalog:'
+        version: 1.11.0(rollup@4.57.1)(typescript@5.7.2)(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
+      '@tailwindcss/vite':
+        specifier: 'catalog:'
+        version: 4.1.0(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
+      '@tanstack/react-query':
+        specifier: 'catalog:'
+        version: 5.74.4(react@19.1.0)
+      '@types/express':
+        specifier: 'catalog:'
+        version: 5.0.1
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.14.0
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.1.0
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.1.0(@types/react@19.1.0)
+      '@vitejs/plugin-react':
+        specifier: 'catalog:'
+        version: 4.3.4(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
+      cors:
+        specifier: 'catalog:'
+        version: 2.8.5
+      dotenv:
+        specifier: 'catalog:'
+        version: 16.5.0
+      express:
+        specifier: 'catalog:'
+        version: 5.1.0
+      tailwindcss:
+        specifier: 'catalog:'
+        version: 4.1.0
+      typescript:
+        specifier: 'catalog:'
+        version: 5.7.2
+      typescript-eslint:
+        specifier: 'catalog:'
+        version: 8.24.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.7.2)
+      vite:
+        specifier: 'catalog:'
+        version: 6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2)
       vite-plugin-top-level-await:
         specifier: 'catalog:'
         version: 1.5.0(rollup@4.57.1)(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
@@ -1729,6 +1735,88 @@ packages:
   '@octokit/types@13.10.0':
     resolution: {integrity: sha512-ifLaO34EbbPj0Xgro4G5lP5asESjwHracYJvVaPIyXMuiuXLlhic3S47cBdTb+jfODkTE5YtGCLt3Ay3+J97sA==}
 
+  '@parcel/watcher-android-arm64@2.5.6':
+    resolution: {integrity: sha512-YQxSS34tPF/6ZG7r/Ih9xy+kP/WwediEUsqmtf0cuCV5TPPKw/PQHRhueUo6JdeFJaqV3pyjm0GdYjZotbRt/A==}
+    engines: {node: '>= 10.0.0'}
+    cpu: [arm64]
+    os: [android]
+
+  '@parcel/watcher-darwin-arm64@2.5.6':
+    resolution: {integrity: sha512-Z2ZdrnwyXvvvdtRHLmM4knydIdU9adO3D4n/0cVipF3rRiwP+3/sfzpAwA/qKFL6i1ModaabkU7IbpeMBgiVEA==}
+    engines: {node: '>= 10.0.0'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@parcel/watcher-darwin-x64@2.5.6':
+    resolution: {integrity: sha512-HgvOf3W9dhithcwOWX9uDZyn1lW9R+7tPZ4sug+NGrGIo4Rk1hAXLEbcH1TQSqxts0NYXXlOWqVpvS1SFS4fRg==}
+    engines: {node: '>= 10.0.0'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@parcel/watcher-freebsd-x64@2.5.6':
+    resolution: {integrity: sha512-vJVi8yd/qzJxEKHkeemh7w3YAn6RJCtYlE4HPMoVnCpIXEzSrxErBW5SJBgKLbXU3WdIpkjBTeUNtyBVn8TRng==}
+    engines: {node: '>= 10.0.0'}
+    cpu: [x64]
+    os: [freebsd]
+
+  '@parcel/watcher-linux-arm-glibc@2.5.6':
+    resolution: {integrity: sha512-9JiYfB6h6BgV50CCfasfLf/uvOcJskMSwcdH1PHH9rvS1IrNy8zad6IUVPVUfmXr+u+Km9IxcfMLzgdOudz9EQ==}
+    engines: {node: '>= 10.0.0'}
+    cpu: [arm]
+    os: [linux]
+
+  '@parcel/watcher-linux-arm-musl@2.5.6':
+    resolution: {integrity: sha512-Ve3gUCG57nuUUSyjBq/MAM0CzArtuIOxsBdQ+ftz6ho8n7s1i9E1Nmk/xmP323r2YL0SONs1EuwqBp2u1k5fxg==}
+    engines: {node: '>= 10.0.0'}
+    cpu: [arm]
+    os: [linux]
+
+  '@parcel/watcher-linux-arm64-glibc@2.5.6':
+    resolution: {integrity: sha512-f2g/DT3NhGPdBmMWYoxixqYr3v/UXcmLOYy16Bx0TM20Tchduwr4EaCbmxh1321TABqPGDpS8D/ggOTaljijOA==}
+    engines: {node: '>= 10.0.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@parcel/watcher-linux-arm64-musl@2.5.6':
+    resolution: {integrity: sha512-qb6naMDGlbCwdhLj6hgoVKJl2odL34z2sqkC7Z6kzir8b5W65WYDpLB6R06KabvZdgoHI/zxke4b3zR0wAbDTA==}
+    engines: {node: '>= 10.0.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@parcel/watcher-linux-x64-glibc@2.5.6':
+    resolution: {integrity: sha512-kbT5wvNQlx7NaGjzPFu8nVIW1rWqV780O7ZtkjuWaPUgpv2NMFpjYERVi0UYj1msZNyCzGlaCWEtzc+exjMGbQ==}
+    engines: {node: '>= 10.0.0'}
+    cpu: [x64]
+    os: [linux]
+
+  '@parcel/watcher-linux-x64-musl@2.5.6':
+    resolution: {integrity: sha512-1JRFeC+h7RdXwldHzTsmdtYR/Ku8SylLgTU/reMuqdVD7CtLwf0VR1FqeprZ0eHQkO0vqsbvFLXUmYm/uNKJBg==}
+    engines: {node: '>= 10.0.0'}
+    cpu: [x64]
+    os: [linux]
+
+  '@parcel/watcher-win32-arm64@2.5.6':
+    resolution: {integrity: sha512-3ukyebjc6eGlw9yRt678DxVF7rjXatWiHvTXqphZLvo7aC5NdEgFufVwjFfY51ijYEWpXbqF5jtrK275z52D4Q==}
+    engines: {node: '>= 10.0.0'}
+    cpu: [arm64]
+    os: [win32]
+
+  '@parcel/watcher-win32-ia32@2.5.6':
+    resolution: {integrity: sha512-k35yLp1ZMwwee3Ez/pxBi5cf4AoBKYXj00CZ80jUz5h8prpiaQsiRPKQMxoLstNuqe2vR4RNPEAEcjEFzhEz/g==}
+    engines: {node: '>= 10.0.0'}
+    cpu: [ia32]
+    os: [win32]
+
+  '@parcel/watcher-win32-x64@2.5.6':
+    resolution: {integrity: sha512-hbQlYcCq5dlAX9Qx+kFb0FHue6vbjlf0FrNzSKdYK2APUf7tGfGxQCk2ihEREmbR6ZMc0MVAD5RIX/41gpUzTw==}
+    engines: {node: '>= 10.0.0'}
+    cpu: [x64]
+    os: [win32]
+
+  '@parcel/watcher@2.5.6':
+    resolution: {integrity: sha512-tmmZ3lQxAe/k/+rNnXQRawJ4NjxO2hqiOLTHvWchtGZULp4RyFeh6aU4XdOYBFe2KE1oShQTv4AblOs2iOrNnQ==}
+    engines: {node: '>= 10.0.0'}
+
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
@@ -2168,6 +2256,10 @@ packages:
 
   '@swc/types@0.1.25':
     resolution: {integrity: sha512-iAoY/qRhNH8a/hBvm3zKj9qQ4oc2+3w1unPJa2XvTK3XjeLXtzcCingVPw/9e5mn1+0yPqxcBGp9Jf0pkfMb1g==}
+
+  '@tailwindcss/cli@4.1.0':
+    resolution: {integrity: sha512-r3coRYp4Rp00L85gwIb4AKqSX7hJ8IwvD7ENQLP8/AlBiP0tcgNy6gAQJD57ERuJljco2dstadP7kMyllzBaSw==}
+    hasBin: true
 
   '@tailwindcss/node@4.1.0':
     resolution: {integrity: sha512-mfgxGxFaxbsUbaGwKIAQXUSm7Qoojw53FftpoKwo4ANwr9wnDaByz4vi1gMti/xfJvmQ5lzA1DvPiX5yCHtBkQ==}
@@ -5050,6 +5142,10 @@ packages:
     resolution: {integrity: sha512-xV2bxeN6F7oYjZWTe/YPAy6MN2M+sL4u/Rlm2AHCIVGfo2p1yGmBHQ6vHehl4bRTZBdHu3TSkWdYgkwpYzAGSw==}
     engines: {node: '>=0.10.0'}
 
+  mri@1.2.0:
+    resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
+    engines: {node: '>=4'}
+
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
@@ -5089,6 +5185,9 @@ packages:
 
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
+
+  node-addon-api@7.1.1:
+    resolution: {integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==}
 
   node-fetch-native@1.6.7:
     resolution: {integrity: sha512-g9yhqoedzIUm0nTnTqAQvueMPVOuIY16bqgAJJC8XOOubYFNwz6IER9qs0Gq2Xd0+CecCKFjtdDTMA4u4xG06Q==}
@@ -8149,6 +8248,66 @@ snapshots:
     dependencies:
       '@octokit/openapi-types': 24.2.0
 
+  '@parcel/watcher-android-arm64@2.5.6':
+    optional: true
+
+  '@parcel/watcher-darwin-arm64@2.5.6':
+    optional: true
+
+  '@parcel/watcher-darwin-x64@2.5.6':
+    optional: true
+
+  '@parcel/watcher-freebsd-x64@2.5.6':
+    optional: true
+
+  '@parcel/watcher-linux-arm-glibc@2.5.6':
+    optional: true
+
+  '@parcel/watcher-linux-arm-musl@2.5.6':
+    optional: true
+
+  '@parcel/watcher-linux-arm64-glibc@2.5.6':
+    optional: true
+
+  '@parcel/watcher-linux-arm64-musl@2.5.6':
+    optional: true
+
+  '@parcel/watcher-linux-x64-glibc@2.5.6':
+    optional: true
+
+  '@parcel/watcher-linux-x64-musl@2.5.6':
+    optional: true
+
+  '@parcel/watcher-win32-arm64@2.5.6':
+    optional: true
+
+  '@parcel/watcher-win32-ia32@2.5.6':
+    optional: true
+
+  '@parcel/watcher-win32-x64@2.5.6':
+    optional: true
+
+  '@parcel/watcher@2.5.6':
+    dependencies:
+      detect-libc: 2.1.2
+      is-glob: 4.0.3
+      node-addon-api: 7.1.1
+      picomatch: 4.0.3
+    optionalDependencies:
+      '@parcel/watcher-android-arm64': 2.5.6
+      '@parcel/watcher-darwin-arm64': 2.5.6
+      '@parcel/watcher-darwin-x64': 2.5.6
+      '@parcel/watcher-freebsd-x64': 2.5.6
+      '@parcel/watcher-linux-arm-glibc': 2.5.6
+      '@parcel/watcher-linux-arm-musl': 2.5.6
+      '@parcel/watcher-linux-arm64-glibc': 2.5.6
+      '@parcel/watcher-linux-arm64-musl': 2.5.6
+      '@parcel/watcher-linux-x64-glibc': 2.5.6
+      '@parcel/watcher-linux-x64-musl': 2.5.6
+      '@parcel/watcher-win32-arm64': 2.5.6
+      '@parcel/watcher-win32-ia32': 2.5.6
+      '@parcel/watcher-win32-x64': 2.5.6
+
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
@@ -8560,6 +8719,16 @@ snapshots:
   '@swc/types@0.1.25':
     dependencies:
       '@swc/counter': 0.1.3
+
+  '@tailwindcss/cli@4.1.0':
+    dependencies:
+      '@parcel/watcher': 2.5.6
+      '@tailwindcss/node': 4.1.0
+      '@tailwindcss/oxide': 4.1.0
+      enhanced-resolve: 5.19.0
+      mri: 1.2.0
+      picocolors: 1.1.1
+      tailwindcss: 4.1.0
 
   '@tailwindcss/node@4.1.0':
     dependencies:
@@ -11926,6 +12095,8 @@ snapshots:
 
   modify-values@1.0.1: {}
 
+  mri@1.2.0: {}
+
   ms@2.1.3: {}
 
   multimatch@5.0.0:
@@ -11957,6 +12128,8 @@ snapshots:
   negotiator@1.0.0: {}
 
   neo-async@2.6.2: {}
+
+  node-addon-api@7.1.1: {}
 
   node-fetch-native@1.6.7: {}
 
