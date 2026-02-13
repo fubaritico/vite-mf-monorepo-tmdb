@@ -5,6 +5,7 @@ export default defineConfig((options) => ({
     'src/index.ts',
     'src/Button/index.ts',
     'src/Card/index.ts',
+    'src/Icon/index.ts',
     'src/styles.css',
   ],
   format: ['esm'],
