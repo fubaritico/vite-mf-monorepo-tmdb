@@ -9,7 +9,7 @@ import { federation } from '@module-federation/vite'
 import dotenv from 'dotenv'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 import { parse } from 'yaml'
-import { notifyHostOnHmr, tailwindRemoteCss } from '@vite-mf-monorepo/shared'
+import { notifyHostOnHmr, tailwindRemoteCss } from '@vite-mf-monorepo/shared/vite'
 
 dotenv.config({ path: resolve(__dirname, '../../.env') })
 

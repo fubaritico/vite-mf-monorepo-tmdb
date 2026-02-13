@@ -9,7 +9,7 @@ import { federation } from '@module-federation/vite'
 import dotenv from 'dotenv'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 import { parse } from 'yaml'
-import { notifyHostOnHmr, tailwindRemoteCss } from '@vite-mf-monorepo/shared'
+import { notifyHostOnHmr, tailwindRemoteCss } from '@vite-mf-monorepo/shared/vite'
 
 import type { ModuleFederationOptions } from '@module-federation/vite/lib/utils/normalizeModuleFederationOptions'
 import type { CommonServerOptions } from 'vite'
@@ -21,11 +21,11 @@ const workspace = parse(readFileSync(resolve(__dirname, '../../pnpm-workspace.ya
 const catalog = workspace.catalog
 
 const remoteConfig: ModuleFederationOptions = {
-  name: 'detail',
+  name: 'movie',
   filename: 'remoteEntry.js',
   exposes: {
-    './Detail': './src/components/Detail',
-    './DetailErrorBoundary': './src/components/DetailErrorBoundary',
+    './Movie': './src/components/Movie',
+    './MovieErrorBoundary': './src/components/MovieErrorBoundary',
     './routes': './src/routes',
   },
   shared: {
@@ -61,17 +61,17 @@ const remoteConfig: ModuleFederationOptions = {
 const proxyOptions: CommonServerOptions = {
   proxy: {
     '/@mf-types.zip': {
-      target: `http://localhost:${process.env.REMOTE_DETAIL_PORT}`,
+      target: `http://localhost:${process.env.REMOTE_MOVIE_PORT}`,
       changeOrigin: true,
       rewrite: () => `/@fs/${process.cwd()}/dist/@mf-types.zip`,
     },
     '/remoteEntry.js': {
-      target: `http://localhost:${process.env.REMOTE_DETAIL_PORT}`,
+      target: `http://localhost:${process.env.REMOTE_MOVIE_PORT}`,
       changeOrigin: true,
       rewrite: () => `/@fs/${process.cwd()}/dist/remoteEntry.js`,
     },
     '/mf-manifest.json': {
-      target: `http://localhost:${process.env.REMOTE_DETAIL_PORT}`,
+      target: `http://localhost:${process.env.REMOTE_MOVIE_PORT}`,
       changeOrigin: true,
       rewrite: () => `/@fs/${process.cwd()}/dist/mf-manifest.json`,
     },
@@ -110,7 +110,7 @@ export default defineConfig(({ mode }) => ({
      * @see files/HMR-SYNC.md - Full documentation
      */
     notifyHostOnHmr({
-      appName: 'detail',
+      appName: 'movie',
       hostUrl: `http://localhost:${process.env.HOST_PORT}`,
       endpoint: '/on-child-rebuild',
     }),
@@ -130,7 +130,7 @@ export default defineConfig(({ mode }) => ({
   ...(mode === 'development'
     ? {
         server: {
-          port: parseInt(process.env.REMOTE_DETAIL_PORT),
+          port: parseInt(process.env.REMOTE_MOVIE_PORT),
           strictPort: true,
           ...proxyOptions,
           fs: {

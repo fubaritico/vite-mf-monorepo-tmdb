@@ -204,97 +204,6 @@ importers:
         specifier: ^2.8.0
         version: 2.8.2
 
-  apps/detail:
-    dependencies:
-      '@vite-mf-monorepo/shared':
-        specifier: workspace:*
-        version: link:../../packages/shared
-      '@vite-mf-monorepo/tmdb-client':
-        specifier: workspace:*
-        version: link:../../packages/http-client
-      clsx:
-        specifier: 'catalog:'
-        version: 2.1.1
-      react:
-        specifier: 'catalog:'
-        version: 19.1.0
-      react-dom:
-        specifier: 'catalog:'
-        version: 19.1.0(react@19.1.0)
-      react-router-dom:
-        specifier: 'catalog:'
-        version: 7.5.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-    devDependencies:
-      '@antdevx/vite-plugin-hmr-sync':
-        specifier: 'catalog:'
-        version: 1.1.2
-      '@eslint/js':
-        specifier: 'catalog:'
-        version: 9.21.0
-      '@module-federation/dts-plugin':
-        specifier: 'catalog:'
-        version: 0.24.1(typescript@5.7.2)
-      '@module-federation/runtime':
-        specifier: 'catalog:'
-        version: 0.24.1
-      '@module-federation/vite':
-        specifier: 'catalog:'
-        version: 1.11.0(rollup@4.57.1)(typescript@5.7.2)(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
-      '@tailwindcss/vite':
-        specifier: 'catalog:'
-        version: 4.1.0(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
-      '@tanstack/react-query':
-        specifier: 'catalog:'
-        version: 5.74.4(react@19.1.0)
-      '@testing-library/jest-dom':
-        specifier: 'catalog:'
-        version: 6.6.3
-      '@testing-library/react':
-        specifier: 'catalog:'
-        version: 16.3.0(@testing-library/dom@10.4.1)(@types/react-dom@19.1.0(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@types/express':
-        specifier: 'catalog:'
-        version: 5.0.1
-      '@types/node':
-        specifier: 'catalog:'
-        version: 22.14.0
-      '@types/react':
-        specifier: 'catalog:'
-        version: 19.1.0
-      '@types/react-dom':
-        specifier: 'catalog:'
-        version: 19.1.0(@types/react@19.1.0)
-      '@vitejs/plugin-react':
-        specifier: 'catalog:'
-        version: 4.3.4(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
-      cors:
-        specifier: 'catalog:'
-        version: 2.8.5
-      dotenv:
-        specifier: 'catalog:'
-        version: 16.5.0
-      express:
-        specifier: 'catalog:'
-        version: 5.1.0
-      tailwindcss:
-        specifier: 'catalog:'
-        version: 4.1.0
-      typescript:
-        specifier: 'catalog:'
-        version: 5.7.2
-      typescript-eslint:
-        specifier: 'catalog:'
-        version: 8.24.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.7.2)
-      vite:
-        specifier: 'catalog:'
-        version: 6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2)
-      vite-plugin-css-injected-by-js:
-        specifier: 'catalog:'
-        version: 3.5.2(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
-      vite-plugin-top-level-await:
-        specifier: 'catalog:'
-        version: 1.5.0(rollup@4.57.1)(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
-
   apps/home:
     dependencies:
       '@vite-mf-monorepo/shared':
@@ -458,6 +367,97 @@ importers:
       vite:
         specifier: 'catalog:'
         version: 6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2)
+      vite-plugin-top-level-await:
+        specifier: 'catalog:'
+        version: 1.5.0(rollup@4.57.1)(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
+
+  apps/movie:
+    dependencies:
+      '@vite-mf-monorepo/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      '@vite-mf-monorepo/tmdb-client':
+        specifier: workspace:*
+        version: link:../../packages/http-client
+      clsx:
+        specifier: 'catalog:'
+        version: 2.1.1
+      react:
+        specifier: 'catalog:'
+        version: 19.1.0
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.1.0(react@19.1.0)
+      react-router-dom:
+        specifier: 'catalog:'
+        version: 7.5.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+    devDependencies:
+      '@antdevx/vite-plugin-hmr-sync':
+        specifier: 'catalog:'
+        version: 1.1.2
+      '@eslint/js':
+        specifier: 'catalog:'
+        version: 9.21.0
+      '@module-federation/dts-plugin':
+        specifier: 'catalog:'
+        version: 0.24.1(typescript@5.7.2)
+      '@module-federation/runtime':
+        specifier: 'catalog:'
+        version: 0.24.1
+      '@module-federation/vite':
+        specifier: 'catalog:'
+        version: 1.11.0(rollup@4.57.1)(typescript@5.7.2)(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
+      '@tailwindcss/vite':
+        specifier: 'catalog:'
+        version: 4.1.0(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
+      '@tanstack/react-query':
+        specifier: 'catalog:'
+        version: 5.74.4(react@19.1.0)
+      '@testing-library/jest-dom':
+        specifier: 'catalog:'
+        version: 6.6.3
+      '@testing-library/react':
+        specifier: 'catalog:'
+        version: 16.3.0(@testing-library/dom@10.4.1)(@types/react-dom@19.1.0(@types/react@19.1.0))(@types/react@19.1.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@types/express':
+        specifier: 'catalog:'
+        version: 5.0.1
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.14.0
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.1.0
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.1.0(@types/react@19.1.0)
+      '@vitejs/plugin-react':
+        specifier: 'catalog:'
+        version: 4.3.4(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
+      cors:
+        specifier: 'catalog:'
+        version: 2.8.5
+      dotenv:
+        specifier: 'catalog:'
+        version: 16.5.0
+      express:
+        specifier: 'catalog:'
+        version: 5.1.0
+      tailwindcss:
+        specifier: 'catalog:'
+        version: 4.1.0
+      typescript:
+        specifier: 'catalog:'
+        version: 5.7.2
+      typescript-eslint:
+        specifier: 'catalog:'
+        version: 8.24.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.7.2)
+      vite:
+        specifier: 'catalog:'
+        version: 6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2)
+      vite-plugin-css-injected-by-js:
+        specifier: 'catalog:'
+        version: 3.5.2(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
       vite-plugin-top-level-await:
         specifier: 'catalog:'
         version: 1.5.0(rollup@4.57.1)(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))

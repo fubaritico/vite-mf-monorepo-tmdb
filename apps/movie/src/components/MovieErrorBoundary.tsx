@@ -1,8 +1,10 @@
 import { useRouteError } from 'react-router-dom'
 
+import type { FC } from 'react'
+
 import '../remote.css'
 
-const DetailErrorBoundary = () => {
+const MovieErrorBoundary: FC = () => {
   const error = useRouteError() as Error
 
   return (
@@ -16,4 +18,4 @@ const DetailErrorBoundary = () => {
   )
 }
 
-export default DetailErrorBoundary
+export default MovieErrorBoundary

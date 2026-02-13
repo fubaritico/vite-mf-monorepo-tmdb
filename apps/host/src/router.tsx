@@ -26,20 +26,20 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: 'detail/:id',
+        path: 'movie/:id',
         async lazy() {
-          // Lazy load the Detail component and ErrorBoundary from the 'detail' remote
-          const [{ default: Detail }, { default: DetailErrorBoundary }] =
+          // Lazy load the Movie component and ErrorBoundary from the 'movie' remote
+          const [{ default: Movie }, { default: MovieErrorBoundary }] =
             await Promise.all([
-              import('detail/Detail') as Promise<{ default: RouteComponent }>,
-              import('detail/DetailErrorBoundary') as Promise<{
-                default: React.FC
+              import('movie/Movie') as Promise<{ default: RouteComponent }>,
+              import('movie/MovieErrorBoundary') as Promise<{
+                default: FC
               }>,
             ])
           return {
-            Component: Detail,
-            loader: Detail.loader(queryClient),
-            ErrorBoundary: DetailErrorBoundary,
+            Component: Movie,
+            loader: Movie.loader(queryClient),
+            ErrorBoundary: MovieErrorBoundary,
           }
         },
       },

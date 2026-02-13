@@ -48,7 +48,7 @@ const Home: RouteComponent = () => {
     >
       {movies.results?.map((movie) => (
         <Link
-          to={`/detail/${String(movie.id)}`}
+          to={`/movie/${String(movie.id)}`}
           key={movie.id}
           className="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
           data-testid="movie-grid-card"

@@ -29,11 +29,11 @@ const moduleFederationConfig = {
       entryGlobalName: 'home',
       sharedScope: 'default',
     },
-    detail: {
+    movie: {
       type: 'module',
-      name: 'detail',
-      entry: `http://localhost:${process.env.REMOTE_DETAIL_PORT}/remoteEntry.js`,
-      entryGlobalName: 'detail',
+      name: 'movie',
+      entry: `http://localhost:${process.env.REMOTE_MOVIE_PORT}/remoteEntry.js`,
+      entryGlobalName: 'movie',
       sharedScope: 'default',
     },
   },
@@ -90,7 +90,7 @@ export default defineConfig(({ mode }) => {
        * @see files/HMR-SYNC.md - Full documentation
        */
       listenForRemoteRebuilds({
-        allowedApps: ['home', 'detail'],
+        allowedApps: ['home', 'movie'],
         endpoint: '/on-child-rebuild',
         hotPayload: { type: 'full-reload', path: '*' },
         onRebuild: (appName) => {

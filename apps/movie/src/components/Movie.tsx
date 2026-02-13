@@ -21,7 +21,7 @@ const getImageUrl = (
   return `${IMAGE_BASE_URL}/${size}${path}`
 }
 
-type ThisComponent = FC & {
+export type RouteComponent = FC & {
   loader: (
     queryClient: QueryClient
   ) => ({ params }: { params: Params<'id'> }) => Promise<MovieDetailsResponse>
@@ -36,7 +36,7 @@ const loader =
     )
   }
 
-const Detail: ThisComponent = () => {
+const Movie: RouteComponent = () => {
   const initialData = useLoaderData<MovieDetailsResponse>()
   const { id } = useParams<{ id: string }>()
 
@@ -117,6 +117,6 @@ const Detail: ThisComponent = () => {
   )
 }
 
-export default Detail
+export default Movie
 
-Detail.loader = loader
+Movie.loader = loader
