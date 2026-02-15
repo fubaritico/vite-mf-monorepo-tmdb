@@ -20,7 +20,8 @@
     "test": "vitest run",
     "coverage": "vitest run --coverage",
     "reset": "./scripts/reset-project.sh",
-    "kill-ports": "./scripts/kill-ports.sh"
+    "kill-ports": "./scripts/kill-ports.sh",
+    "storybook": "pnpm --filter @vite-mf-monorepo/storybook storybook"
   },
   "devDependencies": {
     "@tailwindcss/cli": "catalog:",

@@ -42,6 +42,7 @@ import {
   LinkIcon as LinkIcon20,
   MagnifyingGlassIcon as MagnifyingGlassIcon20,
   MinusIcon as MinusIcon20,
+  PhotoIcon as PhotoIcon20,
   PlayCircleIcon as PlayCircleIcon20,
   PlayIcon as PlayIcon20,
   PlusIcon as PlusIcon20,
@@ -72,6 +73,7 @@ import {
   LinkIcon as LinkIcon24,
   MagnifyingGlassIcon as MagnifyingGlassIcon24,
   MinusIcon as MinusIcon24,
+  PhotoIcon as PhotoIcon24,
   PlayCircleIcon as PlayCircleIcon24,
   PlayIcon as PlayIcon24,
   PlusIcon as PlusIcon24,
@@ -102,6 +104,7 @@ const iconMap24: Record<string, HeroIcon> = {
   ExclamationCircle: ExclamationCircleIcon24,
   ExclamationTriangle: ExclamationTriangleIcon24,
   Film: FilmIcon24,
+  Photo: PhotoIcon24,
   Heart: HeartIcon24,
   InformationCircle: InformationCircleIcon24,
   Link: LinkIcon24,
@@ -133,6 +136,7 @@ const iconMap20: Record<string, HeroIcon> = {
   ExclamationCircle: ExclamationCircleIcon20,
   ExclamationTriangle: ExclamationTriangleIcon20,
   Film: FilmIcon20,
+  Photo: PhotoIcon20,
   Heart: HeartIcon20,
   InformationCircle: InformationCircleIcon20,
   Link: LinkIcon20,
@@ -189,6 +193,7 @@ export type IconName =
   | 'ExclamationCircle'
   | 'ExclamationTriangle'
   | 'Film'
+  | 'Photo'
   | 'Heart'
   | 'InformationCircle'
   | 'Link'
