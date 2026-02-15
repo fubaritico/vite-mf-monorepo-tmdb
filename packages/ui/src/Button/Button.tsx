@@ -37,7 +37,7 @@ const Button: FC<ButtonProps> = ({
   return (
     <button
       className={clsx(
-        'ui:inline-flex ui:items-center ui:justify-center ui:gap-2 ui:font-roboto ui:font-medium ui:transition-colors',
+        'ui:inline-flex ui:items-center ui:justify-center ui:cursor-pointer ui:gap-2 ui:font-roboto ui:font-medium ui:transition-colors',
         'ui:rounded ui:border ui:border-transparent',
         'ui:focus:outline-none ui:focus:ring-2 ui:focus:ring-ring ui:focus:ring-offset-2',
         'ui:disabled:pointer-events-none ui:disabled:opacity-50',
