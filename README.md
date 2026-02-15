@@ -67,6 +67,8 @@ pnpm dev
 |---------|-------------|
 | `pnpm dev` | Start all apps with watch mode for packages |
 | `pnpm reset` | Full reset: clean + install |
+| `pnpm build:packages` | Build tokens, shared, and ui packages |
+| `pnpm storybook` | Start Storybook (requires `pnpm build:packages` first) |
 | `pnpm kill-ports` | Kill processes on ports 3000, 3001, 3002, 6006 |
 | `pnpm test` | Run tests |
 | `pnpm lint` | Run ESLint |
