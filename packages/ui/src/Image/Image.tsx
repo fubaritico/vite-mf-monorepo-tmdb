@@ -1,9 +1,8 @@
+import { getBlurDataUrl } from '@vite-mf-monorepo/shared'
 import clsx from 'clsx'
 import { useCallback, useEffect, useState } from 'react'
 
 import { Icon } from '../Icon'
-
-import { getBlurDataUrl } from './getBlurDataUrl'
 
 import type { FC, ImgHTMLAttributes, ReactNode } from 'react'
 
