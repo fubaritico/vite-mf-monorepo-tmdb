@@ -2,9 +2,20 @@ import clsx from 'clsx'
 
 import type { FC, HTMLAttributes } from 'react'
 
+export type CardVariant = 'default' | 'outline' | 'elevated' | 'ghost'
+
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   /** Visual variant of the card */
-  variant?: 'default' | 'outline'
+  variant?: CardVariant
+}
+
+const variantStyles: Record<CardVariant, string> = {
+  default:
+    'ui:rounded-md ui:p-4 ui:bg-card ui:text-card-foreground ui:shadow-md',
+  outline: 'ui:rounded-md ui:p-4 ui:border ui:border-border ui:bg-transparent',
+  elevated:
+    'ui:rounded-lg ui:p-6 ui:bg-card ui:text-card-foreground ui:shadow-lg',
+  ghost: 'ui:rounded-md',
 }
 
 const Card: FC<CardProps> = ({
@@ -14,18 +25,7 @@ const Card: FC<CardProps> = ({
   ...rest
 }) => {
   return (
-    <div
-      className={clsx(
-        'ui:rounded ui:p-4',
-        {
-          'ui:bg-card ui:text-card-foreground ui:shadow-md':
-            variant === 'default',
-          'ui:border ui:border-border ui:bg-transparent': variant === 'outline',
-        },
-        className
-      )}
-      {...rest}
-    >
+    <div className={clsx(variantStyles[variant], className)} {...rest}>
       {children}
     </div>
   )

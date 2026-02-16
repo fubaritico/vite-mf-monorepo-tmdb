@@ -13,8 +13,8 @@ const circleSizeMap: Record<
 }
 
 const getColorClass = (percent: number): string => {
-  if (percent >= 70) return 'ui:text-green-500'
-  if (percent >= 40) return 'ui:text-yellow-500'
+  if (percent >= 70) return 'ui:text-green-600'
+  if (percent >= 40) return 'ui:text-amber-600'
   return 'ui:text-red-500'
 }
 

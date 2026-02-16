@@ -10,7 +10,7 @@ export { Button } from './Button'
 export type { ButtonProps } from './Button'
 
 export { Card } from './Card'
-export type { CardProps } from './Card'
+export type { CardProps, CardVariant } from './Card'
 
 export { Icon } from './Icon'
 export type { IconProps, IconName, IconSize } from './Icon'
@@ -23,3 +23,6 @@ export type { AspectRatio, ImageProps, ImageState } from './Image'
 
 export { Rating } from './Rating'
 export type { RatingProps, RatingSize, RatingVariant } from './Rating'
+
+export { MovieCard } from './MovieCard'
+export type { MovieCardProps } from './MovieCard'
