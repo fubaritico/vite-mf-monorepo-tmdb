@@ -3,6 +3,9 @@ import './styles.css'
 export { Avatar } from './Avatar'
 export type { AvatarProps, AvatarSize } from './Avatar'
 
+export { Badge } from './Badge'
+export type { BadgeProps, BadgeSize, BadgeVariant } from './Badge'
+
 export { Button } from './Button'
 export type { ButtonProps } from './Button'
 

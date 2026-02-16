@@ -3,6 +3,7 @@ import {
   ArrowRightIcon as ArrowRightIcon16,
   Bars3Icon as Bars3Icon16,
   BookmarkIcon as BookmarkIcon16,
+  CalendarIcon as CalendarIcon16,
   CheckIcon as CheckIcon16,
   ChevronDownIcon as ChevronDownIcon16,
   ChevronLeftIcon as ChevronLeftIcon16,
@@ -28,6 +29,7 @@ import {
   ArrowTopRightOnSquareIcon as ArrowTopRightOnSquareIcon20,
   Bars3Icon as Bars3Icon20,
   BookmarkIcon as BookmarkIcon20,
+  CalendarIcon as CalendarIcon20,
   CheckIcon as CheckIcon20,
   ChevronDownIcon as ChevronDownIcon20,
   ChevronLeftIcon as ChevronLeftIcon20,
@@ -59,6 +61,7 @@ import {
   ArrowTopRightOnSquareIcon as ArrowTopRightOnSquareIcon24,
   Bars3Icon as Bars3Icon24,
   BookmarkIcon as BookmarkIcon24,
+  CalendarIcon as CalendarIcon24,
   CheckIcon as CheckIcon24,
   ChevronDownIcon as ChevronDownIcon24,
   ChevronLeftIcon as ChevronLeftIcon24,
@@ -95,6 +98,7 @@ const iconMap24: Record<string, HeroIcon> = {
   ArrowTopRightOnSquare: ArrowTopRightOnSquareIcon24,
   Bars3: Bars3Icon24,
   Bookmark: BookmarkIcon24,
+  Calendar: CalendarIcon24,
   Check: CheckIcon24,
   ChevronDown: ChevronDownIcon24,
   ChevronLeft: ChevronLeftIcon24,
@@ -127,6 +131,7 @@ const iconMap20: Record<string, HeroIcon> = {
   ArrowTopRightOnSquare: ArrowTopRightOnSquareIcon20,
   Bars3: Bars3Icon20,
   Bookmark: BookmarkIcon20,
+  Calendar: CalendarIcon20,
   Check: CheckIcon20,
   ChevronDown: ChevronDownIcon20,
   ChevronLeft: ChevronLeftIcon20,
@@ -158,6 +163,7 @@ const iconMap16: Record<string, HeroIcon> = {
   ArrowRight: ArrowRightIcon16,
   Bars3: Bars3Icon16,
   Bookmark: BookmarkIcon16,
+  Calendar: CalendarIcon16,
   Check: CheckIcon16,
   ChevronDown: ChevronDownIcon16,
   ChevronLeft: ChevronLeftIcon16,
@@ -185,6 +191,7 @@ export type IconName =
   | 'Bars3'
   | 'Bookmark'
   | 'Check'
+  | 'Calendar'
   | 'ChevronDown'
   | 'ChevronLeft'
   | 'ChevronRight'
