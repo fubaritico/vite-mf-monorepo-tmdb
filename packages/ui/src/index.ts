@@ -26,3 +26,19 @@ export type { RatingProps, RatingSize, RatingVariant } from './Rating'
 
 export { MovieCard } from './MovieCard'
 export type { MovieCardProps } from './MovieCard'
+
+export {
+  Carousel,
+  CarouselItem,
+  CarouselNavigation,
+  CarouselPagination,
+} from './Carousel'
+export type {
+  CarouselArrowPosition,
+  CarouselItemProps,
+  CarouselNavigationPosition,
+  CarouselNavigationProps,
+  CarouselPaginationProps,
+  CarouselProps,
+  CarouselVariant,
+} from './Carousel'
