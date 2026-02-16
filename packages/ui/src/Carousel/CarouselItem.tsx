@@ -7,6 +7,10 @@ export interface CarouselItemProps extends HTMLAttributes<HTMLDivElement> {
   isHero?: boolean
 }
 
+/**
+ * Wrapper for individual carousel items.
+ * For hero variant, items take full width and snap to center.
+ */
 const CarouselItem: FC<CarouselItemProps> = ({
   children,
   isHero = false,

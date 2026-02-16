@@ -4,6 +4,7 @@ import { IconButton } from '../IconButton'
 
 import type { FC } from 'react'
 
+/** Position mode for navigation buttons */
 export type CarouselNavigationPosition = 'inline' | 'sides'
 
 export interface CarouselNavigationProps {
@@ -23,6 +24,10 @@ export interface CarouselNavigationProps {
   className?: string
 }
 
+/**
+ * Navigation buttons for Carousel (previous/next).
+ * Supports two position modes: inline (side by side) or sides (absolute positioned on carousel edges).
+ */
 const CarouselNavigation: FC<CarouselNavigationProps> = ({
   onPrev,
   onNext,

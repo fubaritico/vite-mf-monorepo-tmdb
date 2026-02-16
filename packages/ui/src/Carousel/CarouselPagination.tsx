@@ -15,6 +15,11 @@ export interface CarouselPaginationProps {
   className?: string
 }
 
+/**
+ * Pagination dots for Carousel.
+ * Active dot is displayed as a capsule (wider), inactive dots are circles.
+ * Supports light mode for dark backgrounds (white dots).
+ */
 const CarouselPagination: FC<CarouselPaginationProps> = ({
   total,
   current,

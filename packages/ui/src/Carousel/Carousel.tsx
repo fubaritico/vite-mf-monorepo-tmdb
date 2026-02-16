@@ -6,7 +6,10 @@ import CarouselPagination from './CarouselPagination'
 
 import type { FC, ReactNode } from 'react'
 
+/** Carousel visual variant */
 export type CarouselVariant = 'standard' | 'hero'
+
+/** Arrow position for navigation buttons */
 export type CarouselArrowPosition = 'sides' | 'bottom-right'
 
 export interface CarouselProps {
@@ -26,6 +29,11 @@ export interface CarouselProps {
   className?: string
 }
 
+/**
+ * Carousel component with horizontal scroll, pagination, and navigation.
+ * Supports two variants: standard (multi-items) and hero (single panoramic item).
+ * Pagination is responsive and recalculates on resize.
+ */
 const Carousel: FC<CarouselProps> = ({
   children,
   variant = 'standard',
@@ -41,6 +49,11 @@ const Carousel: FC<CarouselProps> = ({
 
   const isHero = variant === 'hero'
 
+  /**
+   * Calculates the total number of scroll positions based on container and item dimensions.
+   * For hero variant: positions = number of items (one per slide).
+   * For standard variant: positions = ceil(maxScrollLeft / itemWidth) + 1.
+   */
   const calculatePositions = useCallback(() => {
     const container = scrollRef.current
     if (!container) return
@@ -69,10 +82,19 @@ const Carousel: FC<CarouselProps> = ({
     }
   }, [gap, isHero])
 
+  /**
+   * Effect: Recalculates positions when children or calculatePositions function changes.
+   * Ensures pagination reflects the current number of items.
+   */
   useEffect(() => {
     calculatePositions()
   }, [children, calculatePositions])
 
+  /**
+   * Effect: Sets up ResizeObserver to recalculate positions on viewport/container resize.
+   * Critical for responsive pagination - updates totalPositions when window is resized.
+   * Cleanup disconnects observer on unmount.
+   */
   useEffect(() => {
     const container = scrollRef.current
     if (!container) return
@@ -87,6 +109,10 @@ const Carousel: FC<CarouselProps> = ({
     }
   }, [calculatePositions])
 
+  /**
+   * Handles scroll events to update the current index based on scroll position.
+   * Uses item width to determine which position is currently active.
+   */
   const handleScroll = useCallback(() => {
     const container = scrollRef.current
     if (!container) return
@@ -103,6 +129,11 @@ const Carousel: FC<CarouselProps> = ({
     }
   }, [gap, isHero, totalPositions])
 
+  /**
+   * Effect: Attaches scroll event listener to sync current index with scroll position.
+   * Updates pagination dots and navigation button states based on scroll.
+   * Cleanup removes listener on unmount.
+   */
   useEffect(() => {
     const container = scrollRef.current
     if (!container) return
@@ -113,6 +144,10 @@ const Carousel: FC<CarouselProps> = ({
     }
   }, [handleScroll])
 
+  /**
+   * Scrolls to a specific position index with smooth animation.
+   * @param index - The target position index to scroll to
+   */
   const scrollTo = useCallback(
     (index: number) => {
       const container = scrollRef.current
@@ -131,20 +166,25 @@ const Carousel: FC<CarouselProps> = ({
     [gap, isHero]
   )
 
+  /** Scrolls to the previous position if available */
   const scrollPrev = useCallback(() => {
     if (currentIndex > 0) {
       scrollTo(currentIndex - 1)
     }
   }, [currentIndex, scrollTo])
 
+  /** Scrolls to the next position if available */
   const scrollNext = useCallback(() => {
     if (currentIndex < totalPositions - 1) {
       scrollTo(currentIndex + 1)
     }
   }, [currentIndex, totalPositions, scrollTo])
 
+  /** Whether previous navigation is available */
   const canScrollPrev = currentIndex > 0
+  /** Whether next navigation is available */
   const canScrollNext = currentIndex < totalPositions - 1
+  /** Whether to show controls (pagination/arrows) - hidden if all items visible */
   const showControls = totalPositions > 1
 
   return (
