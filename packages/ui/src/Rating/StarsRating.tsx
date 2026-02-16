@@ -13,10 +13,15 @@ const starsSizeMap: Record<RatingSize, IconSize> = {
 }
 
 export interface StarsRatingProps {
+  /** Percentage value (0-100) for the star fill */
   percent: number
+  /** Size of the stars */
   size: RatingSize
+  /** Whether to display the numeric value next to stars */
   showValue: boolean
+  /** The actual rating value (used for display) */
   value: number
+  /** Maximum rating value (used for display formatting) */
   max: number
 }
 

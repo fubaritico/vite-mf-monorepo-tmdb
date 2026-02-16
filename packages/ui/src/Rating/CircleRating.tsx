@@ -19,10 +19,15 @@ const getColorClass = (percent: number): string => {
 }
 
 export interface CircleRatingProps {
+  /** Percentage value (0-100) for the progress ring */
   percent: number
+  /** Size of the rating circle */
   size: RatingSize
+  /** Whether to display the numeric value in the center */
   showValue: boolean
+  /** The actual rating value (used for display) */
   value: number
+  /** Maximum rating value (used for display formatting) */
   max: number
   /** Custom class for the background track circle */
   trackClassName?: string
