@@ -42,3 +42,6 @@ export type {
   CarouselProps,
   CarouselVariant,
 } from './Carousel'
+
+export { Tabs } from './Tabs'
+export type { TabsProps, TabsVariant } from './Tabs'
