@@ -3,7 +3,7 @@ import { IconButton } from '@vite-mf-monorepo/ui'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof IconButton> = {
-  title: 'Components/IconButton',
+  title: 'Design System/IconButton',
   component: IconButton,
   parameters: {
     layout: 'centered',

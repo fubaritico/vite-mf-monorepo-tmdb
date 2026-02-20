@@ -3,7 +3,7 @@ import { Avatar } from '@vite-mf-monorepo/ui'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof Avatar> = {
-  title: 'Components/Avatar',
+  title: 'Design System/Avatar',
   component: Avatar,
   parameters: {
     layout: 'centered',

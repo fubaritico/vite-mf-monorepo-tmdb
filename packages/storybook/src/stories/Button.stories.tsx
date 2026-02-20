@@ -21,7 +21,7 @@ const iconOptions: IconName[] = [
 ]
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Button',
+  title: 'Design System/Button',
   component: Button,
   parameters: {
     layout: 'centered',

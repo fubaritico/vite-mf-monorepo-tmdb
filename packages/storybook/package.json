@@ -26,7 +26,9 @@
     "vite": "catalog:"
   },
   "dependencies": {
+    "@vite-mf-monorepo/layouts": "workspace:*",
     "@vite-mf-monorepo/ui": "workspace:*",
-    "@vite-mf-monorepo/shared": "workspace:*"
+    "@vite-mf-monorepo/shared": "workspace:*",
+    "react-router-dom": "catalog:"
   }
 }

@@ -3,7 +3,7 @@ import { Card } from '@vite-mf-monorepo/ui'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof Card> = {
-  title: 'Components/Card',
+  title: 'Design System/Card',
   component: Card,
   parameters: {
     layout: 'centered',

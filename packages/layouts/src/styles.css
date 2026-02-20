@@ -1,0 +1,8 @@
+@import "tailwindcss" prefix(layout);
+@import "@vite-mf-monorepo/shared/src/tailwind/theme.css";
+
+@source "./**/*.tsx";
+
+@layer base {
+  /* Disable preflight - host app handles reset */
+}

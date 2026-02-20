@@ -35,7 +35,7 @@ const allIconNames: IconName[] = [
 ]
 
 const meta: Meta<typeof Icon> = {
-  title: 'Components/Icon',
+  title: 'Design System/Icon',
   component: Icon,
   parameters: {
     layout: 'centered',

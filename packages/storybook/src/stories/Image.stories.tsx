@@ -24,7 +24,7 @@ const SAMPLE_BACKDROP = IMAGE_OPTIONS['Backdrop - Inside Out 2 (w1280)']
 const BROKEN_IMAGE = IMAGE_OPTIONS['Broken Image']
 
 const meta: Meta<typeof Image> = {
-  title: 'Components/Image',
+  title: 'Design System/Image',
   component: Image,
   parameters: {
     layout: 'centered',

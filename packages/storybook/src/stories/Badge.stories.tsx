@@ -3,7 +3,7 @@ import { Badge } from '@vite-mf-monorepo/ui'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof Badge> = {
-  title: 'Components/Badge',
+  title: 'Design System/Badge',
   component: Badge,
   parameters: {
     layout: 'centered',

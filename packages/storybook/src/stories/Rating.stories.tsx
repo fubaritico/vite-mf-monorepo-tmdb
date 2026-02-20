@@ -3,7 +3,7 @@ import { Rating } from '@vite-mf-monorepo/ui'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof Rating> = {
-  title: 'Components/Rating',
+  title: 'Design System/Rating',
   component: Rating,
   parameters: {
     layout: 'centered',

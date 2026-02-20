@@ -18,7 +18,7 @@ catalog:
 
   # Vite
   vite: 6.2.0
-  '@vitejs/plugin-react': 4.3.4
+  '@vitejs/plugin-react': 4.7.0
 
   # TypeScript
   typescript: 5.7.2
@@ -61,6 +61,6 @@ catalog:
   postcss: 8.5.3
 
   # Testing
-  vitest: 3.0.9
-  '@vitest/coverage-v8': 3.0.9
+  vitest: 3.2.4
+  '@vitest/coverage-v8': 3.2.4
   jsdom: 26.0.0

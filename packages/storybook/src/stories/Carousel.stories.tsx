@@ -3,7 +3,7 @@ import { Carousel, CarouselItem, MovieCard } from '@vite-mf-monorepo/ui'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof Carousel> = {
-  title: 'Components/Carousel',
+  title: 'Design System/Carousel',
   component: Carousel,
   parameters: {
     layout: 'padded',

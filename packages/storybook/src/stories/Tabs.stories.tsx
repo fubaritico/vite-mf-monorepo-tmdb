@@ -4,7 +4,7 @@ import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  title: 'Components/Tabs',
+  title: 'Design System/Tabs',
   component: Tabs,
   parameters: {
     layout: 'centered',
