@@ -1,6 +1,8 @@
 {
   "color": {
     "$description": "Short aliases for Tailwind CSS classes",
+    "white": { "$value": "{color.primitive.neutral.0}", "$type": "color" },
+    "white-80": { "$value": "rgba(255, 255, 255, 0.8)", "$type": "color" },
     "background": { "$value": "{color.semantic.background.default}", "$type": "color" },
     "background-subtle": { "$value": "{color.semantic.background.subtle}", "$type": "color" },
     "background-muted": { "$value": "{color.semantic.background.muted}", "$type": "color" },

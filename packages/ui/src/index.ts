@@ -45,3 +45,6 @@ export type {
 
 export { Tabs } from './Tabs'
 export type { TabsProps, TabsVariant } from './Tabs'
+
+export { Skeleton } from './Skeleton'
+export type { SkeletonProps } from './Skeleton'

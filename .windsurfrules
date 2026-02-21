@@ -16,7 +16,7 @@
 2. **Explain step by step** what will be modified and why
 3. **Never hallucinate or invent** - if uncertain, say so and verify via code reading/tools
 4. **Provide sources** (links/docs/issues) when reasoning relies on external information
-5. **Ask permission** before fetching information from the internet
+5. **Ask permission before consulting documentation** - When uncertain about syntax, API, or implementation details, ALWAYS ask "Puis-je consulter la documentation [library/tool] pour vérifier ?" before using read_url_content or search_web tools. This is MANDATORY and SYSTEMATIC to avoid hallucinations.
 
 ### Terminal commands:
 - **The user executes all terminal commands** - propose commands but never execute them
