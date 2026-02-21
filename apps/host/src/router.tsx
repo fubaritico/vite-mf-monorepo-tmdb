@@ -1,7 +1,6 @@
-// Define the routes with lazy loading
+import { RootLayout } from '@vite-mf-monorepo/layouts'
 import { createBrowserRouter } from 'react-router-dom'
 
-import App from './App.tsx'
 import queryClient from './queryClient.ts'
 
 import type { FC } from 'react'
@@ -12,13 +11,11 @@ type RouteComponent = FC & {
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <App />,
+    element: <RootLayout />,
     children: [
       {
-        index: true,
+        path: '/',
         async lazy() {
-          // Lazy load the Home component from the 'home' remote
           const { default: Home } = (await import('home/Home')) as {
             default: RouteComponent
           }
@@ -28,7 +25,6 @@ const router = createBrowserRouter([
       {
         path: 'movie/:id',
         async lazy() {
-          // Lazy load the Movie component and ErrorBoundary from the 'movie' remote
           const [{ default: Movie }, { default: MovieErrorBoundary }] =
             await Promise.all([
               import('movie/Movie') as Promise<{ default: RouteComponent }>,

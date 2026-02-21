@@ -209,6 +209,9 @@ importers:
 
   apps/home:
     dependencies:
+      '@vite-mf-monorepo/layouts':
+        specifier: workspace:*
+        version: link:../../packages/layouts
       '@vite-mf-monorepo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
@@ -306,6 +309,9 @@ importers:
 
   apps/host:
     dependencies:
+      '@vite-mf-monorepo/layouts':
+        specifier: workspace:*
+        version: link:../../packages/layouts
       '@vite-mf-monorepo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
@@ -382,6 +388,9 @@ importers:
 
   apps/movie:
     dependencies:
+      '@vite-mf-monorepo/layouts':
+        specifier: workspace:*
+        version: link:../../packages/layouts
       '@vite-mf-monorepo/shared':
         specifier: workspace:*
         version: link:../../packages/shared

@@ -4,13 +4,9 @@ import { Outlet } from 'react-router-dom'
 import { Footer } from '../Footer'
 import { Header } from '../Header'
 
-import type { FC, HTMLAttributes, ReactNode } from 'react'
+import type { FC, HTMLAttributes } from 'react'
 
 export interface RootLayoutProps extends HTMLAttributes<HTMLDivElement> {
-  /** Custom header component (replaces default Header) */
-  header?: ReactNode
-  /** Custom footer component (replaces default Footer) */
-  footer?: ReactNode
   /** Hide default header */
   hideHeader?: boolean
   /** Hide default footer */
@@ -23,8 +19,6 @@ export interface RootLayoutProps extends HTMLAttributes<HTMLDivElement> {
  * Uses flexbox to ensure footer stays at bottom when content is short.
  */
 const RootLayout: FC<RootLayoutProps> = ({
-  header,
-  footer,
   hideHeader = false,
   hideFooter = false,
   className,
@@ -38,13 +32,13 @@ const RootLayout: FC<RootLayoutProps> = ({
       )}
       {...rest}
     >
-      {!hideHeader && (header ?? <Header />)}
+      {!hideHeader && <Header />}
 
       <main className="layout:flex-1">
         <Outlet />
       </main>
 
-      {!hideFooter && (footer ?? <Footer />)}
+      {!hideFooter && <Footer />}
     </div>
   )
 }

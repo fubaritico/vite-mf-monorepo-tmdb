@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vite-mf-monorepo/layouts": "workspace:*",
     "@vite-mf-monorepo/shared": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
