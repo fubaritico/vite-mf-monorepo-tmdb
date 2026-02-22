@@ -103,7 +103,7 @@ const Image: FC<ImageProps> = ({
   return (
     <div
       className={clsx('ui:relative ui:overflow-hidden ui:bg-muted', className)}
-      style={{ aspectRatio }}
+      style={aspectRatio ? { aspectRatio } : undefined}
       data-state={state}
     >
       {state === 'error' ? (

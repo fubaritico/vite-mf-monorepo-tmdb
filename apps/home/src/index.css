@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "@vite-mf-monorepo/shared/src/tailwind/theme.css";
 @import "@vite-mf-monorepo/layouts/styles.css";
+@import "@vite-mf-monorepo/ui/styles.css";
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

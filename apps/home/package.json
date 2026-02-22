@@ -17,6 +17,7 @@
     "@vite-mf-monorepo/layouts": "workspace:*",
     "@vite-mf-monorepo/shared": "workspace:*",
     "@vite-mf-monorepo/tmdb-client": "workspace:*",
+    "@vite-mf-monorepo/ui": "workspace:*",
     "clsx": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
@@ -24,15 +25,15 @@
   },
   "devDependencies": {
     "@antdevx/vite-plugin-hmr-sync": "catalog:",
-    "@tailwindcss/vite": "catalog:",
-    "tailwindcss": "catalog:",
     "@eslint/js": "catalog:",
     "@module-federation/dts-plugin": "catalog:",
     "@module-federation/runtime": "catalog:",
     "@module-federation/vite": "catalog:",
+    "@tailwindcss/vite": "catalog:",
     "@tanstack/react-query": "catalog:",
     "@testing-library/jest-dom": "catalog:",
     "@testing-library/react": "catalog:",
+    "@testing-library/user-event": "catalog:",
     "@types/express": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
@@ -41,12 +42,14 @@
     "cors": "catalog:",
     "dotenv": "catalog:",
     "express": "catalog:",
+    "jsdom": "catalog:",
+    "msw": "catalog:",
+    "tailwindcss": "catalog:",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:",
     "vite": "catalog:",
     "vite-plugin-css-injected-by-js": "catalog:",
     "vite-plugin-top-level-await": "catalog:",
-    "vitest": "catalog:",
-    "jsdom": "catalog:"
+    "vitest": "catalog:"
   }
 }

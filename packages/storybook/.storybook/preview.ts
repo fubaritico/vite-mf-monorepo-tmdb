@@ -1,8 +1,15 @@
+import { initialize, mswLoader } from 'msw-storybook-addon'
+
 import type { Preview } from '@storybook/react'
 
 import '@vite-mf-monorepo/layouts/styles.css'
 import '@vite-mf-monorepo/ui/styles.css'
 import '../src/styles.css'
+
+// Initialize MSW
+initialize({
+  onUnhandledRequest: 'bypass',
+})
 
 const preview: Preview = {
   parameters: {
@@ -13,6 +20,7 @@ const preview: Preview = {
       },
     },
   },
+  loaders: [mswLoader],
 }
 
 export default preview

@@ -48,6 +48,7 @@ const MovieCard: FC<MovieCardProps> = ({
         <Image
           src={posterUrl}
           alt={title}
+          aspectRatio={undefined}
           className="ui:h-full ui:w-full ui:object-cover"
         />
         {/* Rating badge */}

@@ -17,6 +17,8 @@
     "@storybook/react-vite": "^8.6.14",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "msw": "catalog:",
+    "msw-storybook-addon": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "storybook": "^8.6.14",
@@ -26,9 +28,14 @@
     "vite": "catalog:"
   },
   "dependencies": {
+    "@tanstack/react-query": "catalog:",
     "@vite-mf-monorepo/layouts": "workspace:*",
-    "@vite-mf-monorepo/ui": "workspace:*",
     "@vite-mf-monorepo/shared": "workspace:*",
     "react-router-dom": "catalog:"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

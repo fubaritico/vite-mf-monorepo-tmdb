@@ -9,17 +9,30 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
+  staticDirs: ['../public'],
   viteFinal: async (config) => {
     config.resolve = config.resolve || {}
     config.resolve.alias = {
       ...config.resolve.alias,
       '@vite-mf-monorepo/ui/styles.css': fileURLToPath(
-        new URL('../../ui/src/styles.css', import.meta.url),
+        new URL('../../../packages/ui/src/styles.css', import.meta.url),
       ),
       '@vite-mf-monorepo/ui': fileURLToPath(
-        new URL('../../ui/src', import.meta.url),
+        new URL('../../../packages/ui/src/index.ts', import.meta.url),
+      ),
+      '@vite-mf-monorepo/home': fileURLToPath(
+        new URL('../../../apps/home/src/index.ts', import.meta.url),
       ),
     }
+    config.resolve.extensions = [
+      '.mjs',
+      '.js',
+      '.mts',
+      '.ts',
+      '.jsx',
+      '.tsx',
+      '.json',
+    ]
     return config
   },
 }
