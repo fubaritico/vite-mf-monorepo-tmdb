@@ -18,6 +18,22 @@
 4. **Provide sources** (links/docs/issues) when reasoning relies on external information
 5. **Ask permission before consulting documentation** - When uncertain about syntax, API, or implementation details, ALWAYS ask "Puis-je consulter la documentation [library/tool] pour vérifier ?" before using read_url_content or search_web tools. This is MANDATORY and SYSTEMATIC to avoid hallucinations.
 
+### Commit Workflow (MANDATORY):
+**Each modification step MUST follow this workflow:**
+1. ✅ **Review** - Verify the code generated is correct
+2. ✅ **Test** - Execute tests (unit tests, lint, type-check)
+3. ✅ **Commit** - Make an atomic commit with conventional commit message
+
+**Examples:**
+- Fix bug → Review code → Run tests → Commit → Next task
+- Add feature → Review code → Run tests → Commit → Next task
+- Refactor → Review code → Run tests → Commit → Next task
+
+**Forbidden:**
+- ❌ Accumulating multiple changes without intermediate commits
+- ❌ Skipping tests before commit
+- ❌ Moving to next task without committing current changes
+
 ### Terminal commands:
 - **The user executes all terminal commands** - propose commands but never execute them
 - Only exception: safe read-only commands like `git status`, `ls`, `cat`

@@ -158,12 +158,18 @@ const Carousel: FC<CarouselProps> = ({
         ? container.offsetWidth
         : (firstItem?.offsetWidth ?? 0)
 
+      // For the last position, scroll to the absolute end
+      const isLastPosition = index === totalPositions - 1
+      const scrollLeft = isLastPosition
+        ? container.scrollWidth - container.offsetWidth
+        : index * (itemWidth + gap)
+
       container.scrollTo({
-        left: index * (itemWidth + gap),
+        left: scrollLeft,
         behavior: 'smooth',
       })
     },
-    [gap, isHero]
+    [gap, isHero, totalPositions]
   )
 
   /** Scrolls to the previous position if available */
