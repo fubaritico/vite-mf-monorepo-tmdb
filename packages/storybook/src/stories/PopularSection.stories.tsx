@@ -1,7 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { PopularSection } from '@vite-mf-monorepo/home'
-
-import { popularHandlers } from '../mocks/handlers'
+import { popularHandlers } from '@vite-mf-monorepo/shared/mocks'
 
 import type { Meta, StoryObj } from '@storybook/react'
 

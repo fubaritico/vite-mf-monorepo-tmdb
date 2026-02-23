@@ -1,14 +1,3 @@
-// Mock ResizeObserver for jsdom environment
-global.ResizeObserver = class ResizeObserver {
-  observe() {}
-  unobserve() {}
-  disconnect() {}
-}
+import { setupBrowserMocks } from '@vite-mf-monorepo/shared/mocks'
 
-// Mock IntersectionObserver if needed
-global.IntersectionObserver = class IntersectionObserver {
-  constructor() {}
-  observe() {}
-  unobserve() {}
-  disconnect() {}
-}
+setupBrowserMocks()

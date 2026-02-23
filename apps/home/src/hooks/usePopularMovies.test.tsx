@@ -1,6 +1,9 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { renderHook, waitFor } from '@testing-library/react'
-import { HttpResponse, http } from 'msw'
+import {
+  mockPopularMovies,
+  popularHandlers,
+} from '@vite-mf-monorepo/shared/mocks'
 import { setupServer } from 'msw/node'
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest'
 
@@ -8,18 +11,7 @@ import { usePopularMovies } from './usePopularMovies'
 
 import type { ReactNode } from 'react'
 
-const mockMovies = {
-  page: 1,
-  results: [{ id: 1, title: 'Test Movie' }],
-  total_pages: 1,
-  total_results: 1,
-}
-
-const server = setupServer(
-  http.get('https://api.themoviedb.org/3/movie/popular', () => {
-    return HttpResponse.json(mockMovies)
-  })
-)
+const server = setupServer(popularHandlers.popularMovies)
 
 beforeAll(() => {
   server.listen()
@@ -57,7 +49,7 @@ describe('usePopularMovies', () => {
       expect(result.current.isSuccess).toBe(true)
     })
 
-    expect(result.current.data).toEqual(mockMovies)
+    expect(result.current.data).toEqual(mockPopularMovies)
   })
 
   it('should handle loading state', () => {

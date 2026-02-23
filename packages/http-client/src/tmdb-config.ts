@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 /**
  * @fileoverview TMDB API client runtime configuration.
  *
@@ -15,7 +17,7 @@ import type { Config } from './client/client/types.gen'
  * TMDB API Bearer token from environment variables.
  * Must be set in `.env.local` at the monorepo root.
  */
-const TMDB_API_TOKEN = import.meta.env.VITE_TMDB_API_TOKEN as string
+const TMDB_API_TOKEN = import.meta.env.VITE_TMDB_API_TOKEN
 
 /**
  * Creates the client configuration for TMDB API requests.

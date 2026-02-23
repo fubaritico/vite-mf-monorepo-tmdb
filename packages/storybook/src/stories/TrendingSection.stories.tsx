@@ -1,7 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { TrendingSection } from '@vite-mf-monorepo/home'
-
-import { trendingHandlers } from '../mocks/handlers'
+import { trendingHandlers } from '@vite-mf-monorepo/shared/mocks'
 
 import type { Meta, StoryObj } from '@storybook/react'
 

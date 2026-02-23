@@ -12,6 +12,6 @@
     "resolveJsonModule": true,
     "types": ["vite/client"]
   },
-  "include": ["src/index.ts", "src/tmdb-config.ts"],
+  "include": ["src/index.ts", "src/tmdb-config.ts", "src/vite-env.d.ts"],
   "exclude": ["node_modules"]
 }

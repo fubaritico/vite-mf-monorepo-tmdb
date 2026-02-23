@@ -1,4 +1,6 @@
-export const mockTrendingDay = {
+import type { TrendingAllResponse } from '@vite-mf-monorepo/tmdb-client/client'
+
+export const mockTrendingDay: TrendingAllResponse = {
   page: 1,
   results: [
     {
@@ -108,7 +110,7 @@ export const mockTrendingDay = {
   total_results: 6,
 }
 
-export const mockTrendingWeek = {
+export const mockTrendingWeek: TrendingAllResponse = {
   page: 1,
   results: [
     {

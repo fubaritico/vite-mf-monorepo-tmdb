@@ -1,4 +1,9 @@
-export const mockPopularMovies = {
+import type {
+  MoviePopularListResponse,
+  TvSeriesPopularListResponse,
+} from '@vite-mf-monorepo/tmdb-client/client'
+
+export const mockPopularMovies: MoviePopularListResponse = {
   page: 1,
   results: [
     {
@@ -103,7 +108,7 @@ export const mockPopularMovies = {
   total_results: 10000,
 }
 
-export const mockPopularTV = {
+export const mockPopularTV: TvSeriesPopularListResponse = {
   page: 1,
   results: [
     {
@@ -112,7 +117,6 @@ export const mockPopularTV = {
       poster_path: '/fqldf2t8ztc9aiwn3k6mlX3tvRT.jpg',
       vote_average: 8.7,
       first_air_date: '2021-11-06',
-      adult: false,
       backdrop_path: '/rkB4LyZHo1NHXFEDHl9vSD9r1lI.jpg',
       genre_ids: [16, 10765, 10759, 18],
       origin_country: ['US'],
@@ -128,7 +132,6 @@ export const mockPopularTV = {
       poster_path: '/9RQhVb3r3mCMqYVhLoCu4EvuipP.jpg',
       vote_average: 8.7,
       first_air_date: '2005-02-21',
-      adult: false,
       backdrop_path: '/xUfRZu2mi8jH6SzQEJGP6tjBuYj.jpg',
       genre_ids: [16, 10759, 10765],
       origin_country: ['US'],
@@ -144,7 +147,6 @@ export const mockPopularTV = {
       poster_path: '/ztkUQFLlC19CCMYHW9o1zWhJRNq.jpg',
       vote_average: 8.9,
       first_air_date: '2008-01-20',
-      adult: false,
       backdrop_path: '/tsRy63Mu5cu8etL1X7ZLyf7UP1M.jpg',
       genre_ids: [18, 80],
       origin_country: ['US'],
@@ -160,7 +162,6 @@ export const mockPopularTV = {
       poster_path: '/gdIrmf2DdY5mgN6ycVP0XlzKzbE.jpg',
       vote_average: 8.7,
       first_air_date: '2013-12-02',
-      adult: false,
       backdrop_path: '/asqK9JnMTsWllwx3c6XqNeSQkx9.jpg',
       genre_ids: [16, 35, 10765],
       origin_country: ['US'],
@@ -176,7 +177,6 @@ export const mockPopularTV = {
       poster_path: '/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg',
       vote_average: 8.4,
       first_air_date: '2011-04-17',
-      adult: false,
       backdrop_path: '/2OMB0ynKlyIenMJWI2Dy9IWT4c.jpg',
       genre_ids: [10765, 18, 10759],
       origin_country: ['US'],
@@ -192,7 +192,6 @@ export const mockPopularTV = {
       poster_path: '/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg',
       vote_average: 8.6,
       first_air_date: '2023-01-15',
-      adult: false,
       backdrop_path: '/9NgtaSwB8Rm7nJLLYfLfJfXrqKK.jpg',
       genre_ids: [18, 10765],
       origin_country: ['US'],
