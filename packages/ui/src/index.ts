@@ -30,12 +30,14 @@ export type { MovieCardProps } from './MovieCard'
 export {
   Carousel,
   CarouselItem,
+  CarouselLoading,
   CarouselNavigation,
   CarouselPagination,
 } from './Carousel'
 export type {
   CarouselArrowPosition,
   CarouselItemProps,
+  CarouselLoadingProps,
   CarouselNavigationPosition,
   CarouselNavigationProps,
   CarouselPaginationProps,

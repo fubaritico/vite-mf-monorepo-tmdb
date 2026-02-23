@@ -61,6 +61,8 @@
 - Use single quotes for strings (per Prettier config)
 - Use 2 spaces for indentation
 - Add semicolons at end of statements
+- **Use `.tsx` extension for files containing JSX** (including test files with React components/JSX)
+- Use `.ts` extension only for files with pure TypeScript (no JSX)
 
 ### React Component Patterns
 

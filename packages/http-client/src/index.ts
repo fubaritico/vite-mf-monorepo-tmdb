@@ -23,3 +23,6 @@
 
 // Re-export generated client
 export * from './client'
+
+// Re-export custom types
+export type { TMDBError } from './types/errors'

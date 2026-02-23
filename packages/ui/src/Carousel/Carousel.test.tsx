@@ -96,6 +96,32 @@ describe('Carousel', () => {
     // Scroll behavior is tested, no error means success
     expect(dots[1]).toBeInTheDocument()
   })
+
+  it('displays error message when errorMessage prop is provided', () => {
+    render(
+      <Carousel errorMessage="Failed to load data">
+        <CarouselItem>Item 1</CarouselItem>
+        <CarouselItem>Item 2</CarouselItem>
+      </Carousel>
+    )
+    expect(screen.getByText('Failed to fetch data')).toBeInTheDocument()
+    expect(screen.getByText('Failed to load data')).toBeInTheDocument()
+    expect(screen.queryByText('Item 1')).not.toBeInTheDocument()
+    expect(screen.queryByText('Item 2')).not.toBeInTheDocument()
+  })
+
+  it('does not display carousel content when error message is shown', () => {
+    render(
+      <Carousel errorMessage="API Error" showPagination showArrows>
+        <CarouselItem>Item 1</CarouselItem>
+      </Carousel>
+    )
+    expect(screen.queryByLabelText('Previous')).not.toBeInTheDocument()
+    expect(screen.queryByLabelText('Next')).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('button', { name: /Go to slide/i })
+    ).not.toBeInTheDocument()
+  })
 })
 
 describe('CarouselItem', () => {

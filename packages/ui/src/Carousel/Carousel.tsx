@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import CarouselError from './CarouselError'
 import CarouselNavigation from './CarouselNavigation'
 import CarouselPagination from './CarouselPagination'
 
@@ -14,7 +15,7 @@ export type CarouselArrowPosition = 'sides' | 'bottom-right'
 
 export interface CarouselProps {
   /** Carousel items */
-  children: ReactNode
+  children?: ReactNode
   /** Visual variant */
   variant?: CarouselVariant
   /** Show pagination dots */
@@ -27,6 +28,8 @@ export interface CarouselProps {
   gap?: number
   /** Additional class name */
   className?: string
+  /** Error message to display instead of carousel content */
+  errorMessage?: string
 }
 
 /**
@@ -42,6 +45,7 @@ const Carousel: FC<CarouselProps> = ({
   arrowPosition = 'sides',
   gap = 16,
   className,
+  errorMessage,
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -185,6 +189,11 @@ const Carousel: FC<CarouselProps> = ({
       scrollTo(currentIndex + 1)
     }
   }, [currentIndex, totalPositions, scrollTo])
+
+  // If error message is provided, display error state instead of carousel
+  if (errorMessage) {
+    return <CarouselError message={errorMessage} />
+  }
 
   /** Whether previous navigation is available */
   const canScrollPrev = currentIndex > 0
