@@ -1,12 +1,3 @@
-export { trendingHandlers } from './trendingHandlers.js'
+export { freeToWatchHandlers } from './freeToWatchHandlers.js'
 export { popularHandlers } from './popularHandlers.js'
-
-import { popularHandlers } from './popularHandlers.js'
-import { trendingHandlers } from './trendingHandlers.js'
-
-export const handlers = [
-  trendingHandlers.trendingDay,
-  trendingHandlers.trendingWeek,
-  popularHandlers.popularMovies,
-  popularHandlers.popularTV,
-]
+export { trendingHandlers } from './trendingHandlers.js'
