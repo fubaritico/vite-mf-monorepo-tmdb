@@ -3,3 +3,6 @@ export * from './utils/getBlurDataUrl.js'
 export * from './utils/healthCheck.js'
 export * from './utils/retry.js'
 export * from './utils/tmdbImage.js'
+
+// Test utilities (only for test environments)
+export * from './test-utils/index.js'

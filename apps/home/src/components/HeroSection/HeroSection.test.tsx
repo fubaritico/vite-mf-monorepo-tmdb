@@ -1,14 +1,15 @@
-import { QueryClient } from '@tanstack/react-query'
 import { screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import {
+  createTestQueryClient,
+  renderComponentWithRouter,
+} from '@vite-mf-monorepo/shared'
 import {
   mockNowPlayingMovies,
   nowPlayingHandlers,
 } from '@vite-mf-monorepo/shared/mocks'
 import { setupServer } from 'msw/node'
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest'
-
-import { renderComponentWithRouter } from '../../mocks/react-router'
 
 import HeroSection from './HeroSection'
 
@@ -40,13 +41,7 @@ describe('HeroSection', () => {
   it('should show skeleton while loading', () => {
     server.use(nowPlayingHandlers.nowPlayingMoviesLoading)
 
-    const queryClient = new QueryClient({
-      defaultOptions: {
-        queries: {
-          retry: false,
-        },
-      },
-    })
+    const queryClient = createTestQueryClient()
 
     renderComponentWithRouter(<HeroSection />, '/', queryClient)
 

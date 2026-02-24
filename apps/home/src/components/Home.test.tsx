@@ -1,7 +1,8 @@
 import { cleanup } from '@testing-library/react'
+import { renderReactQueryWithRouter } from '@vite-mf-monorepo/shared'
 import { afterEach, describe, expect, it } from 'vitest'
 
-import { renderReactQueryWithRouter } from '../mocks/react-router'
+import Home from './Home'
 
 describe('Home', () => {
   afterEach(() => {
@@ -9,7 +10,7 @@ describe('Home', () => {
   })
 
   it('should render the Home page without crashing', () => {
-    const { container } = renderReactQueryWithRouter()
+    const { container } = renderReactQueryWithRouter(<Home />)
 
     // Verify the component renders
     expect(container).toBeTruthy()

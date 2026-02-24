@@ -1,11 +1,10 @@
 import { screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
+import { renderComponentWithRouter } from '@vite-mf-monorepo/shared'
 import { HttpResponse, http } from 'msw'
 import { setupServer } from 'msw/node'
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest'
-
-import { renderComponentWithRouter } from '../../mocks/react-router'
 
 import PopularSection from './PopularSection'
 

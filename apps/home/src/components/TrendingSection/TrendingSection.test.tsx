@@ -1,12 +1,13 @@
-import { QueryClient } from '@tanstack/react-query'
 import { screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
+import {
+  createTestQueryClient,
+  renderComponentWithRouter,
+} from '@vite-mf-monorepo/shared'
 import { HttpResponse, http } from 'msw'
 import { setupServer } from 'msw/node'
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest'
-
-import { renderComponentWithRouter } from '../../mocks/react-router'
 
 import TrendingSection from './TrendingSection'
 
@@ -93,13 +94,7 @@ describe('TrendingSection', () => {
       })
     )
 
-    const queryClient = new QueryClient({
-      defaultOptions: {
-        queries: {
-          retry: false,
-        },
-      },
-    })
+    const queryClient = createTestQueryClient()
 
     renderComponentWithRouter(<TrendingSection />, '/', queryClient)
 
