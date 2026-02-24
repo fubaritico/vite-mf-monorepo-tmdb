@@ -1,6 +1,6 @@
 import { getBlurDataUrl } from '@vite-mf-monorepo/shared'
 import clsx from 'clsx'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Icon } from '../Icon'
 
@@ -48,6 +48,7 @@ const Image: FC<ImageProps> = ({
   onError,
   ...rest
 }) => {
+  const imgRef = useRef<HTMLImageElement>(null)
   const [state, setState] = useState<ImageState>('loading')
   const [generatedBlur, setGeneratedBlur] = useState<string | undefined>(
     undefined
@@ -77,6 +78,11 @@ const Image: FC<ImageProps> = ({
   useEffect(() => {
     setState('loading')
     setGeneratedBlur(undefined)
+
+    // Check if image is already loaded from cache
+    if (imgRef.current?.complete && imgRef.current.naturalHeight !== 0) {
+      setState('loaded')
+    }
   }, [src])
 
   const handleLoad = useCallback(() => {
@@ -121,6 +127,7 @@ const Image: FC<ImageProps> = ({
 
           {blurReady && (
             <img
+              ref={imgRef}
               src={src}
               alt={alt}
               onLoad={handleLoad}
