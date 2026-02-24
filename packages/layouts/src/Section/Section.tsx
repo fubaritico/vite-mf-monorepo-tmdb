@@ -2,22 +2,25 @@ import clsx from 'clsx'
 
 import type { FC, HTMLAttributes } from 'react'
 
+/** Section max-width variants */
+export type SectionMaxWidth = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full'
+
 export interface SectionProps extends HTMLAttributes<HTMLElement> {
   /** Section title */
   title?: string
-  /** Section background variant */
-  variant?: 'default' | 'muted'
+  /** Maximum width variant */
+  maxWidth?: SectionMaxWidth
   /** Vertical spacing */
   spacing?: 'sm' | 'md' | 'lg'
 }
 
 /**
  * Section component for page sections.
- * Provides consistent spacing and optional background variants.
+ * Provides max-width, horizontal padding, and vertical spacing.
  */
 const Section: FC<SectionProps> = ({
   title,
-  variant = 'default',
+  maxWidth = 'xl',
   spacing = 'md',
   className,
   children,
@@ -26,9 +29,14 @@ const Section: FC<SectionProps> = ({
   return (
     <section
       className={clsx(
-        'layout:w-full',
+        'layout:mx-auto layout:px-4 sm:layout:px-5 md:layout:px-6 lg:layout:px-8',
         {
-          'layout:bg-muted': variant === 'muted',
+          'layout:max-w-screen-sm': maxWidth === 'sm',
+          'layout:max-w-screen-md': maxWidth === 'md',
+          'layout:max-w-screen-lg': maxWidth === 'lg',
+          'layout:max-w-screen-xl': maxWidth === 'xl',
+          'layout:max-w-screen-2xl': maxWidth === '2xl',
+          'layout:max-w-full': maxWidth === 'full',
           'layout:py-6': spacing === 'sm',
           'layout:py-12': spacing === 'md',
           'layout:py-16': spacing === 'lg',

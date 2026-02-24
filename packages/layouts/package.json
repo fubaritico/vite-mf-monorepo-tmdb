@@ -19,7 +19,7 @@
         "default": "./dist/*/index.js"
       }
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": "./dist/index.css"
   },
   "sideEffects": [
     "*.css"
@@ -28,7 +28,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css",
+    "build:js": "tsup",
+    "build": "pnpm build:css && pnpm build:js",
     "dev": "tsup --watch",
     "test": "vitest run",
     "test:watch": "vitest",

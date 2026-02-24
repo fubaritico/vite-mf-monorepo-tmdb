@@ -16,8 +16,8 @@ const PopularSection: FC = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <h2 className="text-3xl font-bold">Popular</h2>
+    <div className="hm:flex hm:flex-col hm:gap-4">
+      <h2 className="hm:text-3xl hm:font-bold">What's Popular</h2>
       <Tabs value={mediaType} onValueChange={handleTabChange} variant="pills">
         <Tabs.List>
           <Tabs.Trigger value="movie">Movies</Tabs.Trigger>

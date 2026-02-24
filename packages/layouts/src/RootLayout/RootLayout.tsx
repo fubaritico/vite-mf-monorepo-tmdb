@@ -24,6 +24,17 @@ const RootLayout: FC<RootLayoutProps> = ({
   className,
   ...rest
 }) => {
+  const TMDBLogo = () => (
+    <div className="layout:flex layout:items-center layout:gap-2">
+      <div className="layout:w-8 layout:h-8 layout:bg-primary layout:rounded layout:flex layout:items-center layout:justify-center layout:font-bold layout:text-white">
+        T
+      </div>
+      <span className="layout:text-white layout:font-bold layout:text-xl">
+        TMDB
+      </span>
+    </div>
+  )
+
   return (
     <div
       className={clsx(
@@ -32,13 +43,21 @@ const RootLayout: FC<RootLayoutProps> = ({
       )}
       {...rest}
     >
-      {!hideHeader && <Header />}
+      {!hideHeader && <Header logo={<TMDBLogo />} />}
 
       <main className="layout:flex-1">
         <Outlet />
       </main>
 
-      {!hideFooter && <Footer />}
+      {!hideFooter && (
+        <Footer>
+          <div className="layout:text-center">
+            <p className="layout:text-sm layout:text-muted-foreground">
+              © 2026 TMDB Clone. All rights reserved.
+            </p>
+          </div>
+        </Footer>
+      )}
     </div>
   )
 }

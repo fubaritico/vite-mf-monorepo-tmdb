@@ -89,7 +89,7 @@ const renderWithQueryClient = (ui: React.ReactElement) => {
 describe('PopularSection', () => {
   it('should render section title and tabs', () => {
     renderWithQueryClient(<PopularSection />)
-    expect(screen.getByText('Popular')).toBeInTheDocument()
+    expect(screen.getByText("What's Popular")).toBeInTheDocument()
     expect(screen.getByRole('tab', { name: /movies/i })).toBeInTheDocument()
     expect(screen.getByRole('tab', { name: /tv shows/i })).toBeInTheDocument()
   })

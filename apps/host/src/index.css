@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "@vite-mf-monorepo/shared/src/tailwind/theme.css";
+@import "@vite-mf-monorepo/ui/styles.css";
 @import "@vite-mf-monorepo/layouts/styles.css";
+
+/* Import remote CSS from home app (hm: prefix) */
+@import "../../home/src/remote.css";
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

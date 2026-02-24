@@ -16,10 +16,8 @@ const router = createBrowserRouter([
       {
         path: '/',
         async lazy() {
-          const { default: Home } = (await import('home/Home')) as {
-            default: RouteComponent
-          }
-          return { Component: Home, loader: Home.loader(queryClient) }
+          const { default: Home } = await import('home/Home')
+          return { Component: Home }
         },
       },
       {

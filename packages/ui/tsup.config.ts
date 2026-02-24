@@ -6,7 +6,6 @@ export default defineConfig((options) => ({
     'src/Button/index.ts',
     'src/Card/index.ts',
     'src/Icon/index.ts',
-    'src/styles.css',
   ],
   format: ['esm'],
   dts: true,

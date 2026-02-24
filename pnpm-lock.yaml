@@ -330,6 +330,9 @@ importers:
       '@vite-mf-monorepo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
+      '@vite-mf-monorepo/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       react:
         specifier: 'catalog:'
         version: 19.1.0

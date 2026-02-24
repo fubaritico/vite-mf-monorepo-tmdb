@@ -2,8 +2,27 @@
  * Input CSS for remote consumption (without preflight).
  * This file is processed by Tailwind CLI to generate remote.css.
  * The host already has Tailwind preflight, so we only include theme + utilities.
+ * Prefix: hm (home) to avoid conflicts with host classes.
  */
 @layer theme, base, components, utilities;
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
+@import "tailwindcss/theme.css" layer(theme) prefix(hm);
+@import "tailwindcss/utilities.css" layer(utilities) prefix(hm);
 @import "@vite-mf-monorepo/shared/src/tailwind/theme.css";
+
+@layer utilities {
+  .hm\:text-shadow-strong {
+    text-shadow: 0 0 10px rgb(0 0 0 / 0.75);
+  }
+  .hm\:text-shadow-medium {
+    text-shadow: 0 0 5px rgb(0 0 0 / 0.5);
+  }
+  .hm\:hero-height {
+    aspect-ratio: 21/9;
+  }
+  @media (min-width: 1024px) {
+    .hm\:hero-height {
+      aspect-ratio: auto;
+      max-height: 440px;
+    }
+  }
+}

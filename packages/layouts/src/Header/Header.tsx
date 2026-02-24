@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 
-import { Container } from '../Container'
+import { Section } from '../Section'
 
 import type { FC, HTMLAttributes, ReactNode } from 'react'
 
@@ -56,21 +56,25 @@ const Header: FC<HeaderProps> = ({
       role="banner"
       className={clsx(
         'layout:sticky layout:top-0 layout:z-50',
-        'layout:bg-black layout:text-white layout:border-b layout:border-border',
+        'layout:bg-black layout:text-white layout:drop-shadow-2xl',
         'layout:transition-all layout:duration-300',
         isCompact ? 'layout:h-16' : 'layout:h-20',
         className
       )}
       {...rest}
     >
-      <Container className="layout:h-full layout:flex layout:items-center layout:justify-between layout:py-3">
+      <Section
+        spacing="sm"
+        maxWidth="xl"
+        className="layout:h-full layout:flex layout:items-center layout:justify-between layout:py-0"
+      >
         {logo && <div className="layout:flex layout:items-center">{logo}</div>}
         {children && (
           <div className="layout:flex layout:items-center layout:gap-4">
             {children}
           </div>
         )}
-      </Container>
+      </Section>
     </header>
   )
 }

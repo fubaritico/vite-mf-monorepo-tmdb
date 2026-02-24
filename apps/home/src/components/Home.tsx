@@ -1,65 +1,40 @@
-import { QueryClient, useQuery } from '@tanstack/react-query'
-import { getImageUrl } from '@vite-mf-monorepo/shared'
-import { moviePopularListOptions } from '@vite-mf-monorepo/tmdb-client'
-import { Link, useLoaderData } from 'react-router-dom'
+import { Container, Section } from '@vite-mf-monorepo/layouts'
 
-import type { MoviePopularListResponse } from '@vite-mf-monorepo/tmdb-client'
+import FreeToWatchSection from './FreeToWatchSection/FreeToWatchSection'
+import HeroSection from './HeroSection/HeroSection'
+import PopularSection from './PopularSection/PopularSection'
+import TrendingSection from './TrendingSection/TrendingSection'
+
 import type { FC } from 'react'
 
-import '../remote.css'
-
-export type RouteComponent = FC & {
-  loader: (queryClient: QueryClient) => () => Promise<MoviePopularListResponse>
-}
-
-const loader = (queryClient: QueryClient) => async () => {
-  return queryClient.ensureQueryData(moviePopularListOptions())
-}
-
-const Home: RouteComponent = () => {
-  const initialData = useLoaderData<MoviePopularListResponse>()
-
-  const { data: movies, error } = useQuery({
-    ...moviePopularListOptions(),
-    initialData,
-  })
-
-  if (error) {
-    return (
-      <div className="p-8 text-center text-xl text-destructive">
-        {error.message}
-      </div>
-    )
-  }
-
+const Home: FC = () => {
   return (
-    <div
-      data-testid="movie-grid-list"
-      className="grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] gap-8"
-    >
-      {movies.results?.map((movie) => (
-        <Link
-          to={`/movie/${String(movie.id)}`}
-          key={movie.id}
-          className="flex flex-col overflow-hidden rounded-lg bg-card shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-          data-testid="movie-grid-card"
-        >
-          <div className="relative aspect-[2/3] overflow-hidden">
-            <img
-              src={getImageUrl(movie.poster_path)}
-              alt={`${movie.title ?? 'Movie'} poster`}
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <div className="text-foreground p-4 text-center font-medium">
-            {movie.title}
-          </div>
-        </Link>
-      ))}
-    </div>
+    <>
+      {/* Hero Section - Full width, no container */}
+      <HeroSection />
+
+      {/* Trending Section - White background */}
+      <Container variant="default">
+        <Section spacing="lg" maxWidth="xl">
+          <TrendingSection />
+        </Section>
+      </Container>
+
+      {/* What's Popular Section - Gray background */}
+      <Container variant="muted">
+        <Section spacing="lg" maxWidth="xl">
+          <PopularSection />
+        </Section>
+      </Container>
+
+      {/* Free to Watch Section - White background */}
+      <Container variant="default">
+        <Section spacing="lg" maxWidth="xl">
+          <FreeToWatchSection />
+        </Section>
+      </Container>
+    </>
   )
 }
 
 export default Home
-
-Home.loader = loader

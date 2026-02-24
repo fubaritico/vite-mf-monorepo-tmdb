@@ -41,7 +41,7 @@ const TrendingSection: FC = () => {
     }
 
     return (
-      <Carousel>
+      <Carousel rounded={false}>
         {data.results?.map((item) => {
           const posterUrl = item.poster_path
             ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
@@ -69,8 +69,8 @@ const TrendingSection: FC = () => {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <h2 className="text-3xl font-bold">Trending</h2>
+    <div className="hm:flex hm:flex-col hm:gap-4">
+      <h2 className="hm:text-3xl hm:font-bold">Trending</h2>
       <Tabs value={timeWindow} onValueChange={handleTabChange} variant="pills">
         <Tabs.List>
           <Tabs.Trigger value="day">Today</Tabs.Trigger>

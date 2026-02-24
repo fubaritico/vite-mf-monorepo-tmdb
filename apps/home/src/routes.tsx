@@ -22,7 +22,6 @@ export const routes: RouteObject[] = [
       {
         path: '/',
         element: <Home />,
-        loader: Home.loader(queryClient),
       },
     ],
   },

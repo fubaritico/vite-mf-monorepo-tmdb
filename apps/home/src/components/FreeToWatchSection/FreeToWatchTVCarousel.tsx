@@ -31,7 +31,7 @@ const FreeToWatchTVCarousel: FC = () => {
   }
 
   return (
-    <Carousel>
+    <Carousel rounded={false}>
       {data.results?.map((item) => {
         const posterUrl = item.poster_path
           ? `https://image.tmdb.org/t/p/w500${item.poster_path}`

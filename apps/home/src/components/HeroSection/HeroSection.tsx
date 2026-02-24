@@ -19,7 +19,7 @@ const HeroSection: FC = () => {
     return (
       <Skeleton
         variant="rectangle"
-        width="w-full"
+        width="hm:w-full"
         aspectRatio="21/9"
         rounded={false}
       />
@@ -41,17 +41,19 @@ const HeroSection: FC = () => {
 
         return (
           <CarouselItem key={item.id} isHero>
-            <div className="relative aspect-[21/9] w-full">
+            <div className="hm:relative hm:hero-height hm:w-full hm:overflow-hidden">
               <img
                 src={backdropUrl}
                 alt={item.title ?? 'Unknown'}
-                className="h-full w-full object-cover"
+                className="hm:h-full hm:w-full hm:object-cover hm:object-center"
               />
-              <div className="absolute bottom-8 left-8 max-w-lg text-white">
-                <h2 className="mb-2 text-3xl font-bold text-shadow-medium">
+              <div className="hm:absolute hm:bottom-8 hm:left-8 hm:max-w-lg hm:text-white">
+                <h2 className="hm:mb-2 hm:text-3xl hm:font-bold hm:text-shadow-medium">
                   {item.title ?? 'Unknown'}
                 </h2>
-                <p className="text-sm text-shadow-strong">{item.overview}</p>
+                <p className="hm:text-sm hm:text-shadow-strong">
+                  {item.overview}
+                </p>
               </div>
             </div>
           </CarouselItem>

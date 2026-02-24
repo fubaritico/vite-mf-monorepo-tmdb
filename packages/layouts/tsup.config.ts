@@ -8,7 +8,6 @@ export default defineConfig((options) => ({
     'src/Footer/index.ts',
     'src/RootLayout/index.ts',
     'src/Section/index.ts',
-    'src/styles.css',
   ],
   format: ['esm'],
   dts: true,
