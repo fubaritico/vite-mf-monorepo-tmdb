@@ -39,7 +39,8 @@
   },
   "peerDependencies": {
     "react": "catalog:",
-    "react-dom": "catalog:"
+    "react-dom": "catalog:",
+    "react-router-dom": "catalog:"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "catalog:",
@@ -53,6 +54,7 @@
     "autoprefixer": "catalog:",
     "jsdom": "catalog:",
     "postcss": "catalog:",
+    "react-router-dom": "catalog:",
     "tailwindcss": "catalog:",
     "tsup": "catalog:",
     "typescript": "catalog:",

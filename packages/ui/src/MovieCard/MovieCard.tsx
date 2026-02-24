@@ -1,27 +1,12 @@
 import clsx from 'clsx'
+import { Link } from 'react-router-dom'
 
 import { Card } from '../Card'
 import { Image } from '../Image'
 import { Rating } from '../Rating'
 
+import type { MovieCardProps } from './MovieCard.types'
 import type { FC } from 'react'
-
-export interface MovieCardProps {
-  /** Movie ID for navigation */
-  id: number
-  /** Movie title */
-  title: string
-  /** Poster URL (full URL or TMDB path) */
-  posterUrl: string
-  /** Vote average (0-10) */
-  voteAverage: number
-  /** Release year */
-  year?: number | null
-  /** Additional class name */
-  className?: string
-  /** Click handler */
-  onClick?: () => void
-}
 
 const MovieCard: FC<MovieCardProps> = ({
   id,
@@ -30,17 +15,29 @@ const MovieCard: FC<MovieCardProps> = ({
   voteAverage,
   year,
   className,
-  onClick,
+  as = 'card',
+  ...rest
 }) => {
-  return (
+  // Extract conditional props based on 'as' variant
+  const to = 'to' in rest ? rest.to : undefined
+  const onClick = 'onClick' in rest ? rest.onClick : undefined
+
+  // Determine if card should be interactive
+  const isInteractive = as === 'link' || as === 'button'
+
+  const cardContent = (
     <Card
       variant="ghost"
       className={clsx(
-        'ui:group ui:relative ui:flex ui:cursor-pointer ui:flex-col ui:overflow-hidden',
-        'ui:transition-transform ui:duration-200 hover:ui:scale-[1.02]',
+        'ui:group ui:relative ui:flex ui:flex-col ui:overflow-hidden',
+        isInteractive && [
+          'ui:cursor-pointer',
+          'ui:transition-transform ui:duration-200',
+          'hover:ui:scale-[1.02]',
+        ],
         className
       )}
-      onClick={onClick}
+      onClick={as === 'button' ? onClick : undefined}
       data-testid={`movie-card-${String(id)}`}
     >
       {/* Poster */}
@@ -77,6 +74,16 @@ const MovieCard: FC<MovieCardProps> = ({
       </div>
     </Card>
   )
+
+  if (as === 'link' && to) {
+    return (
+      <Link to={to} className="ui:block ui:no-underline ui:text-inherit">
+        {cardContent}
+      </Link>
+    )
+  }
+
+  return cardContent
 }
 
 export default MovieCard

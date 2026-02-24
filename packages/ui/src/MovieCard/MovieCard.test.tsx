@@ -40,7 +40,7 @@ describe('MovieCard', () => {
 
   it('calls onClick when clicked', () => {
     const handleClick = vi.fn()
-    render(<MovieCard {...defaultProps} onClick={handleClick} />)
+    render(<MovieCard {...defaultProps} as="button" onClick={handleClick} />)
 
     const card = screen.getByTestId('movie-card-123')
     fireEvent.click(card)
