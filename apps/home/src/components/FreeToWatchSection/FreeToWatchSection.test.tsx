@@ -1,5 +1,4 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen, waitFor } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import {
@@ -9,6 +8,8 @@ import {
 } from '@vite-mf-monorepo/shared/mocks'
 import { setupServer } from 'msw/node'
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest'
+
+import { renderComponentWithRouter } from '../../mocks/react-router'
 
 import FreeToWatchSection from './FreeToWatchSection'
 
@@ -29,29 +30,16 @@ afterAll(() => {
   server.close()
 })
 
-const renderWithQueryClient = (ui: React.ReactElement) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  })
-  return render(
-    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
-  )
-}
-
 describe('FreeToWatchSection', () => {
   it('should render section title and tabs', () => {
-    renderWithQueryClient(<FreeToWatchSection />)
+    renderComponentWithRouter(<FreeToWatchSection />)
     expect(screen.getByText('Free To Watch')).toBeInTheDocument()
     expect(screen.getByRole('tab', { name: /movies/i })).toBeInTheDocument()
     expect(screen.getByRole('tab', { name: /tv shows/i })).toBeInTheDocument()
   })
 
   it('should display free movies by default (useFreeToWatchMovies hook)', async () => {
-    renderWithQueryClient(<FreeToWatchSection />)
+    renderComponentWithRouter(<FreeToWatchSection />)
 
     await waitFor(() => {
       expect(
@@ -65,7 +53,7 @@ describe('FreeToWatchSection', () => {
 
   it('should switch to TV shows when clicking TV Shows tab (useFreeToWatchTV hook)', async () => {
     const user = userEvent.setup()
-    renderWithQueryClient(<FreeToWatchSection />)
+    renderComponentWithRouter(<FreeToWatchSection />)
 
     // Wait for movies to load (default view)
     await waitFor(() => {
@@ -97,19 +85,7 @@ describe('FreeToWatchSection', () => {
   it('should show skeleton while loading movies', () => {
     server.use(freeToWatchHandlers.freeToWatchMoviesLoading)
 
-    const queryClient = new QueryClient({
-      defaultOptions: {
-        queries: {
-          retry: false,
-        },
-      },
-    })
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <FreeToWatchSection />
-      </QueryClientProvider>
-    )
+    renderComponentWithRouter(<FreeToWatchSection />)
 
     const skeletons = document.querySelectorAll('.ui-skeleton-shimmer')
     expect(skeletons.length).toBeGreaterThan(0)
@@ -118,7 +94,7 @@ describe('FreeToWatchSection', () => {
   it('should handle API error gracefully', async () => {
     server.use(freeToWatchHandlers.freeToWatchMoviesError)
 
-    renderWithQueryClient(<FreeToWatchSection />)
+    renderComponentWithRouter(<FreeToWatchSection />)
 
     await waitFor(() => {
       const skeletons = document.querySelectorAll('.ui-skeleton-shimmer')

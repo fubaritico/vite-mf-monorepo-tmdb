@@ -1,10 +1,11 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen, waitFor } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import { HttpResponse, http } from 'msw'
 import { setupServer } from 'msw/node'
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest'
+
+import { renderComponentWithRouter } from '../../mocks/react-router'
 
 import PopularSection from './PopularSection'
 
@@ -73,29 +74,16 @@ afterAll(() => {
   server.close()
 })
 
-const renderWithQueryClient = (ui: React.ReactElement) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  })
-  return render(
-    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
-  )
-}
-
 describe('PopularSection', () => {
   it('should render section title and tabs', () => {
-    renderWithQueryClient(<PopularSection />)
+    renderComponentWithRouter(<PopularSection />)
     expect(screen.getByText("What's Popular")).toBeInTheDocument()
     expect(screen.getByRole('tab', { name: /movies/i })).toBeInTheDocument()
     expect(screen.getByRole('tab', { name: /tv shows/i })).toBeInTheDocument()
   })
 
   it('should display popular movies by default (usePopularMovie hook)', async () => {
-    renderWithQueryClient(<PopularSection />)
+    renderComponentWithRouter(<PopularSection />)
 
     await waitFor(() => {
       expect(screen.getByText('Test Movie 1')).toBeInTheDocument()
@@ -105,7 +93,7 @@ describe('PopularSection', () => {
 
   it('should switch to TV shows when clicking TV Shows tab (usePopularTV hook)', async () => {
     const user = userEvent.setup()
-    renderWithQueryClient(<PopularSection />)
+    renderComponentWithRouter(<PopularSection />)
 
     // Wait for movies to load (default view)
     await waitFor(() => {
@@ -134,19 +122,7 @@ describe('PopularSection', () => {
       })
     )
 
-    const queryClient = new QueryClient({
-      defaultOptions: {
-        queries: {
-          retry: false,
-        },
-      },
-    })
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <PopularSection />
-      </QueryClientProvider>
-    )
+    renderComponentWithRouter(<PopularSection />)
 
     const skeletons = document.querySelectorAll('.ui-skeleton-shimmer')
     expect(skeletons.length).toBeGreaterThan(0)
@@ -163,7 +139,7 @@ describe('PopularSection', () => {
       })
     )
 
-    renderWithQueryClient(<PopularSection />)
+    renderComponentWithRouter(<PopularSection />)
 
     await waitFor(() => {
       const skeletons = document.querySelectorAll('.ui-skeleton-shimmer')

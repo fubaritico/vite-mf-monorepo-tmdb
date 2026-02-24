@@ -1,5 +1,5 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen, waitFor } from '@testing-library/react'
+import { QueryClient } from '@tanstack/react-query'
+import { screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import {
   mockNowPlayingMovies,
@@ -7,6 +7,8 @@ import {
 } from '@vite-mf-monorepo/shared/mocks'
 import { setupServer } from 'msw/node'
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest'
+
+import { renderComponentWithRouter } from '../../mocks/react-router'
 
 import HeroSection from './HeroSection'
 
@@ -24,22 +26,9 @@ afterAll(() => {
   server.close()
 })
 
-const renderWithQueryClient = (ui: React.ReactElement) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-      },
-    },
-  })
-  return render(
-    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
-  )
-}
-
 describe('HeroSection', () => {
   it('should display hero carousel with now playing movies', async () => {
-    renderWithQueryClient(<HeroSection />)
+    renderComponentWithRouter(<HeroSection />)
 
     await waitFor(() => {
       expect(
@@ -59,11 +48,7 @@ describe('HeroSection', () => {
       },
     })
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <HeroSection />
-      </QueryClientProvider>
-    )
+    renderComponentWithRouter(<HeroSection />, '/', queryClient)
 
     const skeletons = document.querySelectorAll('.ui-skeleton-shimmer')
     expect(skeletons.length).toBeGreaterThan(0)
@@ -72,7 +57,7 @@ describe('HeroSection', () => {
   it('should handle API error gracefully', async () => {
     server.use(nowPlayingHandlers.nowPlayingMoviesError)
 
-    renderWithQueryClient(<HeroSection />)
+    renderComponentWithRouter(<HeroSection />)
 
     await waitFor(() => {
       const skeletons = document.querySelectorAll('.ui-skeleton-shimmer')
@@ -81,7 +66,7 @@ describe('HeroSection', () => {
   })
 
   it('should display only first 6 now playing items', async () => {
-    renderWithQueryClient(<HeroSection />)
+    renderComponentWithRouter(<HeroSection />)
 
     await waitFor(() => {
       const images = document.querySelectorAll('img')

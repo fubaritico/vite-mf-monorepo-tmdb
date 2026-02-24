@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 import { Footer } from '../Footer'
 import { Header } from '../Header'
@@ -25,14 +25,16 @@ const RootLayout: FC<RootLayoutProps> = ({
   ...rest
 }) => {
   const TMDBLogo = () => (
-    <div className="layout:flex layout:items-center layout:gap-2">
-      <div className="layout:w-8 layout:h-8 layout:bg-primary layout:rounded layout:flex layout:items-center layout:justify-center layout:font-bold layout:text-white">
-        T
+    <Link to="/" className="layout:no-underline">
+      <div className="layout:flex layout:items-center layout:gap-2">
+        <div className="layout:w-8 layout:h-8 layout:bg-primary layout:rounded layout:flex layout:items-center layout:justify-center layout:font-bold layout:text-white">
+          T
+        </div>
+        <span className="layout:text-white layout:font-bold layout:text-xl">
+          TMDB
+        </span>
       </div>
-      <span className="layout:text-white layout:font-bold layout:text-xl">
-        TMDB
-      </span>
-    </div>
+    </Link>
   )
 
   return (

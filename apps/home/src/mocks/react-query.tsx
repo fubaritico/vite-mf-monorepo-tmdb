@@ -6,7 +6,16 @@ import type { RenderOptions } from '@testing-library/react'
 import type { ReactNode } from 'react'
 
 export function ReactQueryWrapper({ children }: { children: ReactNode }) {
-  const [queryClient] = useState(() => new QueryClient())
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            retry: false,
+          },
+        },
+      })
+  )
 
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

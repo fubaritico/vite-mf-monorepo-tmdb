@@ -1,10 +1,12 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen, waitFor } from '@testing-library/react'
+import { QueryClient } from '@tanstack/react-query'
+import { screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import { HttpResponse, http } from 'msw'
 import { setupServer } from 'msw/node'
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest'
+
+import { renderComponentWithRouter } from '../../mocks/react-router'
 
 import TrendingSection from './TrendingSection'
 
@@ -71,29 +73,14 @@ afterAll(() => {
   server.close()
 })
 
-const renderWithQueryClient = (ui: React.ReactElement) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-        staleTime: Infinity,
-      },
-    },
-  })
-
-  return render(
-    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>
-  )
-}
-
 describe('TrendingSection', () => {
   it('should render section title', () => {
-    renderWithQueryClient(<TrendingSection />)
+    renderComponentWithRouter(<TrendingSection />)
     expect(screen.getByText('Trending')).toBeInTheDocument()
   })
 
   it('should render tabs for Today and This Week', () => {
-    renderWithQueryClient(<TrendingSection />)
+    renderComponentWithRouter(<TrendingSection />)
     expect(screen.getByRole('tab', { name: /today/i })).toBeInTheDocument()
     expect(screen.getByRole('tab', { name: /this week/i })).toBeInTheDocument()
   })
@@ -114,11 +101,7 @@ describe('TrendingSection', () => {
       },
     })
 
-    render(
-      <QueryClientProvider client={queryClient}>
-        <TrendingSection />
-      </QueryClientProvider>
-    )
+    renderComponentWithRouter(<TrendingSection />, '/', queryClient)
 
     const skeletons = document.querySelectorAll('.ui-skeleton-shimmer')
     expect(skeletons.length).toBeGreaterThan(0)
@@ -129,7 +112,7 @@ describe('TrendingSection', () => {
   })
 
   it('should display trending movies for today by default', async () => {
-    renderWithQueryClient(<TrendingSection />)
+    renderComponentWithRouter(<TrendingSection />)
 
     await waitFor(() => {
       expect(screen.getByText('Test Movie 1')).toBeInTheDocument()
@@ -139,7 +122,7 @@ describe('TrendingSection', () => {
 
   it('should switch to week data when clicking This Week tab', async () => {
     const user = userEvent.setup()
-    renderWithQueryClient(<TrendingSection />)
+    renderComponentWithRouter(<TrendingSection />)
 
     // Wait for initial data to load
     await waitFor(() => {
@@ -170,7 +153,7 @@ describe('TrendingSection', () => {
       })
     )
 
-    renderWithQueryClient(<TrendingSection />)
+    renderComponentWithRouter(<TrendingSection />)
 
     // Should not crash and skeleton should disappear
     await waitFor(() => {
@@ -180,7 +163,7 @@ describe('TrendingSection', () => {
   })
 
   it('should display movie cards with correct data', async () => {
-    renderWithQueryClient(<TrendingSection />)
+    renderComponentWithRouter(<TrendingSection />)
 
     await waitFor(() => {
       const movieCard = screen.getByTestId('movie-card-1')

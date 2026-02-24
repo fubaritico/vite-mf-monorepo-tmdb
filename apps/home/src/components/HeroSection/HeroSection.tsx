@@ -1,4 +1,5 @@
 import { Carousel, CarouselItem, Skeleton } from '@vite-mf-monorepo/ui'
+import { Link } from 'react-router-dom'
 
 import { useNowPlayingMovies } from '../../hooks/useNowPlayingMovies'
 
@@ -41,21 +42,26 @@ const HeroSection: FC = () => {
 
         return (
           <CarouselItem key={item.id} isHero>
-            <div className="hm:relative hm:hero-height hm:w-full hm:overflow-hidden">
-              <img
-                src={backdropUrl}
-                alt={item.title ?? 'Unknown'}
-                className="hm:h-full hm:w-full hm:object-cover hm:object-center"
-              />
-              <div className="hm:absolute hm:bottom-8 hm:left-8 hm:max-w-lg hm:text-white">
-                <h2 className="hm:mb-2 hm:text-3xl hm:font-bold hm:text-shadow-medium">
-                  {item.title ?? 'Unknown'}
-                </h2>
-                <p className="hm:text-sm hm:text-shadow-strong">
-                  {item.overview}
-                </p>
+            <Link
+              to={`/movie/${String(item.id)}`}
+              className="hm:block hm:no-underline"
+            >
+              <div className="hm:relative hm:hero-height hm:w-full hm:overflow-hidden">
+                <img
+                  src={backdropUrl}
+                  alt={item.title ?? 'Unknown'}
+                  className="hm:h-full hm:w-full hm:object-cover hm:object-center"
+                />
+                <div className="hm:absolute hm:bottom-8 hm:left-8 hm:max-w-lg hm:text-white">
+                  <h2 className="hm:mb-2 hm:text-3xl hm:font-bold hm:text-shadow-medium">
+                    {item.title ?? 'Unknown'}
+                  </h2>
+                  <p className="hm:text-sm hm:text-shadow-strong">
+                    {item.overview}
+                  </p>
+                </div>
               </div>
-            </div>
+            </Link>
           </CarouselItem>
         )
       })}
