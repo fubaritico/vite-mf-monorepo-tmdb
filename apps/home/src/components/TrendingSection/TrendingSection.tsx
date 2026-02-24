@@ -4,6 +4,7 @@ import {
   CarouselLoading,
   MovieCard,
   Tabs,
+  Typography,
 } from '@vite-mf-monorepo/ui'
 import { useState } from 'react'
 
@@ -72,7 +73,7 @@ const TrendingSection: FC = () => {
 
   return (
     <div className="hm:flex hm:flex-col hm:gap-4">
-      <h2 className="hm:text-3xl hm:font-bold">Trending</h2>
+      <Typography variant="h2">Trending</Typography>
       <Tabs value={timeWindow} onValueChange={handleTabChange} variant="pills">
         <Tabs.List>
           <Tabs.Trigger value="day">Today</Tabs.Trigger>

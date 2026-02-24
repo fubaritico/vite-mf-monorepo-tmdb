@@ -1,4 +1,3 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { HeroSection } from '@vite-mf-monorepo/home'
 import { nowPlayingHandlers } from '@vite-mf-monorepo/shared/mocks'
 
@@ -13,24 +12,6 @@ const meta = {
       handlers: [nowPlayingHandlers.nowPlayingMovies],
     },
   },
-  decorators: [
-    (Story) => {
-      const queryClient = new QueryClient({
-        defaultOptions: {
-          queries: {
-            retry: false,
-            staleTime: Infinity,
-          },
-        },
-      })
-
-      return (
-        <QueryClientProvider client={queryClient}>
-          <Story />
-        </QueryClientProvider>
-      )
-    },
-  ],
 } satisfies Meta<typeof HeroSection>
 
 export default meta

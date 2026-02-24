@@ -2,9 +2,13 @@ import { initialize, mswLoader } from 'msw-storybook-addon'
 
 import type { Preview } from '@storybook/react'
 
+import { withQueryClient } from './decorators/withQueryClient'
+import { withRouter } from './decorators/withRouter'
+
 import '@vite-mf-monorepo/layouts/styles.css'
 import '@vite-mf-monorepo/ui/styles.css'
 import '../src/styles.css'
+import '../../../apps/home/src/remote.css'
 
 // Initialize MSW
 initialize({
@@ -21,6 +25,7 @@ const preview: Preview = {
     },
   },
   loaders: [mswLoader],
+  decorators: [withQueryClient, withRouter],
 }
 
 export default preview

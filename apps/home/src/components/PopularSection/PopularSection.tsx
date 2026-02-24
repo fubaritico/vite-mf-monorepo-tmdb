@@ -1,4 +1,4 @@
-import { Tabs } from '@vite-mf-monorepo/ui'
+import { Tabs, Typography } from '@vite-mf-monorepo/ui'
 import { useState } from 'react'
 
 import PopularMoviesCarousel from './PopularMoviesCarousel'
@@ -17,7 +17,7 @@ const PopularSection: FC = () => {
 
   return (
     <div className="hm:flex hm:flex-col hm:gap-4">
-      <h2 className="hm:text-3xl hm:font-bold">What's Popular</h2>
+      <Typography variant="h2">What's Popular</Typography>
       <Tabs value={mediaType} onValueChange={handleTabChange} variant="pills">
         <Tabs.List>
           <Tabs.Trigger value="movie">Movies</Tabs.Trigger>

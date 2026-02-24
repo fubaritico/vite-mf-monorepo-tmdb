@@ -1,4 +1,3 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { TrendingSection } from '@vite-mf-monorepo/home'
 import { trendingHandlers } from '@vite-mf-monorepo/shared/mocks'
 
@@ -14,24 +13,11 @@ const meta = {
     },
   },
   decorators: [
-    (Story) => {
-      const queryClient = new QueryClient({
-        defaultOptions: {
-          queries: {
-            retry: false,
-            staleTime: Infinity,
-          },
-        },
-      })
-
-      return (
-        <QueryClientProvider client={queryClient}>
-          <div style={{ padding: '2rem' }}>
-            <Story />
-          </div>
-        </QueryClientProvider>
-      )
-    },
+    (Story) => (
+      <div style={{ padding: '2rem' }}>
+        <Story />
+      </div>
+    ),
   ],
 } satisfies Meta<typeof TrendingSection>
 
