@@ -1,4 +1,9 @@
-import { Carousel, CarouselItem, MovieCard } from '@vite-mf-monorepo/ui'
+import {
+  Carousel,
+  CarouselItem,
+  MovieCard,
+  Typography,
+} from '@vite-mf-monorepo/ui'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
@@ -161,9 +166,13 @@ export const Hero: Story = {
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-8 left-8 max-w-lg text-white">
-                <h2 className="mb-2 text-3xl font-bold">{slide.title}</h2>
-                <p className="text-sm opacity-90">{slide.overview}</p>
+              <div className="absolute bottom-8 left-8 max-w-lg">
+                <Typography variant="h2" className="mb-2 text-white">
+                  {slide.title}
+                </Typography>
+                <Typography variant="body-sm" className="text-white opacity-90">
+                  {slide.overview}
+                </Typography>
               </div>
             </div>
           </CarouselItem>

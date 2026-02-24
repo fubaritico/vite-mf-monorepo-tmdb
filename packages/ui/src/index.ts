@@ -50,3 +50,6 @@ export type { TabsProps, TabsVariant } from './Tabs'
 
 export { Skeleton } from './Skeleton'
 export type { SkeletonProps } from './Skeleton'
+
+export { Typography } from './Typography'
+export type { TypographyProps, TypographyVariant } from './Typography'

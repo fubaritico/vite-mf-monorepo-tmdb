@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Card } from '../Card'
 import { Image } from '../Image'
 import { Rating } from '../Rating'
+import { Typography } from '../Typography'
 
 import type { MovieCardProps } from './MovieCard.types'
 import type { FC } from 'react'
@@ -62,15 +63,15 @@ const MovieCard: FC<MovieCardProps> = ({
 
       {/* Content */}
       <div className="ui:mt-2 ui:flex ui:flex-col ui:gap-0.5 ui:px-1">
-        <h3
-          className="ui:line-clamp-2 ui:text-sm ui:font-medium ui:text-foreground"
+        <Typography
+          variant="label"
+          as="h3"
+          className="ui:line-clamp-2"
           title={title}
         >
           {title}
-        </h3>
-        {year && (
-          <span className="ui:text-xs ui:text-muted-foreground">{year}</span>
-        )}
+        </Typography>
+        {year && <Typography variant="caption-xs">{year}</Typography>}
       </div>
     </Card>
   )
