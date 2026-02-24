@@ -13,6 +13,8 @@ export interface CarouselLoadingProps {
   showTitle?: boolean
   /** Show skeleton for subtitle/date */
   showSubtitle?: boolean
+  /** Apply rounded corners to skeleton */
+  rounded?: boolean
 }
 
 /**
@@ -27,6 +29,7 @@ const CarouselLoading: FC<CarouselLoadingProps> = ({
   cardHeight = 225,
   showTitle = true,
   showSubtitle = true,
+  rounded = true,
 }) => {
   return (
     <div className="ui:overflow-x-auto ui:flex ui:gap-4">
@@ -40,6 +43,7 @@ const CarouselLoading: FC<CarouselLoadingProps> = ({
               variant="rectangle"
               width="ui:w-full"
               height="ui:h-full"
+              rounded={rounded}
             />
           </div>
           {(showTitle || showSubtitle) && (

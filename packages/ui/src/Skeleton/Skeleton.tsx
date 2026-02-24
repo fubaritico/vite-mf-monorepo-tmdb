@@ -11,6 +11,8 @@ export interface SkeletonProps extends ComponentProps<'div'> {
   height?: string
   /** Aspect ratio (e.g., "2/3", "16/9", "1/1") */
   aspectRatio?: string
+  /** Apply rounded corners (default: true for rectangle/line, always true for circle) */
+  rounded?: boolean
 }
 
 /**
@@ -23,6 +25,7 @@ const Skeleton: FC<SkeletonProps> = ({
   width,
   height,
   aspectRatio,
+  rounded = true,
   className,
   ...rest
 }) => {
@@ -32,15 +35,15 @@ const Skeleton: FC<SkeletonProps> = ({
         'ui:relative ui:overflow-hidden ui:bg-muted',
         'ui-skeleton-shimmer',
         {
-          'ui:rounded-lg': variant === 'rectangle',
+          'ui:rounded-lg': variant === 'rectangle' && rounded,
           'ui:rounded-full': variant === 'circle',
-          'ui:rounded': variant === 'line',
+          'ui:rounded': variant === 'line' && rounded,
         },
         width,
         height,
-        aspectRatio && `ui:aspect-[${aspectRatio}]`,
         className
       )}
+      style={aspectRatio ? { aspectRatio } : undefined}
       {...rest}
     />
   )

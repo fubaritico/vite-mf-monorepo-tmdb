@@ -11,3 +11,13 @@
 @import '../fonts/fonts.css';
 
 @import '@vite-mf-monorepo/tokens/tailwind';
+
+/* Custom utilities */
+@layer utilities {
+  .text-shadow-strong {
+    text-shadow: 0 0 10px rgb(0 0 0 / 0.75);
+  }
+  .text-shadow-medium {
+    text-shadow: 0 0 5px rgb(0 0 0 / 0.5);
+  }
+}

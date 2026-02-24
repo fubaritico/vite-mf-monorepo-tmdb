@@ -30,6 +30,8 @@ export interface CarouselProps {
   className?: string
   /** Error message to display instead of carousel content */
   errorMessage?: string
+  /** Apply rounded corners to viewport */
+  rounded?: boolean
 }
 
 /**
@@ -46,6 +48,7 @@ const Carousel: FC<CarouselProps> = ({
   gap = 16,
   className,
   errorMessage,
+  rounded = true,
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -209,7 +212,8 @@ const Carousel: FC<CarouselProps> = ({
         ref={scrollRef}
         className={clsx(
           'ui:flex ui:overflow-x-auto ui:scroll-smooth ui:scrollbar-none',
-          isHero && 'ui:snap-x ui:snap-mandatory'
+          isHero && 'ui:snap-x ui:snap-mandatory',
+          rounded && 'ui:rounded-lg ui:overflow-hidden'
         )}
         style={{ gap: `${String(gap)}px` }}
       >
