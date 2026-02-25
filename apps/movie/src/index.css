@@ -1,6 +1,24 @@
-@import "tailwindcss";
-@import "@vite-mf-monorepo/shared/src/tailwind/theme.css";
+@import "tailwindcss" prefix(mv);
+@import "@vite-mf-monorepo/shared/src/tailwind/theme.css" prefix(mv);
 @import "@vite-mf-monorepo/layouts/styles.css";
+
+@layer utilities {
+  .mv\:text-shadow-strong {
+    text-shadow: 0 0 10px rgb(0 0 0 / 0.75);
+  }
+  .mv\:text-shadow-medium {
+    text-shadow: 0 0 5px rgb(0 0 0 / 0.5);
+  }
+  .mv\:hero-height {
+    aspect-ratio: 21/9;
+  }
+  @media (min-width: 1024px) {
+    .mv\:hero-height {
+      aspect-ratio: auto;
+      max-height: 440px;
+    }
+  }
+}
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

@@ -39,7 +39,8 @@ describe('Typography', () => {
     )
     const element = container.querySelector('h1')
     expect(element).toBeInTheDocument()
-    expect(element).toHaveClass('ui:text-4xl')
+    expect(element).toHaveClass('ui:text-xl')
+    expect(element).toHaveClass('ui:lg:text-4xl')
     expect(element).toHaveClass('ui:font-bold')
     expect(element).toHaveClass('ui:leading-tight')
   })
@@ -50,7 +51,8 @@ describe('Typography', () => {
     )
     const element = container.querySelector('p')
     expect(element).toBeInTheDocument()
-    expect(element).toHaveClass('ui:text-base')
+    expect(element).toHaveClass('ui:text-xs')
+    expect(element).toHaveClass('ui:md:text-base')
     expect(element).toHaveClass('ui:leading-relaxed')
   })
 
@@ -62,7 +64,8 @@ describe('Typography', () => {
     )
     const element = container.querySelector('p')
     expect(element).toBeInTheDocument()
-    expect(element).toHaveClass('ui:text-4xl')
+    expect(element).toHaveClass('ui:text-xl')
+    expect(element).toHaveClass('ui:lg:text-4xl')
     expect(element).toHaveClass('ui:font-bold')
   })
 
@@ -73,7 +76,8 @@ describe('Typography', () => {
       </Typography>
     )
     const element = screen.getByText('Custom styled')
-    expect(element).toHaveClass('ui:text-base')
+    expect(element).toHaveClass('ui:text-xs')
+    expect(element).toHaveClass('ui:md:text-base')
     expect(element).toHaveClass('custom-class')
   })
 
@@ -93,7 +97,8 @@ describe('Typography', () => {
     )
     const element = container.querySelector('span')
     expect(element).toBeInTheDocument()
-    expect(element).toHaveClass('ui:text-sm')
+    expect(element).toHaveClass('ui:text-xs')
+    expect(element).toHaveClass('ui:sm:text-sm')
     expect(element).toHaveClass('ui:text-muted-foreground')
   })
 
@@ -103,7 +108,8 @@ describe('Typography', () => {
     )
     const element = container.querySelector('label')
     expect(element).toBeInTheDocument()
-    expect(element).toHaveClass('ui:text-sm')
+    expect(element).toHaveClass('ui:text-xs')
+    expect(element).toHaveClass('ui:sm:text-sm')
     expect(element).toHaveClass('ui:font-medium')
   })
 

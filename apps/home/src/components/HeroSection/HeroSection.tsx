@@ -60,13 +60,13 @@ const HeroSection: FC = () => {
                 <div className="hm:absolute hm:bottom-8 hm:left-8 hm:max-w-lg">
                   <Typography
                     variant="h2"
-                    className="hm:mb-2 hm:text-white hm:text-shadow-medium"
+                    className="hm:mb-2 hm:text-white! hm:text-shadow-medium"
                   >
                     {item.title ?? 'Unknown'}
                   </Typography>
                   <Typography
                     variant="body-sm"
-                    className="hm:text-white hm:text-shadow-strong"
+                    className="hm:text-white! hm:text-shadow-strong"
                   >
                     {item.overview ?? ''}
                   </Typography>

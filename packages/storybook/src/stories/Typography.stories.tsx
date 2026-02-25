@@ -20,42 +20,44 @@ export const AllVariants: Story = {
       <div>
         <Typography variant="h1">Heading 1</Typography>
         <Typography variant="caption" className="ui:block ui:mt-2">
-          variant="h1" - 36px, bold, tight leading
+          variant="h1" - 20px / sm:24px / md:30px / lg:36px, bold, tight leading
         </Typography>
       </div>
 
       <div>
         <Typography variant="h2">Heading 2</Typography>
         <Typography variant="caption" className="ui:block ui:mt-2">
-          variant="h2" - 30px, bold, tight leading
+          variant="h2" - 18px / sm:20px / md:24px / lg:30px, bold, tight leading
         </Typography>
       </div>
 
       <div>
         <Typography variant="h3">Heading 3</Typography>
         <Typography variant="caption" className="ui:block ui:mt-2">
-          variant="h3" - 24px, semibold, snug leading
+          variant="h3" - 16px / sm:18px / md:20px / lg:24px, semibold, snug
+          leading
         </Typography>
       </div>
 
       <div>
         <Typography variant="h4">Heading 4</Typography>
         <Typography variant="caption" className="ui:block ui:mt-2">
-          variant="h4" - 20px, semibold, snug leading
+          variant="h4" - 14px / sm:16px / md:18px / lg:20px, semibold, snug
+          leading
         </Typography>
       </div>
 
       <div>
         <Typography variant="h5">Heading 5</Typography>
         <Typography variant="caption" className="ui:block ui:mt-2">
-          variant="h5" - 18px, medium, normal leading
+          variant="h5" - 14px / sm:16px / md:18px, medium, normal leading
         </Typography>
       </div>
 
       <div>
         <Typography variant="h6">Heading 6</Typography>
         <Typography variant="caption" className="ui:block ui:mt-2">
-          variant="h6" - 16px, medium, normal leading
+          variant="h6" - 12px / sm:14px / md:16px, medium, normal leading
         </Typography>
       </div>
 
@@ -65,7 +67,8 @@ export const AllVariants: Story = {
           Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </Typography>
         <Typography variant="caption" className="ui:block ui:mt-2">
-          variant="body" - 16px, normal weight, relaxed leading
+          variant="body" - 12px / sm:14px / md:16px, normal weight, relaxed
+          leading
         </Typography>
       </div>
 
@@ -75,7 +78,8 @@ export const AllVariants: Story = {
           elit.
         </Typography>
         <Typography variant="caption" className="ui:block ui:mt-2">
-          variant="body-lg" - 18px, normal weight, relaxed leading
+          variant="body-lg" - 14px / sm:16px / md:18px, normal weight, relaxed
+          leading
         </Typography>
       </div>
 
@@ -85,7 +89,7 @@ export const AllVariants: Story = {
           elit.
         </Typography>
         <Typography variant="caption" className="ui:block ui:mt-2">
-          variant="body-sm" - 14px, normal weight, relaxed leading
+          variant="body-sm" - 12px / sm:14px, normal weight, relaxed leading
         </Typography>
       </div>
 
@@ -95,21 +99,22 @@ export const AllVariants: Story = {
           regular body text.
         </Typography>
         <Typography variant="caption" className="ui:block ui:mt-2">
-          variant="lead" - 20px, muted color, relaxed leading
+          variant="lead" - 14px / sm:16px / md:18px / lg:20px, muted color,
+          relaxed leading
         </Typography>
       </div>
 
       <div>
         <Typography variant="label">Label text</Typography>
         <Typography variant="caption" className="ui:block ui:mt-2">
-          variant="label" - 14px, medium weight (for form labels)
+          variant="label" - 12px / sm:14px, medium weight (for form labels)
         </Typography>
       </div>
 
       <div>
         <Typography variant="caption">Caption or helper text</Typography>
         <Typography variant="caption" className="ui:block ui:mt-2">
-          variant="caption" - 14px, muted color (for small text)
+          variant="caption" - 12px / sm:14px, muted color (for small text)
         </Typography>
       </div>
 
@@ -118,7 +123,7 @@ export const AllVariants: Story = {
           Muted text - Secondary information
         </Typography>
         <Typography variant="caption" className="ui:block ui:mt-2">
-          variant="muted" - 14px, muted color
+          variant="muted" - 12px / sm:14px, muted color
         </Typography>
       </div>
 

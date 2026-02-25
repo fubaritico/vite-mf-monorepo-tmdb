@@ -10,10 +10,12 @@
     "paths": {
       "@vite-mf-monorepo/home": ["../../apps/home/src"],
       "@vite-mf-monorepo/home/*": ["../../apps/home/src/*"],
+      "@vite-mf-monorepo/movie": ["../../apps/movie/src"],
+      "@vite-mf-monorepo/movie/*": ["../../apps/movie/src/*"],
       "@vite-mf-monorepo/ui": ["../../packages/ui/src"],
       "@vite-mf-monorepo/ui/*": ["../../packages/ui/src/*"]
     }
   },
-  "include": ["src", ".storybook", "../../apps/home/src"],
+  "include": ["src", ".storybook", "../../apps/home/src", "../../apps/movie/src"],
   "exclude": ["node_modules", "dist"]
 }

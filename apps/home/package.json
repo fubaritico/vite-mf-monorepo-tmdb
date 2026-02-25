@@ -26,6 +26,9 @@
   "devDependencies": {
     "@antdevx/vite-plugin-hmr-sync": "catalog:",
     "@eslint/js": "catalog:",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/roboto": "^5.2.9",
+    "@fontsource/roboto-condensed": "^5.2.8",
     "@module-federation/dts-plugin": "catalog:",
     "@module-federation/runtime": "catalog:",
     "@module-federation/vite": "catalog:",

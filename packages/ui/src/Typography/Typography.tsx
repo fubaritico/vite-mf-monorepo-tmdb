@@ -32,22 +32,25 @@ export interface TypographyProps extends HTMLAttributes<HTMLElement> {
 }
 
 const variantStyles: Record<TypographyVariant, string> = {
-  h1: 'ui:text-4xl ui:font-bold ui:leading-tight ui:text-foreground',
-  h2: 'ui:text-3xl ui:font-bold ui:leading-tight ui:text-foreground',
-  h3: 'ui:text-2xl ui:font-semibold ui:leading-snug ui:text-foreground',
-  h4: 'ui:text-xl ui:font-semibold ui:leading-snug ui:text-foreground',
-  h5: 'ui:text-lg ui:font-medium ui:leading-normal ui:text-foreground',
-  h6: 'ui:text-base ui:font-medium ui:leading-normal ui:text-foreground',
-  body: 'ui:text-base ui:leading-relaxed ui:text-foreground',
-  'body-sm': 'ui:text-sm ui:leading-relaxed ui:text-foreground',
-  'body-lg': 'ui:text-lg ui:leading-relaxed ui:text-foreground',
-  lead: 'ui:text-xl ui:leading-relaxed ui:text-muted-foreground',
-  caption: 'ui:text-sm ui:text-muted-foreground',
-  'caption-xs': 'ui:text-xs ui:text-muted-foreground',
-  label: 'ui:text-sm ui:font-medium ui:text-foreground',
-  muted: 'ui:text-sm ui:text-muted-foreground',
+  h1: 'ui:font-roboto ui:text-xl ui:sm:text-2xl ui:md:text-3xl ui:lg:text-4xl ui:font-bold ui:leading-tight ui:text-foreground',
+  h2: 'ui:font-roboto ui:text-lg ui:sm:text-xl ui:md:text-2xl ui:lg:text-3xl ui:font-bold ui:leading-tight ui:text-foreground',
+  h3: 'ui:font-roboto ui:text-base ui:sm:text-lg ui:md:text-xl ui:lg:text-2xl ui:font-semibold ui:leading-snug ui:text-foreground',
+  h4: 'ui:font-roboto ui:text-sm ui:sm:text-base ui:md:text-lg ui:lg:text-xl ui:font-semibold ui:leading-snug ui:text-foreground',
+  h5: 'ui:font-roboto ui:text-sm ui:sm:text-base ui:md:text-lg ui:font-medium ui:leading-normal ui:text-foreground',
+  h6: 'ui:font-roboto ui:text-xs ui:sm:text-sm ui:md:text-base ui:font-medium ui:leading-normal ui:text-foreground',
+  body: 'ui:font-inter ui:text-xs ui:sm:text-sm ui:md:text-base ui:leading-relaxed ui:text-foreground',
+  'body-sm':
+    'ui:font-inter ui:text-xs ui:sm:text-sm ui:leading-relaxed ui:text-foreground',
+  'body-lg':
+    'ui:font-inter ui:text-sm ui:sm:text-base ui:md:text-lg ui:leading-relaxed ui:text-foreground',
+  lead: 'ui:font-inter ui:text-sm ui:sm:text-base ui:md:text-lg ui:lg:text-xl ui:leading-relaxed ui:text-muted-foreground',
+  caption: 'ui:font-inter ui:text-xs ui:sm:text-sm ui:text-muted-foreground',
+  'caption-xs': 'ui:font-inter ui:text-xs ui:text-muted-foreground',
+  label:
+    'ui:font-inter ui:text-xs ui:sm:text-sm ui:font-medium ui:text-foreground',
+  muted: 'ui:font-inter ui:text-xs ui:sm:text-sm ui:text-muted-foreground',
   blockquote:
-    'ui:border-l-4 ui:border-border ui:pl-4 ui:italic ui:text-muted-foreground',
+    'ui:font-inter ui:text-xs ui:sm:text-sm ui:md:text-base ui:border-l-4 ui:border-border ui:pl-4 ui:italic ui:text-muted-foreground',
 }
 
 const variantToTag: Record<TypographyVariant, ElementType> = {

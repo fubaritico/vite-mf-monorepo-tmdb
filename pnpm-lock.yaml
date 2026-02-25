@@ -246,6 +246,15 @@ importers:
       '@eslint/js':
         specifier: 'catalog:'
         version: 9.21.0
+      '@fontsource/inter':
+        specifier: ^5.2.8
+        version: 5.2.8
+      '@fontsource/roboto':
+        specifier: ^5.2.9
+        version: 5.2.9
+      '@fontsource/roboto-condensed':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@module-federation/dts-plugin':
         specifier: 'catalog:'
         version: 0.24.1(typescript@5.7.2)
@@ -415,6 +424,9 @@ importers:
       '@vite-mf-monorepo/tmdb-client':
         specifier: workspace:*
         version: link:../../packages/http-client
+      '@vite-mf-monorepo/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       clsx:
         specifier: 'catalog:'
         version: 2.1.1
@@ -434,6 +446,15 @@ importers:
       '@eslint/js':
         specifier: 'catalog:'
         version: 9.21.0
+      '@fontsource/inter':
+        specifier: ^5.2.8
+        version: 5.2.8
+      '@fontsource/roboto':
+        specifier: ^5.2.9
+        version: 5.2.9
+      '@fontsource/roboto-condensed':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@module-federation/dts-plugin':
         specifier: 'catalog:'
         version: 0.24.1(typescript@5.7.2)
@@ -657,6 +678,15 @@ importers:
         specifier: 'catalog:'
         version: 7.5.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
     devDependencies:
+      '@fontsource/inter':
+        specifier: ^5.2.8
+        version: 5.2.8
+      '@fontsource/roboto':
+        specifier: ^5.2.9
+        version: 5.2.9
+      '@fontsource/roboto-condensed':
+        specifier: ^5.2.8
+        version: 5.2.8
       '@storybook/addon-a11y':
         specifier: ^8.6.14
         version: 8.6.15(storybook@8.6.15(prettier@3.5.3))
