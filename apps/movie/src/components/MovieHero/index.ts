@@ -1,2 +1,1 @@
-export { default } from './MovieHero'
-export type { MovieHeroProps } from './MovieHero'
+export { default as MovieHero } from './MovieHero'

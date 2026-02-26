@@ -1,50 +1,71 @@
-import { Badge, Rating, Typography } from '@vite-mf-monorepo/ui'
+import { useQuery } from '@tanstack/react-query'
+import { getImageUrl } from '@vite-mf-monorepo/shared'
+import { movieDetailsOptions } from '@vite-mf-monorepo/tmdb-client'
+import { Badge, Rating, Skeleton, Typography } from '@vite-mf-monorepo/ui'
 import clsx from 'clsx'
+import { useParams } from 'react-router-dom'
 
+import type { UseQueryResult } from '@tanstack/react-query'
+import type {
+  MovieDetailsResponse,
+  TMDBError,
+} from '@vite-mf-monorepo/tmdb-client'
 import type { FC } from 'react'
 
-export interface MovieHeroProps {
-  /** Movie title */
-  title: string
-  /** Movie tagline */
-  tagline?: string
-  /** Backdrop image URL */
-  backdropUrl: string
-  /** Release date (formatted) */
-  releaseDate?: string
-  /** Runtime in minutes */
-  runtime?: number
-  /** Vote average (0-10) */
-  voteAverage?: number
-  /** Array of genre names */
-  genres?: string[]
-  /** Additional class name */
-  className?: string
-}
+const MovieHero: FC = () => {
+  const { id } = useParams<{ id: string }>()
+  const movieId = Number(id)
 
-const MovieHero: FC<MovieHeroProps> = ({
-  title,
-  tagline,
-  backdropUrl,
-  releaseDate,
-  runtime,
-  voteAverage,
-  genres = [],
-  className,
-}) => {
+  const {
+    data: movie,
+    isLoading,
+    error,
+  } = useQuery({
+    ...movieDetailsOptions({ path: { movie_id: movieId } }),
+  }) as UseQueryResult<MovieDetailsResponse, TMDBError>
+
   const formatRuntime = (minutes: number) => {
     const hours = Math.floor(minutes / 60)
     const mins = minutes % 60
     return `${String(hours)}h ${String(mins)}m`
   }
 
+  if (isLoading) {
+    return (
+      <Skeleton
+        variant="rectangle"
+        width="mv:w-full"
+        className="mv:hero-height"
+        rounded={false}
+      />
+    )
+  }
+
+  if (error || !movie) {
+    return (
+      <div className="mv:flex mv:h-[400px] mv:w-full mv:items-center mv:justify-center mv:bg-muted">
+        <Typography variant="body" className="mv:text-destructive">
+          {error?.status_message ?? 'Failed to load movie details'}
+        </Typography>
+      </div>
+    )
+  }
+
+  const backdropUrl = movie.backdrop_path
+    ? getImageUrl(movie.backdrop_path, 'original')
+    : ''
+  const releaseYear = movie.release_date
+    ? new Date(movie.release_date).getFullYear().toString()
+    : undefined
+  const genreNames = movie.genres?.map((g) => g.name ?? '') ?? []
+
   return (
-    <div className={`mv:relative mv:w-full ${className ?? ''}`}>
+    <div className="mv:relative mv:w-full">
       {/* Backdrop Image */}
       <div className="mv:relative mv:hero-height mv:w-full mv:overflow-hidden">
         <img
           src={backdropUrl}
-          alt={title}
+          alt={movie.title ?? 'Movie'}
           className="mv:relative mv:h-full mv:w-full mv:object-cover mv:object-center mv:z-0"
         />
         {/* Gradient Overlay */}
@@ -65,52 +86,56 @@ const MovieHero: FC<MovieHeroProps> = ({
               variant="h1"
               className="mv:mb-1 mv:sm:mb-2 mv:text-white! mv:text-shadow-medium"
             >
-              {title}
+              {movie.title}
             </Typography>
 
             {/* Tagline */}
-            {tagline && (
+            {movie.tagline && (
               <Typography
                 variant="lead"
                 className="mv:mb-2 mv:sm:mb-3 mv:md:mb-4 mv:italic mv:text-white! mv:opacity-90 mv:text-shadow-strong"
               >
-                {tagline}
+                {movie.tagline}
               </Typography>
             )}
 
             {/* Metadata */}
             <div className="mv:mb-2 mv:sm:mb-3 mv:md:mb-4 mv:flex mv:items-center mv:gap-2 mv:sm:gap-3 mv:md:gap-4 mv:text-white">
-              {releaseDate && (
+              {releaseYear && (
                 <Typography
                   variant="body"
                   className="mv:text-white mv:text-shadow-strong"
                 >
-                  {releaseDate}
+                  {releaseYear}
                 </Typography>
               )}
-              {runtime && (
+              {movie.runtime && (
                 <>
                   <span className="mv:text-white">•</span>
                   <Typography
                     variant="body"
                     className="mv:text-white mv:text-shadow-strong"
                   >
-                    {formatRuntime(runtime)}
+                    {formatRuntime(movie.runtime)}
                   </Typography>
                 </>
               )}
-              {voteAverage !== undefined && (
+              {movie.vote_average !== undefined && (
                 <>
                   <span className="mv:text-white mv:text-shadow-strong">•</span>
-                  <Rating value={voteAverage} size="sm" variant="circle" />
+                  <Rating
+                    value={movie.vote_average}
+                    size="sm"
+                    variant="circle"
+                  />
                 </>
               )}
             </div>
 
             {/* Genres */}
-            {genres.length > 0 && (
+            {genreNames.length > 0 && (
               <div className="mv:flex mv:flex-wrap mv:gap-2">
-                {genres.map((genre) => (
+                {genreNames.map((genre) => (
                   <Badge key={genre} variant="secondary" size="sm">
                     {genre}
                   </Badge>

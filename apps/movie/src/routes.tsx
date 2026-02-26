@@ -23,7 +23,6 @@ export const routes: RouteObject[] = [
       {
         path: 'movie/:id',
         element: <Movie />,
-        loader: Movie.loader(queryClient),
         errorElement: <MovieErrorBoundary />,
       },
     ],

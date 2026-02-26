@@ -1,110 +1,89 @@
-import { QueryClient, useQuery } from '@tanstack/react-query'
-import { getImageUrl } from '@vite-mf-monorepo/shared'
-import { movieDetailsOptions } from '@vite-mf-monorepo/tmdb-client'
-import { useLoaderData, useParams } from 'react-router-dom'
+import { Section } from '@vite-mf-monorepo/layouts'
+import { Typography } from '@vite-mf-monorepo/ui'
 
-import type { MovieDetailsResponse } from '@vite-mf-monorepo/tmdb-client'
+import { MovieHero } from './MovieHero'
+
 import type { FC } from 'react'
-import type { Params } from 'react-router-dom'
 
 import '../remote.css'
 
-export type RouteComponent = FC & {
-  loader: (
-    queryClient: QueryClient
-  ) => ({ params }: { params: Params<'id'> }) => Promise<MovieDetailsResponse>
-}
-
-const loader =
-  (queryClient: QueryClient) =>
-  ({ params }: { params: Params<'id'> }) => {
-    const movieId = Number(params.id)
-    return queryClient.ensureQueryData(
-      movieDetailsOptions({ path: { movie_id: movieId } })
-    )
-  }
-
-const Movie: RouteComponent = () => {
-  const initialData = useLoaderData<MovieDetailsResponse>()
-  const { id } = useParams<{ id: string }>()
-
-  const { data: movie, error } = useQuery({
-    ...movieDetailsOptions({ path: { movie_id: Number(id) } }),
-    initialData,
-  })
-
-  if (error) {
-    return (
-      <div className="p-8 text-center text-xl text-destructive">
-        {error.message}
-      </div>
-    )
-  }
-
+const Movie: FC = () => {
   return (
-    <div className="flex flex-col gap-8 md:flex-row">
-      <div className="flex-shrink-0 md:w-[300px]">
-        <img
-          src={getImageUrl(movie.poster_path)}
-          alt={`${movie.title ?? 'Movie'} poster`}
-          className="w-full rounded-lg shadow-lg"
-        />
-      </div>
-      <div className="flex-1">
-        <h2 className="mb-2 text-4xl text-foreground">{movie.title}</h2>
-        {movie.tagline && (
-          <p className="mb-4 italic text-muted-foreground">{movie.tagline}</p>
-        )}
-        <div className="mb-4 flex gap-4 text-muted-foreground">
-          {movie.release_date && (
-            <span>{new Date(movie.release_date).getFullYear()}</span>
-          )}
-          {movie.runtime && <span>{movie.runtime} min</span>}
-          {movie.vote_average !== undefined && (
-            <span>{movie.vote_average.toFixed(1)} / 10</span>
-          )}
-        </div>
-        <div className="mb-6 flex flex-wrap gap-2">
-          {movie.genres?.map((genre) => (
-            <span
-              key={genre.id}
-              className="rounded-full bg-secondary px-3 py-1 text-sm text-secondary-foreground"
-            >
-              {genre.name}
-            </span>
-          ))}
-        </div>
-        <div className="mb-6">
-          <h3 className="mb-2 text-xl font-medium text-foreground">Overview</h3>
-          <p className="leading-relaxed text-muted-foreground">
-            {movie.overview}
-          </p>
-        </div>
-        {(movie.budget ?? movie.revenue) && (
-          <div className="mt-4 flex flex-col gap-2">
-            {movie.budget && movie.budget > 0 && (
-              <div className="flex gap-2">
-                <span className="font-medium text-foreground">Budget:</span>
-                <span className="text-muted-foreground">
-                  ${movie.budget.toLocaleString()}
-                </span>
-              </div>
-            )}
-            {movie.revenue && movie.revenue > 0 && (
-              <div className="flex gap-2">
-                <span className="font-medium text-foreground">Revenue:</span>
-                <span className="text-muted-foreground">
-                  ${movie.revenue.toLocaleString()}
-                </span>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
+    <div>
+      {/* Hero Section */}
+      <MovieHero />
+
+      {/* Synopsis Section - TODO */}
+      <Section maxWidth="xl" spacing="md">
+        <Typography variant="h2" className="mv:mb-4">
+          Synopsis
+        </Typography>
+        <Typography variant="body" className="mv:text-muted-foreground">
+          Synopsis section coming soon...
+        </Typography>
+      </Section>
+
+      {/* Photos Section - TODO */}
+      <Section maxWidth="xl" spacing="md">
+        <Typography variant="h2" className="mv:mb-6">
+          Photos
+        </Typography>
+        <Typography variant="body" className="mv:text-muted-foreground">
+          Photos gallery coming soon...
+        </Typography>
+      </Section>
+
+      {/* Crew Section - TODO */}
+      <Section maxWidth="xl" spacing="md">
+        <Typography variant="h2" className="mv:mb-6">
+          Crew
+        </Typography>
+        <Typography variant="body" className="mv:text-muted-foreground">
+          Director and writers information coming soon...
+        </Typography>
+      </Section>
+
+      {/* Top 10 Cast Section - TODO */}
+      <Section maxWidth="xl" spacing="md">
+        <Typography variant="h2" className="mv:mb-6">
+          Top 10 Cast
+        </Typography>
+        <Typography variant="body" className="mv:text-muted-foreground">
+          Cast carousel coming soon...
+        </Typography>
+      </Section>
+
+      {/* Trailers & Clips Section - TODO */}
+      <Section maxWidth="xl" spacing="md">
+        <Typography variant="h2" className="mv:mb-6">
+          Trailers & Clips
+        </Typography>
+        <Typography variant="body" className="mv:text-muted-foreground">
+          Video trailers coming soon...
+        </Typography>
+      </Section>
+
+      {/* You May Also Like Section - TODO */}
+      <Section maxWidth="xl" spacing="md">
+        <Typography variant="h2" className="mv:mb-6">
+          You May Also Like
+        </Typography>
+        <Typography variant="body" className="mv:text-muted-foreground">
+          Similar movies carousel coming soon...
+        </Typography>
+      </Section>
+
+      {/* Recommendations Section - TODO */}
+      <Section maxWidth="xl" spacing="md">
+        <Typography variant="h2" className="mv:mb-6">
+          Recommendations
+        </Typography>
+        <Typography variant="body" className="mv:text-muted-foreground">
+          Recommended movies carousel coming soon...
+        </Typography>
+      </Section>
     </div>
   )
 }
 
 export default Movie
-
-Movie.loader = loader

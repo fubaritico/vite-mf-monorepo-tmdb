@@ -1,6 +1,8 @@
 import { PopularSection } from '@vite-mf-monorepo/home'
 import { popularHandlers } from '@vite-mf-monorepo/shared/mocks'
 
+import { withRouter } from '../../.storybook/decorators/withRouter'
+
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
@@ -13,6 +15,7 @@ const meta = {
     },
   },
   decorators: [
+    withRouter(),
     (Story) => (
       <div style={{ padding: '2rem' }}>
         <Story />

@@ -1,4 +1,5 @@
 export { freeToWatchHandlers } from './freeToWatchHandlers.js'
+export { movieDetailsHandlers } from './movieDetailsHandlers.js'
 export { nowPlayingHandlers } from './nowPlayingHandlers.js'
 export { popularHandlers } from './popularHandlers.js'
 export { trendingHandlers } from './trendingHandlers.js'
