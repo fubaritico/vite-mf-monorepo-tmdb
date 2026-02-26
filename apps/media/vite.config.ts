@@ -9,7 +9,10 @@ import { federation } from '@module-federation/vite'
 import dotenv from 'dotenv'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 import { parse } from 'yaml'
-import { notifyHostOnHmr, tailwindRemoteCss } from '@vite-mf-monorepo/shared/vite'
+import {
+  notifyHostOnHmr,
+  tailwindRemoteCss,
+} from '@vite-mf-monorepo/shared/vite'
 
 import type { ModuleFederationOptions } from '@module-federation/vite/lib/utils/normalizeModuleFederationOptions'
 import type { CommonServerOptions } from 'vite'
@@ -17,15 +20,17 @@ import type { CommonServerOptions } from 'vite'
 dotenv.config({ path: resolve(__dirname, '../../.env') })
 
 // Read versions from pnpm catalog (single source of truth)
-const workspace = parse(readFileSync(resolve(__dirname, '../../pnpm-workspace.yaml'), 'utf-8'))
+const workspace = parse(
+  readFileSync(resolve(__dirname, '../../pnpm-workspace.yaml'), 'utf-8')
+)
 const catalog = workspace.catalog
 
 const remoteConfig: ModuleFederationOptions = {
-  name: 'movie',
+  name: 'media',
   filename: 'remoteEntry.js',
   exposes: {
-    './Movie': './src/components/Movie',
-    './MovieErrorBoundary': './src/components/MovieErrorBoundary',
+    './Media': './src/components/Media',
+    './MediaErrorBoundary': './src/components/MediaErrorBoundary',
     './routes': './src/routes',
   },
   shared: {
@@ -106,7 +111,7 @@ export default defineConfig(({ mode }) => {
             }),
             topLevelAwait(),
             notifyHostOnHmr({
-              appName: 'movie',
+              appName: 'media',
               hostUrl: `http://localhost:${process.env.HOST_PORT}`,
               endpoint: '/on-child-rebuild',
             }),
@@ -114,29 +119,29 @@ export default defineConfig(({ mode }) => {
       tailwindcss(),
       react(),
     ],
-  build: {
-    modulePreload: false,
-    target: 'esnext',
-    minify: false,
-    cssCodeSplit: false,
-    emptyOutDir: true,
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
+    build: {
+      modulePreload: false,
+      target: 'esnext',
+      minify: false,
+      cssCodeSplit: false,
+      emptyOutDir: true,
+      rollupOptions: {
+        output: {
+          manualChunks: undefined,
+        },
       },
     },
-  },
-  ...(mode === 'development'
-    ? {
-        server: {
-          port: parseInt(process.env.REMOTE_MOVIE_PORT),
-          strictPort: true,
-          ...proxyOptions,
-          fs: {
-            allow: ['./dist/mf-manifest.json', 'dist', 'src'],
+    ...(mode === 'development'
+      ? {
+          server: {
+            port: parseInt(process.env.REMOTE_MOVIE_PORT),
+            strictPort: true,
+            ...proxyOptions,
+            fs: {
+              allow: ['./dist/mf-manifest.json', 'dist', 'src'],
+            },
           },
-        },
-      }
-    : {}),
+        }
+      : {}),
   }
 })

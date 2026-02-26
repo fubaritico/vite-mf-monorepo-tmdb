@@ -74,7 +74,7 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {
   args: {
     src: SAMPLE_POSTER,
-    alt: 'Movie poster',
+    alt: 'Media poster',
     aspectRatio: '2/3',
   },
 }
@@ -83,7 +83,7 @@ export const WithAutoBlur: Story = {
   args: {
     src: SAMPLE_POSTER,
     autoBlur: true,
-    alt: 'Movie poster with auto blur placeholder',
+    alt: 'Media poster with auto blur placeholder',
     aspectRatio: '2/3',
   },
   parameters: {
@@ -100,7 +100,7 @@ export const Backdrop: Story = {
   args: {
     src: SAMPLE_BACKDROP,
     autoBlur: true,
-    alt: 'Movie backdrop',
+    alt: 'Media backdrop',
     aspectRatio: '16/9',
   },
   parameters: {

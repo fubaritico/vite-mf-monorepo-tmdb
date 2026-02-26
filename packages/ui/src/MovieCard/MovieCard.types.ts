@@ -6,9 +6,9 @@
  * Base props shared across all MovieCard variants
  */
 export interface MovieCardBaseProps {
-  /** Movie ID */
+  /** Media ID */
   id: number
-  /** Movie title */
+  /** Media title */
   title: string
   /** Poster URL (full URL or TMDB path) */
   posterUrl: string

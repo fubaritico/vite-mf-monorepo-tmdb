@@ -1,19 +1,20 @@
-@import "tailwindcss" prefix(mv);
-@import "@vite-mf-monorepo/shared/src/tailwind/theme.css" prefix(mv);
+@import "tailwindcss" prefix(mda);
+@import "@vite-mf-monorepo/shared/src/tailwind/theme.css" prefix(mda);
 @import "@vite-mf-monorepo/layouts/styles.css";
+@import "@vite-mf-monorepo/ui/styles.css";
 
 @layer utilities {
-  .mv\:text-shadow-strong {
+  .mda\:text-shadow-strong {
     text-shadow: 0 0 10px rgb(0 0 0 / 0.75);
   }
-  .mv\:text-shadow-medium {
+  .mda\:text-shadow-medium {
     text-shadow: 0 0 5px rgb(0 0 0 / 0.5);
   }
-  .mv\:hero-height {
+  .mda\:hero-height {
     aspect-ratio: 21/9;
   }
   @media (min-width: 1024px) {
-    .mv\:hero-height {
+    .mda\:hero-height {
       aspect-ratio: auto;
       max-height: 440px;
     }

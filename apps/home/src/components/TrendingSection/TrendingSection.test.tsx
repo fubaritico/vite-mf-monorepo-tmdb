@@ -16,14 +16,14 @@ const mockTrendingDay = {
   results: [
     {
       id: 1,
-      title: 'Test Movie 1',
+      title: 'Test Media 1',
       poster_path: '/test1.jpg',
       vote_average: 7.5,
       release_date: '2025-01-15',
     },
     {
       id: 2,
-      title: 'Test Movie 2',
+      title: 'Test Media 2',
       poster_path: '/test2.jpg',
       vote_average: 8.2,
       release_date: '2025-02-01',
@@ -38,14 +38,14 @@ const mockTrendingWeek = {
   results: [
     {
       id: 3,
-      title: 'Test Movie 3',
+      title: 'Test Media 3',
       poster_path: '/test3.jpg',
       vote_average: 6.8,
       release_date: '2025-01-10',
     },
     {
       id: 4,
-      title: 'Test Movie 4',
+      title: 'Test Media 4',
       poster_path: '/test4.jpg',
       vote_average: 7.9,
       release_date: '2025-01-20',
@@ -102,7 +102,7 @@ describe('TrendingSection', () => {
     expect(skeletons.length).toBeGreaterThan(0)
 
     await waitFor(() => {
-      expect(screen.getByText('Test Movie 1')).toBeInTheDocument()
+      expect(screen.getByText('Test Media 1')).toBeInTheDocument()
     })
   })
 
@@ -110,8 +110,8 @@ describe('TrendingSection', () => {
     renderComponentWithRouter(<TrendingSection />)
 
     await waitFor(() => {
-      expect(screen.getByText('Test Movie 1')).toBeInTheDocument()
-      expect(screen.getByText('Test Movie 2')).toBeInTheDocument()
+      expect(screen.getByText('Test Media 1')).toBeInTheDocument()
+      expect(screen.getByText('Test Media 2')).toBeInTheDocument()
     })
   })
 
@@ -121,7 +121,7 @@ describe('TrendingSection', () => {
 
     // Wait for initial data to load
     await waitFor(() => {
-      expect(screen.getByText('Test Movie 1')).toBeInTheDocument()
+      expect(screen.getByText('Test Media 1')).toBeInTheDocument()
     })
 
     // Click on This Week tab
@@ -130,12 +130,12 @@ describe('TrendingSection', () => {
 
     // Wait for week data to load
     await waitFor(() => {
-      expect(screen.getByText('Test Movie 3')).toBeInTheDocument()
-      expect(screen.getByText('Test Movie 4')).toBeInTheDocument()
+      expect(screen.getByText('Test Media 3')).toBeInTheDocument()
+      expect(screen.getByText('Test Media 4')).toBeInTheDocument()
     })
 
     // Day data should not be visible
-    expect(screen.queryByText('Test Movie 1')).not.toBeInTheDocument()
+    expect(screen.queryByText('Test Media 1')).not.toBeInTheDocument()
   })
 
   it('should handle API error gracefully', async () => {

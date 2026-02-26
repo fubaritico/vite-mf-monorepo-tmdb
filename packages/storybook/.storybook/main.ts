@@ -15,16 +15,16 @@ const config: StorybookConfig = {
     config.resolve.alias = {
       ...config.resolve.alias,
       '@vite-mf-monorepo/ui/styles.css': fileURLToPath(
-        new URL('../../../packages/ui/src/styles.css', import.meta.url),
+        new URL('../../../packages/ui/src/styles.css', import.meta.url)
       ),
       '@vite-mf-monorepo/ui': fileURLToPath(
-        new URL('../../../packages/ui/src/index.ts', import.meta.url),
+        new URL('../../../packages/ui/src/index.ts', import.meta.url)
       ),
       '@vite-mf-monorepo/home': fileURLToPath(
-        new URL('../../../apps/home/src/index.ts', import.meta.url),
+        new URL('../../../apps/home/src/index.ts', import.meta.url)
       ),
-      '@vite-mf-monorepo/movie': fileURLToPath(
-        new URL('../../../apps/movie/src/index.ts', import.meta.url),
+      '@vite-mf-monorepo/media': fileURLToPath(
+        new URL('../../../apps/media/src/index.ts', import.meta.url)
       ),
     }
     config.resolve.extensions = [

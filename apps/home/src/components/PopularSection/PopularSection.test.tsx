@@ -13,14 +13,14 @@ const mockPopularMovies = {
   results: [
     {
       id: 1,
-      title: 'Test Movie 1',
+      title: 'Test Media 1',
       poster_path: '/test1.jpg',
       vote_average: 7.5,
       release_date: '2025-01-15',
     },
     {
       id: 2,
-      title: 'Test Movie 2',
+      title: 'Test Media 2',
       poster_path: '/test2.jpg',
       vote_average: 8.2,
       release_date: '2025-02-01',
@@ -85,8 +85,8 @@ describe('PopularSection', () => {
     renderComponentWithRouter(<PopularSection />)
 
     await waitFor(() => {
-      expect(screen.getByText('Test Movie 1')).toBeInTheDocument()
-      expect(screen.getByText('Test Movie 2')).toBeInTheDocument()
+      expect(screen.getByText('Test Media 1')).toBeInTheDocument()
+      expect(screen.getByText('Test Media 2')).toBeInTheDocument()
     })
   })
 
@@ -96,7 +96,7 @@ describe('PopularSection', () => {
 
     // Wait for movies to load (default view)
     await waitFor(() => {
-      expect(screen.getByText('Test Movie 1')).toBeInTheDocument()
+      expect(screen.getByText('Test Media 1')).toBeInTheDocument()
     })
 
     // Click TV Shows tab to trigger hook switch
@@ -110,7 +110,7 @@ describe('PopularSection', () => {
     })
 
     // Verify movies are no longer displayed
-    expect(screen.queryByText('Test Movie 1')).not.toBeInTheDocument()
+    expect(screen.queryByText('Test Media 1')).not.toBeInTheDocument()
   })
 
   it('should show skeleton while loading movies', async () => {
@@ -127,7 +127,7 @@ describe('PopularSection', () => {
     expect(skeletons.length).toBeGreaterThan(0)
 
     await waitFor(() => {
-      expect(screen.getByText('Test Movie 1')).toBeInTheDocument()
+      expect(screen.getByText('Test Media 1')).toBeInTheDocument()
     })
   })
 

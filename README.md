@@ -21,7 +21,7 @@ This project demonstrates a **real-world micro-frontend architecture** designed 
 
 The architecture is structured to support multiple autonomous teams:
 
-- **Home & Movie Team**: Manages the home page and movie detail pages (`apps/home`, `apps/movie`)
+- **Home & Media Team**: Manages the home page and movie detail pages (`apps/home`, `apps/movie`)
 - **User & Wishlist Team**: Handles user accounts and wishlist features (planned)
 - **Talent Team**: Develops person/talent detail pages (planned, `apps/talent`)
 

@@ -413,7 +413,7 @@ importers:
         specifier: 'catalog:'
         version: 1.5.0(rollup@4.57.1)(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
 
-  apps/movie:
+  apps/media:
     dependencies:
       '@vite-mf-monorepo/layouts':
         specifier: workspace:*
@@ -500,6 +500,12 @@ importers:
       express:
         specifier: 'catalog:'
         version: 5.1.0
+      jsdom:
+        specifier: 'catalog:'
+        version: 26.0.0
+      msw:
+        specifier: 'catalog:'
+        version: 2.8.3(@types/node@22.14.0)(typescript@5.7.2)
       tailwindcss:
         specifier: 'catalog:'
         version: 4.1.0
@@ -518,6 +524,9 @@ importers:
       vite-plugin-top-level-await:
         specifier: 'catalog:'
         version: 1.5.0(rollup@4.57.1)(vite@6.2.0(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2))
+      vitest:
+        specifier: 'catalog:'
+        version: 3.2.4(@types/node@22.14.0)(jiti@2.6.1)(jsdom@26.0.0)(lightningcss@1.29.2)(msw@2.8.3(@types/node@22.14.0)(typescript@5.7.2))(yaml@2.8.2)
 
   packages/http-client:
     dependencies:

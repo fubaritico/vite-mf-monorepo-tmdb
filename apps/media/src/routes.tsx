@@ -2,8 +2,8 @@ import { QueryClient } from '@tanstack/react-query'
 import { RootLayout } from '@vite-mf-monorepo/layouts'
 import { RouteObject } from 'react-router-dom'
 
-import Movie from './components/Movie'
-import MovieErrorBoundary from './components/MovieErrorBoundary'
+import Media from './components/Media.tsx'
+import MediaErrorBoundary from './components/MediaErrorBoundary.tsx'
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,13 +22,13 @@ export const routes: RouteObject[] = [
     children: [
       {
         path: 'movie/:id',
-        element: <Movie />,
-        errorElement: <MovieErrorBoundary />,
+        element: <Media />,
+        errorElement: <MediaErrorBoundary />,
       },
       {
         path: 'tv/:id',
-        element: <Movie />,
-        errorElement: <MovieErrorBoundary />,
+        element: <Media />,
+        errorElement: <MediaErrorBoundary />,
       },
     ],
   },

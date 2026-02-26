@@ -1,25 +1,25 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
 import { Typography } from '@vite-mf-monorepo/ui'
 
-import { MovieHero } from './MovieHero'
+import { MediaHero } from './MediaHero'
 
 import type { FC } from 'react'
 
 import '../remote.css'
 
-const Movie: FC = () => {
+const Media: FC = () => {
   return (
     <>
       {/* Hero Section - Full width, no container */}
-      <MovieHero />
+      <MediaHero />
 
       {/* Synopsis Section - White background */}
       <Container variant="default">
         <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mv:mb-4">
+          <Typography variant="h2" className="mda:mb-4">
             Synopsis
           </Typography>
-          <Typography variant="body" className="mv:text-muted-foreground">
+          <Typography variant="body" className="mda:text-muted-foreground">
             Synopsis section coming soon...
           </Typography>
         </Section>
@@ -28,10 +28,10 @@ const Movie: FC = () => {
       {/* Photos Section - Gray background */}
       <Container variant="muted">
         <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mv:mb-6">
+          <Typography variant="h2" className="mda:mb-6">
             Photos
           </Typography>
-          <Typography variant="body" className="mv:text-muted-foreground">
+          <Typography variant="body" className="mda:text-muted-foreground">
             Photos gallery coming soon...
           </Typography>
         </Section>
@@ -40,10 +40,10 @@ const Movie: FC = () => {
       {/* Crew Section - White background */}
       <Container variant="default">
         <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mv:mb-6">
+          <Typography variant="h2" className="mda:mb-6">
             Crew
           </Typography>
-          <Typography variant="body" className="mv:text-muted-foreground">
+          <Typography variant="body" className="mda:text-muted-foreground">
             Director and writers information coming soon...
           </Typography>
         </Section>
@@ -52,10 +52,10 @@ const Movie: FC = () => {
       {/* Top 10 Cast Section - Gray background */}
       <Container variant="muted">
         <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mv:mb-6">
+          <Typography variant="h2" className="mda:mb-6">
             Top 10 Cast
           </Typography>
-          <Typography variant="body" className="mv:text-muted-foreground">
+          <Typography variant="body" className="mda:text-muted-foreground">
             Cast carousel coming soon...
           </Typography>
         </Section>
@@ -64,10 +64,10 @@ const Movie: FC = () => {
       {/* Trailers & Clips Section - White background */}
       <Container variant="default">
         <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mv:mb-6">
+          <Typography variant="h2" className="mda:mb-6">
             Trailers & Clips
           </Typography>
-          <Typography variant="body" className="mv:text-muted-foreground">
+          <Typography variant="body" className="mda:text-muted-foreground">
             Video trailers coming soon...
           </Typography>
         </Section>
@@ -76,10 +76,10 @@ const Movie: FC = () => {
       {/* You May Also Like Section - Gray background */}
       <Container variant="muted">
         <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mv:mb-6">
+          <Typography variant="h2" className="mda:mb-6">
             You May Also Like
           </Typography>
-          <Typography variant="body" className="mv:text-muted-foreground">
+          <Typography variant="body" className="mda:text-muted-foreground">
             Similar movies carousel coming soon...
           </Typography>
         </Section>
@@ -88,10 +88,10 @@ const Movie: FC = () => {
       {/* Recommendations Section - White background */}
       <Container variant="default">
         <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mv:mb-6">
+          <Typography variant="h2" className="mda:mb-6">
             Recommendations
           </Typography>
-          <Typography variant="body" className="mv:text-muted-foreground">
+          <Typography variant="body" className="mda:text-muted-foreground">
             Recommended movies carousel coming soon...
           </Typography>
         </Section>
@@ -100,4 +100,4 @@ const Movie: FC = () => {
   )
 }
 
-export default Movie
+export default Media

@@ -12,7 +12,7 @@ pnpm detail:dev
 
 Server starts on http://localhost:3002
 
-### Testing with a Movie ID
+### Testing with a Media ID
 
 In standalone mode, you need to access a URL with a valid movie ID:
 

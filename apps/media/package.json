@@ -1,5 +1,5 @@
 {
-  "name": "@vite-mf-monorepo/movie",
+  "name": "@vite-mf-monorepo/media",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -8,6 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prod": "vite build --mode production & node server.js",
     "preview": "vite preview"
   },
@@ -35,6 +37,7 @@
     "@tanstack/react-query": "catalog:",
     "@testing-library/jest-dom": "catalog:",
     "@testing-library/react": "catalog:",
+    "msw": "catalog:",
     "@types/express": "catalog:",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
@@ -43,10 +46,12 @@
     "cors": "catalog:",
     "dotenv": "catalog:",
     "express": "catalog:",
+    "jsdom": "catalog:",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:",
     "vite": "catalog:",
     "vite-plugin-css-injected-by-js": "catalog:",
-    "vite-plugin-top-level-await": "catalog:"
+    "vite-plugin-top-level-await": "catalog:",
+    "vitest": "catalog:"
   }
 }

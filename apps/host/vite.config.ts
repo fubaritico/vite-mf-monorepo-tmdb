@@ -29,11 +29,11 @@ const moduleFederationConfig = {
       entryGlobalName: 'home',
       sharedScope: 'default',
     },
-    movie: {
+    media: {
       type: 'module',
-      name: 'movie',
+      name: 'media',
       entry: `http://localhost:${process.env.REMOTE_MOVIE_PORT}/remoteEntry.js`,
-      entryGlobalName: 'movie',
+      entryGlobalName: 'media',
       sharedScope: 'default',
     },
   },
@@ -82,7 +82,7 @@ export default defineConfig(({ mode }) => {
         : [
             federation(moduleFederationConfig),
             listenForRemoteRebuilds({
-              allowedApps: ['home', 'movie'],
+              allowedApps: ['home', 'media'],
               endpoint: '/on-child-rebuild',
               hotPayload: { type: 'full-reload', path: '*' },
               onRebuild: (appName) => {

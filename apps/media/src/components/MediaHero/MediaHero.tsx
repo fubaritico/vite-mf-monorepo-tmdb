@@ -8,18 +8,12 @@ import { formatRuntime, getMediaTypeFromPath, isMovie } from '../../utils'
 
 import type { FC } from 'react'
 
-const MovieHero: FC = () => {
+const MediaHero: FC = () => {
   const location = useLocation()
   const { id } = useParams<{ id: string }>()
   const contentId = Number(id)
 
   const mediaType = getMediaTypeFromPath(location.pathname)
-
-  console.warn('[MovieHero] Media type detection:', {
-    pathname: location.pathname,
-    mediaType,
-    contentId,
-  })
 
   const {
     data: media,
@@ -31,29 +25,24 @@ const MovieHero: FC = () => {
     return (
       <Skeleton
         variant="rectangle"
-        width="mv:w-full"
-        className="mv:hero-height"
+        width="mda:w-full"
+        className="mda:hero-height"
         rounded={false}
       />
     )
   }
 
   if (error || !media) {
-    console.warn('[MovieHero] Error loading media:', {
-      contentId,
-      error,
-      errorMessage: error?.status_message,
-    })
     return (
-      <div className="mv:flex mv:h-[400px] mv:w-full mv:items-center mv:justify-center mv:bg-muted">
-        <Typography variant="body" className="mv:text-destructive">
+      <div className="mda:flex mda:h-[400px] mda:w-full mda:items-center mda:justify-center mda:bg-muted">
+        <Typography variant="body" className="mda:text-destructive">
           {error?.status_message ?? 'Failed to load media details'}
         </Typography>
       </div>
     )
   }
 
-  // Extract properties with Movie/TV compatibility using type guard
+  // Extract properties with Media/TV compatibility using type guard
   const title = isMovie(media) ? media.title : media.name
   const releaseDate = isMovie(media) ? media.release_date : media.first_air_date
   const runtime = isMovie(media) ? media.runtime : undefined
@@ -74,15 +63,15 @@ const MovieHero: FC = () => {
   const genreNames = media.genres?.map((g) => g.name ?? '') ?? []
 
   return (
-    <div className="mv:relative mv:w-full">
+    <div className="mda:relative mda:w-full">
       {/* Backdrop Image */}
-      <div className="mv:relative mv:hero-height mv:w-full mv:overflow-hidden">
+      <div className="mda:relative mda:hero-height mda:w-full mda:overflow-hidden">
         <img
           src={backdropUrl}
-          alt={title ?? 'Movie'}
-          className="mv:relative mv:h-full mv:w-full mv:object-cover mv:object-center mv:z-0"
+          alt={title ?? 'Media'}
+          className="mda:relative mda:h-full mda:w-full mda:object-cover mda:object-center mda:z-0"
           onError={(e) => {
-            console.warn('[MovieHero] Image failed to load:', {
+            console.warn('[MediaHero] Image failed to load:', {
               src: backdropUrl,
               alt: title,
               error: e,
@@ -90,22 +79,22 @@ const MovieHero: FC = () => {
           }}
         />
         {/* Gradient Overlay */}
-        <div className="mv:absolute mv:inset-0 mv:bg-gradient-to-t mv:from-black/80 mv:via-black/40 mv:to-transparent mv:z-1 mv:top-0 mv:left-0 mv:right-0 mv:bottom-0" />
+        <div className="mda:absolute mda:inset-0 mda:bg-gradient-to-t mda:from-black/80 mda:via-black/40 mda:to-transparent mda:z-1 mda:top-0 mda:left-0 mda:right-0 mda:bottom-0" />
 
         {/* Content Overlay */}
         <div
           className={clsx(
-            'mv:absolute mv:left-1/2 mv:-translate-x-1/2 mv:z-2 mv:w-full mv:max-w-screen-xl',
-            'mv:px-4 mv:sm:px-5 mv:md:px-6 mv:lg:px-8',
-            'mv:bottom-4 mv:sm:bottom-5 mv:md:bottom-6 mv:lg:bottom-8',
-            'mv:flex mv:justify-start mv:items-end'
+            'mda:absolute mda:left-1/2 mda:-translate-x-1/2 mda:z-2 mda:w-full mda:max-w-screen-xl',
+            'mda:px-4 mda:sm:px-5 mda:md:px-6 mda:lg:px-8',
+            'mda:bottom-4 mda:sm:bottom-5 mda:md:bottom-6 mda:lg:bottom-8',
+            'mda:flex mda:justify-start mda:items-end'
           )}
         >
-          <div className="mv:flex mv:flex-col mv:w-full">
+          <div className="mda:flex mda:flex-col mda:w-full">
             {/* Title */}
             <Typography
               variant="h1"
-              className="mv:mb-1 mv:sm:mb-2 mv:text-white! mv:text-shadow-medium"
+              className="mda:mb-1 mda:sm:mb-2 mda:text-white! mda:text-shadow-medium"
             >
               {title}
             </Typography>
@@ -114,19 +103,19 @@ const MovieHero: FC = () => {
             {media.tagline && (
               <Typography
                 variant="lead"
-                className="mv:mb-2 mv:sm:mb-3 mv:md:mb-4 mv:italic mv:text-white! mv:opacity-90 mv:text-shadow-strong"
+                className="mda:mb-2 mda:sm:mb-3 mda:md:mb-4 mda:italic mda:text-white! mda:opacity-90 mda:text-shadow-strong"
               >
                 {media.tagline}
               </Typography>
             )}
 
             {/* Metadata */}
-            <div className="mv:mb-2 mv:sm:mb-3 mv:md:mb-4 mv:flex mv:items-center mv:gap-2 mv:text-white">
+            <div className="mda:mb-2 mda:sm:mb-3 mda:md:mb-4 mda:flex mda:items-center mda:gap-2 mda:text-white!">
               {releaseYear && (
                 <Typography
                   as="span"
                   variant="body"
-                  className="mv:text-white mv:text-shadow-strong"
+                  className="mda:text-white! mda:text-shadow-strong"
                 >
                   {releaseYear}
                 </Typography>
@@ -136,14 +125,14 @@ const MovieHero: FC = () => {
                   <Typography
                     as="span"
                     variant="body"
-                    className="mv:text-white mv:text-shadow-strong"
+                    className="mda:text-white! mda:text-shadow-strong"
                   >
                     •
                   </Typography>
                   <Typography
                     as="span"
                     variant="body"
-                    className="mv:text-white mv:text-shadow-strong"
+                    className="mda:text-white! mda:text-shadow-strong"
                   >
                     {formatRuntime(runtime)}
                   </Typography>
@@ -154,14 +143,14 @@ const MovieHero: FC = () => {
                   <Typography
                     as="span"
                     variant="body"
-                    className="mv:text-white mv:text-shadow-strong"
+                    className="mda:text-white! mda:text-shadow-strong"
                   >
                     •
                   </Typography>
                   <Typography
                     as="span"
                     variant="body"
-                    className="mv:text-white mv:text-shadow-strong"
+                    className="mda:text-white! mda:text-shadow-strong"
                   >
                     {numberOfSeasons} Season{numberOfSeasons > 1 ? 's' : ''}
                   </Typography>
@@ -172,14 +161,14 @@ const MovieHero: FC = () => {
                   <Typography
                     as="span"
                     variant="body"
-                    className="mv:text-white mv:text-shadow-strong"
+                    className="mda:text-white! mda:text-shadow-strong"
                   >
                     •
                   </Typography>
                   <Typography
                     as="span"
                     variant="body"
-                    className="mv:text-white mv:text-shadow-strong"
+                    className="mda:text-white! mda:text-shadow-strong"
                   >
                     {numberOfEpisodes} Episode{numberOfEpisodes > 1 ? 's' : ''}
                   </Typography>
@@ -190,7 +179,7 @@ const MovieHero: FC = () => {
                   <Typography
                     as="span"
                     variant="body"
-                    className="mv:text-white mv:text-shadow-strong"
+                    className="mda:text-white! mda:text-shadow-strong"
                   >
                     •
                   </Typography>
@@ -205,7 +194,7 @@ const MovieHero: FC = () => {
 
             {/* Genres */}
             {genreNames.length > 0 && (
-              <div className="mv:flex mv:flex-wrap mv:gap-2">
+              <div className="mda:flex mda:flex-wrap mda:gap-2">
                 {genreNames.map((genre) => (
                   <Badge key={genre} variant="secondary" size="sm">
                     {genre}
@@ -220,4 +209,4 @@ const MovieHero: FC = () => {
   )
 }
 
-export default MovieHero
+export default MediaHero

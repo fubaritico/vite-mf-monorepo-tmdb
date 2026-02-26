@@ -120,7 +120,7 @@ export const Showcase: Story = {
         </div>
       </section>
 
-      {/* TMDB Movie Card Example */}
+      {/* TMDB Media Card Example */}
       <section>
         <h3 className="mb-4 text-sm font-semibold text-gray-500">
           Movie Card Example

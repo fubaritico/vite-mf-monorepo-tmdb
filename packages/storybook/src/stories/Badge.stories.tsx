@@ -88,7 +88,7 @@ export const Showcase: Story = {
         </div>
       </section>
 
-      {/* Movie Genres */}
+      {/* Media Genres */}
       <section>
         <h3 className="mb-4 text-sm font-semibold text-gray-500">
           Movie Genres
@@ -114,7 +114,7 @@ export const Showcase: Story = {
         </div>
       </section>
 
-      {/* Movie Card Example */}
+      {/* Media Card Example */}
       <section>
         <h3 className="mb-4 text-sm font-semibold text-gray-500">
           Movie Card Example

@@ -32,7 +32,7 @@ describe('useTrending', () => {
       results: [
         {
           id: 1,
-          title: 'Test Movie',
+          title: 'Test Media',
           media_type: 'movie',
         },
       ],
@@ -86,15 +86,15 @@ describe('useTrending', () => {
   it('should use correct query key for different time windows', async () => {
     const mockData = { page: 1, results: [], total_pages: 1, total_results: 0 }
 
+    /* eslint-disable */
     vi.mocked(trendingAllOptions).mockImplementation(
       (options) =>
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         ({
           queryKey: ['trendingAll', options],
           queryFn: () => mockData,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }) as any
     )
+    /* eslint-enable */
 
     const { result: resultDay } = renderHook(() => useTrending('day'), {
       wrapper: createWrapper(),

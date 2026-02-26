@@ -4,8 +4,8 @@ import type {
 } from '@vite-mf-monorepo/tmdb-client'
 
 /**
- * Type guard to check if media is a Movie
- * @param media - Media details (Movie or TV Series)
+ * Type guard to check if media is a Media
+ * @param media - Media details (Media or TV Series)
  * @returns true if media is MovieDetailsResponse
  */
 export function isMovie(

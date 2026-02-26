@@ -6,7 +6,7 @@ import MovieCard from './MovieCard'
 describe('MovieCard', () => {
   const defaultProps = {
     id: 123,
-    title: 'Test Movie',
+    title: 'Test Media',
     posterUrl: 'https://image.tmdb.org/t/p/w342/test-poster.jpg',
     voteAverage: 7.5,
     year: 2024,
@@ -14,7 +14,7 @@ describe('MovieCard', () => {
 
   it('renders movie title', () => {
     render(<MovieCard {...defaultProps} />)
-    expect(screen.getByText('Test Movie')).toBeInTheDocument()
+    expect(screen.getByText('Test Media')).toBeInTheDocument()
   })
 
   it('renders release year', () => {
@@ -34,7 +34,7 @@ describe('MovieCard', () => {
 
   it('renders poster image', () => {
     render(<MovieCard {...defaultProps} />)
-    const img = screen.getByRole('img', { name: 'Test Movie' })
+    const img = screen.getByRole('img', { name: 'Test Media' })
     expect(img).toBeInTheDocument()
   })
 

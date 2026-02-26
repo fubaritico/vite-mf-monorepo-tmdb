@@ -17,28 +17,28 @@ const router = createBrowserRouter([
       {
         path: 'movie/:id',
         async lazy() {
-          const [{ default: Movie }, { default: MovieErrorBoundary }] =
+          const [{ default: Media }, { default: MediaErrorBoundary }] =
             await Promise.all([
-              import('movie/Movie'),
-              import('movie/MovieErrorBoundary'),
+              import('media/Media'),
+              import('media/MediaErrorBoundary'),
             ])
           return {
-            Component: Movie,
-            ErrorBoundary: MovieErrorBoundary,
+            Component: Media,
+            ErrorBoundary: MediaErrorBoundary,
           }
         },
       },
       {
         path: 'tv/:id',
         async lazy() {
-          const [{ default: Movie }, { default: MovieErrorBoundary }] =
+          const [{ default: Media }, { default: MediaErrorBoundary }] =
             await Promise.all([
-              import('movie/Movie'),
-              import('movie/MovieErrorBoundary'),
+              import('media/Media'),
+              import('media/MediaErrorBoundary'),
             ])
           return {
-            Component: Movie,
-            ErrorBoundary: MovieErrorBoundary,
+            Component: Media,
+            ErrorBoundary: MediaErrorBoundary,
           }
         },
       },

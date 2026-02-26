@@ -83,7 +83,7 @@ export const Showcase: Story = {
     <div className="flex flex-col gap-8">
       {/* Grid of cards */}
       <section>
-        <h3 className="mb-4 text-sm font-semibold text-gray-500">Movie Grid</h3>
+        <h3 className="mb-4 text-sm font-semibold text-gray-500">Media Grid</h3>
         <div className="grid grid-cols-4 gap-4" style={{ width: 800 }}>
           {sampleMovies.map((movie) => (
             <MovieCard
@@ -141,7 +141,7 @@ export const Showcase: Story = {
         <div style={{ width: 150 }}>
           <MovieCard
             id={20}
-            title="Movie Without Year"
+            title="Media Without Year"
             posterUrl="https://image.tmdb.org/t/p/w342/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg"
             voteAverage={7.5}
           />

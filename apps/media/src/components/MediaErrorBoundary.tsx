@@ -4,7 +4,7 @@ import type { FC } from 'react'
 
 import '../remote.css'
 
-const MovieErrorBoundary: FC = () => {
+const MediaErrorBoundary: FC = () => {
   const error = useRouteError() as Error
 
   return (
@@ -18,4 +18,4 @@ const MovieErrorBoundary: FC = () => {
   )
 }
 
-export default MovieErrorBoundary
+export default MediaErrorBoundary
