@@ -28,6 +28,20 @@ const router = createBrowserRouter([
           }
         },
       },
+      {
+        path: 'tv/:id',
+        async lazy() {
+          const [{ default: Movie }, { default: MovieErrorBoundary }] =
+            await Promise.all([
+              import('movie/Movie'),
+              import('movie/MovieErrorBoundary'),
+            ])
+          return {
+            Component: Movie,
+            ErrorBoundary: MovieErrorBoundary,
+          }
+        },
+      },
     ],
   },
 ])

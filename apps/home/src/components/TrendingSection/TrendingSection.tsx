@@ -51,12 +51,16 @@ const TrendingSection: FC = () => {
             ? new Date(item.release_date).getFullYear()
             : null
 
+          // Use media_type to determine correct route
+          const mediaType = item.media_type === 'tv' ? 'tv' : 'movie'
+          const linkTo = `/${mediaType}/${String(item.id)}`
+
           return (
             <CarouselItem key={item.id}>
               <div style={{ width: 150 }}>
                 <MovieCard
                   as="link"
-                  to={`/movie/${String(item.id)}`}
+                  to={linkTo}
                   id={item.id ?? 0}
                   title={item.title ?? 'Unknown'}
                   posterUrl={posterUrl}

@@ -46,7 +46,7 @@ const PopularTVCarousel: FC = () => {
             <div style={{ width: 150 }}>
               <MovieCard
                 as="link"
-                to={`/movie/${String(item.id)}`}
+                to={`/tv/${String(item.id)}`}
                 id={item.id ?? 0}
                 title={item.name ?? 'Unknown'}
                 posterUrl={posterUrl}

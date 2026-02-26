@@ -25,6 +25,11 @@ export const routes: RouteObject[] = [
         element: <Movie />,
         errorElement: <MovieErrorBoundary />,
       },
+      {
+        path: 'tv/:id',
+        element: <Movie />,
+        errorElement: <MovieErrorBoundary />,
+      },
     ],
   },
 ]

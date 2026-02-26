@@ -1,34 +1,31 @@
-import { useQuery } from '@tanstack/react-query'
 import { getImageUrl } from '@vite-mf-monorepo/shared'
-import { movieDetailsOptions } from '@vite-mf-monorepo/tmdb-client'
 import { Badge, Rating, Skeleton, Typography } from '@vite-mf-monorepo/ui'
 import clsx from 'clsx'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
-import type { UseQueryResult } from '@tanstack/react-query'
-import type {
-  MovieDetailsResponse,
-  TMDBError,
-} from '@vite-mf-monorepo/tmdb-client'
+import { useMediaDetails } from '../../hooks'
+import { formatRuntime, getMediaTypeFromPath, isMovie } from '../../utils'
+
 import type { FC } from 'react'
 
 const MovieHero: FC = () => {
+  const location = useLocation()
   const { id } = useParams<{ id: string }>()
-  const movieId = Number(id)
+  const contentId = Number(id)
+
+  const mediaType = getMediaTypeFromPath(location.pathname)
+
+  console.warn('[MovieHero] Media type detection:', {
+    pathname: location.pathname,
+    mediaType,
+    contentId,
+  })
 
   const {
-    data: movie,
+    data: media,
     isLoading,
     error,
-  } = useQuery({
-    ...movieDetailsOptions({ path: { movie_id: movieId } }),
-  }) as UseQueryResult<MovieDetailsResponse, TMDBError>
-
-  const formatRuntime = (minutes: number) => {
-    const hours = Math.floor(minutes / 60)
-    const mins = minutes % 60
-    return `${String(hours)}h ${String(mins)}m`
-  }
+  } = useMediaDetails(mediaType, contentId)
 
   if (isLoading) {
     return (
@@ -41,23 +38,40 @@ const MovieHero: FC = () => {
     )
   }
 
-  if (error || !movie) {
+  if (error || !media) {
+    console.warn('[MovieHero] Error loading media:', {
+      contentId,
+      error,
+      errorMessage: error?.status_message,
+    })
     return (
       <div className="mv:flex mv:h-[400px] mv:w-full mv:items-center mv:justify-center mv:bg-muted">
         <Typography variant="body" className="mv:text-destructive">
-          {error?.status_message ?? 'Failed to load movie details'}
+          {error?.status_message ?? 'Failed to load media details'}
         </Typography>
       </div>
     )
   }
 
-  const backdropUrl = movie.backdrop_path
-    ? getImageUrl(movie.backdrop_path, 'original')
-    : ''
-  const releaseYear = movie.release_date
-    ? new Date(movie.release_date).getFullYear().toString()
+  // Extract properties with Movie/TV compatibility using type guard
+  const title = isMovie(media) ? media.title : media.name
+  const releaseDate = isMovie(media) ? media.release_date : media.first_air_date
+  const runtime = isMovie(media) ? media.runtime : undefined
+  const numberOfSeasons = !isMovie(media)
+    ? (media as { number_of_seasons?: number }).number_of_seasons
     : undefined
-  const genreNames = movie.genres?.map((g) => g.name ?? '') ?? []
+  const numberOfEpisodes = !isMovie(media)
+    ? (media as { number_of_episodes?: number }).number_of_episodes
+    : undefined
+
+  const backdropUrl = media.backdrop_path
+    ? getImageUrl(media.backdrop_path, 'original')
+    : ''
+
+  const releaseYear = releaseDate
+    ? new Date(releaseDate).getFullYear().toString()
+    : undefined
+  const genreNames = media.genres?.map((g) => g.name ?? '') ?? []
 
   return (
     <div className="mv:relative mv:w-full">
@@ -65,8 +79,15 @@ const MovieHero: FC = () => {
       <div className="mv:relative mv:hero-height mv:w-full mv:overflow-hidden">
         <img
           src={backdropUrl}
-          alt={movie.title ?? 'Movie'}
+          alt={title ?? 'Movie'}
           className="mv:relative mv:h-full mv:w-full mv:object-cover mv:object-center mv:z-0"
+          onError={(e) => {
+            console.warn('[MovieHero] Image failed to load:', {
+              src: backdropUrl,
+              alt: title,
+              error: e,
+            })
+          }}
         />
         {/* Gradient Overlay */}
         <div className="mv:absolute mv:inset-0 mv:bg-gradient-to-t mv:from-black/80 mv:via-black/40 mv:to-transparent mv:z-1 mv:top-0 mv:left-0 mv:right-0 mv:bottom-0" />
@@ -86,45 +107,95 @@ const MovieHero: FC = () => {
               variant="h1"
               className="mv:mb-1 mv:sm:mb-2 mv:text-white! mv:text-shadow-medium"
             >
-              {movie.title}
+              {title}
             </Typography>
 
             {/* Tagline */}
-            {movie.tagline && (
+            {media.tagline && (
               <Typography
                 variant="lead"
                 className="mv:mb-2 mv:sm:mb-3 mv:md:mb-4 mv:italic mv:text-white! mv:opacity-90 mv:text-shadow-strong"
               >
-                {movie.tagline}
+                {media.tagline}
               </Typography>
             )}
 
             {/* Metadata */}
-            <div className="mv:mb-2 mv:sm:mb-3 mv:md:mb-4 mv:flex mv:items-center mv:gap-2 mv:sm:gap-3 mv:md:gap-4 mv:text-white">
+            <div className="mv:mb-2 mv:sm:mb-3 mv:md:mb-4 mv:flex mv:items-center mv:gap-2 mv:text-white">
               {releaseYear && (
                 <Typography
+                  as="span"
                   variant="body"
                   className="mv:text-white mv:text-shadow-strong"
                 >
                   {releaseYear}
                 </Typography>
               )}
-              {movie.runtime && (
+              {runtime && (
                 <>
-                  <span className="mv:text-white">•</span>
                   <Typography
+                    as="span"
                     variant="body"
                     className="mv:text-white mv:text-shadow-strong"
                   >
-                    {formatRuntime(movie.runtime)}
+                    •
+                  </Typography>
+                  <Typography
+                    as="span"
+                    variant="body"
+                    className="mv:text-white mv:text-shadow-strong"
+                  >
+                    {formatRuntime(runtime)}
                   </Typography>
                 </>
               )}
-              {movie.vote_average !== undefined && (
+              {numberOfSeasons && (
                 <>
-                  <span className="mv:text-white mv:text-shadow-strong">•</span>
+                  <Typography
+                    as="span"
+                    variant="body"
+                    className="mv:text-white mv:text-shadow-strong"
+                  >
+                    •
+                  </Typography>
+                  <Typography
+                    as="span"
+                    variant="body"
+                    className="mv:text-white mv:text-shadow-strong"
+                  >
+                    {numberOfSeasons} Season{numberOfSeasons > 1 ? 's' : ''}
+                  </Typography>
+                </>
+              )}
+              {numberOfEpisodes && (
+                <>
+                  <Typography
+                    as="span"
+                    variant="body"
+                    className="mv:text-white mv:text-shadow-strong"
+                  >
+                    •
+                  </Typography>
+                  <Typography
+                    as="span"
+                    variant="body"
+                    className="mv:text-white mv:text-shadow-strong"
+                  >
+                    {numberOfEpisodes} Episode{numberOfEpisodes > 1 ? 's' : ''}
+                  </Typography>
+                </>
+              )}
+              {media.vote_average !== undefined && (
+                <>
+                  <Typography
+                    as="span"
+                    variant="body"
+                    className="mv:text-white mv:text-shadow-strong"
+                  >
+                    •
+                  </Typography>
                   <Rating
-                    value={movie.vote_average}
+                    value={media.vote_average}
                     size="sm"
                     variant="circle"
                   />
