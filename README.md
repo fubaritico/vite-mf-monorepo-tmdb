@@ -13,6 +13,40 @@ I use IntelliJ for this project, and also the windsurf/cascade plugin with claud
 
 It's a work in progress, so many future enhancements are planned.
 
+## Project Purpose
+
+This project demonstrates a **real-world micro-frontend architecture** designed for **multi-team collaboration** on a single application. It showcases how different teams can work independently on distinct features while maintaining a cohesive user experience.
+
+### Team Organization
+
+The architecture is structured to support multiple autonomous teams:
+
+- **Home & Movie Team**: Manages the home page and movie detail pages (`apps/home`, `apps/movie`)
+- **User & Wishlist Team**: Handles user accounts and wishlist features (planned)
+- **Talent Team**: Develops person/talent detail pages (planned, `apps/talent`)
+
+Each team owns their remote application, with full autonomy over their codebase, deployment, and release cycle.
+
+### Developer Experience
+
+The project setup is designed for **simplicity and efficiency**:
+
+```bash
+pnpm install  # Install dependencies
+pnpm build:packages  # Build shared packages
+pnpm dev  # Start development
+```
+
+Three commands to get started. No complex configuration, no manual setup steps. The monorepo structure with shared packages (design system, tokens, API client) ensures consistency while preserving team independence.
+
+### Architecture Benefits
+
+- **Independent deployment**: Each remote can be deployed separately
+- **Team autonomy**: Teams work on isolated codebases with minimal coordination
+- **Shared foundation**: Common design system, tokens, and utilities ensure consistency
+- **Type safety**: TypeScript types are generated and shared between remotes and host
+- **Scalability**: New teams and features can be added without disrupting existing work
+
 ### Technologies Used
 - React
 - Vite
