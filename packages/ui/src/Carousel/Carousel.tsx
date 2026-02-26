@@ -234,7 +234,7 @@ const Carousel: FC<CarouselProps> = ({
 
       {/* Hero: Pagination centered, Arrows bottom-right */}
       {showControls && isHero && showPagination && (
-        <div className="ui:absolute ui:bottom-4 ui:left-1/2 ui:-translate-x-1/2">
+        <div className="ui:absolute ui:bottom-4 ui:left-1/2 ui:-translate-x-1/2 ui:z-10">
           <CarouselPagination
             total={totalPositions}
             current={currentIndex}
@@ -250,7 +250,7 @@ const Carousel: FC<CarouselProps> = ({
           canPrev={canScrollPrev}
           canNext={canScrollNext}
           size="sm"
-          className="ui:absolute ui:bottom-4 ui:right-4"
+          className="ui:absolute ui:bottom-4 ui:right-4 ui:z-10"
         />
       )}
 

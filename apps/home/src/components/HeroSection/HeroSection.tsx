@@ -55,21 +55,27 @@ const HeroSection: FC = () => {
                 <img
                   src={backdropUrl}
                   alt={item.title ?? 'Unknown'}
-                  className="hm:h-full hm:w-full hm:object-cover hm:object-center"
+                  className="hm:relative hm:h-full hm:w-full hm:object-cover hm:object-center hm:z-0"
                 />
-                <div className="hm:absolute hm:bottom-8 hm:left-8 hm:max-w-lg">
-                  <Typography
-                    variant="h2"
-                    className="hm:mb-2 hm:text-white! hm:text-shadow-medium"
-                  >
-                    {item.title ?? 'Unknown'}
-                  </Typography>
-                  <Typography
-                    variant="body-sm"
-                    className="hm:text-white! hm:text-shadow-strong"
-                  >
-                    {item.overview ?? ''}
-                  </Typography>
+                {/* Gradient Overlay */}
+                <div className="hm:absolute hm:inset-0 hm:bg-gradient-to-t hm:from-black/80 hm:via-black/40 hm:to-transparent hm:z-1 hm:top-0 hm:left-0 hm:right-0 hm:bottom-0" />
+
+                {/* Content Overlay */}
+                <div className="hm:absolute hm:left-1/2 hm:-translate-x-1/2 hm:z-2 hm:w-full hm:max-w-screen-xl hm:px-4 hm:sm:px-5 hm:md:px-6 hm:lg:px-8 hm:bottom-4 hm:sm:bottom-5 hm:md:bottom-6 hm:lg:bottom-8 hm:flex hm:justify-start hm:items-end">
+                  <div className="hm:flex hm:flex-col hm:w-full hm:max-w-lg">
+                    <Typography
+                      variant="h2"
+                      className="hm:mb-2 hm:text-white! hm:text-shadow-medium"
+                    >
+                      {item.title ?? 'Unknown'}
+                    </Typography>
+                    <Typography
+                      variant="body-sm"
+                      className="hm:text-white! hm:text-shadow-strong"
+                    >
+                      {item.overview ?? ''}
+                    </Typography>
+                  </div>
                 </div>
               </div>
             </Link>
