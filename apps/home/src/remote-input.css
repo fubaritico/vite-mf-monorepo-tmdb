@@ -7,7 +7,7 @@
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme) prefix(hm);
 @import "tailwindcss/utilities.css" layer(utilities) prefix(hm);
-@import "@vite-mf-monorepo/shared/src/tailwind/theme.css";
+@import "@vite-mf-monorepo/shared/src/tailwind/theme-no-fonts.css";
 
 @layer utilities {
   .hm\:text-shadow-strong {

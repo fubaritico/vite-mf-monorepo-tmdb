@@ -4,6 +4,7 @@ import type { Preview } from '@storybook/react'
 
 import { withQueryClient } from './decorators/withQueryClient'
 
+import '@vite-mf-monorepo/shared/src/fonts/fonts.css'
 import '@vite-mf-monorepo/layouts/styles.css'
 import '@vite-mf-monorepo/ui/styles.css'
 import '../src/styles.css'

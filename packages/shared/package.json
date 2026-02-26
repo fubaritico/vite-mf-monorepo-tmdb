@@ -18,7 +18,9 @@
       "types": "./dist/mocks/index.d.ts",
       "import": "./dist/mocks/index.js"
     },
-    "./src/tailwind/theme.css": "./src/tailwind/theme.css"
+    "./src/tailwind/theme.css": "./src/tailwind/theme.css",
+    "./src/tailwind/theme-no-fonts.css": "./src/tailwind/theme-no-fonts.css",
+    "./src/fonts/fonts.css": "./src/fonts/fonts.css"
   },
   "scripts": {
     "build": "tsc",
