@@ -2,6 +2,7 @@ import { Container, Section } from '@vite-mf-monorepo/layouts'
 import { Typography } from '@vite-mf-monorepo/ui'
 
 import { MediaHero } from './MediaHero'
+import { Synopsis } from './Synopsis'
 
 import type { FC } from 'react'
 
@@ -14,16 +15,7 @@ const Media: FC = () => {
       <MediaHero />
 
       {/* Synopsis Section - White background */}
-      <Container variant="default">
-        <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mda:mb-4">
-            Synopsis
-          </Typography>
-          <Typography variant="body" className="mda:text-muted-foreground">
-            Synopsis section coming soon...
-          </Typography>
-        </Section>
-      </Container>
+      <Synopsis />
 
       {/* Photos Section - Gray background */}
       <Container variant="muted">
