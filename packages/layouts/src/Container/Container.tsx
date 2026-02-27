@@ -20,6 +20,7 @@ const Container: FC<ContainerProps> = ({
   return (
     <div
       className={clsx(
+        'media-section',
         'layout:w-full',
         {
           'layout:bg-muted': variant === 'muted',

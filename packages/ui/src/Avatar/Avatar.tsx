@@ -5,7 +5,7 @@ import { Icon } from '../Icon'
 
 import type { FC, ImgHTMLAttributes } from 'react'
 
-export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 
 export interface AvatarProps
   extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {
@@ -28,6 +28,7 @@ const sizeMap: Record<
   md: { container: 'ui:h-10 ui:w-10', icon: 20, text: 'ui:text-base' },
   lg: { container: 'ui:h-12 ui:w-12', icon: 24, text: 'ui:text-lg' },
   xl: { container: 'ui:h-16 ui:w-16', icon: 32, text: 'ui:text-xl' },
+  '2xl': { container: 'ui:h-32 ui:w-32', icon: 64, text: 'ui:text-2xl' },
 }
 
 const Avatar: FC<AvatarProps> = ({

@@ -1,6 +1,7 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
 import { Typography } from '@vite-mf-monorepo/ui'
 
+import { Crew } from './Crew'
 import { MediaHero } from './MediaHero'
 import { Synopsis } from './Synopsis'
 
@@ -17,8 +18,11 @@ const Media: FC = () => {
       {/* Synopsis Section - White background */}
       <Synopsis />
 
-      {/* Photos Section - Gray background */}
-      <Container variant="muted">
+      {/* Crew Section - White background */}
+      <Crew />
+
+      {/* Photos Section */}
+      <Container variant="default">
         <Section maxWidth="xl" spacing="md">
           <Typography variant="h2" className="mda:mb-6">
             Photos
@@ -29,20 +33,8 @@ const Media: FC = () => {
         </Section>
       </Container>
 
-      {/* Crew Section - White background */}
+      {/* Top 10 Cast Section */}
       <Container variant="default">
-        <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mda:mb-6">
-            Crew
-          </Typography>
-          <Typography variant="body" className="mda:text-muted-foreground">
-            Director and writers information coming soon...
-          </Typography>
-        </Section>
-      </Container>
-
-      {/* Top 10 Cast Section - Gray background */}
-      <Container variant="muted">
         <Section maxWidth="xl" spacing="md">
           <Typography variant="h2" className="mda:mb-6">
             Top 10 Cast
@@ -53,7 +45,7 @@ const Media: FC = () => {
         </Section>
       </Container>
 
-      {/* Trailers & Clips Section - White background */}
+      {/* Trailers & Clips Section */}
       <Container variant="default">
         <Section maxWidth="xl" spacing="md">
           <Typography variant="h2" className="mda:mb-6">
@@ -65,8 +57,8 @@ const Media: FC = () => {
         </Section>
       </Container>
 
-      {/* You May Also Like Section - Gray background */}
-      <Container variant="muted">
+      {/* You May Also Like Section */}
+      <Container variant="default">
         <Section maxWidth="xl" spacing="md">
           <Typography variant="h2" className="mda:mb-6">
             You May Also Like
@@ -77,7 +69,7 @@ const Media: FC = () => {
         </Section>
       </Container>
 
-      {/* Recommendations Section - White background */}
+      {/* Recommendations Section */}
       <Container variant="default">
         <Section maxWidth="xl" spacing="md">
           <Typography variant="h2" className="mda:mb-6">
