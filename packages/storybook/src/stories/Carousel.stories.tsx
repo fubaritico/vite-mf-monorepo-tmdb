@@ -17,7 +17,7 @@ const meta: Meta<typeof Carousel> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['standard', 'hero'],
+      options: ['standard', 'hero', 'lightbox'],
     },
     arrowPosition: {
       control: 'select',
@@ -31,6 +31,9 @@ const meta: Meta<typeof Carousel> = {
     },
     gap: {
       control: { type: 'number', min: 0, max: 48 },
+    },
+    initialIndex: {
+      control: { type: 'number', min: 0 },
     },
   },
 }
@@ -211,6 +214,72 @@ export const NoArrows: Story = {
           <CarouselItem key={movie.id}>
             <div style={{ width: 150 }}>
               <MovieCard {...movie} />
+            </div>
+          </CarouselItem>
+        ))}
+      </Carousel>
+    </div>
+  ),
+}
+
+const lightboxImages = [
+  {
+    id: 1,
+    url: 'https://image.tmdb.org/t/p/w1280/xOMo8BRK7PfcJv9JCnx7s5hj0PX.jpg',
+    alt: 'Dune: Part Two — backdrop 1',
+  },
+  {
+    id: 2,
+    url: 'https://image.tmdb.org/t/p/w1280/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg',
+    alt: 'Oppenheimer — backdrop 1',
+  },
+  {
+    id: 3,
+    url: 'https://image.tmdb.org/t/p/w1280/b0PlSFdDwbyK0cf5RxwDpaOJQvQ.jpg',
+    alt: 'The Batman — backdrop 1',
+  },
+  {
+    id: 4,
+    url: 'https://image.tmdb.org/t/p/w1280/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg',
+    alt: 'Oppenheimer — backdrop 2',
+  },
+  {
+    id: 5,
+    url: 'https://image.tmdb.org/t/p/w1280/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg',
+    alt: 'Spider-Man — backdrop',
+  },
+]
+
+export const Lightbox: Story = {
+  parameters: { layout: 'fullscreen' },
+  render: () => (
+    <div style={{ width: '100vw', height: '100vh', background: '#000' }}>
+      <Carousel
+        variant="lightbox"
+        gap={0}
+        rounded={false}
+        showPagination={false}
+      >
+        {lightboxImages.map((img) => (
+          <CarouselItem key={img.id} isLightbox>
+            <div
+              style={{
+                width: '100vw',
+                height: '100vh',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <img
+                src={img.url}
+                alt={img.alt}
+                style={{
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  objectFit: 'contain',
+                }}
+              />
             </div>
           </CarouselItem>
         ))}

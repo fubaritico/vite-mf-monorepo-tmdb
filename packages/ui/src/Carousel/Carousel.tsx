@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import CarouselCounter from './CarouselCounter'
 import CarouselError from './CarouselError'
 import CarouselNavigation from './CarouselNavigation'
 import CarouselPagination from './CarouselPagination'
@@ -8,7 +9,7 @@ import CarouselPagination from './CarouselPagination'
 import type { FC, ReactNode } from 'react'
 
 /** Carousel visual variant */
-export type CarouselVariant = 'standard' | 'hero'
+export type CarouselVariant = 'standard' | 'hero' | 'lightbox'
 
 /** Arrow position for navigation buttons */
 export type CarouselArrowPosition = 'sides' | 'bottom-right'
@@ -18,7 +19,7 @@ export interface CarouselProps {
   children?: ReactNode
   /** Visual variant */
   variant?: CarouselVariant
-  /** Show pagination dots */
+  /** Show pagination dots (ignored for lightbox — counter is shown instead) */
   showPagination?: boolean
   /** Show navigation arrows */
   showArrows?: boolean
@@ -32,12 +33,29 @@ export interface CarouselProps {
   errorMessage?: string
   /** Apply rounded corners to viewport */
   rounded?: boolean
+  /**
+   * Initial scroll index — jumps to this item on mount without animation.
+   * Use with key={index} on Carousel for URL-based navigation (lightbox).
+   */
+  initialIndex?: number
+  /**
+   * Override internal prev navigation (e.g. navigate to previous URL in lightbox).
+   * When provided, replaces internal scrollPrev.
+   */
+  onPrev?: () => void
+  /**
+   * Override internal next navigation (e.g. navigate to next URL in lightbox).
+   * When provided, replaces internal scrollNext.
+   */
+  onNext?: () => void
 }
 
 /**
  * Carousel component with horizontal scroll, pagination, and navigation.
- * Supports two variants: standard (multi-items) and hero (single panoramic item).
- * Pagination is responsive and recalculates on resize.
+ * Supports three variants:
+ * - standard: multi-items horizontal scroll
+ * - hero: single panoramic item with snap
+ * - lightbox: single item per view, ghost arrows, counter (for PhotoViewer)
  */
 const Carousel: FC<CarouselProps> = ({
   children,
@@ -49,17 +67,23 @@ const Carousel: FC<CarouselProps> = ({
   className,
   errorMessage,
   rounded = true,
+  initialIndex,
+  onPrev,
+  onNext,
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [totalPositions, setTotalPositions] = useState(1)
 
   const isHero = variant === 'hero'
+  const isLightbox = variant === 'lightbox'
+  /** Hero and lightbox both use container width for per-item scroll calculation */
+  const isFullWidth = isHero || isLightbox
 
   /**
    * Calculates the total number of scroll positions based on container and item dimensions.
-   * For hero variant: positions = number of items (one per slide).
-   * For standard variant: positions = ceil(maxScrollLeft / itemWidth) + 1.
+   * For hero/lightbox: positions = number of items (one per slide).
+   * For standard: positions = ceil(maxScrollLeft / itemWidth) + 1.
    */
   const calculatePositions = useCallback(() => {
     const container = scrollRef.current
@@ -67,7 +91,7 @@ const Carousel: FC<CarouselProps> = ({
 
     const items = container.children
 
-    if (isHero) {
+    if (isFullWidth) {
       setTotalPositions(items.length)
       return
     }
@@ -87,11 +111,10 @@ const Carousel: FC<CarouselProps> = ({
       const positions = Math.round(maxScrollLeft / (itemWidth + gap)) + 1
       setTotalPositions(Math.max(1, positions))
     }
-  }, [gap, isHero])
+  }, [gap, isFullWidth])
 
   /**
    * Effect: Recalculates positions when children or calculatePositions function changes.
-   * Ensures pagination reflects the current number of items.
    */
   useEffect(() => {
     calculatePositions()
@@ -99,8 +122,6 @@ const Carousel: FC<CarouselProps> = ({
 
   /**
    * Effect: Sets up ResizeObserver to recalculate positions on viewport/container resize.
-   * Critical for responsive pagination - updates totalPositions when window is resized.
-   * Cleanup disconnects observer on unmount.
    */
   useEffect(() => {
     const container = scrollRef.current
@@ -117,8 +138,26 @@ const Carousel: FC<CarouselProps> = ({
   }, [calculatePositions])
 
   /**
+   * Effect: Jumps to initialIndex on mount (no animation).
+   * Consumed by lightbox via key={index} remounting — refs avoid stale closure.
+   */
+  const initialScrollRef = useRef({
+    index: initialIndex ?? 0,
+    isFullWidth,
+    gap,
+  })
+  useEffect(() => {
+    const { index, isFullWidth: fw, gap: g } = initialScrollRef.current
+    if (index <= 0) return
+    const container = scrollRef.current
+    if (!container) return
+    const firstItem = container.children[0] as HTMLElement | undefined
+    const itemWidth = fw ? container.offsetWidth : (firstItem?.offsetWidth ?? 0)
+    container.scrollLeft = index * (itemWidth + (fw ? 0 : g))
+  }, [])
+
+  /**
    * Handles scroll events to update the current index based on scroll position.
-   * Uses item width to determine which position is currently active.
    */
   const handleScroll = useCallback(() => {
     const container = scrollRef.current
@@ -126,7 +165,7 @@ const Carousel: FC<CarouselProps> = ({
 
     const scrollLeft = container.scrollLeft
     const firstItem = container.children[0] as HTMLElement | undefined
-    const itemWidth = isHero
+    const itemWidth = isFullWidth
       ? container.offsetWidth
       : (firstItem?.offsetWidth ?? 0)
 
@@ -134,13 +173,8 @@ const Carousel: FC<CarouselProps> = ({
       const index = Math.round(scrollLeft / (itemWidth + gap))
       setCurrentIndex(Math.min(index, totalPositions - 1))
     }
-  }, [gap, isHero, totalPositions])
+  }, [gap, isFullWidth, totalPositions])
 
-  /**
-   * Effect: Attaches scroll event listener to sync current index with scroll position.
-   * Updates pagination dots and navigation button states based on scroll.
-   * Cleanup removes listener on unmount.
-   */
   useEffect(() => {
     const container = scrollRef.current
     if (!container) return
@@ -153,7 +187,6 @@ const Carousel: FC<CarouselProps> = ({
 
   /**
    * Scrolls to a specific position index with smooth animation.
-   * @param index - The target position index to scroll to
    */
   const scrollTo = useCallback(
     (index: number) => {
@@ -161,11 +194,10 @@ const Carousel: FC<CarouselProps> = ({
       if (!container) return
 
       const firstItem = container.children[0] as HTMLElement | undefined
-      const itemWidth = isHero
+      const itemWidth = isFullWidth
         ? container.offsetWidth
         : (firstItem?.offsetWidth ?? 0)
 
-      // For the last position, scroll to the absolute end
       const isLastPosition = index === totalPositions - 1
       const scrollLeft = isLastPosition
         ? container.scrollWidth - container.offsetWidth
@@ -176,33 +208,34 @@ const Carousel: FC<CarouselProps> = ({
         behavior: 'smooth',
       })
     },
-    [gap, isHero, totalPositions]
+    [gap, isFullWidth, totalPositions]
   )
 
-  /** Scrolls to the previous position if available */
+  /** Scrolls to the previous position (internal fallback when onPrev is not provided) */
   const scrollPrev = useCallback(() => {
     if (currentIndex > 0) {
       scrollTo(currentIndex - 1)
     }
   }, [currentIndex, scrollTo])
 
-  /** Scrolls to the next position if available */
+  /** Scrolls to the next position (internal fallback when onNext is not provided) */
   const scrollNext = useCallback(() => {
     if (currentIndex < totalPositions - 1) {
       scrollTo(currentIndex + 1)
     }
   }, [currentIndex, totalPositions, scrollTo])
 
-  // If error message is provided, display error state instead of carousel
+  /** Effective prev handler: external callback takes priority over internal scroll */
+  const handlePrev = onPrev ?? scrollPrev
+  /** Effective next handler: external callback takes priority over internal scroll */
+  const handleNext = onNext ?? scrollNext
+
   if (errorMessage) {
     return <CarouselError message={errorMessage} />
   }
 
-  /** Whether previous navigation is available */
   const canScrollPrev = currentIndex > 0
-  /** Whether next navigation is available */
   const canScrollNext = currentIndex < totalPositions - 1
-  /** Whether to show controls (pagination/arrows) - hidden if all items visible */
   const showControls = totalPositions > 1
 
   return (
@@ -212,7 +245,7 @@ const Carousel: FC<CarouselProps> = ({
         ref={scrollRef}
         className={clsx(
           'ui:flex ui:overflow-x-auto ui:scroll-smooth ui:scrollbar-none',
-          isHero && 'ui:snap-x ui:snap-mandatory',
+          isFullWidth && 'ui:snap-x ui:snap-mandatory',
           rounded && 'ui:rounded-lg ui:overflow-hidden'
         )}
         style={{ gap: `${String(gap)}px` }}
@@ -220,17 +253,21 @@ const Carousel: FC<CarouselProps> = ({
         {children}
       </div>
 
-      {/* Arrows - sides position (standard only) */}
-      {showControls && showArrows && arrowPosition === 'sides' && !isHero && (
-        <CarouselNavigation
-          onPrev={scrollPrev}
-          onNext={scrollNext}
-          canPrev={canScrollPrev}
-          canNext={canScrollNext}
-          size="md"
-          position="sides"
-        />
-      )}
+      {/* Standard: Arrows on sides */}
+      {showControls &&
+        showArrows &&
+        arrowPosition === 'sides' &&
+        !isHero &&
+        !isLightbox && (
+          <CarouselNavigation
+            onPrev={handlePrev}
+            onNext={handleNext}
+            canPrev={canScrollPrev}
+            canNext={canScrollNext}
+            size="md"
+            position="sides"
+          />
+        )}
 
       {/* Hero: Pagination centered, Arrows bottom-right */}
       {showControls && isHero && showPagination && (
@@ -245,8 +282,8 @@ const Carousel: FC<CarouselProps> = ({
       )}
       {showControls && isHero && showArrows && (
         <CarouselNavigation
-          onPrev={scrollPrev}
-          onNext={scrollNext}
+          onPrev={handlePrev}
+          onNext={handleNext}
           canPrev={canScrollPrev}
           canNext={canScrollNext}
           size="sm"
@@ -257,6 +294,7 @@ const Carousel: FC<CarouselProps> = ({
       {/* Standard: Pagination + Arrows below */}
       {showControls &&
       !isHero &&
+      !isLightbox &&
       ((showArrows && arrowPosition === 'bottom-right') || showPagination) ? (
         <div
           className={clsx(
@@ -275,8 +313,8 @@ const Carousel: FC<CarouselProps> = ({
           )}
           {showArrows && arrowPosition === 'bottom-right' && (
             <CarouselNavigation
-              onPrev={scrollPrev}
-              onNext={scrollNext}
+              onPrev={handlePrev}
+              onNext={handleNext}
               canPrev={canScrollPrev}
               canNext={canScrollNext}
               size="sm"
@@ -284,6 +322,24 @@ const Carousel: FC<CarouselProps> = ({
           )}
         </div>
       ) : null}
+
+      {/* Lightbox: Counter top-right, ghost arrows on sides */}
+      {showControls && isLightbox && (
+        <div className="ui:absolute ui:top-4 ui:right-4 ui:z-10">
+          <CarouselCounter current={currentIndex} total={totalPositions} />
+        </div>
+      )}
+      {showControls && isLightbox && showArrows && (
+        <CarouselNavigation
+          onPrev={handlePrev}
+          onNext={handleNext}
+          canPrev={canScrollPrev}
+          canNext={canScrollNext}
+          size="md"
+          position="sides-inset"
+          iconVariant="ghost"
+        />
+      )}
     </div>
   )
 }

@@ -5,7 +5,7 @@ import { IconButton } from '../IconButton'
 import type { FC } from 'react'
 
 /** Position mode for navigation buttons */
-export type CarouselNavigationPosition = 'inline' | 'sides'
+export type CarouselNavigationPosition = 'inline' | 'sides' | 'sides-inset'
 
 export interface CarouselNavigationProps {
   /** Callback for previous button */
@@ -20,13 +20,17 @@ export interface CarouselNavigationProps {
   size?: 'sm' | 'md'
   /** Position mode */
   position?: CarouselNavigationPosition
+  /** Icon button visual variant — ghost for lightbox (white arrows on dark bg) */
+  iconVariant?: 'secondary' | 'ghost'
   /** Additional class name */
   className?: string
 }
 
 /**
  * Navigation buttons for Carousel (previous/next).
- * Supports two position modes: inline (side by side) or sides (absolute positioned on carousel edges).
+ * - inline: side by side (for bottom-right layout)
+ * - sides: absolute, centered on the carousel edges (overhangs container — standard carousel)
+ * - sides-inset: absolute, inside the container with padding (lightbox, fullscreen contexts)
  */
 const CarouselNavigation: FC<CarouselNavigationProps> = ({
   onPrev,
@@ -35,6 +39,7 @@ const CarouselNavigation: FC<CarouselNavigationProps> = ({
   canNext,
   size = 'sm',
   position = 'inline',
+  iconVariant = 'secondary',
   className,
 }) => {
   if (position === 'sides') {
@@ -43,7 +48,7 @@ const CarouselNavigation: FC<CarouselNavigationProps> = ({
         <div className="ui:absolute ui:left-0 ui:top-1/2 ui:-translate-x-1/2 ui:-translate-y-1/2">
           <IconButton
             icon="ChevronLeft"
-            variant="secondary"
+            variant={iconVariant}
             size={size}
             onClick={onPrev}
             disabled={!canPrev}
@@ -53,7 +58,7 @@ const CarouselNavigation: FC<CarouselNavigationProps> = ({
         <div className="ui:absolute ui:right-0 ui:top-1/2 ui:-translate-y-1/2 ui:translate-x-1/2">
           <IconButton
             icon="ChevronRight"
-            variant="secondary"
+            variant={iconVariant}
             size={size}
             onClick={onNext}
             disabled={!canNext}
@@ -64,11 +69,40 @@ const CarouselNavigation: FC<CarouselNavigationProps> = ({
     )
   }
 
+  if (position === 'sides-inset') {
+    return (
+      <>
+        <div className="ui:absolute ui:left-4 ui:top-1/2 ui:-translate-y-1/2 ui:z-10 ui:text-white">
+          <IconButton
+            icon="ChevronLeft"
+            variant={iconVariant}
+            size={size}
+            onClick={onPrev}
+            disabled={!canPrev}
+            aria-label="Previous"
+            className="ui:bg-white/20 ui:hover:bg-white/55"
+          />
+        </div>
+        <div className="ui:absolute ui:right-4 ui:top-1/2 ui:-translate-y-1/2 ui:z-10 ui:text-white">
+          <IconButton
+            icon="ChevronRight"
+            variant={iconVariant}
+            size={size}
+            onClick={onNext}
+            disabled={!canNext}
+            aria-label="Next"
+            className="ui:bg-white/20 ui:hover:bg-white/55"
+          />
+        </div>
+      </>
+    )
+  }
+
   return (
     <div className={clsx('ui:flex ui:gap-2', className)}>
       <IconButton
         icon="ChevronLeft"
-        variant="secondary"
+        variant={iconVariant}
         size={size}
         onClick={onPrev}
         disabled={!canPrev}
@@ -76,7 +110,7 @@ const CarouselNavigation: FC<CarouselNavigationProps> = ({
       />
       <IconButton
         icon="ChevronRight"
-        variant="secondary"
+        variant={iconVariant}
         size={size}
         onClick={onNext}
         disabled={!canNext}

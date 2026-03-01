@@ -2,7 +2,10 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import Carousel from './Carousel'
+import CarouselCounter from './CarouselCounter'
 import CarouselItem from './CarouselItem'
+
+import type { Mock } from 'vitest'
 
 class ResizeObserverMock {
   observe = vi.fn()
@@ -10,8 +13,12 @@ class ResizeObserverMock {
   disconnect = vi.fn()
 }
 
+// Stored in a variable to avoid @typescript-eslint/unbound-method on prototype access in expect().
+let scrollToMock: Mock
+
 beforeEach(() => {
-  Element.prototype.scrollTo = vi.fn()
+  scrollToMock = vi.fn()
+  Element.prototype.scrollTo = scrollToMock
   vi.stubGlobal('ResizeObserver', ResizeObserverMock)
 })
 
@@ -124,6 +131,88 @@ describe('Carousel', () => {
   })
 })
 
+describe('Carousel lightbox variant', () => {
+  it('renders CarouselCounter with item count', () => {
+    render(
+      <Carousel variant="lightbox" gap={0}>
+        <CarouselItem isLightbox>Item 1</CarouselItem>
+        <CarouselItem isLightbox>Item 2</CarouselItem>
+        <CarouselItem isLightbox>Item 3</CarouselItem>
+      </Carousel>
+    )
+    expect(screen.getByText('1 / 3')).toBeInTheDocument()
+  })
+
+  it('renders navigation arrows', () => {
+    render(
+      <Carousel variant="lightbox" gap={0}>
+        <CarouselItem isLightbox>Item 1</CarouselItem>
+        <CarouselItem isLightbox>Item 2</CarouselItem>
+      </Carousel>
+    )
+    expect(screen.getByLabelText('Previous')).toBeInTheDocument()
+    expect(screen.getByLabelText('Next')).toBeInTheDocument()
+  })
+
+  it('calls external onNext callback instead of internal scroll', () => {
+    const onNext = vi.fn()
+    render(
+      <Carousel variant="lightbox" gap={0} onNext={onNext}>
+        <CarouselItem isLightbox>Item 1</CarouselItem>
+        <CarouselItem isLightbox>Item 2</CarouselItem>
+      </Carousel>
+    )
+    fireEvent.click(screen.getByLabelText('Next'))
+    expect(onNext).toHaveBeenCalledTimes(1)
+    expect(scrollToMock).not.toHaveBeenCalled()
+  })
+
+  it('calls external onPrev callback when provided', () => {
+    const onPrev = vi.fn()
+    render(
+      <Carousel variant="lightbox" gap={0} onPrev={onPrev}>
+        <CarouselItem isLightbox>Item 1</CarouselItem>
+        <CarouselItem isLightbox>Item 2</CarouselItem>
+      </Carousel>
+    )
+    // Prev is disabled at index 0 — clicking a disabled button does nothing
+    const prevBtn = screen.getByLabelText('Previous')
+    expect(prevBtn).toBeDisabled()
+    expect(onPrev).not.toHaveBeenCalled()
+  })
+
+  it('mounts without error when initialIndex is provided', () => {
+    expect(() => {
+      render(
+        <Carousel variant="lightbox" gap={0} initialIndex={2}>
+          <CarouselItem isLightbox>Item 1</CarouselItem>
+          <CarouselItem isLightbox>Item 2</CarouselItem>
+          <CarouselItem isLightbox>Item 3</CarouselItem>
+        </Carousel>
+      )
+    }).not.toThrow()
+  })
+})
+
+describe('CarouselCounter', () => {
+  it('displays 1-indexed current over total', () => {
+    render(<CarouselCounter current={0} total={5} />)
+    expect(screen.getByText('1 / 5')).toBeInTheDocument()
+  })
+
+  it('increments current by 1 for display', () => {
+    render(<CarouselCounter current={2} total={10} />)
+    expect(screen.getByText('3 / 10')).toBeInTheDocument()
+  })
+
+  it('applies additional className', () => {
+    const { container } = render(
+      <CarouselCounter current={0} total={3} className="custom-class" />
+    )
+    expect(container.firstChild).toHaveClass('custom-class')
+  })
+})
+
 describe('CarouselItem', () => {
   it('renders children', () => {
     render(<CarouselItem>Test Content</CarouselItem>)
@@ -132,6 +221,14 @@ describe('CarouselItem', () => {
 
   it('applies hero styles when isHero is true', () => {
     const { container } = render(<CarouselItem isHero>Hero</CarouselItem>)
+    expect(container.firstChild).toHaveClass('ui:w-full')
+    expect(container.firstChild).toHaveClass('ui:snap-center')
+  })
+
+  it('applies full-width snap styles when isLightbox is true', () => {
+    const { container } = render(
+      <CarouselItem isLightbox>Lightbox</CarouselItem>
+    )
     expect(container.firstChild).toHaveClass('ui:w-full')
     expect(container.firstChild).toHaveClass('ui:snap-center')
   })
