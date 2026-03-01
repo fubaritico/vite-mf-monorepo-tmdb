@@ -21,6 +21,9 @@ export type { IconButtonProps } from './IconButton'
 export { Image } from './Image'
 export type { AspectRatio, ImageProps, ImageState } from './Image'
 
+export { Modal } from './Modal'
+export type { ModalProps } from './Modal'
+
 export { Rating } from './Rating'
 export type { RatingProps, RatingSize, RatingVariant } from './Rating'
 
