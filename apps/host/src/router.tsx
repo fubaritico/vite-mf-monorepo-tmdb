@@ -3,6 +3,16 @@ import { createBrowserRouter } from 'react-router-dom'
 
 import queryClient from './queryClient.ts'
 
+import type { QueryClient } from '@tanstack/react-query'
+import type { FC } from 'react'
+import type { LoaderFunctionArgs } from 'react-router-dom'
+
+type RouteComponent = FC & {
+  loader: (
+    queryClient: QueryClient
+  ) => (args: LoaderFunctionArgs) => Promise<unknown>
+}
+
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
@@ -27,6 +37,17 @@ const router = createBrowserRouter([
             ErrorBoundary: MediaErrorBoundary,
           }
         },
+        children: [
+          {
+            path: 'photos/:index',
+            async lazy() {
+              const { default: Photos } = (await import('photos/Photos')) as {
+                default: RouteComponent
+              }
+              return { Component: Photos, loader: Photos.loader(queryClient) }
+            },
+          },
+        ],
       },
       {
         path: 'tv/:id',
@@ -41,6 +62,17 @@ const router = createBrowserRouter([
             ErrorBoundary: MediaErrorBoundary,
           }
         },
+        children: [
+          {
+            path: 'photos/:index',
+            async lazy() {
+              const { default: Photos } = (await import('photos/Photos')) as {
+                default: RouteComponent
+              }
+              return { Component: Photos, loader: Photos.loader(queryClient) }
+            },
+          },
+        ],
       },
     ],
   },

@@ -2,6 +2,138 @@
 
 ## Component Templates
 
+### RouteComponent (page exposed via Module Federation with React Router loader)
+
+Used for pages that are exposed via Module Federation AND consumed as lazy routes in the host.
+The `loader` static method enables `queryClient.ensureQueryData` for prefetching.
+
+```typescript
+import { QueryClient, useQuery } from '@tanstack/react-query'
+import { endpointOptions } from '@vite-mf-monorepo/tmdb-client'
+import { useLoaderData } from 'react-router-dom'
+
+import type { ResponseType } from '@vite-mf-monorepo/tmdb-client'
+import type { LoaderFunctionArgs } from 'react-router-dom'
+import type { FC } from 'react'
+
+import '../remote.css'
+
+export type RouteComponent = FC & {
+  loader: (queryClient: QueryClient) => (args: LoaderFunctionArgs) => Promise<ResponseType>
+}
+
+// Without params (e.g., Home — index route):
+const loaderNoParams = (queryClient: QueryClient) => async () => {
+  return queryClient.ensureQueryData(endpointOptions())
+}
+
+// With URL params (e.g., PhotoViewer — /movie/:id/photos/:index):
+const loaderWithParams = (queryClient: QueryClient) => async ({ params }: LoaderFunctionArgs) => {
+  return queryClient.ensureQueryData(endpointOptions({ path: { movie_id: params.id } }))
+}
+
+const Component: RouteComponent = () => {
+  const initialData = useLoaderData<ResponseType>()
+
+  const { data, error } = useQuery({
+    ...endpointOptions(),
+    initialData,
+  })
+
+  if (error) return <div>{error.message}</div>
+
+  return <div>{/* render */}</div>
+}
+
+Component.loader = loaderWithParams  // or loaderNoParams
+export default Component
+```
+
+**Standalone router file** (`src/router.tsx`) — always a dedicated file, never inline in main.tsx:
+```typescript
+import { QueryClient } from '@tanstack/react-query'
+import { createBrowserRouter } from 'react-router-dom'
+
+import Component from './components/Component'
+
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: Infinity,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: true,
+    },
+  },
+})
+
+export const router = createBrowserRouter([
+  {
+    path: '/some-path/:id',
+    element: <Component />,
+    loader: Component.loader(queryClient),
+  },
+])
+```
+
+**Host integration** — standard page (lazy + loader):
+```typescript
+// In apps/host/src/router.tsx
+import type { RouteComponent } from 'remote/Component'
+
+{
+  path: 'some-path/:id',
+  async lazy() {
+    const { default: Component } = (await import('remote/Component')) as {
+      default: RouteComponent
+    }
+    return { Component, loader: Component.loader(queryClient) }
+  },
+}
+```
+
+**Host integration** — modal overlay as nested child route (e.g., PhotoViewer):
+
+Modal overlays that sit on top of a parent page (e.g., `/movie/:id/photos/:index` over `/movie/:id`)
+should be declared as **children of the parent route**, not as siblings. This way:
+- React Router keeps the parent (Media) mounted — it renders naturally in the background
+- The child (PhotoViewer) renders via `<Outlet />` in the parent
+- `<dialog>` top-layer covers everything — no background location state needed
+
+```typescript
+// In apps/host/src/router.tsx
+{
+  path: 'movie/:id',
+  async lazy() { /* Media */ },
+  children: [
+    {
+      path: 'photos/:index',   // inherits :id from parent
+      async lazy() {
+        const { default: PhotoViewer } = (await import('photos/PhotoViewer')) as {
+          default: RouteComponent
+        }
+        return { Component: PhotoViewer, loader: PhotoViewer.loader(queryClient) }
+      },
+    },
+  ],
+},
+{
+  path: 'tv/:id',
+  async lazy() { /* Media */ },
+  children: [
+    {
+      path: 'photos/:index',   // same child, different parent path
+      async lazy() { /* same PhotoViewer lazy */ },
+    },
+  ],
+},
+```
+
+The parent component (Media) must render `<Outlet />` somewhere — PhotoViewer's `<dialog>`
+is fullscreen top-layer so the Outlet placement in Media is invisible to the user.
+
+---
+
 ### UI Component (packages/ui)
 ```typescript
 import clsx from 'clsx'

@@ -1,0 +1,53 @@
+{
+  "name": "@vite-mf-monorepo/photos",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prod": "vite build --mode production & node server.js",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vite-mf-monorepo/shared": "workspace:*",
+    "@vite-mf-monorepo/tmdb-client": "workspace:*",
+    "@vite-mf-monorepo/ui": "workspace:*",
+    "clsx": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@antdevx/vite-plugin-hmr-sync": "catalog:",
+    "@tailwindcss/vite": "catalog:",
+    "tailwindcss": "catalog:",
+    "@eslint/js": "catalog:",
+    "@module-federation/dts-plugin": "catalog:",
+    "@module-federation/runtime": "catalog:",
+    "@module-federation/vite": "catalog:",
+    "@tanstack/react-query": "catalog:",
+    "@testing-library/jest-dom": "catalog:",
+    "@testing-library/react": "catalog:",
+    "msw": "catalog:",
+    "@types/express": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "cors": "catalog:",
+    "dotenv": "catalog:",
+    "express": "catalog:",
+    "jsdom": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-css-injected-by-js": "catalog:",
+    "vite-plugin-top-level-await": "catalog:",
+    "vitest": "catalog:"
+  }
+}
