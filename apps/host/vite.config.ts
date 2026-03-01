@@ -36,6 +36,13 @@ const moduleFederationConfig = {
       entryGlobalName: 'media',
       sharedScope: 'default',
     },
+    photos: {
+      type: 'module',
+      name: 'photos',
+      entry: `http://localhost:${process.env.REMOTE_PHOTOS_PORT}/remoteEntry.js`,
+      entryGlobalName: 'photos',
+      sharedScope: 'default',
+    },
   },
   shared: {
     react: {
@@ -82,7 +89,7 @@ export default defineConfig(({ mode }) => {
         : [
             federation(moduleFederationConfig),
             listenForRemoteRebuilds({
-              allowedApps: ['home', 'media'],
+              allowedApps: ['home', 'media', 'photos'],
               endpoint: '/on-child-rebuild',
               hotPayload: { type: 'full-reload', path: '*' },
               onRebuild: (appName) => {
