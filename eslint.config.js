@@ -73,7 +73,7 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       '@typescript-eslint/no-unsafe-assignment': 'warn',
-      '@typescript-eslint/no-unused-vars': 'error',
+      '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
       '@typescript-eslint/no-explicit-any': 'error',
       'no-console': [
         'error',

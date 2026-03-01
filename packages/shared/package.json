@@ -18,6 +18,10 @@
       "types": "./dist/mocks/index.d.ts",
       "import": "./dist/mocks/index.js"
     },
+    "./test-utils": {
+      "types": "./dist/test-utils/index.d.ts",
+      "import": "./dist/test-utils/index.js"
+    },
     "./src/tailwind/theme.css": "./src/tailwind/theme.css",
     "./src/tailwind/theme-no-fonts.css": "./src/tailwind/theme-no-fonts.css",
     "./src/fonts/fonts.css": "./src/fonts/fonts.css"
