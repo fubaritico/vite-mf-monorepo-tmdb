@@ -1,6 +1,7 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
 import { Typography } from '@vite-mf-monorepo/ui'
 
+import { Cast } from './Cast'
 import { Crew } from './Crew'
 import { MediaHero } from './MediaHero'
 import { Synopsis } from './Synopsis'
@@ -33,17 +34,8 @@ const Media: FC = () => {
         </Section>
       </Container>
 
-      {/* Top 10 Cast Section */}
-      <Container variant="default">
-        <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mda:mb-6">
-            Top 10 Cast
-          </Typography>
-          <Typography variant="body" className="mda:text-muted-foreground">
-            Cast carousel coming soon...
-          </Typography>
-        </Section>
-      </Container>
+      {/* Cast Section */}
+      <Cast />
 
       {/* Trailers & Clips Section */}
       <Container variant="default">
