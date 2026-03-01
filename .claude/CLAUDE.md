@@ -9,7 +9,7 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 ## Critical Workflow Rules
 - **Discuss approach FIRST** — never code without confirming approach
 - **Review → Test → Commit** per change — no accumulation
-- **I propose commands, user executes** (exception: read-only git/ls)
+- **Never execute commands** — propose only. Exception: user says "execute", "run", etc.
 - **Never hallucinate** — if uncertain, say so and read the code first
 - **Ask permission** before consulting external docs (APIs, libraries)
 - **Never `console.log`** — use `console.warn` / `console.error`
@@ -40,16 +40,17 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - Phase 4.1 (media rename), 4.2 (routing), 4.3 (hooks), 4.4 (MediaHero) ✅
 - Phase 4.5 (Synopsis), 4.7 (Crew), 4.7.1 (alternating backgrounds) ✅
 - Button polymorphic (as='link' | as='button') ✅
+- Phase 4.8 (Cast Section) ✅
 
 ### Next
-- 🎯 Cast Section (Phase 4.8) — 2-col grid, Avatar xl=64px, embedded query, Button as='link'
-  - Avatar sizes: add 2xl=96px, rename actuel 2xl→3xl=128px
-  - Étendre movieCreditsData à 10 acteurs
-  - Cast component
-  - /story Cast
+- 🎯 Phase 4.6 — Photos Section + PhotoViewer remote (planifié, prêt à coder)
+  - Plan B (host orchestrateur, background location routing) — voir ROADMAP.md §4.6
+  - 10 commits : Modal → Carousel lightbox → apps/photos → host routing → media Photos
+- Phase 4.9 — Trailers & Clips Section
+- Phase 4.10 — You May Also Like Section (similar movies carousel)
 
 ### Pending
-- Phase 3.10: rounded={false} on all carousels
+- (rien pour l'instant)
 
 ### Known Issues
 - Font loading in remotes → use `theme-no-fonts.css`
