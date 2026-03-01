@@ -17,5 +17,8 @@ export type {
 export { default as CarouselPagination } from './CarouselPagination'
 export type { CarouselPaginationProps } from './CarouselPagination'
 
+export { default as CarouselCounter } from './CarouselCounter'
+export type { CarouselCounterProps } from './CarouselCounter'
+
 export { default as CarouselLoading } from './CarouselLoading'
 export type { CarouselLoadingProps } from './CarouselLoading'

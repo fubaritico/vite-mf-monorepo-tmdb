@@ -3,17 +3,20 @@ import clsx from 'clsx'
 import type { FC, HTMLAttributes } from 'react'
 
 export interface CarouselItemProps extends HTMLAttributes<HTMLDivElement> {
-  /** Whether this is a hero item (full width with snap, no border radius) */
+  /** Whether this is a hero item (full width with snap) */
   isHero?: boolean
+  /** Whether this is a lightbox item (full width with snap, same layout as hero) */
+  isLightbox?: boolean
 }
 
 /**
  * Wrapper for individual carousel items.
- * For hero variant, items take full width and snap to center.
+ * For hero and lightbox variants, items take full width and snap to center.
  */
 const CarouselItem: FC<CarouselItemProps> = ({
   children,
   isHero = false,
+  isLightbox = false,
   className,
   ...rest
 }) => {
@@ -21,7 +24,7 @@ const CarouselItem: FC<CarouselItemProps> = ({
     <div
       className={clsx(
         'ui:flex-shrink-0',
-        isHero && 'ui:w-full ui:snap-center',
+        (isHero || isLightbox) && 'ui:w-full ui:snap-center',
         className
       )}
       {...rest}

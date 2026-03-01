@@ -32,6 +32,7 @@ export type { MovieCardProps } from './MovieCard'
 
 export {
   Carousel,
+  CarouselCounter,
   CarouselItem,
   CarouselLoading,
   CarouselNavigation,
@@ -39,6 +40,7 @@ export {
 } from './Carousel'
 export type {
   CarouselArrowPosition,
+  CarouselCounterProps,
   CarouselItemProps,
   CarouselLoadingProps,
   CarouselNavigationPosition,
