@@ -15,6 +15,7 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - **Never `console.log`** — use `console.warn` / `console.error`
 - **Never explicit `any`** — strict TypeScript
 - **Always run** lint + typecheck + test before commit
+- **Always test** in Storybook + app before commit
 
 ## Code Conventions
 - Functional components only: `const Name: FC<NameProps> = ({ ... }) => { ... }`
@@ -38,9 +39,14 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - Phase 3.7, 3.11, 3.12, 3.13 ✅
 - Phase 4.1 (media rename), 4.2 (routing), 4.3 (hooks), 4.4 (MediaHero) ✅
 - Phase 4.5 (Synopsis), 4.7 (Crew), 4.7.1 (alternating backgrounds) ✅
+- Button polymorphic (as='link' | as='button') ✅
 
 ### Next
-- 🎯 Button polymorphic (as='link' | as='button') → then Cast Section (Phase 4.8)
+- 🎯 Cast Section (Phase 4.8) — 2-col grid, Avatar xl=64px, embedded query, Button as='link'
+  - Avatar sizes: add 2xl=96px, rename actuel 2xl→3xl=128px
+  - Étendre movieCreditsData à 10 acteurs
+  - Cast component
+  - /story Cast
 
 ### Pending
 - Phase 3.10: rounded={false} on all carousels
@@ -48,6 +54,7 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 ### Known Issues
 - Font loading in remotes → use `theme-no-fonts.css`
 - Tailwind reserved names → never use `container`, use `media-section`
+- packages/shared exports: ajouter dans `exports` si un nouveau sous-chemin est importé
 
 ## Reference Files (use @mention to load)
 - Patterns & templates: `@.claude/rules/component-patterns.md`

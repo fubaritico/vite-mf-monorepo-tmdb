@@ -71,7 +71,7 @@ const Crew: FC = () => {
                   : undefined
               }
               variant="vertical"
-              size="2xl"
+              size="3xl"
             />
           )}
           {writers.map((writer) => (
@@ -85,7 +85,7 @@ const Crew: FC = () => {
                   : undefined
               }
               variant="vertical"
-              size="2xl"
+              size="3xl"
             />
           ))}
         </div>

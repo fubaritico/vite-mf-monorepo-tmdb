@@ -12,7 +12,7 @@ const meta: Meta<typeof Avatar> = {
   argTypes: {
     size: {
       control: 'select',
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
     },
     src: {
       control: 'text',
@@ -57,6 +57,8 @@ export const Showcase: Story = {
           <Avatar src={SAMPLE_AVATAR} alt="MD" size="md" />
           <Avatar src={SAMPLE_AVATAR} alt="LG" size="lg" />
           <Avatar src={SAMPLE_AVATAR} alt="XL" size="xl" />
+          <Avatar src={SAMPLE_AVATAR} alt="2XL" size="2xl" />
+          <Avatar src={SAMPLE_AVATAR} alt="3XL" size="3xl" />
         </div>
       </section>
 
@@ -71,6 +73,8 @@ export const Showcase: Story = {
           <Avatar alt="MD" size="md" initials="MD" />
           <Avatar alt="LG" size="lg" initials="LG" />
           <Avatar alt="XL" size="xl" initials="XL" />
+          <Avatar alt="2XL" size="2xl" initials="2X" />
+          <Avatar alt="3XL" size="3xl" initials="3X" />
         </div>
       </section>
 
@@ -85,6 +89,8 @@ export const Showcase: Story = {
           <Avatar alt="MD" size="md" />
           <Avatar alt="LG" size="lg" />
           <Avatar alt="XL" size="xl" />
+          <Avatar alt="2XL" size="2xl" />
+          <Avatar alt="3XL" size="3xl" />
         </div>
       </section>
     </div>
@@ -98,21 +104,21 @@ export const CastList: Story = {
   render: () => (
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-3">
-        <Avatar src={SAMPLE_AVATAR} alt="Tom Hanks" size="md" />
+        <Avatar src={SAMPLE_AVATAR} alt="Tom Hanks" size="2xl" />
         <div>
           <p className="font-medium">Tom Hanks</p>
           <p className="text-sm text-gray-500">Forrest Gump</p>
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <Avatar alt="Robin Wright" size="md" initials="RW" />
+        <Avatar alt="Robin Wright" size="2xl" initials="RW" />
         <div>
           <p className="font-medium">Robin Wright</p>
           <p className="text-sm text-gray-500">Jenny Curran</p>
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <Avatar alt="Unknown Actor" size="md" />
+        <Avatar alt="Unknown Actor" size="2xl" />
         <div>
           <p className="font-medium">Unknown Actor</p>
           <p className="text-sm text-gray-500">Supporting Role</p>

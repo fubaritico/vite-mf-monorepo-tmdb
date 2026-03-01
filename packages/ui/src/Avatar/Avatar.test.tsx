@@ -61,6 +61,12 @@ describe('Avatar', () => {
 
     rerender(<Avatar alt="Test" size="xl" />)
     expect(container.firstChild).toHaveClass('ui:h-16', 'ui:w-16')
+
+    rerender(<Avatar alt="Test" size="2xl" />)
+    expect(container.firstChild).toHaveClass('ui:h-24', 'ui:w-24')
+
+    rerender(<Avatar alt="Test" size="3xl" />)
+    expect(container.firstChild).toHaveClass('ui:h-32', 'ui:w-32')
   })
 
   it('has rounded-full class for circular shape', () => {
