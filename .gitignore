@@ -24,8 +24,6 @@ test-output.json
 # module federation hidden folder
 .__mf__temp
 
-# module federation generated folder
-apps/host/@mf-types/
 
 # Vitest coverage
 coverage
