@@ -1,3 +1,11 @@
+## 🚀 Live Demo
+
+**[https://vite-mf-tmdb.netlify.app](https://vite-mf-tmdb.netlify.app)**
+
+Browse movies, explore detail pages, cast, crew and photos — powered by a micro-frontend architecture deployed on Netlify.
+
+---
+
 ## Monorepo Micro Front End \w React, Vite, @module-federation/vite Lerna & Pnpm
 
 This project is a grid of movies that uses micro frontends architecture. A detail page is accessed by clicking on a movie card. It is built using React, Vite, Lerna, and Pnpm. The project is structured as a monorepo, which allows for easy management of multiple packages and applications.
