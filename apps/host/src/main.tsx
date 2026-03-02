@@ -10,8 +10,8 @@ import './index.css'
 import ErrorBoundary from './components/ErrorBoundary'
 import { queryClient, router } from './router'
 
-const HOME_REMOTE_URL = `${import.meta.env.VITE_HOME_URL as string}/health`
-const MOVIE_REMOTE_URL = `${import.meta.env.VITE_MEDIA_URL as string}/health`
+const HOME_REMOTE_URL = `${import.meta.env.VITE_HOME_URL as string}/remoteEntry.js`
+const MOVIE_REMOTE_URL = `${import.meta.env.VITE_MEDIA_URL as string}/remoteEntry.js`
 
 // Initialize module federation runtime
 createInstance({
