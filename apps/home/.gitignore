@@ -33,5 +33,3 @@ gen
 # module federation hidden folder
 .__mf__temp
 
-# Generated CSS for remote consumption (without preflight)
-src/remote.css

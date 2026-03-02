@@ -1,0 +1,342 @@
+/*! tailwindcss v4.1.0 | MIT License | https://tailwindcss.com */
+@supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+  @layer base {
+    *, ::before, ::after, ::backdrop {
+      --tw-translate-x: 0;
+      --tw-translate-y: 0;
+      --tw-translate-z: 0;
+      --tw-space-y-reverse: 0;
+      --tw-gradient-position: initial;
+      --tw-gradient-from: #0000;
+      --tw-gradient-via: #0000;
+      --tw-gradient-to: #0000;
+      --tw-gradient-stops: initial;
+      --tw-gradient-via-stops: initial;
+      --tw-gradient-from-position: 0%;
+      --tw-gradient-via-position: 50%;
+      --tw-gradient-to-position: 100%;
+    }
+  }
+}
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --mda-color-neutral-400: oklch(70.8% 0 0);
+    --mda-color-black: #000;
+    --mda-color-white: #ffffff;
+    --mda-breakpoint-xl: 80rem;
+    --mda-color-destructive: #ef4444;
+    --mda-color-muted: #f5f5f5;
+    --mda-color-muted-foreground: #737373;
+    --mda-spacing-0: 0;
+    --mda-spacing-1: 0.25rem;
+    --mda-spacing-2: 0.5rem;
+    --mda-spacing-3: 0.75rem;
+    --mda-spacing-4: 1rem;
+    --mda-spacing-5: 1.25rem;
+    --mda-spacing-6: 1.5rem;
+    --mda-spacing-8: 2rem;
+  }
+}
+@layer utilities {
+  .mda\:absolute {
+    position: absolute;
+  }
+  .mda\:relative {
+    position: relative;
+  }
+  .mda\:inset-0 {
+    inset: var(--mda-spacing-0);
+  }
+  .mda\:top-0 {
+    top: var(--mda-spacing-0);
+  }
+  .mda\:right-0 {
+    right: var(--mda-spacing-0);
+  }
+  .mda\:bottom-0 {
+    bottom: var(--mda-spacing-0);
+  }
+  .mda\:bottom-4 {
+    bottom: var(--mda-spacing-4);
+  }
+  .mda\:left-0 {
+    left: var(--mda-spacing-0);
+  }
+  .mda\:left-1\/2 {
+    left: calc(1/2 * 100%);
+  }
+  .mda\:z-0 {
+    z-index: 0;
+  }
+  .mda\:z-1 {
+    z-index: 1;
+  }
+  .mda\:z-2 {
+    z-index: 2;
+  }
+  .mda\:mb-1 {
+    margin-bottom: var(--mda-spacing-1);
+  }
+  .mda\:mb-2 {
+    margin-bottom: var(--mda-spacing-2);
+  }
+  .mda\:mb-6 {
+    margin-bottom: var(--mda-spacing-6);
+  }
+  .mda\:mb-8 {
+    margin-bottom: var(--mda-spacing-8);
+  }
+  .mda\:flex {
+    display: flex;
+  }
+  .mda\:grid {
+    display: grid;
+  }
+  .mda\:h-\[400px\] {
+    height: 400px;
+  }
+  .mda\:h-full {
+    height: 100%;
+  }
+  .mda\:w-full {
+    width: 100%;
+  }
+  .mda\:max-w-screen-xl {
+    max-width: var(--mda-breakpoint-xl);
+  }
+  .mda\:-translate-x-1\/2 {
+    --tw-translate-x: calc(calc(1/2 * 100%) * -1);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .mda\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .mda\:flex-col {
+    flex-direction: column;
+  }
+  .mda\:flex-row {
+    flex-direction: row;
+  }
+  .mda\:flex-wrap {
+    flex-wrap: wrap;
+  }
+  .mda\:items-center {
+    align-items: center;
+  }
+  .mda\:items-end {
+    align-items: flex-end;
+  }
+  .mda\:justify-center {
+    justify-content: center;
+  }
+  .mda\:justify-start {
+    justify-content: flex-start;
+  }
+  .mda\:gap-2 {
+    gap: var(--mda-spacing-2);
+  }
+  .mda\:gap-6 {
+    gap: var(--mda-spacing-6);
+  }
+  .mda\:space-y-2 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(var(--mda-spacing-2) * var(--tw-space-y-reverse));
+      margin-block-end: calc(var(--mda-spacing-2) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .mda\:overflow-hidden {
+    overflow: hidden;
+  }
+  .mda\:bg-muted {
+    background-color: var(--mda-color-muted);
+  }
+  .mda\:bg-gradient-to-t {
+    --tw-gradient-position: to top in oklab;
+    background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+  .mda\:from-black\/80 {
+    --tw-gradient-from: color-mix(in oklab, var(--mda-color-black) 80%, transparent);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .mda\:via-black\/40 {
+    --tw-gradient-via: color-mix(in oklab, var(--mda-color-black) 40%, transparent);
+    --tw-gradient-via-stops: var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-via) var(--tw-gradient-via-position), var(--tw-gradient-to) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-via-stops);
+  }
+  .mda\:to-transparent {
+    --tw-gradient-to: transparent;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .mda\:object-cover {
+    object-fit: cover;
+  }
+  .mda\:object-center {
+    object-position: center;
+  }
+  .mda\:px-4 {
+    padding-inline: var(--mda-spacing-4);
+  }
+  .mda\:text-destructive {
+    color: var(--mda-color-destructive);
+  }
+  .mda\:text-muted-foreground {
+    color: var(--mda-color-muted-foreground);
+  }
+  .mda\:text-neutral-400 {
+    color: var(--mda-color-neutral-400);
+  }
+  .mda\:text-white\! {
+    color: var(--mda-color-white) !important;
+  }
+  .mda\:italic {
+    font-style: italic;
+  }
+  .mda\:opacity-90 {
+    opacity: 90%;
+  }
+  .mda\:sm\:bottom-5 {
+    @media (width >= 40rem) {
+      bottom: var(--mda-spacing-5);
+    }
+  }
+  .mda\:sm\:mb-2 {
+    @media (width >= 40rem) {
+      margin-bottom: var(--mda-spacing-2);
+    }
+  }
+  .mda\:sm\:mb-3 {
+    @media (width >= 40rem) {
+      margin-bottom: var(--mda-spacing-3);
+    }
+  }
+  .mda\:sm\:px-5 {
+    @media (width >= 40rem) {
+      padding-inline: var(--mda-spacing-5);
+    }
+  }
+  .mda\:md\:bottom-6 {
+    @media (width >= 48rem) {
+      bottom: var(--mda-spacing-6);
+    }
+  }
+  .mda\:md\:mb-4 {
+    @media (width >= 48rem) {
+      margin-bottom: var(--mda-spacing-4);
+    }
+  }
+  .mda\:md\:px-6 {
+    @media (width >= 48rem) {
+      padding-inline: var(--mda-spacing-6);
+    }
+  }
+  .mda\:lg\:bottom-8 {
+    @media (width >= 64rem) {
+      bottom: var(--mda-spacing-8);
+    }
+  }
+  .mda\:lg\:px-8 {
+    @media (width >= 64rem) {
+      padding-inline: var(--mda-spacing-8);
+    }
+  }
+}
+@layer utilities {
+  .text-shadow-strong {
+    text-shadow: 0 0 10px rgb(0 0 0 / 0.75);
+  }
+  .text-shadow-medium {
+    text-shadow: 0 0 5px rgb(0 0 0 / 0.5);
+  }
+}
+@layer components {
+  .media-section:nth-of-type(odd) {
+    background-color: var(--mda-color-muted);
+  }
+  .media-section:nth-of-type(even) {
+    background-color: white;
+  }
+  footer .media-section {
+    background-color: transparent !important;
+  }
+}
+@layer utilities {
+  .mda\:text-shadow-strong {
+    text-shadow: 0 0 10px rgb(0 0 0 / 0.75);
+  }
+  .mda\:text-shadow-medium {
+    text-shadow: 0 0 5px rgb(0 0 0 / 0.5);
+  }
+  .mda\:hero-height {
+    aspect-ratio: 21/9;
+  }
+  @media (min-width: 1024px) {
+    .mda\:hero-height {
+      aspect-ratio: auto;
+      max-height: 440px;
+    }
+  }
+}
+@property --tw-translate-x {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-y {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-translate-z {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-space-y-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-gradient-position {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-from {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-via {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-to {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-stops {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-via-stops {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-from-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --tw-gradient-via-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 50%;
+}
+@property --tw-gradient-to-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
