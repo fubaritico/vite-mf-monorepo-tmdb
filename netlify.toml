@@ -16,3 +16,17 @@
   NODE_VERSION = "22.11.0"
   PNPM_VERSION = "10.8.1"
   NPM_FLAGS = "--legacy-peer-deps"
+
+# CORS headers — required for Module Federation remotes
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
+
+# SPA routing — redirect all routes to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
