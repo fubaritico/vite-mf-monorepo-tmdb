@@ -30,19 +30,10 @@ export async function checkRemoteHealth(
         }, timeout)
 
         try {
-          const response = await fetch(remoteUrl, {
+          await fetch(remoteUrl, {
             signal: controller.signal,
-            headers: {
-              'Cache-Control': 'no-cache',
-              Pragma: 'no-cache',
-            },
+            mode: 'no-cors',
           })
-
-          if (!response.ok) {
-            throw new Error(
-              `Remote health check failed with status ${String(response.status)}`
-            )
-          }
 
           return true
         } finally {
