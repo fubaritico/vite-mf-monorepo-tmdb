@@ -35,5 +35,3 @@ gen
 #Standalone env vars
 .env.local
 
-# Generated CSS for remote consumption (without preflight)
-src/remote.css
