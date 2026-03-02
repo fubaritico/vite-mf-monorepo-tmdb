@@ -1,0 +1,18 @@
+# ============================================================================
+# Netlify Configuration - Monorepo Root
+# ============================================================================
+# This is the main netlify.toml at the root of the monorepo.
+# Each Netlify site will use this file with different base directories.
+# ============================================================================
+
+[build]
+  # This will be overridden per site in Netlify UI
+  base = ""
+  command = "pnpm install && pnpm build:packages && cd apps/home && pnpm build"
+  publish = "apps/home/dist"
+
+# Node.js and pnpm versions (applies to all sites)
+[build.environment]
+  NODE_VERSION = "22.11.0"
+  PNPM_VERSION = "10.8.1"
+  NPM_FLAGS = "--legacy-peer-deps"
