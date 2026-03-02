@@ -30,6 +30,8 @@ const remoteConfig: ModuleFederationOptions = {
   filename: 'remoteEntry.js',
   exposes: {
     './Photos': './src/components/Photos',
+    './PhotosErrorBoundary': './src/components/Photos/PhotosErrorBoundary',
+    './routes': './src/routes',
   },
   shared: {
     react: {

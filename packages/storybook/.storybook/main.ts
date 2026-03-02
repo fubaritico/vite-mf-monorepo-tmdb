@@ -26,6 +26,9 @@ const config: StorybookConfig = {
       '@vite-mf-monorepo/media': fileURLToPath(
         new URL('../../../apps/media/src/index.ts', import.meta.url)
       ),
+      '@vite-mf-monorepo/photos': fileURLToPath(
+        new URL('../../../apps/photos/src/index.ts', import.meta.url)
+      ),
     }
     config.resolve.extensions = [
       '.mjs',

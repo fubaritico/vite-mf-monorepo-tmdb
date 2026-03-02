@@ -12,10 +12,12 @@
       "@vite-mf-monorepo/home/*": ["../../apps/home/src/*"],
       "@vite-mf-monorepo/media": ["../../apps/media/src"],
       "@vite-mf-monorepo/media/*": ["../../apps/media/src/*"],
+      "@vite-mf-monorepo/photos": ["../../apps/photos/src"],
+      "@vite-mf-monorepo/photos/*": ["../../apps/photos/src/*"],
       "@vite-mf-monorepo/ui": ["../../packages/ui/src"],
       "@vite-mf-monorepo/ui/*": ["../../packages/ui/src/*"]
     }
   },
-  "include": ["src", ".storybook", "../../apps/home/src", "../../apps/media/src"],
+  "include": ["src", ".storybook", "../../apps/home/src", "../../apps/media/src", "../../apps/photos/src"],
   "exclude": ["node_modules", "dist"]
 }

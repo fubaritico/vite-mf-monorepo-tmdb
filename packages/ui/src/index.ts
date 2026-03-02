@@ -61,3 +61,6 @@ export type { TalentProps } from './Talent'
 
 export { Typography } from './Typography'
 export type { TypographyProps, TypographyVariant } from './Typography'
+
+export { Spinner } from './Spinner'
+export type { SpinnerProps } from './Spinner'

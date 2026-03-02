@@ -117,12 +117,12 @@ describe('Modal', () => {
 
   it('has correct aria attributes', () => {
     render(
-      <Modal isOpen onClose={vi.fn()} aria-label="Photo viewer">
+      <Modal isOpen onClose={vi.fn()} aria-label="PhotosModal viewer">
         content
       </Modal>
     )
     const dialog = screen.getByRole('dialog')
-    expect(dialog).toHaveAttribute('aria-label', 'Photo viewer')
+    expect(dialog).toHaveAttribute('aria-label', 'PhotosModal viewer')
     expect(dialog).toHaveAttribute('aria-modal', 'true')
   })
 })
