@@ -1,7 +1,7 @@
 import { QueryClient } from '@tanstack/react-query'
 import { createBrowserRouter } from 'react-router-dom'
 
-import Photos from './components/Photos'
+import { Photos } from './components/Photos'
 
 export const queryClient = new QueryClient({
   defaultOptions: {

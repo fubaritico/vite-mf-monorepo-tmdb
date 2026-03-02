@@ -25,6 +25,7 @@ const CarouselItem: FC<CarouselItemProps> = ({
       className={clsx(
         'ui:flex-shrink-0',
         (isHero || isLightbox) && 'ui:w-full ui:snap-center',
+        isLightbox && 'ui:flex ui:items-center ui:justify-center ui:h-full',
         className
       )}
       {...rest}

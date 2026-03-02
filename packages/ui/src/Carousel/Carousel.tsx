@@ -239,13 +239,14 @@ const Carousel: FC<CarouselProps> = ({
   const showControls = totalPositions > 1
 
   return (
-    <div className={clsx('ui:relative', className)}>
+    <div className={clsx('ui:relative', isLightbox && 'ui:h-full', className)}>
       {/* Scroll container */}
       <div
         ref={scrollRef}
         className={clsx(
           'ui:flex ui:overflow-x-auto ui:scroll-smooth ui:scrollbar-none',
           isFullWidth && 'ui:snap-x ui:snap-mandatory',
+          isLightbox && 'ui:h-full',
           rounded && 'ui:rounded-lg ui:overflow-hidden'
         )}
         style={{ gap: `${String(gap)}px` }}

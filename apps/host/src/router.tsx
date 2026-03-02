@@ -3,16 +3,6 @@ import { createBrowserRouter } from 'react-router-dom'
 
 import queryClient from './queryClient.ts'
 
-import type { QueryClient } from '@tanstack/react-query'
-import type { FC } from 'react'
-import type { LoaderFunctionArgs } from 'react-router-dom'
-
-type RouteComponent = FC & {
-  loader: (
-    queryClient: QueryClient
-  ) => (args: LoaderFunctionArgs) => Promise<unknown>
-}
-
 const router = createBrowserRouter([
   {
     element: <RootLayout />,
@@ -41,10 +31,15 @@ const router = createBrowserRouter([
           {
             path: 'photos/:index',
             async lazy() {
-              const { default: Photos } = (await import('photos/Photos')) as {
-                default: RouteComponent
+              const [{ default: Photos }, { default: PhotosErrorBoundary }] =
+                await Promise.all([
+                  import('photos/Photos'),
+                  import('photos/PhotosErrorBoundary'),
+                ])
+              return {
+                Component: Photos,
+                ErrorBoundary: PhotosErrorBoundary,
               }
-              return { Component: Photos, loader: Photos.loader(queryClient) }
             },
           },
         ],
@@ -66,10 +61,15 @@ const router = createBrowserRouter([
           {
             path: 'photos/:index',
             async lazy() {
-              const { default: Photos } = (await import('photos/Photos')) as {
-                default: RouteComponent
+              const [{ default: Photos }, { default: PhotosErrorBoundary }] =
+                await Promise.all([
+                  import('photos/Photos'),
+                  import('photos/PhotosErrorBoundary'),
+                ])
+              return {
+                Component: Photos,
+                ErrorBoundary: PhotosErrorBoundary,
               }
-              return { Component: Photos, loader: Photos.loader(queryClient) }
             },
           },
         ],
