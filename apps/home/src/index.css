@@ -3,6 +3,7 @@
 @import "@vite-mf-monorepo/layouts/styles.css";
 @import "@vite-mf-monorepo/ui/styles.css";
 
+/* Tailwind utilities */
 @layer utilities {
   .hm\:text-shadow-strong {
     text-shadow: 0 0 10px rgb(0 0 0 / 0.75);
