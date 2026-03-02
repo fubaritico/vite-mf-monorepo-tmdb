@@ -1,0 +1,48 @@
+# ============================================================================
+# Netlify Configuration - Home Remote Application
+# ============================================================================
+# This file configures the deployment of the HOME remote on Netlify.
+# This remote is consumed by the host via Module Federation.
+#
+# Documentation: https://docs.netlify.com/configure-builds/file-based-configuration/
+# ============================================================================
+
+[build]
+  # Build from monorepo root to access all packages
+  base = ""
+  
+  # Build command: install deps, build packages, then build home
+  command = "pnpm install && pnpm build:packages && cd apps/home && pnpm build"
+  
+  # Output directory for the built application
+  publish = "apps/home/dist"
+
+# Node.js and pnpm versions (must match package.json engines)
+[build.environment]
+  NODE_VERSION = "22.11.0"
+  PNPM_VERSION = "10.8.1"
+
+# ============================================================================
+# CORS Headers Configuration
+# ============================================================================
+# Allow the host application to load this remote via Module Federation
+# These headers are required for cross-origin resource sharing
+# ============================================================================
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
+
+# ============================================================================
+# SPA Routing Configuration
+# ============================================================================
+# Redirect all routes to index.html for standalone mode development
+# ============================================================================
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

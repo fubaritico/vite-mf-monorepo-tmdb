@@ -8,8 +8,12 @@ node_modules/
 .idea/*
 
 # Where secrets are stored
+.env
+/.env
 .env.local
 /.env.local
+.env.production
+/.env.production
 
 # Temp commit message
 commit_message.txt

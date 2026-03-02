@@ -17,6 +17,15 @@ const workspace = parse(
 )
 const catalog = workspace.catalog
 
+// ============================================================================
+// Module Federation Configuration
+// ============================================================================
+// This configuration defines how the host loads remote applications.
+//
+// Development: Uses localhost URLs with ports from .env
+// Production: Uses Netlify deployment URLs from environment variables
+// ============================================================================
+
 const moduleFederationConfig = {
   name: 'host',
   exposes: {},
@@ -25,21 +34,36 @@ const moduleFederationConfig = {
     home: {
       type: 'module',
       name: 'home',
-      entry: `http://localhost:${process.env.REMOTE_HOME_PORT}/remoteEntry.js`,
+      // Production: Use VITE_HOME_URL from Netlify environment variables
+      // Development: Use localhost with REMOTE_HOME_PORT from .env
+      entry:
+        process.env.NODE_ENV === 'production'
+          ? `${process.env.VITE_HOME_URL}/remoteEntry.js`
+          : `http://localhost:${process.env.REMOTE_HOME_PORT}/remoteEntry.js`,
       entryGlobalName: 'home',
       sharedScope: 'default',
     },
     media: {
       type: 'module',
       name: 'media',
-      entry: `http://localhost:${process.env.REMOTE_MOVIE_PORT}/remoteEntry.js`,
+      // Production: Use VITE_MEDIA_URL from Netlify environment variables
+      // Development: Use localhost with REMOTE_MOVIE_PORT from .env
+      entry:
+        process.env.NODE_ENV === 'production'
+          ? `${process.env.VITE_MEDIA_URL}/remoteEntry.js`
+          : `http://localhost:${process.env.REMOTE_MOVIE_PORT}/remoteEntry.js`,
       entryGlobalName: 'media',
       sharedScope: 'default',
     },
     photos: {
       type: 'module',
       name: 'photos',
-      entry: `http://localhost:${process.env.REMOTE_PHOTOS_PORT}/remoteEntry.js`,
+      // Production: Use VITE_PHOTOS_URL from Netlify environment variables
+      // Development: Use localhost with REMOTE_PHOTOS_PORT from .env
+      entry:
+        process.env.NODE_ENV === 'production'
+          ? `${process.env.VITE_PHOTOS_URL}/remoteEntry.js`
+          : `http://localhost:${process.env.REMOTE_PHOTOS_PORT}/remoteEntry.js`,
       entryGlobalName: 'photos',
       sharedScope: 'default',
     },
