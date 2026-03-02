@@ -4,14 +4,15 @@ import { fileURLToPath } from 'url'
 import cors from 'cors' // Import CORS middleware
 import dotenv from 'dotenv' // Import dotenv
 
-dotenv.config()
-
-const app = express()
-const PORT = parseInt(process.env.HOST_PORT)
-
 // Required for handling `__dirname` in ES modules
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+// Load .env from monorepo root
+dotenv.config({ path: path.resolve(__dirname, '../../.env') })
+
+const app = express()
+const PORT = parseInt(process.env.HOST_PORT)
 
 // Enable CORS for all routes
 app.use(cors())

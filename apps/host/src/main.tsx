@@ -10,8 +10,8 @@ import './index.css'
 import ErrorBoundary from './components/ErrorBoundary'
 import { queryClient, router } from './router'
 
-const HOME_REMOTE_URL = `http://localhost:${import.meta.env.VITE_REMOTE_HOME_PORT as string}/health`
-const MOVIE_REMOTE_URL = `http://localhost:${import.meta.env.VITE_REMOTE_MOVIE_PORT as string}/health`
+const HOME_REMOTE_URL = `${import.meta.env.VITE_HOME_URL as string}/health`
+const MOVIE_REMOTE_URL = `${import.meta.env.VITE_MEDIA_URL as string}/health`
 
 // Initialize module federation runtime
 createInstance({
@@ -20,12 +20,12 @@ createInstance({
     {
       name: 'home',
       alias: 'home',
-      entry: `http://localhost:${import.meta.env.VITE_REMOTE_HOME_PORT as string}/remoteEntry.js`,
+      entry: `${import.meta.env.VITE_MEDIA_URL as string}/remoteEntry.js`,
     },
     {
       name: 'movie',
       alias: 'movie',
-      entry: `http://localhost:${import.meta.env.VITE_REMOTE_MOVIE_PORT as string}/remoteEntry.js`,
+      entry: `${import.meta.env.VITE_MEDIA_URL as string}/remoteEntry.js`,
     },
   ],
   /* eslint-disable @typescript-eslint/dot-notation -- consistent bracket notation for all keys */

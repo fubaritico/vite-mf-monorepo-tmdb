@@ -31,7 +31,7 @@ const remoteConfig: ModuleFederationOptions = {
   exposes: {
     './Photos': './src/components/Photos',
     './PhotosErrorBoundary': './src/components/Photos/PhotosErrorBoundary',
-    './routes': './src/routes',
+    './router': './src/router',
   },
   shared: {
     react: {

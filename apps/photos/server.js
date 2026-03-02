@@ -4,13 +4,14 @@ import { fileURLToPath } from 'url'
 import cors from 'cors'
 import dotenv from 'dotenv'
 
-dotenv.config()
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+// Load .env from monorepo root
+dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
 const app = express()
 const PORT = parseInt(process.env.REMOTE_PHOTOS_PORT)
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 app.use(cors())
 
