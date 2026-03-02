@@ -20,12 +20,17 @@ createInstance({
     {
       name: 'home',
       alias: 'home',
+      entry: `${import.meta.env.VITE_HOME_URL as string}/remoteEntry.js`,
+    },
+    {
+      name: 'media',
+      alias: 'media',
       entry: `${import.meta.env.VITE_MEDIA_URL as string}/remoteEntry.js`,
     },
     {
-      name: 'movie',
-      alias: 'movie',
-      entry: `${import.meta.env.VITE_MEDIA_URL as string}/remoteEntry.js`,
+      name: 'photos',
+      alias: 'photos',
+      entry: `${import.meta.env.VITE_PHOTOS_URL as string}/remoteEntry.js`,
     },
   ],
   /* eslint-disable @typescript-eslint/dot-notation -- consistent bracket notation for all keys */
