@@ -1,9 +1,11 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
 import { Typography } from '@vite-mf-monorepo/ui'
+import { Outlet } from 'react-router-dom'
 
 import { Cast } from './Cast'
 import { Crew } from './Crew'
 import { MediaHero } from './MediaHero'
+import { Photos } from './Photos'
 import { Synopsis } from './Synopsis'
 
 import type { FC } from 'react'
@@ -23,19 +25,13 @@ const Media: FC = () => {
       <Crew />
 
       {/* Photos Section */}
-      <Container variant="default">
-        <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mda:mb-6">
-            Photos
-          </Typography>
-          <Typography variant="body" className="mda:text-muted-foreground">
-            Photos gallery coming soon...
-          </Typography>
-        </Section>
-      </Container>
+      <Photos />
 
       {/* Cast Section */}
       <Cast />
+
+      {/* Outlet for nested routes (e.g. PhotoViewer modal) */}
+      <Outlet />
 
       {/* Trailers & Clips Section */}
       <Container variant="default">

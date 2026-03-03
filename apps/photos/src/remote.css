@@ -37,9 +37,6 @@
   .ph\:h-full {
     height: 100%;
   }
-  .ph\:max-h-screen {
-    max-height: 100vh;
-  }
   .ph\:w-full {
     width: 100%;
   }
@@ -79,6 +76,11 @@
   }
   .text-shadow-medium {
     text-shadow: 0 0 5px rgb(0 0 0 / 0.5);
+  }
+}
+@layer utilities {
+  .ph\:max-h-viewer {
+    max-height: calc(100vh - 50px);
   }
 }
 @property --tw-font-weight {

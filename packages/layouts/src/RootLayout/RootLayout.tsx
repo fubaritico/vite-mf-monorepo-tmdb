@@ -1,5 +1,6 @@
 import clsx from 'clsx'
-import { Link, Outlet } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 
 import { Footer } from '../Footer'
 import { Header } from '../Header'
@@ -24,6 +25,24 @@ const RootLayout: FC<RootLayoutProps> = ({
   className,
   ...rest
 }) => {
+  const { pathname } = useLocation()
+  const prevPathnameRef = useRef(pathname)
+
+  /**
+   * Scrolls to top on every page navigation, with two exceptions:
+   * - Opening the lightbox (/photos/ in new path) — media page must stay in place.
+   * - Closing the lightbox (/photos/ in previous path) — restores media scroll position.
+   */
+  useEffect(() => {
+    const prev = prevPathnameRef.current
+    prevPathnameRef.current = pathname
+
+    if (pathname.includes('/photos/')) return
+    if (prev.includes('/photos/')) return
+
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [pathname])
+
   const TMDBLogo = () => (
     <Link to="/" className="layout:no-underline">
       <div className="layout:flex layout:items-center layout:gap-2">

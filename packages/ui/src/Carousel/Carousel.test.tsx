@@ -181,6 +181,30 @@ describe('Carousel lightbox variant', () => {
     expect(onPrev).not.toHaveBeenCalled()
   })
 
+  it('calls onPrev on ArrowLeft keydown', () => {
+    const onPrev = vi.fn()
+    render(
+      <Carousel variant="lightbox" gap={0} initialIndex={1} onPrev={onPrev}>
+        <CarouselItem isLightbox>Item 1</CarouselItem>
+        <CarouselItem isLightbox>Item 2</CarouselItem>
+      </Carousel>
+    )
+    fireEvent.keyDown(document, { key: 'ArrowLeft' })
+    expect(onPrev).toHaveBeenCalledTimes(1)
+  })
+
+  it('calls onNext on ArrowRight keydown', () => {
+    const onNext = vi.fn()
+    render(
+      <Carousel variant="lightbox" gap={0} onNext={onNext}>
+        <CarouselItem isLightbox>Item 1</CarouselItem>
+        <CarouselItem isLightbox>Item 2</CarouselItem>
+      </Carousel>
+    )
+    fireEvent.keyDown(document, { key: 'ArrowRight' })
+    expect(onNext).toHaveBeenCalledTimes(1)
+  })
+
   it('mounts without error when initialIndex is provided', () => {
     expect(() => {
       render(

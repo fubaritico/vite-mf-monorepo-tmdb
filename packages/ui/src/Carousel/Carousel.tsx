@@ -1,5 +1,11 @@
 import clsx from 'clsx'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react'
 
 import CarouselCounter from './CarouselCounter'
 import CarouselError from './CarouselError'
@@ -48,6 +54,17 @@ export interface CarouselProps {
    * When provided, replaces internal scrollNext.
    */
   onNext?: () => void
+  /**
+   * When true, all internal scroll transitions are instant (no smooth animation).
+   * Use for lightbox with URL-based navigation where the Carousel remounts each time.
+   */
+  disableAnimation?: boolean
+  /**
+   * When true, user-initiated wheel/trackpad scroll is blocked on the container,
+   * and currentIndex is driven entirely by initialIndex (no scroll tracking).
+   * Use for URL-driven carousels (lightbox) to avoid scroll/resize desync.
+   */
+  disableScroll?: boolean
 }
 
 /**
@@ -70,10 +87,26 @@ const Carousel: FC<CarouselProps> = ({
   initialIndex,
   onPrev,
   onNext,
+  disableAnimation = false,
+  disableScroll = false,
 }) => {
   const scrollRef = useRef<HTMLDivElement>(null)
-  const [currentIndex, setCurrentIndex] = useState(0)
   const [totalPositions, setTotalPositions] = useState(1)
+
+  /**
+   * Internal scroll-tracked index — updated by handleScroll on every scroll event.
+   * Only used when disableScroll=false (scroll-driven mode).
+   */
+  const [scrollIndex, setScrollIndex] = useState(initialIndex ?? 0)
+
+  /**
+   * Effective current index.
+   * - disableScroll=true  → driven by initialIndex prop (URL-driven, no scroll tracking)
+   * - disableScroll=false → driven by scroll events via scrollIndex state
+   * This separation prevents ResizeObserver/snap drift from corrupting the index
+   * in URL-driven carousels (lightbox).
+   */
+  const currentIndex = disableScroll ? (initialIndex ?? 0) : scrollIndex
 
   const isHero = variant === 'hero'
   const isLightbox = variant === 'lightbox'
@@ -146,18 +179,23 @@ const Carousel: FC<CarouselProps> = ({
     isFullWidth,
     gap,
   })
-  useEffect(() => {
+
+  useLayoutEffect(() => {
     const { index, isFullWidth: fw, gap: g } = initialScrollRef.current
     if (index <= 0) return
     const container = scrollRef.current
     if (!container) return
     const firstItem = container.children[0] as HTMLElement | undefined
     const itemWidth = fw ? container.offsetWidth : (firstItem?.offsetWidth ?? 0)
+    // Override CSS scroll-behavior: smooth — jump must be instant before first paint
+    container.style.scrollBehavior = 'auto'
     container.scrollLeft = index * (itemWidth + (fw ? 0 : g))
+    container.style.scrollBehavior = ''
   }, [])
 
   /**
-   * Handles scroll events to update the current index based on scroll position.
+   * Effect: Tracks scroll position to update currentIndex.
+   * Skipped entirely when disableScroll=true (currentIndex comes from initialIndex).
    */
   const handleScroll = useCallback(() => {
     const container = scrollRef.current
@@ -171,11 +209,16 @@ const Carousel: FC<CarouselProps> = ({
 
     if (itemWidth > 0) {
       const index = Math.round(scrollLeft / (itemWidth + gap))
-      setCurrentIndex(Math.min(index, totalPositions - 1))
+      setScrollIndex(Math.min(index, totalPositions - 1))
     }
   }, [gap, isFullWidth, totalPositions])
 
+  /**
+   * Effect: Attaches scroll listener to update scrollIndex.
+   * Skipped when disableScroll=true — currentIndex is driven by initialIndex prop instead.
+   */
   useEffect(() => {
+    if (disableScroll) return
     const container = scrollRef.current
     if (!container) return
 
@@ -183,7 +226,26 @@ const Carousel: FC<CarouselProps> = ({
     return () => {
       container.removeEventListener('scroll', handleScroll)
     }
-  }, [handleScroll])
+  }, [disableScroll, handleScroll])
+
+  /**
+   * Effect: Blocks wheel/trackpad scroll when disableScroll=true.
+   * Uses preventDefault on wheel events — must be non-passive to work.
+   */
+  useEffect(() => {
+    if (!disableScroll) return
+    const container = scrollRef.current
+    if (!container) return
+
+    const preventScroll = (e: WheelEvent) => {
+      e.preventDefault()
+    }
+
+    container.addEventListener('wheel', preventScroll, { passive: false })
+    return () => {
+      container.removeEventListener('wheel', preventScroll)
+    }
+  }, [disableScroll])
 
   /**
    * Scrolls to a specific position index with smooth animation.
@@ -205,10 +267,10 @@ const Carousel: FC<CarouselProps> = ({
 
       container.scrollTo({
         left: scrollLeft,
-        behavior: 'smooth',
+        behavior: disableAnimation ? 'auto' : 'smooth',
       })
     },
-    [gap, isFullWidth, totalPositions]
+    [gap, isFullWidth, totalPositions, disableAnimation]
   )
 
   /** Scrolls to the previous position (internal fallback when onPrev is not provided) */
@@ -229,6 +291,32 @@ const Carousel: FC<CarouselProps> = ({
   const handlePrev = onPrev ?? scrollPrev
   /** Effective next handler: external callback takes priority over internal scroll */
   const handleNext = onNext ?? scrollNext
+
+  /**
+   * Refs that always point to the latest handlePrev/handleNext.
+   * Allows the keyboard effect to use a stable listener (empty deps) without stale closures.
+   */
+  const handlePrevRef = useRef(handlePrev)
+  const handleNextRef = useRef(handleNext)
+  useEffect(() => {
+    handlePrevRef.current = handlePrev
+    handleNextRef.current = handleNext
+  })
+
+  /**
+   * Effect: Keyboard navigation — ArrowLeft/ArrowRight trigger prev/next.
+   * Listens on document so it works in lightbox (fullscreen) without requiring focus.
+   */
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') handlePrevRef.current()
+      if (e.key === 'ArrowRight') handleNextRef.current()
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
 
   if (errorMessage) {
     return <CarouselError message={errorMessage} />

@@ -13,6 +13,14 @@ import '../../remote.css'
 
 import type { FC } from 'react'
 
+/**
+ * TMDB backdrop enriched with a deterministic URL-safe id derived from file_path.
+ * Format: file_path without leading slash and extension (e.g. "/abc123.jpg" → "abc123").
+ */
+type BackdropWithId = NonNullable<MovieImagesResponse['backdrops']>[number] & {
+  id: string
+}
+
 const Photos: FC = () => {
   const { id, index } = useParams<{ id: string; index: string }>()
   const navigate = useNavigate()
@@ -21,9 +29,10 @@ const Photos: FC = () => {
     ...movieImagesOptions({ path: { movie_id: Number(id) } }),
   }) as UseQueryResult<MovieImagesResponse, TMDBError>
 
+  /** Navigates two levels up: /movie/:id/photos/:index → /movie/:id (works for /tv/:id too) */
   const handleClose = () => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    navigate(-1)
+    navigate('../..', { relative: 'path' })
   }
 
   if (error)
@@ -52,28 +61,38 @@ const Photos: FC = () => {
     )
   }
 
-  const backdrops = data.backdrops ?? []
-  const currentIndex = Number(index ?? 0)
+  /** Enrich backdrops with a deterministic URL-safe id (see BackdropWithId) */
+  const backdrops: BackdropWithId[] = (data.backdrops ?? []).map((b) => ({
+    ...b,
+    id: b.file_path?.replace(/^\//, '').replace(/\.[^/.]+$/, '') ?? '',
+  }))
 
+  /** Resolve current position from URL param — fallback to 0 if id not found */
+  const currentIndex = backdrops.findIndex((b) => b.id === index)
+  const safeIndex = currentIndex === -1 ? 0 : currentIndex
+
+  /** undefined when at first image — disables prev arrow in Carousel */
   const handlePrev =
-    currentIndex > 0
+    safeIndex > 0
       ? () => {
           // eslint-disable-next-line @typescript-eslint/no-floating-promises
-          navigate(`../${String(currentIndex - 1)}`, { relative: 'path' })
+          navigate(`../${backdrops[safeIndex - 1].id}`, { relative: 'path' })
         }
       : undefined
+
+  /** undefined when at last image — disables next arrow in Carousel */
   const handleNext =
-    currentIndex < backdrops.length - 1
+    safeIndex < backdrops.length - 1
       ? () => {
           // eslint-disable-next-line @typescript-eslint/no-floating-promises
-          navigate(`../${String(currentIndex + 1)}`, { relative: 'path' })
+          navigate(`../${backdrops[safeIndex + 1].id}`, { relative: 'path' })
         }
       : undefined
 
   return (
     <PhotosModal
       images={backdrops}
-      initialIndex={currentIndex}
+      initialIndex={safeIndex}
       onClose={handleClose}
       onPrev={handlePrev}
       onNext={handleNext}
