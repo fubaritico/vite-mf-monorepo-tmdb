@@ -57,11 +57,20 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - Tailwind reserved names → never use `container`, use `media-section`
 - packages/shared exports: ajouter dans `exports` si un nouveau sous-chemin est importé
 
-## Reference Files (use @mention to load)
-- Patterns & templates: `@.claude/rules/component-patterns.md`
-- Architecture & stack: `@.claude/rules/architecture.md`
-- Bugs & decisions: `@.claude/rules/troubleshooting.md`
-- Full roadmap: `@files/ROADMAP.md`
+## Model Selection
+- **Haiku** — questions simples, explications, recherche, status, discussion
+- **Sonnet** — code, refactoring, debug, architecture, commits
+- Évaluer la complexité avant de répondre et suggérer Haiku si approprié
+
+## Reference Files (load on demand — NOT auto-loaded)
+| File | When to load |
+|---|---|
+| `.claude/rules/component-patterns.md` | Création composant, section, story, test |
+| `.claude/rules/architecture.md` | Stack, scripts, CSS, Module Federation |
+| `.claude/rules/troubleshooting.md` | Debug, décision architecturale |
+| `files/ROADMAP.md` | Planification, roadmap |
+
+**Before coding**: based on the user's task description, ask which reference files are needed — do NOT start coding without the relevant files loaded.
 
 ## Skills (slash commands)
 - `/new-ui-component [Name]` — create UI component in packages/ui
