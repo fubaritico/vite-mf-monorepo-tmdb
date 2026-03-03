@@ -116,7 +116,7 @@ export default defineConfig(({ mode }) => {
     build: {
       modulePreload: false,
       target: 'esnext',
-      minify: 'terser',
+      minify: true,
       cssCodeSplit: false,
       emptyOutDir: true,
       rollupOptions: {
