@@ -1,14 +1,16 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
 import { Typography } from '@vite-mf-monorepo/ui'
+import { Suspense, lazy } from 'react'
 import { Outlet } from 'react-router-dom'
 
-import { Cast } from './Cast'
-import { Crew } from './Crew'
 import { MediaHero } from './MediaHero'
-import { Photos } from './Photos'
-import { Synopsis } from './Synopsis'
 
 import type { FC } from 'react'
+
+const Synopsis = lazy(() => import('./Synopsis/Synopsis'))
+const Crew = lazy(() => import('./Crew/Crew'))
+const Photos = lazy(() => import('./Photos/Photos'))
+const Cast = lazy(() => import('./Cast/Cast'))
 
 import '../remote.css'
 
@@ -19,16 +21,24 @@ const Media: FC = () => {
       <MediaHero />
 
       {/* Synopsis Section - White background */}
-      <Synopsis />
+      <Suspense>
+        <Synopsis />
+      </Suspense>
 
       {/* Crew Section - White background */}
-      <Crew />
+      <Suspense>
+        <Crew />
+      </Suspense>
 
       {/* Photos Section */}
-      <Photos />
+      <Suspense>
+        <Photos />
+      </Suspense>
 
       {/* Cast Section */}
-      <Cast />
+      <Suspense>
+        <Cast />
+      </Suspense>
 
       {/* Outlet for nested routes (e.g. PhotoViewer modal) */}
       <Outlet />
