@@ -15,6 +15,22 @@
       --tw-gradient-from-position: 0%;
       --tw-gradient-via-position: 50%;
       --tw-gradient-to-position: 100%;
+      --tw-font-weight: initial;
+      --tw-duration: initial;
+      --tw-shadow: 0 0 #0000;
+      --tw-shadow-color: initial;
+      --tw-shadow-alpha: 100%;
+      --tw-inset-shadow: 0 0 #0000;
+      --tw-inset-shadow-color: initial;
+      --tw-inset-shadow-alpha: 100%;
+      --tw-ring-color: initial;
+      --tw-ring-shadow: 0 0 #0000;
+      --tw-inset-ring-color: initial;
+      --tw-inset-ring-shadow: 0 0 #0000;
+      --tw-ring-inset: initial;
+      --tw-ring-offset-width: 0px;
+      --tw-ring-offset-color: #fff;
+      --tw-ring-offset-shadow: 0 0 #0000;
     }
   }
 }
@@ -25,6 +41,12 @@
     --mda-color-black: #000;
     --mda-color-white: #ffffff;
     --mda-breakpoint-xl: 80rem;
+    --mda-font-weight-semibold: 600;
+    --mda-radius-md: 0.5rem;
+    --mda-aspect-video: 16 / 9;
+    --mda-default-transition-duration: 150ms;
+    --mda-default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    --mda-color-ring: #a3a3a3;
     --mda-color-destructive: #ef4444;
     --mda-color-muted: #f5f5f5;
     --mda-color-muted-foreground: #737373;
@@ -36,6 +58,7 @@
     --mda-spacing-5: 1.25rem;
     --mda-spacing-6: 1.5rem;
     --mda-spacing-8: 2rem;
+    --mda-spacing-72: 18rem;
   }
 }
 @layer utilities {
@@ -75,6 +98,9 @@
   .mda\:z-2 {
     z-index: 2;
   }
+  .mda\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
   .mda\:mb-1 {
     margin-bottom: var(--mda-spacing-1);
   }
@@ -92,6 +118,9 @@
   }
   .mda\:grid {
     display: grid;
+  }
+  .mda\:aspect-video {
+    aspect-ratio: var(--mda-aspect-video);
   }
   .mda\:h-\[400px\] {
     height: 400px;
@@ -149,6 +178,9 @@
   .mda\:overflow-hidden {
     overflow: hidden;
   }
+  .mda\:rounded-md {
+    border-radius: var(--mda-radius-md);
+  }
   .mda\:bg-muted {
     background-color: var(--mda-color-muted);
   }
@@ -178,6 +210,10 @@
   .mda\:px-4 {
     padding-inline: var(--mda-spacing-4);
   }
+  .mda\:font-semibold {
+    --tw-font-weight: var(--mda-font-weight-semibold);
+    font-weight: var(--mda-font-weight-semibold);
+  }
   .mda\:text-destructive {
     color: var(--mda-color-destructive);
   }
@@ -195,6 +231,37 @@
   }
   .mda\:opacity-90 {
     opacity: 90%;
+  }
+  .mda\:transition-colors {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-timing-function: var(--tw-ease, var(--mda-default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--mda-default-transition-duration));
+  }
+  .mda\:transition-transform {
+    transition-property: transform, translate, scale, rotate;
+    transition-timing-function: var(--tw-ease, var(--mda-default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--mda-default-transition-duration));
+  }
+  .mda\:duration-200 {
+    --tw-duration: 200ms;
+    transition-duration: 200ms;
+  }
+  .mda\:focus-visible\:ring-2 {
+    &:focus-visible {
+      --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentColor);
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+    }
+  }
+  .mda\:focus-visible\:ring-ring {
+    &:focus-visible {
+      --tw-ring-color: var(--mda-color-ring);
+    }
+  }
+  .mda\:focus-visible\:outline-none {
+    &:focus-visible {
+      --tw-outline-style: none;
+      outline-style: none;
+    }
   }
   .mda\:sm\:bottom-5 {
     @media (width >= 40rem) {
@@ -221,9 +288,34 @@
       bottom: var(--mda-spacing-6);
     }
   }
+  .mda\:md\:row-span-2 {
+    @media (width >= 48rem) {
+      grid-row: span 2 / span 2;
+    }
+  }
   .mda\:md\:mb-4 {
     @media (width >= 48rem) {
       margin-bottom: var(--mda-spacing-4);
+    }
+  }
+  .mda\:md\:aspect-auto {
+    @media (width >= 48rem) {
+      aspect-ratio: auto;
+    }
+  }
+  .mda\:md\:h-72 {
+    @media (width >= 48rem) {
+      height: var(--mda-spacing-72);
+    }
+  }
+  .mda\:md\:grid-cols-4 {
+    @media (width >= 48rem) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .mda\:md\:grid-rows-2 {
+    @media (width >= 48rem) {
+      grid-template-rows: repeat(2, minmax(0, 1fr));
     }
   }
   .mda\:md\:px-6 {
@@ -339,4 +431,77 @@
   syntax: "<length-percentage>";
   inherits: false;
   initial-value: 100%;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-duration {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-inset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-ring-inset {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-offset-width {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --tw-ring-offset-color {
+  syntax: "*";
+  inherits: false;
+  initial-value: #fff;
+}
+@property --tw-ring-offset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
 }
