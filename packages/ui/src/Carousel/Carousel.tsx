@@ -35,6 +35,8 @@ export interface CarouselProps {
   gap?: number
   /** Additional class name */
   className?: string
+  /** Class name for the hero controls container (pagination + arrows) — use to constrain width/padding */
+  heroControlsClassName?: string
   /** Error message to display instead of carousel content */
   errorMessage?: string
   /** Apply rounded corners to viewport */
@@ -82,6 +84,7 @@ const Carousel: FC<CarouselProps> = ({
   arrowPosition = 'sides',
   gap = 16,
   className,
+  heroControlsClassName,
   errorMessage,
   rounded = true,
   initialIndex,
@@ -358,26 +361,35 @@ const Carousel: FC<CarouselProps> = ({
           />
         )}
 
-      {/* Hero: Pagination centered, Arrows bottom-right */}
-      {showControls && isHero && showPagination && (
-        <div className="ui:absolute ui:bottom-4 ui:left-1/2 ui:-translate-x-1/2 ui:z-10">
-          <CarouselPagination
-            total={totalPositions}
-            current={currentIndex}
-            onSelect={scrollTo}
-            light
-          />
+      {/* Hero: single container — pagination centered, arrows right-aligned */}
+      {showControls && isHero && (showPagination || showArrows) && (
+        <div
+          className={clsx(
+            'ui:absolute ui:bottom-4 ui:left-1/2 ui:-translate-x-1/2 ui:w-full ui:z-10 ui:flex ui:items-end',
+            heroControlsClassName
+          )}
+        >
+          <div className="ui:flex-1" />
+          {showPagination && (
+            <CarouselPagination
+              total={totalPositions}
+              current={currentIndex}
+              onSelect={scrollTo}
+              light
+            />
+          )}
+          <div className="ui:flex-1 ui:flex ui:justify-end">
+            {showArrows && (
+              <CarouselNavigation
+                onPrev={handlePrev}
+                onNext={handleNext}
+                canPrev={canScrollPrev}
+                canNext={canScrollNext}
+                size="sm"
+              />
+            )}
+          </div>
         </div>
-      )}
-      {showControls && isHero && showArrows && (
-        <CarouselNavigation
-          onPrev={handlePrev}
-          onNext={handleNext}
-          canPrev={canScrollPrev}
-          canNext={canScrollNext}
-          size="sm"
-          className="ui:absolute ui:bottom-4 ui:right-4 ui:z-10"
-        />
       )}
 
       {/* Standard: Pagination + Arrows below */}
