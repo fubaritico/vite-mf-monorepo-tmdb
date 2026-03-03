@@ -318,9 +318,9 @@
       grid-template-rows: repeat(2, minmax(0, 1fr));
     }
   }
-  .mda\:md\:px-6 {
+  .mda\:md\:px-5 {
     @media (width >= 48rem) {
-      padding-inline: var(--mda-spacing-6);
+      padding-inline: var(--mda-spacing-5);
     }
   }
   .mda\:lg\:bottom-8 {
@@ -328,9 +328,9 @@
       bottom: var(--mda-spacing-8);
     }
   }
-  .mda\:lg\:px-8 {
+  .mda\:lg\:px-5 {
     @media (width >= 64rem) {
-      padding-inline: var(--mda-spacing-8);
+      padding-inline: var(--mda-spacing-5);
     }
   }
 }

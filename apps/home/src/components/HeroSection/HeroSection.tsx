@@ -39,7 +39,12 @@ const HeroSection: FC = () => {
   }
 
   return (
-    <Carousel variant="hero" rounded={false} gap={0}>
+    <Carousel
+      variant="hero"
+      rounded={false}
+      gap={0}
+      heroControlsClassName="hm:max-w-screen-xl hm:px-5 hm:sm:px-5 hm:md:px-5 hm:lg:px-6"
+    >
       {data.results?.slice(0, 6).map((item) => {
         const backdropUrl = item.backdrop_path
           ? `https://image.tmdb.org/t/p/original${item.backdrop_path}`
@@ -61,7 +66,7 @@ const HeroSection: FC = () => {
                 <div className="hm:absolute hm:inset-0 hm:bg-gradient-to-t hm:from-black/80 hm:via-black/40 hm:to-transparent hm:z-1 hm:top-0 hm:left-0 hm:right-0 hm:bottom-0" />
 
                 {/* Content Overlay */}
-                <div className="hm:absolute hm:left-1/2 hm:-translate-x-1/2 hm:z-2 hm:w-full hm:max-w-screen-xl hm:px-4 hm:sm:px-5 hm:md:px-6 hm:lg:px-8 hm:bottom-4 hm:sm:bottom-5 hm:md:bottom-6 hm:lg:bottom-8 hm:flex hm:justify-start hm:items-end">
+                <div className="hm:absolute hm:left-1/2 hm:-translate-x-1/2 hm:z-2 hm:w-full hm:max-w-screen-xl hm:px-4 hm:sm:px-5 hm:md:px-5 hm:lg:px-5 hm:bottom-8 hm:sm:bottom-8 hm:md:bottom-8 hm:lg:bottom-10 hm:flex hm:justify-start hm:items-end">
                   <div className="hm:flex hm:flex-col hm:w-full hm:max-w-lg">
                     <Typography
                       variant="h2"
