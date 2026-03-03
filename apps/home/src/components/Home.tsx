@@ -1,11 +1,15 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
+import { Suspense, lazy } from 'react'
 
-import FreeToWatchSection from './FreeToWatchSection/FreeToWatchSection'
 import HeroSection from './HeroSection/HeroSection'
-import PopularSection from './PopularSection/PopularSection'
-import TrendingSection from './TrendingSection/TrendingSection'
 
 import type { FC } from 'react'
+
+const TrendingSection = lazy(() => import('./TrendingSection/TrendingSection'))
+const PopularSection = lazy(() => import('./PopularSection/PopularSection'))
+const FreeToWatchSection = lazy(
+  () => import('./FreeToWatchSection/FreeToWatchSection')
+)
 
 const Home: FC = () => {
   return (
@@ -16,21 +20,27 @@ const Home: FC = () => {
       {/* Trending Section - White background */}
       <Container variant="default">
         <Section spacing="lg" maxWidth="xl">
-          <TrendingSection />
+          <Suspense>
+            <TrendingSection />
+          </Suspense>
         </Section>
       </Container>
 
       {/* What's Popular Section - Gray background */}
       <Container variant="muted">
         <Section spacing="lg" maxWidth="xl">
-          <PopularSection />
+          <Suspense>
+            <PopularSection />
+          </Suspense>
         </Section>
       </Container>
 
       {/* Free to Watch Section - White background */}
       <Container variant="default">
         <Section spacing="lg" maxWidth="xl">
-          <FreeToWatchSection />
+          <Suspense>
+            <FreeToWatchSection />
+          </Suspense>
         </Section>
       </Container>
     </>
