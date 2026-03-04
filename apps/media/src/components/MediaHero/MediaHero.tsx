@@ -53,13 +53,21 @@ const MediaHero: FC = () => {
     ? (media as { number_of_episodes?: number }).number_of_episodes
     : undefined
 
-  const backdropUrl = media.backdrop_path
+  const backdropPathMobile = media.backdrop_path
+    ? getImageUrl(media.backdrop_path, 'w300')
+    : ''
+
+  const backdropPathTablet = media.backdrop_path
+    ? getImageUrl(media.backdrop_path, 'w780')
+    : ''
+
+  const backdropPathDesktop = media.backdrop_path
     ? getImageUrl(media.backdrop_path, 'w1280')
     : ''
 
-  const backdropSrcset = media.backdrop_path
-    ? `${getImageUrl(media.backdrop_path, 'w780')} 640w, ${getImageUrl(media.backdrop_path, 'w1280')} 1280w`
-    : undefined
+  const backdropPathUltraWide = media.backdrop_path
+    ? getImageUrl(media.backdrop_path, 'original')
+    : ''
 
   const releaseYear = releaseDate
     ? new Date(releaseDate).getFullYear().toString()
@@ -70,20 +78,25 @@ const MediaHero: FC = () => {
     <div className="mda:relative mda:w-full">
       {/* Backdrop Image */}
       <div className="mda:relative mda:hero-height mda:w-full mda:overflow-hidden">
-        <img
-          src={backdropUrl}
-          srcSet={backdropSrcset}
-          fetchPriority="high"
-          alt={title ?? 'Media'}
-          className="mda:relative mda:h-full mda:w-full mda:object-cover mda:object-center mda:z-0"
-          onError={(e) => {
-            console.warn('[MediaHero] Image failed to load:', {
-              src: backdropUrl,
-              alt: title,
-              error: e,
-            })
-          }}
-        />
+        <picture>
+          <source media="(max-width: 639px)" srcSet={backdropPathMobile} />
+          <source media="(max-width: 1023px)" srcSet={backdropPathTablet} />
+          <source media="(max-width: 1535px)" srcSet={backdropPathDesktop} />
+          <source media="(min-width: 1536px)" srcSet={backdropPathUltraWide} />
+          <img
+            src={backdropPathDesktop}
+            fetchPriority="high"
+            alt={title ?? 'Media'}
+            className="mda:relative mda:h-full mda:w-full mda:object-cover mda:object-center mda:z-0"
+            onError={(e) => {
+              console.warn('[MediaHero] Image failed to load:', {
+                src: backdropPathDesktop,
+                alt: title,
+                error: e,
+              })
+            }}
+          />
+        </picture>
         {/* Gradient Overlay */}
         <div className="mda:absolute mda:inset-0 mda:bg-gradient-to-t mda:from-black/80 mda:via-black/40 mda:to-transparent mda:z-1 mda:top-0 mda:left-0 mda:right-0 mda:bottom-0" />
 

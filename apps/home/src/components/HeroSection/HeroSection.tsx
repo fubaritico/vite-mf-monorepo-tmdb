@@ -46,13 +46,21 @@ const HeroSection: FC = () => {
       heroControlsClassName="hm:max-w-screen-xl hm:px-5 hm:sm:px-5 hm:md:px-5 hm:lg:px-6"
     >
       {data.results?.slice(0, 6).map((item) => {
-        const backdropUrl = item.backdrop_path
+        const backdropPathMobile = item.backdrop_path
+          ? `https://image.tmdb.org/t/p/w300${item.backdrop_path}`
+          : ''
+
+        const backdropPathTablet = item.backdrop_path
+          ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}`
+          : ''
+
+        const backdropPathDesktop = item.backdrop_path
           ? `https://image.tmdb.org/t/p/w1280${item.backdrop_path}`
           : ''
 
-        const backdropSrcset = item.backdrop_path
-          ? `https://image.tmdb.org/t/p/w780${item.backdrop_path} 640w, https://image.tmdb.org/t/p/w1280${item.backdrop_path} 1280w`
-          : undefined
+        const backdropPathUltraWide = item.backdrop_path
+          ? `https://image.tmdb.org/t/p/original${item.backdrop_path}`
+          : ''
 
         return (
           <CarouselItem key={item.id} isHero>
@@ -61,13 +69,30 @@ const HeroSection: FC = () => {
               className="hm:block hm:no-underline"
             >
               <div className="hm:relative hm:hero-height hm:w-full hm:overflow-hidden">
-                <img
-                  src={backdropUrl}
-                  srcSet={backdropSrcset}
-                  fetchPriority="high"
-                  alt={item.title ?? 'Unknown'}
-                  className="hm:relative hm:h-full hm:w-full hm:object-cover hm:object-center hm:z-0"
-                />
+                <picture>
+                  <source
+                    media="(max-width: 639px)"
+                    srcSet={backdropPathMobile}
+                  />
+                  <source
+                    media="(max-width: 1023px)"
+                    srcSet={backdropPathTablet}
+                  />
+                  <source
+                    media="(max-width: 1535px)"
+                    srcSet={backdropPathDesktop}
+                  />
+                  <source
+                    media="(min-width: 1536px)"
+                    srcSet={backdropPathUltraWide}
+                  />
+                  <img
+                    src={backdropPathDesktop}
+                    fetchPriority="high"
+                    alt={item.title ?? 'Unknown'}
+                    className="hm:relative hm:h-full hm:w-full hm:object-cover hm:object-center hm:z-0"
+                  />
+                </picture>
                 {/* Gradient Overlay */}
                 <div className="hm:absolute hm:inset-0 hm:bg-gradient-to-t hm:from-black/80 hm:via-black/40 hm:to-transparent hm:z-1 hm:top-0 hm:left-0 hm:right-0 hm:bottom-0" />
 
