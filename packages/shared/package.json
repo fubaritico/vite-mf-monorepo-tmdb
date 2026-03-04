@@ -44,9 +44,9 @@
     "@testing-library/react": "catalog:"
   },
   "devDependencies": {
-    "@fontsource/inter": "^5.2.8",
-    "@fontsource/roboto": "^5.2.9",
-    "@fontsource/roboto-condensed": "^5.2.8",
+    "@fontsource/inter": "catalog:",
+    "@fontsource/roboto": "catalog:",
+    "@fontsource/roboto-condensed": "catalog:",
     "@tanstack/react-query": "catalog:",
     "@testing-library/react": "catalog:",
     "@types/node": "catalog:",
