@@ -64,7 +64,7 @@ const HeroSection: FC = () => {
                 <img
                   src={backdropUrl}
                   srcSet={backdropSrcset}
-                  loading="lazy"
+                  fetchPriority="high"
                   alt={item.title ?? 'Unknown'}
                   className="hm:relative hm:h-full hm:w-full hm:object-cover hm:object-center hm:z-0"
                 />
