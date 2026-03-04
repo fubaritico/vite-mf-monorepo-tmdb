@@ -1,3 +1,4 @@
+import { getOptimizedImageUrl } from '@vite-mf-monorepo/shared'
 import {
   Carousel,
   CarouselItem,
@@ -47,19 +48,19 @@ const HeroSection: FC = () => {
     >
       {data.results?.slice(0, 6).map((item) => {
         const backdropPathMobile = item.backdrop_path
-          ? `https://image.tmdb.org/t/p/w300${item.backdrop_path}`
+          ? getOptimizedImageUrl(item.backdrop_path, 'w300')
           : ''
 
         const backdropPathTablet = item.backdrop_path
-          ? `https://image.tmdb.org/t/p/w780${item.backdrop_path}`
+          ? getOptimizedImageUrl(item.backdrop_path, 'w780')
           : ''
 
         const backdropPathDesktop = item.backdrop_path
-          ? `https://image.tmdb.org/t/p/w1280${item.backdrop_path}`
+          ? getOptimizedImageUrl(item.backdrop_path, 'w1280')
           : ''
 
         const backdropPathUltraWide = item.backdrop_path
-          ? `https://image.tmdb.org/t/p/original${item.backdrop_path}`
+          ? getOptimizedImageUrl(item.backdrop_path, 'original')
           : ''
 
         return (

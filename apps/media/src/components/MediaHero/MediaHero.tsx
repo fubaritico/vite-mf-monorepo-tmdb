@@ -1,4 +1,4 @@
-import { getImageUrl } from '@vite-mf-monorepo/shared'
+import { getOptimizedImageUrl } from '@vite-mf-monorepo/shared'
 import { Badge, Rating, Skeleton, Typography } from '@vite-mf-monorepo/ui'
 import clsx from 'clsx'
 import { useLocation, useParams } from 'react-router-dom'
@@ -54,19 +54,19 @@ const MediaHero: FC = () => {
     : undefined
 
   const backdropPathMobile = media.backdrop_path
-    ? getImageUrl(media.backdrop_path, 'w300')
+    ? getOptimizedImageUrl(media.backdrop_path, 'w300')
     : ''
 
   const backdropPathTablet = media.backdrop_path
-    ? getImageUrl(media.backdrop_path, 'w780')
+    ? getOptimizedImageUrl(media.backdrop_path, 'w780')
     : ''
 
   const backdropPathDesktop = media.backdrop_path
-    ? getImageUrl(media.backdrop_path, 'w1280')
+    ? getOptimizedImageUrl(media.backdrop_path, 'w1280')
     : ''
 
   const backdropPathUltraWide = media.backdrop_path
-    ? getImageUrl(media.backdrop_path, 'original')
+    ? getOptimizedImageUrl(media.backdrop_path, 'original')
     : ''
 
   const releaseYear = releaseDate
