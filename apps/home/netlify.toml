@@ -21,6 +21,7 @@
 [build.environment]
   NODE_VERSION = "22.11.0"
   PNPM_VERSION = "10.8.1"
+  VITE_USE_NETLIFY_CDN = "true"
 
 # ============================================================================
 # CORS Headers Configuration
