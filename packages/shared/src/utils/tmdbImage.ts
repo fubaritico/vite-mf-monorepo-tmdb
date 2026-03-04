@@ -45,10 +45,7 @@ export const getOptimizedImageUrl = (
     (import.meta.env as Record<string, string>).VITE_USE_NETLIFY_CDN === 'true'
 
   if (useNetlifyCDN) {
-    // Extract width from size param (e.g., "w500" → "500")
-    const width = size.replace('w', '')
-    // Let Netlify choose best format (AVIF/WebP based on browser support) and resize
-    return `/.netlify/images?url=${encodeURIComponent(baseUrl)}&w=${width}&q=${String(quality)}`
+    return `/.netlify/images?url=${encodeURIComponent(baseUrl)}&q=${String(quality)}&w=${size.replace('w', '')}`
   }
 
   // Direct TMDB with query params (images will load, format conversion delegated to browser)

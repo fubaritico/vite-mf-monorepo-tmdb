@@ -23,6 +23,10 @@
   PNPM_VERSION = "10.8.1"
   NPM_FLAGS = "--legacy-peer-deps"
 
+# Netlify Image CDN — enable format conversion for remote TMDB images
+[images]
+  remote_images = ["https://image.tmdb.org/.*"]
+
 # ============================================================================
 # SPA Routing Configuration
 # ============================================================================
