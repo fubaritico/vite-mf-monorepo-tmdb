@@ -3,12 +3,12 @@ import { Skeleton, Typography } from '@vite-mf-monorepo/ui'
 import { Suspense, lazy } from 'react'
 import { Outlet } from 'react-router-dom'
 
+import { Crew } from './Crew'
 import { MediaHero } from './MediaHero'
+import { Synopsis } from './Synopsis'
 
 import type { FC } from 'react'
 
-const Synopsis = lazy(() => import('./Synopsis/Synopsis'))
-const Crew = lazy(() => import('./Crew/Crew'))
 const Photos = lazy(() => import('./Photos/Photos'))
 const Cast = lazy(() => import('./Cast/Cast'))
 
@@ -21,102 +21,35 @@ const Media: FC = () => {
       <MediaHero />
 
       {/* Synopsis Section - White background */}
-      <Suspense
-        fallback={
-          <div
-            className="mda:flex mda:flex-col mda:gap-4"
-            style={{ minHeight: '160px' }}
-          >
-            <Skeleton variant="line" width="mda:w-32" height="mda:h-8" />
-            <Skeleton variant="line" width="mda:w-full" height="mda:h-6" />
-          </div>
-        }
-      >
-        <Synopsis />
-      </Suspense>
+      <Synopsis />
 
       {/* Crew Section - White background */}
-      <Suspense
-        fallback={
-          <div
-            className="mda:flex mda:flex-col mda:gap-4"
-            style={{ minHeight: '244px' }}
-          >
-            <Skeleton variant="line" width="mda:w-24" height="mda:h-8" />
-            <div className="mda:grid mda:grid-cols-2 mda:gap-6">
-              {Array.from({ length: 2 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="mda:flex mda:flex-col mda:items-center mda:gap-2"
-                >
-                  <Skeleton
-                    variant="circle"
-                    width="mda:w-24"
-                    height="mda:h-24"
-                  />
-                  <Skeleton variant="line" width="mda:w-20" height="mda:h-4" />
-                </div>
-              ))}
-            </div>
-          </div>
-        }
-      >
-        <Crew />
-      </Suspense>
+      <Crew />
 
       {/* Photos Section */}
       <Suspense
         fallback={
-          <div
-            className="mda:flex mda:flex-col mda:gap-4"
-            style={{ minHeight: '350px' }}
-          >
-            <Skeleton variant="line" width="mda:w-24" height="mda:h-8" />
-            <div className="mda:grid mda:grid-cols-2 md:mda:grid-cols-3 mda:gap-4">
-              {Array.from({ length: 4 }).map((_, i) => (
-                <Skeleton
-                  key={i}
-                  variant="rectangle"
-                  width="mda:w-full"
-                  height="mda:h-40"
-                  rounded
-                />
-              ))}
-            </div>
+          <div style={{ minHeight: '438px' }}>
+            <Skeleton variant="rectangle" width="100%" height="438px" />
           </div>
         }
       >
-        <Photos />
+        <div style={{ contentVisibility: 'auto' }}>
+          <Photos />
+        </div>
       </Suspense>
 
       {/* Cast Section */}
       <Suspense
         fallback={
-          <div
-            className="mda:flex mda:flex-col mda:gap-4"
-            style={{ minHeight: '540px' }}
-          >
-            <Skeleton variant="line" width="mda:w-24" height="mda:h-8" />
-            <div className="mda:grid mda:grid-cols-2 mda:gap-6">
-              {Array.from({ length: 10 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="mda:flex mda:flex-col mda:items-center mda:gap-2"
-                >
-                  <Skeleton
-                    variant="circle"
-                    width="mda:w-20"
-                    height="mda:h-20"
-                  />
-                  <Skeleton variant="line" width="mda:w-24" height="mda:h-4" />
-                  <Skeleton variant="line" width="mda:w-20" height="mda:h-3" />
-                </div>
-              ))}
-            </div>
+          <div style={{ minHeight: '630px' }}>
+            <Skeleton variant="rectangle" width="100%" height="630px" />
           </div>
         }
       >
-        <Cast />
+        <div style={{ contentVisibility: 'auto' }}>
+          <Cast />
+        </div>
       </Suspense>
 
       {/* Outlet for nested routes (e.g. PhotoViewer modal) */}

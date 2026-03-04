@@ -1,13 +1,14 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
-import { CarouselLoading, Skeleton } from '@vite-mf-monorepo/ui'
+import { Skeleton } from '@vite-mf-monorepo/ui'
 import { Suspense, lazy } from 'react'
 
 import HeroSection from './HeroSection/HeroSection'
+import TrendingSection from './TrendingSection/TrendingSection'
 
 import type { FC } from 'react'
 
-const TrendingSection = lazy(() => import('./TrendingSection/TrendingSection'))
 const PopularSection = lazy(() => import('./PopularSection/PopularSection'))
+
 const FreeToWatchSection = lazy(
   () => import('./FreeToWatchSection/FreeToWatchSection')
 )
@@ -21,20 +22,7 @@ const Home: FC = () => {
       {/* Trending Section - White background */}
       <Container variant="default">
         <Section spacing="lg" maxWidth="xl">
-          <Suspense
-            fallback={
-              <div
-                className="hm:flex hm:flex-col hm:gap-4"
-                style={{ minHeight: '421px' }}
-              >
-                <Skeleton variant="line" width="hm:w-32" height="hm:h-8" />
-                <Skeleton variant="line" width="hm:w-24" height="hm:h-10" />
-                <CarouselLoading count={6} />
-              </div>
-            }
-          >
-            <TrendingSection />
-          </Suspense>
+          <TrendingSection />
         </Section>
       </Container>
 
@@ -43,16 +31,14 @@ const Home: FC = () => {
         <Section spacing="lg" maxWidth="xl">
           <Suspense
             fallback={
-              <div
-                className="hm:flex hm:flex-col hm:gap-4"
-                style={{ minHeight: '421px' }}
-              >
-                <Skeleton variant="line" width="hm:w-40" height="hm:h-8" />
-                <CarouselLoading count={6} />
+              <div style={{ minHeight: '421px' }}>
+                <Skeleton variant="rectangle" width="100%" height="421px" />
               </div>
             }
           >
-            <PopularSection />
+            <div style={{ contentVisibility: 'auto' }}>
+              <PopularSection />
+            </div>
           </Suspense>
         </Section>
       </Container>
@@ -62,16 +48,14 @@ const Home: FC = () => {
         <Section spacing="lg" maxWidth="xl">
           <Suspense
             fallback={
-              <div
-                className="hm:flex hm:flex-col hm:gap-4"
-                style={{ minHeight: '421px' }}
-              >
-                <Skeleton variant="line" width="hm:w-40" height="hm:h-8" />
-                <CarouselLoading count={6} />
+              <div style={{ minHeight: '421px' }}>
+                <Skeleton variant="rectangle" width="100%" height="421px" />
               </div>
             }
           >
-            <FreeToWatchSection />
+            <div style={{ contentVisibility: 'auto' }}>
+              <FreeToWatchSection />
+            </div>
           </Suspense>
         </Section>
       </Container>
