@@ -10,10 +10,10 @@
 [build]
   # Build from monorepo root to access all packages
   base = ""
-  
+
   # Build command: install deps, build packages, then build media
   command = "pnpm install && pnpm build:packages && cd apps/media && pnpm build"
-  
+
   # Output directory for the built application
   publish = "apps/media/dist"
 
@@ -22,6 +22,10 @@
   NODE_VERSION = "22.11.0"
   PNPM_VERSION = "10.8.1"
   VITE_USE_NETLIFY_CDN = "true"
+
+# Netlify Image CDN — enable format conversion for remote TMDB images
+[images]
+  remote_images = ["https://image.tmdb.org/.*"]
 
 # ============================================================================
 # CORS Headers Configuration
