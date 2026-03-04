@@ -94,10 +94,17 @@ Examples:
 // Construct full URL with size
 `https://image.tmdb.org/t/p/${size}${path}`
 
-// Sizes:
-// Posters:   w92 w154 w185 w342 w500 w780 original
-// Backdrops: w300 w780 w1280 original
-// Profiles:  w45 w185 h632 original
+// OFFICIALLY SUPPORTED SIZES (from /configuration API endpoint)
+// Reference: https://www.themoviedb.org/talk/53c11d4ec3a3684cf4006400
+//
+// Posters:   w92, w154, w185, w342, w500, w780, original
+// Backdrops: w300, w780, w1280, original (used in our app: w300 mobile, w500 tablet, w780 desktop, w1280 ultrawide)
+// Profiles:  w45, w185, h632, original
+// Still:     w92, w185, w300, original
+// Logos:     w45, w92, w154, w185, w300, w500, original
+//
+// Note: Only use these officially supported sizes. While other dimensions might load,
+// they are not guaranteed to work and may be slower.
 ```
 
 ## Responsive Breakpoints (mobile-first)
