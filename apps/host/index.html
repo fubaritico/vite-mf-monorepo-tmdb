@@ -10,6 +10,10 @@
     <link rel="preload" href="%VITE_HOME_URL%/remoteEntry.js" as="script" crossorigin>
     <link rel="preload" href="%VITE_MEDIA_URL%/remoteEntry.js" as="script" crossorigin>
     <link rel="preload" href="%VITE_PHOTOS_URL%/remoteEntry.js" as="script" crossorigin>
+
+    <!-- Preconnect to critical external origins -->
+    <link rel="preconnect" href="https://image.tmdb.org">
+    <link rel="preconnect" href="https://api.themoviedb.org">
   </head>
   <body>
     <div id="root"></div>
