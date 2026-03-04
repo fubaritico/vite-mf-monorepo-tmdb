@@ -23,10 +23,6 @@
     Access-Control-Allow-Methods = "GET, POST, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type"
 
-# Netlify Image CDN — enable format conversion for remote TMDB images
-[images]
-  remote_images = ["https://image.tmdb.org/.*"]
-
 # SPA routing — redirect all routes to index.html
 [[redirects]]
   from = "/*"

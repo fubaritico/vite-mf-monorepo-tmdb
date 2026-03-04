@@ -10,10 +10,10 @@
 [build]
   # Build from monorepo root to access all packages
   base = ""
-  
+
   # Build command: install deps, build packages, then build home
   command = "pnpm install && pnpm build:packages && cd apps/home && pnpm build"
-  
+
   # Output directory for the built application
   publish = "apps/home/dist"
 
@@ -36,6 +36,10 @@
     Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Methods = "GET, POST, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type"
+
+# Netlify Image CDN — enable format conversion for remote TMDB images
+[images]
+  remote_images = ["https://image.tmdb.org/.*"]
 
 # ============================================================================
 # SPA Routing Configuration

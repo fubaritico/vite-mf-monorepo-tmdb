@@ -10,10 +10,10 @@
 [build]
   # Build from monorepo root to access all packages
   base = ""
-  
+
   # Build command: install deps, build packages, then build host
   command = "pnpm install && pnpm build:packages && cd apps/host && pnpm build"
-  
+
   # Output directory for the built application
   publish = "apps/host/dist"
 
