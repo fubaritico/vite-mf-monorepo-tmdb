@@ -1,16 +1,14 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
-import { Skeleton, Typography } from '@vite-mf-monorepo/ui'
-import { Suspense, lazy } from 'react'
+import { Typography } from '@vite-mf-monorepo/ui'
 import { Outlet } from 'react-router-dom'
 
+import { Cast } from './Cast'
 import { Crew } from './Crew'
 import { MediaHero } from './MediaHero'
+import { Photos } from './Photos'
 import { Synopsis } from './Synopsis'
 
 import type { FC } from 'react'
-
-const Photos = lazy(() => import('./Photos/Photos'))
-const Cast = lazy(() => import('./Cast/Cast'))
 
 import '../remote.css'
 
@@ -27,30 +25,10 @@ const Media: FC = () => {
       <Crew />
 
       {/* Photos Section */}
-      <Suspense
-        fallback={
-          <div style={{ minHeight: '438px' }}>
-            <Skeleton variant="rectangle" width="100%" height="438px" />
-          </div>
-        }
-      >
-        <div style={{ contentVisibility: 'auto' }}>
-          <Photos />
-        </div>
-      </Suspense>
+      <Photos />
 
       {/* Cast Section */}
-      <Suspense
-        fallback={
-          <div style={{ minHeight: '630px' }}>
-            <Skeleton variant="rectangle" width="100%" height="630px" />
-          </div>
-        }
-      >
-        <div style={{ contentVisibility: 'auto' }}>
-          <Cast />
-        </div>
-      </Suspense>
+      <Cast />
 
       {/* Outlet for nested routes (e.g. PhotoViewer modal) */}
       <Outlet />
