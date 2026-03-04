@@ -12,21 +12,21 @@ export const getImageUrl = (
 }
 
 /**
- * Constructs an optimized image URL with Netlify Image Optimization.
- * Automatically converts PNG to WebP/AVIF based on browser support.
+ * Constructs an optimized image URL via Netlify Image CDN.
+ * Automatically converts to WebP/AVIF and handles caching on edge.
  *
- * Use this for modern image optimization. Query parameters tell Netlify
- * to automatically select WebP/AVIF format based on browser capabilities.
+ * This routes TMDB images through Netlify's Image CDN endpoint (/.netlify/images)
+ * for on-demand transformation, format conversion, and edge caching.
  *
  * @param path - TMDB image path
  * @param size - TMDB image size (w300, w780, w1280, etc.)
- * @param quality - Image quality 0-100 (default: 80)
- * @returns Optimized image URL with Netlify format auto-selection
+ * @param quality - Image quality 1-100 (default: 80)
+ * @returns Optimized image URL routed through Netlify Image CDN
  *
  * @example
- * // Mobile: w300 PNG → auto-converted to WebP/AVIF
+ * // Mobile: w300 JPEG → transformed to WebP via Netlify CDN
  * getOptimizedImageUrl('/path/image.jpg', 'w300', 80)
- * // Result: https://image.tmdb.org/t/p/w300/path/image.jpg?q=80&fm=auto
+ * // Result: /.netlify/images?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw300%2Fpath%2Fimage.jpg&q=80&fm=webp
  */
 export const getOptimizedImageUrl = (
   path: string | null | undefined,
@@ -34,8 +34,9 @@ export const getOptimizedImageUrl = (
   quality = 80
 ): string => {
   if (!path) return ''
-  const baseUrl = getImageUrl(path, size)
-  // fm=auto: Netlify selects format based on Accept headers (WebP/AVIF if supported)
-  // q=XX: quality setting
-  return `${baseUrl}?q=${String(quality)}&fm=auto`
+  const remoteUrl = getImageUrl(path, size)
+  // Route through Netlify Image CDN for on-demand transformation and format conversion
+  // q=XX: quality setting (1-100)
+  // fm=webp: request WebP format (Netlify automatically falls back to AVIF if supported)
+  return `/.netlify/images?url=${encodeURIComponent(remoteUrl)}&q=${String(quality)}&fm=webp`
 }
