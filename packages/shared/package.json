@@ -47,6 +47,7 @@
     "@fontsource/inter": "catalog:",
     "@fontsource/roboto": "catalog:",
     "@fontsource/roboto-condensed": "catalog:",
+    "@fontsource/press-start-2p": "catalog:",
     "@tanstack/react-query": "catalog:",
     "@testing-library/react": "catalog:",
     "@types/node": "catalog:",
