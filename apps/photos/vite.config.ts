@@ -116,7 +116,14 @@ export default defineConfig(({ mode }) => {
     build: {
       modulePreload: false,
       target: 'esnext',
-      minify: true,
+      minify: 'esbuild',
+      esbuild: {
+        minifyIdentifiers: true,
+        minifySyntax: true,
+        minifyWhitespace: true,
+        pure: ['console.log'],
+        legalComments: 'none',
+      },
       cssCodeSplit: false,
       emptyOutDir: true,
       rollupOptions: {

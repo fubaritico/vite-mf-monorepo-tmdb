@@ -1,17 +1,11 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
-import { Skeleton } from '@vite-mf-monorepo/ui'
-import { Suspense, lazy } from 'react'
 
+import FreeToWatchSection from './FreeToWatchSection/FreeToWatchSection'
 import HeroSection from './HeroSection/HeroSection'
+import PopularSection from './PopularSection/PopularSection'
 import TrendingSection from './TrendingSection/TrendingSection'
 
 import type { FC } from 'react'
-
-const PopularSection = lazy(() => import('./PopularSection/PopularSection'))
-
-const FreeToWatchSection = lazy(
-  () => import('./FreeToWatchSection/FreeToWatchSection')
-)
 
 const Home: FC = () => {
   return (
@@ -29,34 +23,14 @@ const Home: FC = () => {
       {/* What's Popular Section - Gray background */}
       <Container variant="muted">
         <Section spacing="lg" maxWidth="xl">
-          <Suspense
-            fallback={
-              <div style={{ minHeight: '421px' }}>
-                <Skeleton variant="rectangle" width="100%" height="421px" />
-              </div>
-            }
-          >
-            <div style={{ contentVisibility: 'auto' }}>
-              <PopularSection />
-            </div>
-          </Suspense>
+          <PopularSection />
         </Section>
       </Container>
 
       {/* Free to Watch Section - White background */}
       <Container variant="default">
         <Section spacing="lg" maxWidth="xl">
-          <Suspense
-            fallback={
-              <div style={{ minHeight: '421px' }}>
-                <Skeleton variant="rectangle" width="100%" height="421px" />
-              </div>
-            }
-          >
-            <div style={{ contentVisibility: 'auto' }}>
-              <FreeToWatchSection />
-            </div>
-          </Suspense>
+          <FreeToWatchSection />
         </Section>
       </Container>
     </>
