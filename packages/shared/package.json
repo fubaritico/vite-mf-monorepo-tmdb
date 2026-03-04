@@ -53,6 +53,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "glob": "13.0.6",
     "msw": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"

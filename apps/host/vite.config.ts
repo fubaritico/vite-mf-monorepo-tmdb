@@ -6,6 +6,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { listenForRemoteRebuilds } from '@antdevx/vite-plugin-hmr-sync'
 import { federation } from '@module-federation/vite'
+import { fontPreloadInjection } from '@vite-mf-monorepo/shared/vite'
 import dotenv from 'dotenv'
 import { parse } from 'yaml'
 
@@ -111,6 +112,10 @@ export default defineConfig(({ mode }) => {
       ...(isTest
         ? []
         : [
+            fontPreloadInjection({
+              criticalFonts: ['press-start-2p', 'inter'],
+              suppressLogs: false,
+            }),
             federation(moduleFederationConfig),
             listenForRemoteRebuilds({
               allowedApps: ['home', 'media', 'photos'],
