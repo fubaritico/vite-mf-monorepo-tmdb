@@ -10,6 +10,8 @@ export type ImageState = 'loading' | 'loaded' | 'error'
 
 export type AspectRatio = '2/3' | '16/9' | '1/1' | '4/3' | '3/2'
 
+export type ImageLoading = 'lazy' | 'eager'
+
 export interface ImageProps
   extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'placeholder'> {
   /** Image source URL */
@@ -32,6 +34,8 @@ export interface ImageProps
   onLoad?: () => void
   /** Callback when image fails to load */
   onError?: () => void
+  /** Load strategy: 'lazy' waits for viewport visibility, 'eager' loads immediately. Default: 'eager' */
+  loading?: ImageLoading
 }
 
 const Image: FC<ImageProps> = ({
@@ -46,16 +50,42 @@ const Image: FC<ImageProps> = ({
   className,
   onLoad,
   onError,
+  loading = 'eager',
   ...rest
 }) => {
   const imgRef = useRef<HTMLImageElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   const [state, setState] = useState<ImageState>('loading')
   const [generatedBlur, setGeneratedBlur] = useState<string | undefined>(
     undefined
   )
   const [blurReady, setBlurReady] = useState(!autoBlur || !!blurDataUrl)
+  const [isVisible, setIsVisible] = useState(loading === 'eager')
 
   const effectiveBlur = blurDataUrl ?? generatedBlur
+
+  // Lazy load with IntersectionObserver
+  useEffect(() => {
+    if (loading === 'eager' || !containerRef.current) {
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.unobserve(entry.target)
+        }
+      },
+      { rootMargin: '50px' }
+    )
+
+    observer.observe(containerRef.current)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [loading])
 
   useEffect(() => {
     if (!autoBlur || blurDataUrl) {
@@ -108,6 +138,7 @@ const Image: FC<ImageProps> = ({
 
   return (
     <div
+      ref={containerRef}
       className={clsx('ui:relative ui:overflow-hidden ui:bg-muted', className)}
       style={aspectRatio ? { aspectRatio } : undefined}
       data-state={state}
@@ -125,7 +156,7 @@ const Image: FC<ImageProps> = ({
             />
           )}
 
-          {blurReady && (
+          {blurReady && isVisible && (
             <img
               ref={imgRef}
               src={src}

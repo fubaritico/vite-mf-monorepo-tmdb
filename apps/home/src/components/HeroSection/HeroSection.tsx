@@ -47,8 +47,12 @@ const HeroSection: FC = () => {
     >
       {data.results?.slice(0, 6).map((item) => {
         const backdropUrl = item.backdrop_path
-          ? `https://image.tmdb.org/t/p/original${item.backdrop_path}`
+          ? `https://image.tmdb.org/t/p/w1280${item.backdrop_path}`
           : ''
+
+        const backdropSrcset = item.backdrop_path
+          ? `https://image.tmdb.org/t/p/w780${item.backdrop_path} 640w, https://image.tmdb.org/t/p/w1280${item.backdrop_path} 1280w`
+          : undefined
 
         return (
           <CarouselItem key={item.id} isHero>
@@ -59,6 +63,7 @@ const HeroSection: FC = () => {
               <div className="hm:relative hm:hero-height hm:w-full hm:overflow-hidden">
                 <img
                   src={backdropUrl}
+                  srcSet={backdropSrcset}
                   alt={item.title ?? 'Unknown'}
                   className="hm:relative hm:h-full hm:w-full hm:object-cover hm:object-center hm:z-0"
                 />

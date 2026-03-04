@@ -54,8 +54,12 @@ const MediaHero: FC = () => {
     : undefined
 
   const backdropUrl = media.backdrop_path
-    ? getImageUrl(media.backdrop_path, 'original')
+    ? getImageUrl(media.backdrop_path, 'w1280')
     : ''
+
+  const backdropSrcset = media.backdrop_path
+    ? `${getImageUrl(media.backdrop_path, 'w780')} 640w, ${getImageUrl(media.backdrop_path, 'w1280')} 1280w`
+    : undefined
 
   const releaseYear = releaseDate
     ? new Date(releaseDate).getFullYear().toString()
@@ -68,6 +72,7 @@ const MediaHero: FC = () => {
       <div className="mda:relative mda:hero-height mda:w-full mda:overflow-hidden">
         <img
           src={backdropUrl}
+          srcSet={backdropSrcset}
           alt={title ?? 'Media'}
           className="mda:relative mda:h-full mda:w-full mda:object-cover mda:object-center mda:z-0"
           onError={(e) => {

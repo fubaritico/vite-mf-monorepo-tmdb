@@ -15,9 +15,6 @@ catalogs:
     '@fontsource/inter':
       specifier: 5.2.8
       version: 5.2.8
-    '@fontsource/press-start-2p':
-      specifier: 5.2.7
-      version: 5.2.7
     '@fontsource/roboto':
       specifier: 5.2.9
       version: 5.2.9
@@ -261,9 +258,6 @@ importers:
       '@fontsource/inter':
         specifier: 'catalog:'
         version: 5.2.8
-      '@fontsource/press-start-2p':
-        specifier: 'catalog:'
-        version: 5.2.7
       '@fontsource/roboto':
         specifier: 'catalog:'
         version: 5.2.9
@@ -464,9 +458,6 @@ importers:
       '@fontsource/inter':
         specifier: 'catalog:'
         version: 5.2.8
-      '@fontsource/press-start-2p':
-        specifier: 'catalog:'
-        version: 5.2.7
       '@fontsource/roboto':
         specifier: 'catalog:'
         version: 5.2.9
@@ -765,9 +756,6 @@ importers:
       '@fontsource/inter':
         specifier: 'catalog:'
         version: 5.2.8
-      '@fontsource/press-start-2p':
-        specifier: 'catalog:'
-        version: 5.2.7
       '@fontsource/roboto':
         specifier: 'catalog:'
         version: 5.2.9
@@ -820,9 +808,6 @@ importers:
       '@fontsource/inter':
         specifier: 'catalog:'
         version: 5.2.8
-      '@fontsource/press-start-2p':
-        specifier: 'catalog:'
-        version: 5.2.7
       '@fontsource/roboto':
         specifier: 'catalog:'
         version: 5.2.9
@@ -1541,9 +1526,6 @@ packages:
 
   '@fontsource/inter@5.2.8':
     resolution: {integrity: sha512-P6r5WnJoKiNVV+zvW2xM13gNdFhAEpQ9dQJHt3naLvfg+LkF2ldgSLiF4T41lf1SQCM9QmkqPTn4TH568IRagg==}
-
-  '@fontsource/press-start-2p@5.2.7':
-    resolution: {integrity: sha512-ezSxYRchANoteja170ZHh2Tt4oejmVEvX42VFPOVVvERSZ68pcuZFjbhHfrK/sNjYmaGg656y7B3431ojO9PCQ==}
 
   '@fontsource/roboto-condensed@5.2.8':
     resolution: {integrity: sha512-M2OxXXGJQeif+LhxHjWiCEX3BHIYeZf64CcUTeh9AQFGp7DXo2UAXZiZUUOalVdOiuUtQSIi2CDHLDWFiyoECQ==}
@@ -7937,8 +7919,6 @@ snapshots:
       levn: 0.4.1
 
   '@fontsource/inter@5.2.8': {}
-
-  '@fontsource/press-start-2p@5.2.7': {}
 
   '@fontsource/roboto-condensed@5.2.8': {}
 
