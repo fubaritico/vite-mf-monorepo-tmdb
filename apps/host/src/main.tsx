@@ -41,6 +41,7 @@ createInstance({
         scope: 'default',
         shareConfig: {
           singleton: true,
+          eager: true,
           requiredVersion: __MF_VERSIONS__['react'],
         },
       },
@@ -51,6 +52,7 @@ createInstance({
         scope: 'default',
         shareConfig: {
           singleton: true,
+          eager: true,
           requiredVersion: __MF_VERSIONS__['react-dom'],
         },
       },
@@ -61,6 +63,7 @@ createInstance({
         scope: 'default',
         shareConfig: {
           singleton: true,
+          eager: true,
           requiredVersion: __MF_VERSIONS__['react-router-dom'],
         },
       },
@@ -71,6 +74,7 @@ createInstance({
         scope: 'default',
         shareConfig: {
           singleton: true,
+          eager: true,
           requiredVersion: __MF_VERSIONS__['@tanstack/react-query'],
         },
       },
