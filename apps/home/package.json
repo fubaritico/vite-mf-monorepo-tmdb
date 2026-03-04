@@ -29,7 +29,6 @@
     "@fontsource/inter": "catalog:",
     "@fontsource/roboto": "catalog:",
     "@fontsource/roboto-condensed": "catalog:",
-    "@fontsource/press-start-2p": "catalog:",
     "@module-federation/dts-plugin": "catalog:",
     "@module-federation/runtime": "catalog:",
     "@module-federation/vite": "catalog:",
