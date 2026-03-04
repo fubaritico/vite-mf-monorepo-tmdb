@@ -117,7 +117,7 @@ export default defineConfig(({ mode }) => {
               suppressLogs: false,
             }),
             assetPreloadInjection({
-              include: ['index', 'hostInit'],
+              include: ['index', 'hostInit', 'main'],
               exclude: ['remoteEntry'],
               suppressLogs: false,
             }),
