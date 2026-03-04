@@ -1,6 +1,6 @@
 {
   "font": {
-    "roboto": { "$value": "'Press Start 2P', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'", "$type": "fontFamily" },
+    "roboto": { "$value": "'Roboto', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'", "$type": "fontFamily" },
     "roboto-condensed": { "$value": "'Roboto Condensed', 'Roboto', ui-sans-serif, system-ui, sans-serif", "$type": "fontFamily" },
     "inter": { "$value": "'Inter', 'Roboto', ui-sans-serif, system-ui, sans-serif", "$type": "fontFamily" },
     "size": {

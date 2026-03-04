@@ -113,7 +113,7 @@ export default defineConfig(({ mode }) => {
         ? []
         : [
             fontPreloadInjection({
-              criticalFonts: ['press-start-2p', 'inter'],
+              criticalFonts: ['inter', 'roboto'],
               suppressLogs: false,
             }),
             federation(moduleFederationConfig),
