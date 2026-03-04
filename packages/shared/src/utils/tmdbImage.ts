@@ -34,7 +34,7 @@ export const getImageUrl = (
  */
 export const getOptimizedImageUrl = (
   path: string | null | undefined,
-  size = 'w500',
+  size = 'w300',
   quality = 80
 ): string => {
   if (!path) return ''
@@ -45,7 +45,7 @@ export const getOptimizedImageUrl = (
     (import.meta.env as Record<string, string>).VITE_USE_NETLIFY_CDN === 'true'
 
   if (useNetlifyCDN) {
-    return `/.netlify/images?url=${encodeURIComponent(baseUrl)}&q=${String(quality)}&w=${size.replace('w', '')}`
+    return `/.netlify/images?url=${encodeURIComponent(baseUrl)}&q=${String(quality)}&w=${size.replace('w', '')}&q=avif`
   }
 
   // Direct TMDB with query params (images will load, format conversion delegated to browser)

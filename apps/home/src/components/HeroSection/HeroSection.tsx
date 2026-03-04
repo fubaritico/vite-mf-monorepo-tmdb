@@ -52,7 +52,7 @@ const HeroSection: FC = () => {
           : ''
 
         const backdropPathTablet = item.backdrop_path
-          ? getOptimizedImageUrl(item.backdrop_path, 'w500', 60)
+          ? getOptimizedImageUrl(item.backdrop_path, 'w300', 60)
           : ''
 
         const backdropPathDesktop = item.backdrop_path

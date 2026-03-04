@@ -34,7 +34,7 @@ const FreeToWatchTVCarousel: FC = () => {
     <Carousel rounded={false}>
       {data.results?.map((item) => {
         const posterUrl = item.poster_path
-          ? `https://image.tmdb.org/t/p/w342${item.poster_path}`
+          ? `https://image.tmdb.org/t/p/w92${item.poster_path}`
           : ''
         const year = item.first_air_date
           ? new Date(item.first_air_date).getFullYear()
