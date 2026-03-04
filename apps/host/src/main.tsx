@@ -1,6 +1,6 @@
 import { createInstance } from '@module-federation/runtime'
 import { QueryClientProvider } from '@tanstack/react-query'
-import { checkRemoteHealth } from '@vite-mf-monorepo/shared'
+// import { checkRemoteHealth } from '@vite-mf-monorepo/shared'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
@@ -10,8 +10,8 @@ import './index.css'
 import ErrorBoundary from './components/ErrorBoundary'
 import { queryClient, router } from './router'
 
-const HOME_REMOTE_URL = `${import.meta.env.VITE_HOME_URL as string}/health`
-const MOVIE_REMOTE_URL = `${import.meta.env.VITE_MEDIA_URL as string}/health`
+// const HOME_REMOTE_URL = `${import.meta.env.VITE_HOME_URL as string}/health`
+// const MOVIE_REMOTE_URL = `${import.meta.env.VITE_MEDIA_URL as string}/health`
 
 // Initialize module federation runtime
 createInstance({
@@ -79,6 +79,20 @@ createInstance({
   /* eslint-enable @typescript-eslint/dot-notation */
 })
 
+const root = document.getElementById('root')
+if (!root) {
+  throw new Error('root not found')
+}
+createRoot(root).render(
+  <StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <ErrorBoundary>
+        <RouterProvider router={router} />
+      </ErrorBoundary>
+    </QueryClientProvider>
+  </StrictMode>
+)
+/*
 async function bootstrap() {
   const root = document.getElementById('root')
   if (!root) {
@@ -125,4 +139,4 @@ async function bootstrap() {
   }
 }
 
-void bootstrap()
+void bootstrap()*/
