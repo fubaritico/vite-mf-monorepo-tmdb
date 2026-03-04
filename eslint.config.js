@@ -36,6 +36,7 @@ export default tseslint.config(
       '**/dist/**',
       '**/@mf-types/**',
       '**/.__mf__temp/**',
+      '**/files/**',
       '**/scripts/**',
       'packages/http-client/src/client/**',
       'packages/storybook/.storybook/**',
@@ -73,7 +74,10 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       '@typescript-eslint/no-unsafe-assignment': 'warn',
-      '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { ignoreRestSiblings: true },
+      ],
       '@typescript-eslint/no-explicit-any': 'error',
       'no-console': [
         'error',
