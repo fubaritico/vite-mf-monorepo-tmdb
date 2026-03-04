@@ -25,7 +25,7 @@ const Media: FC = () => {
         fallback={
           <div
             className="mda:flex mda:flex-col mda:gap-4"
-            style={{ minHeight: '80px' }}
+            style={{ minHeight: '160px' }}
           >
             <Skeleton variant="line" width="mda:w-32" height="mda:h-8" />
             <Skeleton variant="line" width="mda:w-full" height="mda:h-6" />
@@ -40,7 +40,7 @@ const Media: FC = () => {
         fallback={
           <div
             className="mda:flex mda:flex-col mda:gap-4"
-            style={{ minHeight: '200px' }}
+            style={{ minHeight: '244px' }}
           >
             <Skeleton variant="line" width="mda:w-24" height="mda:h-8" />
             <div className="mda:grid mda:grid-cols-2 mda:gap-6">
@@ -69,7 +69,7 @@ const Media: FC = () => {
         fallback={
           <div
             className="mda:flex mda:flex-col mda:gap-4"
-            style={{ minHeight: '250px' }}
+            style={{ minHeight: '350px' }}
           >
             <Skeleton variant="line" width="mda:w-24" height="mda:h-8" />
             <div className="mda:grid mda:grid-cols-2 md:mda:grid-cols-3 mda:gap-4">
@@ -94,7 +94,7 @@ const Media: FC = () => {
         fallback={
           <div
             className="mda:flex mda:flex-col mda:gap-4"
-            style={{ minHeight: '350px' }}
+            style={{ minHeight: '540px' }}
           >
             <Skeleton variant="line" width="mda:w-24" height="mda:h-8" />
             <div className="mda:grid mda:grid-cols-2 mda:gap-6">

@@ -23,7 +23,10 @@ const Home: FC = () => {
         <Section spacing="lg" maxWidth="xl">
           <Suspense
             fallback={
-              <div className="hm:flex hm:flex-col hm:gap-4">
+              <div
+                className="hm:flex hm:flex-col hm:gap-4"
+                style={{ minHeight: '421px' }}
+              >
                 <Skeleton variant="line" width="hm:w-32" height="hm:h-8" />
                 <Skeleton variant="line" width="hm:w-24" height="hm:h-10" />
                 <CarouselLoading count={6} />
@@ -40,7 +43,10 @@ const Home: FC = () => {
         <Section spacing="lg" maxWidth="xl">
           <Suspense
             fallback={
-              <div className="hm:flex hm:flex-col hm:gap-4">
+              <div
+                className="hm:flex hm:flex-col hm:gap-4"
+                style={{ minHeight: '421px' }}
+              >
                 <Skeleton variant="line" width="hm:w-40" height="hm:h-8" />
                 <CarouselLoading count={6} />
               </div>
@@ -56,7 +62,10 @@ const Home: FC = () => {
         <Section spacing="lg" maxWidth="xl">
           <Suspense
             fallback={
-              <div className="hm:flex hm:flex-col hm:gap-4">
+              <div
+                className="hm:flex hm:flex-col hm:gap-4"
+                style={{ minHeight: '421px' }}
+              >
                 <Skeleton variant="line" width="hm:w-40" height="hm:h-8" />
                 <CarouselLoading count={6} />
               </div>
