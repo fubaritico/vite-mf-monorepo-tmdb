@@ -47,6 +47,7 @@ catalog:
   '@fontsource/inter': 5.2.8
   '@fontsource/roboto': 5.2.9
   '@fontsource/roboto-condensed': 5.2.8
+  '@fontsource/press-start-2p': 5.2.7
 
   # Testing
   '@testing-library/react': 16.3.0
