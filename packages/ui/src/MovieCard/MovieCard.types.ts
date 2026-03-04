@@ -2,6 +2,8 @@
  * MovieCard component types with discriminated union for type-safe variants
  */
 
+import type { ImageLoading } from '../Image'
+
 /**
  * Base props shared across all MovieCard variants
  */
@@ -18,6 +20,8 @@ export interface MovieCardBaseProps {
   year?: number | null
   /** Additional class name */
   className?: string
+  /** Image loading strategy ('lazy' | 'eager'). Default: 'lazy' */
+  imageLoading?: ImageLoading
 }
 
 /**

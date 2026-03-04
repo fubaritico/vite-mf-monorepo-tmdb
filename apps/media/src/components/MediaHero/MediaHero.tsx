@@ -73,6 +73,7 @@ const MediaHero: FC = () => {
         <img
           src={backdropUrl}
           srcSet={backdropSrcset}
+          loading="lazy"
           alt={title ?? 'Media'}
           className="mda:relative mda:h-full mda:w-full mda:object-cover mda:object-center mda:z-0"
           onError={(e) => {

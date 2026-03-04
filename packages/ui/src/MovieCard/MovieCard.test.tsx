@@ -10,6 +10,7 @@ describe('MovieCard', () => {
     posterUrl: 'https://image.tmdb.org/t/p/w342/test-poster.jpg',
     voteAverage: 7.5,
     year: 2024,
+    imageLoading: 'eager' as const,
   }
 
   it('renders movie title', () => {

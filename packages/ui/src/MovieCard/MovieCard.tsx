@@ -16,6 +16,7 @@ const MovieCard: FC<MovieCardProps> = ({
   voteAverage,
   year,
   className,
+  imageLoading = 'lazy',
   as = 'card',
   ...rest
 }) => {
@@ -46,6 +47,7 @@ const MovieCard: FC<MovieCardProps> = ({
         <Image
           src={posterUrl}
           alt={title}
+          loading={imageLoading}
           aspectRatio={undefined}
           className="ui:h-full ui:w-full ui:object-cover"
         />
