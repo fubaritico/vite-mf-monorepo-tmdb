@@ -48,19 +48,19 @@ const HeroSection: FC = () => {
     >
       {data.results?.slice(0, 6).map((item) => {
         const backdropPathMobile = item.backdrop_path
-          ? getOptimizedImageUrl(item.backdrop_path, 'w300')
+          ? getOptimizedImageUrl(item.backdrop_path, 'w300', 60)
           : ''
 
         const backdropPathTablet = item.backdrop_path
-          ? getOptimizedImageUrl(item.backdrop_path, 'w780')
+          ? getOptimizedImageUrl(item.backdrop_path, 'w500', 60)
           : ''
 
         const backdropPathDesktop = item.backdrop_path
-          ? getOptimizedImageUrl(item.backdrop_path, 'w1280')
+          ? getOptimizedImageUrl(item.backdrop_path, 'w780', 60)
           : ''
 
         const backdropPathUltraWide = item.backdrop_path
-          ? getOptimizedImageUrl(item.backdrop_path, 'original')
+          ? getOptimizedImageUrl(item.backdrop_path, 'w1280', 60)
           : ''
 
         return (
@@ -88,7 +88,7 @@ const HeroSection: FC = () => {
                     srcSet={backdropPathUltraWide}
                   />
                   <img
-                    src={backdropPathDesktop}
+                    src={backdropPathMobile}
                     fetchPriority="high"
                     alt={item.title ?? 'Unknown'}
                     className="hm:relative hm:h-full hm:w-full hm:object-cover hm:object-center hm:z-0"
