@@ -1,5 +1,5 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
-import { Typography } from '@vite-mf-monorepo/ui'
+import { Skeleton, Typography } from '@vite-mf-monorepo/ui'
 import { Suspense, lazy } from 'react'
 import { Outlet } from 'react-router-dom'
 
@@ -21,22 +21,101 @@ const Media: FC = () => {
       <MediaHero />
 
       {/* Synopsis Section - White background */}
-      <Suspense>
+      <Suspense
+        fallback={
+          <div
+            className="mda:flex mda:flex-col mda:gap-4"
+            style={{ minHeight: '80px' }}
+          >
+            <Skeleton variant="line" width="mda:w-32" height="mda:h-8" />
+            <Skeleton variant="line" width="mda:w-full" height="mda:h-6" />
+          </div>
+        }
+      >
         <Synopsis />
       </Suspense>
 
       {/* Crew Section - White background */}
-      <Suspense>
+      <Suspense
+        fallback={
+          <div
+            className="mda:flex mda:flex-col mda:gap-4"
+            style={{ minHeight: '200px' }}
+          >
+            <Skeleton variant="line" width="mda:w-24" height="mda:h-8" />
+            <div className="mda:grid mda:grid-cols-2 mda:gap-6">
+              {Array.from({ length: 2 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="mda:flex mda:flex-col mda:items-center mda:gap-2"
+                >
+                  <Skeleton
+                    variant="circle"
+                    width="mda:w-24"
+                    height="mda:h-24"
+                  />
+                  <Skeleton variant="line" width="mda:w-20" height="mda:h-4" />
+                </div>
+              ))}
+            </div>
+          </div>
+        }
+      >
         <Crew />
       </Suspense>
 
       {/* Photos Section */}
-      <Suspense>
+      <Suspense
+        fallback={
+          <div
+            className="mda:flex mda:flex-col mda:gap-4"
+            style={{ minHeight: '250px' }}
+          >
+            <Skeleton variant="line" width="mda:w-24" height="mda:h-8" />
+            <div className="mda:grid mda:grid-cols-2 md:mda:grid-cols-3 mda:gap-4">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <Skeleton
+                  key={i}
+                  variant="rectangle"
+                  width="mda:w-full"
+                  height="mda:h-40"
+                  rounded
+                />
+              ))}
+            </div>
+          </div>
+        }
+      >
         <Photos />
       </Suspense>
 
       {/* Cast Section */}
-      <Suspense>
+      <Suspense
+        fallback={
+          <div
+            className="mda:flex mda:flex-col mda:gap-4"
+            style={{ minHeight: '350px' }}
+          >
+            <Skeleton variant="line" width="mda:w-24" height="mda:h-8" />
+            <div className="mda:grid mda:grid-cols-2 mda:gap-6">
+              {Array.from({ length: 10 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="mda:flex mda:flex-col mda:items-center mda:gap-2"
+                >
+                  <Skeleton
+                    variant="circle"
+                    width="mda:w-20"
+                    height="mda:h-20"
+                  />
+                  <Skeleton variant="line" width="mda:w-24" height="mda:h-4" />
+                  <Skeleton variant="line" width="mda:w-20" height="mda:h-3" />
+                </div>
+              ))}
+            </div>
+          </div>
+        }
+      >
         <Cast />
       </Suspense>
 
