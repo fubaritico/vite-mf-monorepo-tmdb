@@ -77,3 +77,4 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `/new-section [AppName] [SectionName]` — create embedded-query section in any app
 - `/story [Name]` — create Storybook story (**mandatory** after every component)
 - `/commit` — prepare conventional commit message
+- `/start-session` — resume a work session
