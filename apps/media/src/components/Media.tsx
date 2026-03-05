@@ -6,6 +6,7 @@ import { Cast } from './Cast'
 import { Crew } from './Crew'
 import { MediaHero } from './MediaHero'
 import { Photos } from './Photos'
+import { SimilarSection } from './SimilarSection'
 import { Synopsis } from './Synopsis'
 import { TrailersSection } from './TrailersSection'
 
@@ -37,17 +38,8 @@ const Media: FC = () => {
       {/* Trailers & Clips Section */}
       <TrailersSection />
 
-      {/* You May Also Like Section */}
-      <Container variant="default">
-        <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mda:mb-6">
-            You May Also Like
-          </Typography>
-          <Typography variant="body" className="mda:text-muted-foreground">
-            Similar movies carousel coming soon...
-          </Typography>
-        </Section>
-      </Container>
+      {/* Similar Section with Movie/TV Tabs */}
+      <SimilarSection />
 
       {/* Recommendations Section */}
       <Container variant="default">

@@ -40,7 +40,8 @@ const TabsList: FC<TabsListProps> = ({ className, children, ...rest }) => {
         className={clsx(
           'ui:flex ui:gap-1',
           variant === 'underline' && 'ui:border-b ui:border-border',
-          variant === 'pills' && 'ui:bg-muted ui:p-1 ui:rounded-lg ui:w-fit',
+          variant === 'pills' &&
+            'ui:[.media-section:nth-of-type(odd)_&]:bg-white ui:bg-muted ui:p-1 ui:rounded-lg ui:w-fit',
           className
         )}
         role="tablist"
