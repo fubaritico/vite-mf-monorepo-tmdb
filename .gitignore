@@ -23,6 +23,7 @@ test-output.json
 
 # module federation hidden folder
 .__mf__temp
+**/apis.d.ts
 
 
 # Vitest coverage
