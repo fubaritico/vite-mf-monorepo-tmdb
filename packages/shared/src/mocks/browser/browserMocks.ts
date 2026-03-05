@@ -19,5 +19,11 @@ export const setupBrowserMocks = () => {
     unobserve() {}
     disconnect() {}
   } as any
+
+  // Mock HTMLDialogElement methods for jsdom environment
+  if (typeof HTMLDialogElement !== 'undefined') {
+    HTMLDialogElement.prototype.showModal = () => {}
+    HTMLDialogElement.prototype.close = () => {}
+  }
 }
 /* eslint-enable @typescript-eslint/no-empty-function, @typescript-eslint/no-explicit-any, @typescript-eslint/no-useless-constructor, @typescript-eslint/no-unsafe-assignment */
