@@ -1,11 +1,10 @@
-import { Container, Section } from '@vite-mf-monorepo/layouts'
-import { Typography } from '@vite-mf-monorepo/ui'
 import { Outlet } from 'react-router-dom'
 
 import { Cast } from './Cast'
 import { Crew } from './Crew'
 import { MediaHero } from './MediaHero'
 import { Photos } from './Photos'
+import { RecommendedSection } from './RecommendedSection'
 import { SimilarSection } from './SimilarSection'
 import { Synopsis } from './Synopsis'
 import { TrailersSection } from './TrailersSection'
@@ -42,16 +41,7 @@ const Media: FC = () => {
       <SimilarSection />
 
       {/* Recommendations Section */}
-      <Container variant="default">
-        <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mda:mb-6">
-            Recommendations
-          </Typography>
-          <Typography variant="body" className="mda:text-muted-foreground">
-            Recommended movies carousel coming soon...
-          </Typography>
-        </Section>
-      </Container>
+      <RecommendedSection />
     </>
   )
 }
