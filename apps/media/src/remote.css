@@ -89,9 +89,6 @@
   .mda\:left-1\/2 {
     left: calc(1/2 * 100%);
   }
-  .mda\:z-0 {
-    z-index: 0;
-  }
   .mda\:z-1 {
     z-index: 1;
   }
@@ -203,9 +200,6 @@
   }
   .mda\:object-cover {
     object-fit: cover;
-  }
-  .mda\:object-center {
-    object-position: center;
   }
   .mda\:px-4 {
     padding-inline: var(--mda-spacing-4);

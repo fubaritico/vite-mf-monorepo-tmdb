@@ -5,15 +5,6 @@
       --tw-translate-x: 0;
       --tw-translate-y: 0;
       --tw-translate-z: 0;
-      --tw-gradient-position: initial;
-      --tw-gradient-from: #0000;
-      --tw-gradient-via: #0000;
-      --tw-gradient-to: #0000;
-      --tw-gradient-stops: initial;
-      --tw-gradient-via-stops: initial;
-      --tw-gradient-from-position: 0%;
-      --tw-gradient-via-position: 50%;
-      --tw-gradient-to-position: 100%;
     }
   }
 }
@@ -40,32 +31,11 @@
   .hm\:relative {
     position: relative;
   }
-  .hm\:inset-0 {
-    inset: var(--hm-spacing-0);
-  }
-  .hm\:top-0 {
-    top: var(--hm-spacing-0);
-  }
-  .hm\:right-0 {
-    right: var(--hm-spacing-0);
-  }
-  .hm\:bottom-0 {
-    bottom: var(--hm-spacing-0);
-  }
   .hm\:bottom-8 {
     bottom: var(--hm-spacing-8);
   }
-  .hm\:left-0 {
-    left: var(--hm-spacing-0);
-  }
   .hm\:left-1\/2 {
     left: calc(1/2 * 100%);
-  }
-  .hm\:z-0 {
-    z-index: 0;
-  }
-  .hm\:z-1 {
-    z-index: 1;
   }
   .hm\:z-2 {
     z-index: 2;
@@ -78,9 +48,6 @@
   }
   .hm\:flex {
     display: flex;
-  }
-  .hm\:h-full {
-    height: 100%;
   }
   .hm\:w-full {
     width: 100%;
@@ -109,29 +76,6 @@
   }
   .hm\:overflow-hidden {
     overflow: hidden;
-  }
-  .hm\:bg-gradient-to-t {
-    --tw-gradient-position: to top in oklab;
-    background-image: linear-gradient(var(--tw-gradient-stops));
-  }
-  .hm\:from-black\/80 {
-    --tw-gradient-from: color-mix(in oklab, var(--hm-color-black) 80%, transparent);
-    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
-  }
-  .hm\:via-black\/40 {
-    --tw-gradient-via: color-mix(in oklab, var(--hm-color-black) 40%, transparent);
-    --tw-gradient-via-stops: var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-via) var(--tw-gradient-via-position), var(--tw-gradient-to) var(--tw-gradient-to-position);
-    --tw-gradient-stops: var(--tw-gradient-via-stops);
-  }
-  .hm\:to-transparent {
-    --tw-gradient-to: transparent;
-    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
-  }
-  .hm\:object-cover {
-    object-fit: cover;
-  }
-  .hm\:object-center {
-    object-position: center;
   }
   .hm\:px-4 {
     padding-inline: var(--hm-spacing-4);
@@ -220,46 +164,4 @@
   syntax: "*";
   inherits: false;
   initial-value: 0;
-}
-@property --tw-gradient-position {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-gradient-from {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: #0000;
-}
-@property --tw-gradient-via {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: #0000;
-}
-@property --tw-gradient-to {
-  syntax: "<color>";
-  inherits: false;
-  initial-value: #0000;
-}
-@property --tw-gradient-stops {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-gradient-via-stops {
-  syntax: "*";
-  inherits: false;
-}
-@property --tw-gradient-from-position {
-  syntax: "<length-percentage>";
-  inherits: false;
-  initial-value: 0%;
-}
-@property --tw-gradient-via-position {
-  syntax: "<length-percentage>";
-  inherits: false;
-  initial-value: 50%;
-}
-@property --tw-gradient-to-position {
-  syntax: "<length-percentage>";
-  inherits: false;
-  initial-value: 100%;
 }

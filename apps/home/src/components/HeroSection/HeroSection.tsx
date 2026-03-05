@@ -1,14 +1,13 @@
 import {
   Carousel,
   CarouselItem,
+  HeroImage,
   Skeleton,
   Typography,
 } from '@vite-mf-monorepo/ui'
 import { Link } from 'react-router-dom'
 
 import { useNowPlayingMovies } from '../../hooks/useNowPlayingMovies'
-
-import HeroImage from './HeroImage'
 
 import type { UseQueryResult } from '@tanstack/react-query'
 import type {
@@ -27,7 +26,7 @@ const HeroSection: FC = () => {
     return (
       <Skeleton
         variant="rectangle"
-        width="hm:w-full"
+        className="hm:w-full hm:hero-height"
         aspectRatio="21/9"
         rounded={false}
       />
