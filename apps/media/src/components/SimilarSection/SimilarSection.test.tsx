@@ -1,4 +1,5 @@
 import { screen, waitFor } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { userEvent } from '@testing-library/user-event'
 import { renderWithReactQuery } from '@vite-mf-monorepo/shared/test-utils'
 import { useLocation, useParams } from 'react-router-dom'

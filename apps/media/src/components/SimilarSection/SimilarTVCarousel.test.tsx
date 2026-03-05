@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { mockTVSeriesSimilar } from '@vite-mf-monorepo/shared/mocks'
 import { renderWithRouter } from '@vite-mf-monorepo/shared/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
