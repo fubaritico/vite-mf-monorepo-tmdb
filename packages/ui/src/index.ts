@@ -33,6 +33,9 @@ export type { RatingProps, RatingSize, RatingVariant } from './Rating'
 export { MovieCard } from './MovieCard'
 export type { MovieCardProps } from './MovieCard'
 
+export { TrailerCard } from './TrailerCard'
+export type { TrailerCardProps } from './TrailerCard'
+
 export {
   Carousel,
   CarouselCounter,

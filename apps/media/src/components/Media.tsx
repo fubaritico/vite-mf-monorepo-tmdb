@@ -7,6 +7,7 @@ import { Crew } from './Crew'
 import { MediaHero } from './MediaHero'
 import { Photos } from './Photos'
 import { Synopsis } from './Synopsis'
+import { TrailersSection } from './TrailersSection'
 
 import type { FC } from 'react'
 
@@ -34,16 +35,7 @@ const Media: FC = () => {
       <Outlet />
 
       {/* Trailers & Clips Section */}
-      <Container variant="default">
-        <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mda:mb-6">
-            Trailers & Clips
-          </Typography>
-          <Typography variant="body" className="mda:text-muted-foreground">
-            Video trailers coming soon...
-          </Typography>
-        </Section>
-      </Container>
+      <TrailersSection />
 
       {/* You May Also Like Section */}
       <Container variant="default">
