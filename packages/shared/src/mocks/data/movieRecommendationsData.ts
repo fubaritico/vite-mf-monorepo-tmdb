@@ -160,7 +160,7 @@ export const mockMovieRecommendations: MovieRecommendationsResponse = {
       adult: false,
       backdrop_path: '/1MjbsHtkXz6J5oLpJBMUa39ooNJ.jpg',
       genre_ids: [18, 80, 53],
-      id: 769,
+      id: 949,
       original_language: 'en',
       original_title: 'Heat',
       overview:
