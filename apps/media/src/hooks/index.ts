@@ -1,6 +1,8 @@
 export { useMediaDetails } from './useMediaDetails'
 export { useMovieDetails } from './useMovieDetails'
 export { useMovieImages } from './useMovieImages'
+export { useMovieRecommendations } from './useMovieRecommendations'
 export { useMovieSimilar } from './useMovieSimilar'
 export { useTVDetails } from './useTVDetails'
+export { useTVSeriesRecommendations } from './useTVSeriesRecommendations'
 export { useTVSeriesSimilar } from './useTVSeriesSimilar'
