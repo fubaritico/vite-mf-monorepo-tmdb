@@ -1,3 +1,4 @@
+import { getOptimizedImageUrl } from '@vite-mf-monorepo/shared'
 import {
   Carousel,
   CarouselItem,
@@ -45,7 +46,7 @@ const TrendingSection: FC = () => {
       <Carousel rounded={false}>
         {data.results?.map((item) => {
           const posterUrl = item.poster_path
-            ? `https://image.tmdb.org/t/p/w154${item.poster_path}`
+            ? getOptimizedImageUrl(item.poster_path, 'w92', 60)
             : ''
           const year = item.release_date
             ? new Date(item.release_date).getFullYear()
