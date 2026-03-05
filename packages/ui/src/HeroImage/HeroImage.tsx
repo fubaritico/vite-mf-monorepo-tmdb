@@ -1,14 +1,21 @@
 import { getOptimizedImageUrl } from '@vite-mf-monorepo/shared'
-import { Skeleton } from '@vite-mf-monorepo/ui'
 import { useState } from 'react'
+
+import { Skeleton } from '../Skeleton'
 
 import type { FC } from 'react'
 
 export interface HeroImageProps {
-  backdropPath: string | null | undefined
-  title: string | null | undefined
+  /** Backdrop path from TMDB API */
+  backdropPath?: string | null
+  /** Alt text for the image */
+  title?: string | null
 }
 
+/**
+ * HeroImage component for displaying optimized backdrop images with responsive sources
+ * and gradient overlay. Used in hero sections across the application.
+ */
 const HeroImage: FC<HeroImageProps> = ({ backdropPath, title }) => {
   const [loading, setLoading] = useState(true)
 
@@ -32,9 +39,10 @@ const HeroImage: FC<HeroImageProps> = ({ backdropPath, title }) => {
     <>
       {loading && (
         <Skeleton
+          data-testid="hero-image-skeleton"
           variant="rectangle"
-          width="hm:relative hm:w-full h-full hm:hero-height hm:z-0"
-          aspectRatio="16/9"
+          width="ui:relative ui:w-full ui:h-full ui:hero-height ui:z-0"
+          aspectRatio="21/9"
           rounded={false}
         />
       )}
@@ -59,12 +67,12 @@ const HeroImage: FC<HeroImageProps> = ({ backdropPath, title }) => {
               setLoading(false)
             }}
             alt={title ?? 'Unknown'}
-            className="hm:relative hm:h-full hm:w-full hm:object-cover hm:object-center hm:z-0"
+            className="ui:relative ui:h-full ui:w-full ui:object-cover ui:object-center ui:z-0"
           />
         )}
       </picture>
       {/* Gradient Overlay */}
-      <div className="hm:absolute hm:inset-0 hm:bg-gradient-to-t hm:from-black/80 hm:via-black/40 hm:to-transparent hm:z-1 hm:top-0 hm:left-0 hm:right-0 hm:bottom-0" />
+      <div className="ui:absolute ui:inset-0 ui:bg-gradient-to-t ui:from-black/80 ui:via-black/40 ui:to-transparent ui:z-1 ui:top-0 ui:left-0 ui:right-0 ui:bottom-0" />
     </>
   )
 }

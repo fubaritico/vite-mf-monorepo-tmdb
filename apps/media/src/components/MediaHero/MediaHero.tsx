@@ -1,5 +1,10 @@
-import { getOptimizedImageUrl } from '@vite-mf-monorepo/shared'
-import { Badge, Rating, Skeleton, Typography } from '@vite-mf-monorepo/ui'
+import {
+  Badge,
+  HeroImage,
+  Rating,
+  Skeleton,
+  Typography,
+} from '@vite-mf-monorepo/ui'
 import clsx from 'clsx'
 import { useLocation, useParams } from 'react-router-dom'
 
@@ -25,8 +30,8 @@ const MediaHero: FC = () => {
     return (
       <Skeleton
         variant="rectangle"
-        width="mda:w-full"
-        className="mda:hero-height"
+        className="hm:w-full hm:hero-height"
+        aspectRatio="21/9"
         rounded={false}
       />
     )
@@ -53,22 +58,6 @@ const MediaHero: FC = () => {
     ? (media as { number_of_episodes?: number }).number_of_episodes
     : undefined
 
-  const backdropPathMobile = media.backdrop_path
-    ? getOptimizedImageUrl(media.backdrop_path, 'w300')
-    : ''
-
-  const backdropPathTablet = media.backdrop_path
-    ? getOptimizedImageUrl(media.backdrop_path, 'w780')
-    : ''
-
-  const backdropPathDesktop = media.backdrop_path
-    ? getOptimizedImageUrl(media.backdrop_path, 'w1280')
-    : ''
-
-  const backdropPathUltraWide = media.backdrop_path
-    ? getOptimizedImageUrl(media.backdrop_path, 'original')
-    : ''
-
   const releaseYear = releaseDate
     ? new Date(releaseDate).getFullYear().toString()
     : undefined
@@ -78,25 +67,8 @@ const MediaHero: FC = () => {
     <div className="mda:relative mda:w-full">
       {/* Backdrop Image */}
       <div className="mda:relative mda:hero-height mda:w-full mda:overflow-hidden">
-        <picture>
-          <source media="(max-width: 639px)" srcSet={backdropPathMobile} />
-          <source media="(max-width: 1023px)" srcSet={backdropPathTablet} />
-          <source media="(max-width: 1535px)" srcSet={backdropPathDesktop} />
-          <source media="(min-width: 1536px)" srcSet={backdropPathUltraWide} />
-          <img
-            src={backdropPathDesktop}
-            fetchPriority="high"
-            alt={title ?? 'Media'}
-            className="mda:relative mda:h-full mda:w-full mda:object-cover mda:object-center mda:z-0"
-            onError={(e) => {
-              console.warn('[MediaHero] Image failed to load:', {
-                src: backdropPathDesktop,
-                alt: title,
-                error: e,
-              })
-            }}
-          />
-        </picture>
+        <HeroImage backdropPath={media.backdrop_path} />
+
         {/* Gradient Overlay */}
         <div className="mda:absolute mda:inset-0 mda:bg-gradient-to-t mda:from-black/80 mda:via-black/40 mda:to-transparent mda:z-1 mda:top-0 mda:left-0 mda:right-0 mda:bottom-0" />
 
