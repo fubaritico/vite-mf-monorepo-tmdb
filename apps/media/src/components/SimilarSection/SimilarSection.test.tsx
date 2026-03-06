@@ -1,6 +1,5 @@
-import { screen, waitFor } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { userEvent } from '@testing-library/user-event'
 import { renderWithReactQuery } from '@vite-mf-monorepo/shared/test-utils'
 import { useLocation, useParams } from 'react-router-dom'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
@@ -47,14 +46,7 @@ describe('SimilarSection', () => {
     ).toBeInTheDocument()
   })
 
-  it('renders tabs with Movies and Series TV options', () => {
-    renderWithReactQuery(<SimilarSection />)
-
-    expect(screen.getByRole('tab', { name: 'Movies' })).toBeInTheDocument()
-    expect(screen.getByRole('tab', { name: 'Series TV' })).toBeInTheDocument()
-  })
-
-  it('defaults to Movies tab on /movie/:id page', () => {
+  it('displays SimilarMoviesCarousel on /movie/:id page', () => {
     vi.mocked(useLocation).mockReturnValue({
       pathname: '/movie/278',
       search: '',
@@ -65,11 +57,10 @@ describe('SimilarSection', () => {
 
     renderWithReactQuery(<SimilarSection />)
 
-    const moviesTab = screen.getByRole('tab', { name: 'Movies' })
-    expect(moviesTab).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByTestId('similar-movies-carousel')).toBeInTheDocument()
   })
 
-  it('defaults to Series TV tab on /tv/:id page', () => {
+  it('displays SimilarTVCarousel on /tv/:id page', () => {
     vi.mocked(useLocation).mockReturnValue({
       pathname: '/tv/1399',
       search: '',
@@ -80,45 +71,6 @@ describe('SimilarSection', () => {
 
     renderWithReactQuery(<SimilarSection />)
 
-    const tvTab = screen.getByRole('tab', { name: 'Series TV' })
-    expect(tvTab).toHaveAttribute('aria-selected', 'true')
-  })
-
-  it('displays SimilarMoviesCarousel when Movies tab is active', () => {
-    renderWithReactQuery(<SimilarSection />)
-
-    expect(screen.getByTestId('similar-movies-carousel')).toBeInTheDocument()
-  })
-
-  it('displays SimilarTVCarousel when Series TV tab is clicked', async () => {
-    const user = userEvent.setup()
-
-    renderWithReactQuery(<SimilarSection />)
-
-    const tvTab = screen.getByRole('tab', { name: 'Series TV' })
-    await user.click(tvTab)
-
-    await waitFor(() => {
-      expect(screen.getByTestId('similar-tv-carousel')).toBeInTheDocument()
-    })
-  })
-
-  it('switches back to SimilarMoviesCarousel when Movies tab is clicked', async () => {
-    const user = userEvent.setup()
-
-    renderWithReactQuery(<SimilarSection />)
-
-    const tvTab = screen.getByRole('tab', { name: 'Series TV' })
-    const moviesTab = screen.getByRole('tab', { name: 'Movies' })
-
-    await user.click(tvTab)
-    await waitFor(() => {
-      expect(screen.getByTestId('similar-tv-carousel')).toBeInTheDocument()
-    })
-
-    await user.click(moviesTab)
-    await waitFor(() => {
-      expect(screen.getByTestId('similar-movies-carousel')).toBeInTheDocument()
-    })
+    expect(screen.getByTestId('similar-tv-carousel')).toBeInTheDocument()
   })
 })
