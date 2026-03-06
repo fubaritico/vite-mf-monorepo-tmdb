@@ -22,11 +22,21 @@ const TabsTrigger: FC<TabsTriggerProps> = ({
   children,
   ...rest
 }) => {
-  const { value: activeValue, onValueChange, variant } = useTabsContext()
+  const {
+    value: activeValue,
+    onValueChange,
+    variant,
+    prefix,
+  } = useTabsContext()
   const { registerTrigger, unregisterTrigger, getTriggers, isDisabled } =
     useTabsListContext()
 
   const isActive = value === activeValue
+
+  const getTabId = (val: string) =>
+    prefix ? `tab-${prefix}-${val}` : `tab-${val}`
+  const getTabPanelId = (val: string) =>
+    prefix ? `tabpanel-${prefix}-${val}` : `tabpanel-${val}`
 
   useEffect(() => {
     registerTrigger(value, disabled)
@@ -102,9 +112,9 @@ const TabsTrigger: FC<TabsTriggerProps> = ({
     <button
       type="button"
       role="tab"
-      aria-selected={isActive}
-      aria-controls={`tabpanel-${value}`}
-      id={`tab-${value}`}
+      aria-selected={isActive ? 'true' : 'false'}
+      aria-controls={getTabPanelId(value)}
+      id={getTabId(value)}
       tabIndex={isActive ? 0 : -1}
       disabled={disabled}
       className={clsx(
@@ -117,15 +127,15 @@ const TabsTrigger: FC<TabsTriggerProps> = ({
           'ui:relative ui:border-b-2 ui:border-transparent ui:-mb-px',
           isActive
             ? 'ui:text-primary ui:border-primary'
-            : 'ui:text-muted-foreground hover:ui:text-foreground',
+            : 'ui:text-foreground hover:ui:text-foreground',
           disabled &&
             'ui:text-muted-foreground/50 ui:cursor-not-allowed hover:ui:text-muted-foreground/50',
         ],
         variant === 'pills' && [
           'ui:rounded-md',
           isActive
-            ? 'ui:bg-primary ui:text-white ui:shadow-sm'
-            : 'ui:text-muted-foreground hover:ui:text-foreground',
+            ? 'ui:bg-primary ui:shadow-sm'
+            : 'ui:text-foreground hover:ui:text-foreground',
           disabled &&
             'ui:text-muted-foreground/50 ui:cursor-not-allowed hover:ui:text-muted-foreground/50',
         ],

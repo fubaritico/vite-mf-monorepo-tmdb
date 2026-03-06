@@ -50,7 +50,10 @@ const Talent: FC<TalentProps> = ({
         >
           {name ?? 'Unknown'}
         </Typography>
-        <Typography variant="caption" className="ui:text-muted-foreground">
+        <Typography
+          variant="caption"
+          className="ui:text-muted-foreground ui:[.media-section:nth-of-type(odd)_&]:text-badge-foreground"
+        >
           {role ?? 'N/A'}
         </Typography>
       </div>

@@ -108,9 +108,6 @@ describe('PopularSection', () => {
       expect(screen.getByText('Test TV Show 1')).toBeInTheDocument()
       expect(screen.getByText('Test TV Show 2')).toBeInTheDocument()
     })
-
-    // Verify movies are no longer displayed
-    expect(screen.queryByText('Test Media 1')).not.toBeInTheDocument()
   })
 
   it('should show skeleton while loading movies', async () => {

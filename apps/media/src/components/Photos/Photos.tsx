@@ -99,11 +99,11 @@ const Photos: FC = () => {
             <Icon
               name="Photo"
               size={24}
-              className="mda:text-muted-foreground"
+              className="mda:text-badge-foreground"
             />
             <Typography
               variant="body"
-              className="mda:text-muted-foreground mda:font-semibold"
+              className="mda:text-badge-foreground mda:font-semibold"
             >
               {total} photos
             </Typography>

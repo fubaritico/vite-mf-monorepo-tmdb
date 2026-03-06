@@ -40,21 +40,25 @@ describe('Carousel', () => {
   })
 
   it('renders pagination dots for hero variant', () => {
-    render(
+    const { container } = render(
       <Carousel variant="hero">
         <CarouselItem isHero>Item 1</CarouselItem>
         <CarouselItem isHero>Item 2</CarouselItem>
         <CarouselItem isHero>Item 3</CarouselItem>
       </Carousel>
     )
-    const dots = screen.getAllByRole('button', { name: /Go to slide/i })
+    const dots = container.querySelectorAll(
+      '[aria-hidden="true"].ui\\:w-2, [aria-hidden="true"].ui\\:w-6'
+    )
     expect(dots).toHaveLength(3)
   })
 
   it('hides pagination when showPagination is false', () => {
-    renderCarousel({ showPagination: false })
-    const dots = screen.queryAllByRole('button', { name: /Go to slide/i })
-    expect(dots).toHaveLength(0)
+    const { container } = renderCarousel({ showPagination: false })
+    const paginationDiv = container.querySelector(
+      '.ui\\:flex.ui\\:items-center.ui\\:gap-2'
+    )
+    expect(paginationDiv?.children.length ?? 0).toBe(0)
   })
 
   it('renders navigation arrows for hero variant', () => {
@@ -90,18 +94,20 @@ describe('Carousel', () => {
     expect(screen.getByText('Hero Item 2')).toBeInTheDocument()
   })
 
-  it('pagination dot click triggers scroll', () => {
-    render(
+  it('renders hero variant with pagination dots and navigation', () => {
+    const { container } = render(
       <Carousel variant="hero">
         <CarouselItem isHero>Item 1</CarouselItem>
         <CarouselItem isHero>Item 2</CarouselItem>
         <CarouselItem isHero>Item 3</CarouselItem>
       </Carousel>
     )
-    const dots = screen.getAllByRole('button', { name: /Go to slide/i })
-    fireEvent.click(dots[1])
-    // Scroll behavior is tested, no error means success
-    expect(dots[1]).toBeInTheDocument()
+    const dots = container.querySelectorAll(
+      '[aria-hidden="true"].ui\\:w-2, [aria-hidden="true"].ui\\:w-6'
+    )
+    expect(dots).toHaveLength(3)
+    expect(screen.getByLabelText('Previous')).toBeInTheDocument()
+    expect(screen.getByLabelText('Next')).toBeInTheDocument()
   })
 
   it('displays error message when errorMessage prop is provided', () => {
@@ -118,16 +124,17 @@ describe('Carousel', () => {
   })
 
   it('does not display carousel content when error message is shown', () => {
-    render(
+    const { container } = render(
       <Carousel errorMessage="API Error" showPagination showArrows>
         <CarouselItem>Item 1</CarouselItem>
       </Carousel>
     )
     expect(screen.queryByLabelText('Previous')).not.toBeInTheDocument()
     expect(screen.queryByLabelText('Next')).not.toBeInTheDocument()
-    expect(
-      screen.queryByRole('button', { name: /Go to slide/i })
-    ).not.toBeInTheDocument()
+    const dots = container.querySelectorAll(
+      '[aria-hidden="true"].ui\\:w-2, [aria-hidden="true"].ui\\:w-6'
+    )
+    expect(dots).toHaveLength(0)
   })
 })
 

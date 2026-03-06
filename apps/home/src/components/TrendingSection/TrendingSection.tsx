@@ -79,13 +79,19 @@ const TrendingSection: FC = () => {
   return (
     <div className="hm:flex hm:flex-col hm:gap-4">
       <Typography variant="h2">Trending</Typography>
-      <Tabs value={timeWindow} onValueChange={handleTabChange} variant="pills">
+      <Tabs
+        value={timeWindow}
+        onValueChange={handleTabChange}
+        variant="pills"
+        prefix="trending"
+      >
         <Tabs.List>
           <Tabs.Trigger value="day">Today</Tabs.Trigger>
           <Tabs.Trigger value="week">This Week</Tabs.Trigger>
         </Tabs.List>
+        <Tabs.Panel value="day">{renderContent()}</Tabs.Panel>
+        <Tabs.Panel value="week">{renderContent()}</Tabs.Panel>
       </Tabs>
-      {renderContent()}
     </div>
   )
 }

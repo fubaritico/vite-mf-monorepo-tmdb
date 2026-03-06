@@ -9,6 +9,8 @@ interface TabsContextValue {
   onValueChange: (value: string) => void
   /** Visual variant */
   variant: TabsVariant
+  /** Optional prefix for ID generation */
+  prefix?: string
 }
 
 export const TabsContext = createContext<TabsContextValue | undefined>(

@@ -73,7 +73,14 @@ const MovieCard: FC<MovieCardProps> = ({
         >
           {title}
         </Typography>
-        {year && <Typography variant="caption-xs">{year}</Typography>}
+        {year && (
+          <Typography
+            variant="caption-xs"
+            className="ui:[.media-section:nth-of-type(odd)_&]:text-badge-foreground"
+          >
+            {year}
+          </Typography>
+        )}
       </div>
     </Card>
   )

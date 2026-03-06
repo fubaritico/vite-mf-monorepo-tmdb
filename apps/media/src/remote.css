@@ -47,6 +47,7 @@
     --mda-default-transition-duration: 150ms;
     --mda-default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --mda-color-ring: #a3a3a3;
+    --mda-color-badge-foreground: #404040;
     --mda-color-destructive: #ef4444;
     --mda-color-muted: #f5f5f5;
     --mda-color-muted-foreground: #737373;
@@ -213,6 +214,9 @@
   .mda\:font-semibold {
     --tw-font-weight: var(--mda-font-weight-semibold);
     font-weight: var(--mda-font-weight-semibold);
+  }
+  .mda\:text-badge-foreground {
+    color: var(--mda-color-badge-foreground);
   }
   .mda\:text-destructive {
     color: var(--mda-color-destructive);

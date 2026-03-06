@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import { TabsContext } from './TabsContext'
 import TabsList from './TabsList'
+import TabsPanel from './TabsPanel'
 import TabsTrigger from './TabsTrigger'
 
 import type { FC, HTMLAttributes } from 'react'
@@ -19,6 +20,8 @@ export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
   onValueChange?: (value: string) => void
   /** Visual variant */
   variant?: TabsVariant
+  /** Optional prefix for ID generation (e.g., "popular" generates ids: popular-{value}) */
+  prefix?: string
 }
 
 /**
@@ -30,11 +33,13 @@ export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
 const Tabs: FC<TabsProps> & {
   List: typeof TabsList
   Trigger: typeof TabsTrigger
+  Panel: typeof TabsPanel
 } = ({
   defaultValue = '',
   value,
   onValueChange,
   variant = 'underline',
+  prefix,
   className,
   children,
   ...rest
@@ -53,7 +58,12 @@ const Tabs: FC<TabsProps> & {
 
   return (
     <TabsContext.Provider
-      value={{ value: activeValue, onValueChange: handleValueChange, variant }}
+      value={{
+        value: activeValue,
+        onValueChange: handleValueChange,
+        variant,
+        prefix,
+      }}
     >
       <div className={clsx('ui:w-full', className)} {...rest}>
         {children}
@@ -64,5 +74,6 @@ const Tabs: FC<TabsProps> & {
 
 Tabs.List = TabsList
 Tabs.Trigger = TabsTrigger
+Tabs.Panel = TabsPanel
 
 export default Tabs

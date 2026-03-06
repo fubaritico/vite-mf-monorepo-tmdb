@@ -7,8 +7,6 @@ export interface CarouselPaginationProps {
   total: number
   /** Current active index */
   current: number
-  /** Callback when a dot is clicked */
-  onSelect: (index: number) => void
   /** Use light colors (for dark backgrounds) */
   light?: boolean
   /** Additional class name */
@@ -23,7 +21,6 @@ export interface CarouselPaginationProps {
 const CarouselPagination: FC<CarouselPaginationProps> = ({
   total,
   current,
-  onSelect,
   light = false,
   className,
 }) => {
@@ -32,13 +29,9 @@ const CarouselPagination: FC<CarouselPaginationProps> = ({
   return (
     <div className={clsx('ui:flex ui:items-center ui:gap-2', className)}>
       {Array.from({ length: total }).map((_, index) => (
-        <button
+        <div
           key={index}
-          type="button"
-          onClick={() => {
-            onSelect(index)
-          }}
-          aria-label={`Go to slide ${String(index + 1)}`}
+          aria-hidden="true"
           className={clsx(
             'ui:rounded-full ui:transition-all ui:duration-300',
             index === current

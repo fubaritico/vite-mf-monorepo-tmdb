@@ -24,10 +24,15 @@
     },
     "./src/tailwind/theme.css": "./src/tailwind/theme.css",
     "./src/tailwind/theme-no-fonts.css": "./src/tailwind/theme-no-fonts.css",
-    "./src/fonts/fonts.css": "./src/fonts/fonts.css"
+    "./src/fonts/fonts.css": "./src/fonts/fonts.css",
+    "./assets": {
+      "types": "./dist/assets/index.d.ts",
+      "import": "./dist/assets/index.js"
+    }
   },
   "scripts": {
-    "build": "tsc",
+    "svg": "node ./script/export-svgs.js",
+    "build": "pnpm svg && tsc && mkdir -p dist/assets && mv dist/.temp-svg/* dist/assets/ 2>/dev/null && rm -rf dist/.temp-svg src/.temp-svg || true",
     "dev": "tsc --watch",
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix"
@@ -37,7 +42,9 @@
     "@vite-mf-monorepo/tokens": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-router-dom": "catalog:"
+    "react-router-dom": "catalog:",
+    "svg-to-jsx": "^1.0.4",
+    "svgr": "^2.0.0"
   },
   "peerDependencies": {
     "@tanstack/react-query": "catalog:",

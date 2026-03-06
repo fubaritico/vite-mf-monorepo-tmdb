@@ -18,18 +18,23 @@ const PopularSection: FC = () => {
   return (
     <div className="hm:flex hm:flex-col hm:gap-4">
       <Typography variant="h2">What's Popular</Typography>
-      <Tabs value={mediaType} onValueChange={handleTabChange} variant="pills">
+      <Tabs
+        value={mediaType}
+        onValueChange={handleTabChange}
+        variant="pills"
+        prefix="popular"
+      >
         <Tabs.List>
           <Tabs.Trigger value="movie">Movies</Tabs.Trigger>
           <Tabs.Trigger value="tv">TV Shows</Tabs.Trigger>
         </Tabs.List>
+        <Tabs.Panel value="movie">
+          <PopularMoviesCarousel />
+        </Tabs.Panel>
+        <Tabs.Panel value="tv">
+          <PopularTVCarousel />
+        </Tabs.Panel>
       </Tabs>
-
-      {mediaType === 'movie' ? (
-        <PopularMoviesCarousel />
-      ) : (
-        <PopularTVCarousel />
-      )}
     </div>
   )
 }

@@ -18,18 +18,23 @@ const FreeToWatchSection: FC = () => {
   return (
     <div className="hm:flex hm:flex-col hm:gap-4">
       <Typography variant="h2">Free To Watch</Typography>
-      <Tabs value={mediaType} onValueChange={handleTabChange} variant="pills">
+      <Tabs
+        value={mediaType}
+        onValueChange={handleTabChange}
+        variant="pills"
+        prefix="free"
+      >
         <Tabs.List>
           <Tabs.Trigger value="movie">Movies</Tabs.Trigger>
           <Tabs.Trigger value="tv">TV Shows</Tabs.Trigger>
         </Tabs.List>
+        <Tabs.Panel value="movie">
+          <FreeToWatchMoviesCarousel />
+        </Tabs.Panel>
+        <Tabs.Panel value="tv">
+          <FreeToWatchTVCarousel />
+        </Tabs.Panel>
       </Tabs>
-
-      {mediaType === 'movie' ? (
-        <FreeToWatchMoviesCarousel />
-      ) : (
-        <FreeToWatchTVCarousel />
-      )}
     </div>
   )
 }
