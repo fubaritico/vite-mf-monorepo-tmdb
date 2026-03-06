@@ -4,6 +4,7 @@ import {
   CarouselItem,
   CarouselLoading,
   MovieCard,
+  Typography,
 } from '@vite-mf-monorepo/ui'
 
 import { useTVSeriesRecommendations } from '../../hooks'
@@ -36,9 +37,19 @@ const RecommendedTVCarousel: FC<RecommendedTVCarouselProps> = ({ id }) => {
     return <Carousel errorMessage={errorMsg} />
   }
 
+  if (!data.results?.length) {
+    return (
+      <Carousel>
+        <Typography variant="body" className="mda:text-muted-foreground">
+          No TV series recommendations
+        </Typography>
+      </Carousel>
+    )
+  }
+
   return (
     <Carousel rounded={false}>
-      {data.results?.slice(0, 20).map((item) => {
+      {data.results.slice(0, 20).map((item) => {
         const posterUrl = item.poster_path
           ? getOptimizedImageUrl(item.poster_path, 'w92', 60)
           : ''
