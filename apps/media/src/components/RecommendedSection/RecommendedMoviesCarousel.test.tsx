@@ -62,9 +62,9 @@ describe('RecommendedMoviesCarousel', () => {
   it('displays movie carousel items', () => {
     renderWithRouter(<RecommendedMoviesCarousel id={278} />)
 
+    expect(screen.getByText('The Godfather')).toBeInTheDocument()
+    expect(screen.getByText("Schindler's List")).toBeInTheDocument()
     expect(screen.getByText('The Godfather Part II')).toBeInTheDocument()
-    expect(screen.getByText('GoodFellas')).toBeInTheDocument()
-    expect(screen.getByText('Dead Poets Society')).toBeInTheDocument()
   })
 
   it('renders loading skeleton when data is loading', () => {

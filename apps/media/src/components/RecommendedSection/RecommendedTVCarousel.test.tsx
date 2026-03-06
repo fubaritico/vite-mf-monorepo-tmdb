@@ -62,9 +62,9 @@ describe('RecommendedTVCarousel', () => {
   it('displays TV show carousel items', () => {
     renderWithRouter(<RecommendedTVCarousel id={1396} />)
 
-    expect(screen.getByText('Breaking Bad')).toBeInTheDocument()
+    expect(screen.getByText('Better Call Saul')).toBeInTheDocument()
     expect(screen.getByText('Game of Thrones')).toBeInTheDocument()
-    expect(screen.getByText('Peaky Blinders')).toBeInTheDocument()
+    expect(screen.getByText('Arcane')).toBeInTheDocument()
   })
 
   it('renders loading skeleton when data is loading', () => {
@@ -103,10 +103,10 @@ describe('RecommendedTVCarousel', () => {
   it('creates correct link URLs for TV shows', () => {
     renderWithRouter(<RecommendedTVCarousel id={1396} />)
 
-    const breakingBadLink = screen.getByRole('link', {
-      name: /Breaking Bad/i,
+    const betterCallSaulLink = screen.getByRole('link', {
+      name: /Better Call Saul/i,
     })
-    expect(breakingBadLink).toHaveAttribute('href', '/tv/1396')
+    expect(betterCallSaulLink).toHaveAttribute('href', '/tv/60059')
   })
 
   it('limits carousel items to 20 results', () => {
