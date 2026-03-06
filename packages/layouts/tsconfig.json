@@ -15,6 +15,6 @@
     "resolveJsonModule": true,
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src", "vitest.setup.ts"],
+  "include": ["src", "vitest.setup.ts", "declaration.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

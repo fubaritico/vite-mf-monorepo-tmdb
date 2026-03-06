@@ -237,7 +237,13 @@ const Icon: FC<IconProps> = ({ name, size = 24, className, ...rest }) => {
   }
 
   return (
-    <IconComponent className={className} width={size} height={size} {...rest} />
+    <IconComponent
+      className={className}
+      width={size}
+      height={size}
+      {...rest}
+      aria-hidden
+    />
   )
 }
 

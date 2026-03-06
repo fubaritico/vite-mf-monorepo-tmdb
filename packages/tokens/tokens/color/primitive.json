@@ -19,7 +19,8 @@
       "amber": {
         "400": { "$value": "#fbbf24", "$type": "color" },
         "500": { "$value": "#f59e0b", "$type": "color" },
-        "600": { "$value": "#d97706", "$type": "color" }
+        "600": { "$value": "#d97706", "$type": "color" },
+        "700": { "$value": "#b45309", "$type": "color" }
       },
       "red": {
         "500": { "$value": "#ef4444", "$type": "color" },

@@ -1,0 +1,20 @@
+{
+  "browsers": {
+    "chromium": {
+      "launch": {
+        "args": ["--no-sandbox"]
+      }
+    }
+  },
+  "runners": ["chromium"],
+  "timeout": 10000,
+  "wait": 1000,
+  "standard": "WCAG2AA",
+  "level": "error",
+  "runners": ["axe"],
+  "urls": [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost:3002"
+  ]
+}

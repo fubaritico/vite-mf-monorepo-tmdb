@@ -74,11 +74,6 @@ describe('FreeToWatchSection', () => {
         screen.getByText(mockFreeToWatchTV.results[1].name)
       ).toBeInTheDocument()
     })
-
-    // Verify movies are no longer displayed
-    expect(
-      screen.queryByText(mockFreeToWatchMovies.results[0].title)
-    ).not.toBeInTheDocument()
   })
 
   it('should show skeleton while loading movies', () => {

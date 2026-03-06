@@ -374,7 +374,6 @@ const Carousel: FC<CarouselProps> = ({
             <CarouselPagination
               total={totalPositions}
               current={currentIndex}
-              onSelect={scrollTo}
               light
             />
           )}
@@ -406,11 +405,7 @@ const Carousel: FC<CarouselProps> = ({
           )}
         >
           {showPagination && (
-            <CarouselPagination
-              total={totalPositions}
-              current={currentIndex}
-              onSelect={scrollTo}
-            />
+            <CarouselPagination total={totalPositions} current={currentIndex} />
           )}
           {showArrows && arrowPosition === 'bottom-right' && (
             <CarouselNavigation

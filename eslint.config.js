@@ -38,6 +38,7 @@ export default tseslint.config(
       '**/.__mf__temp/**',
       '**/files/**',
       '**/scripts/**',
+      'packages/shared/script/**',
       'packages/http-client/src/client/**',
       'packages/storybook/.storybook/**',
       'packages/storybook/storybook-static/**',

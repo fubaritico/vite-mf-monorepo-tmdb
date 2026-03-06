@@ -1,3 +1,4 @@
+import { LogoT } from '@vite-mf-monorepo/shared/assets'
 import clsx from 'clsx'
 import { useEffect, useRef } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
@@ -46,9 +47,7 @@ const RootLayout: FC<RootLayoutProps> = ({
   const TMDBLogo = () => (
     <Link to="/" className="layout:no-underline">
       <div className="layout:flex layout:items-center layout:gap-2">
-        <div className="layout:w-8 layout:h-8 layout:bg-primary layout:rounded layout:flex layout:items-center layout:justify-center layout:font-bold layout:text-white">
-          T
-        </div>
+        <LogoT />
         <span className="layout:text-white layout:font-bold layout:text-xl">
           TMDB
         </span>
@@ -73,7 +72,7 @@ const RootLayout: FC<RootLayoutProps> = ({
       {!hideFooter && (
         <Footer>
           <div className="layout:text-center">
-            <p className="layout:text-sm layout:text-muted-foreground">
+            <p className="layout:text-sm layout:text-footer-foreground">
               © 2026 TMDB Clone. All rights reserved.
             </p>
           </div>

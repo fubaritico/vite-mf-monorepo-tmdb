@@ -56,7 +56,7 @@
           "foreground": { "$value": "{color.primitive.neutral.100}", "$type": "color" }
         },
         "primary": {
-          "background": { "$value": "{color.primitive.amber.500}", "$type": "color" },
+          "background": { "$value": "{color.primitive.amber.600}", "$type": "color" },
           "foreground": { "$value": "{color.primitive.neutral.900}", "$type": "color" }
         }
       },
