@@ -6,7 +6,7 @@ import { tvSeriesSimilarOptions } from '@vite-mf-monorepo/tmdb-client'
  */
 export const useTVSeriesSimilar = (seriesId: number) => {
   return useQuery({
-    ...tvSeriesSimilarOptions({ path: { series_id: seriesId } }),
+    ...tvSeriesSimilarOptions({ path: { series_id: String(seriesId) } }),
     staleTime: 1000 * 60 * 5,
   })
 }
