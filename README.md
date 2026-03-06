@@ -192,6 +192,56 @@ This will generate a coverage report in the `coverage` folder of each package. T
 
 With Intellij, you can open the coverage report by right-clicking on the `coverage` folder and selecting "Open in Browser". This will open the coverage report in your default browser.
 
+### Accessibility (a11y)
+
+This project prioritizes **accessible user interfaces** by following WCAG guidelines and automated testing.
+
+#### Testing Accessibility
+
+Tests use **React Testing Library's semantic queries** to ensure components are accessible:
+
+```typescript
+// ✅ Good: Query by semantic roles (mimics how users interact)
+screen.getByRole('button', { name: /submit/i })
+screen.getByRole('tab', { name: /today/i })
+screen.getByRole('tabpanel', { name: /content/i })
+
+// ❌ Bad: Query by implementation (brittle, not accessible)
+screen.getByText('Click me')
+container.querySelector('.btn')
+```
+
+**Key patterns**:
+- Use `getByRole()` for interactive elements (button, tab, dialog, tabpanel)
+- Target specific panels when elements appear in multiple locations (e.g., tabs rendering all panels)
+- Use `.querySelector()` scoped to a specific container to avoid "Found multiple elements" errors
+
+#### pa11y Automation
+
+This project uses **[pa11y](https://www.pa11y.org/)** for automated accessibility scanning. Configuration is in `.pa11yci.json`:
+
+```bash
+# Run accessibility audit on all pages
+pnpm run test:a11y
+```
+
+**What pa11y checks**:
+- WCAG 2.1 compliance (contrast, aria attributes, semantic HTML)
+- Broken links and missing alt text
+- Form labels and keyboard navigation
+- Page structure and heading hierarchy
+
+#### Accessibility Best Practices Applied
+
+- **Semantic HTML**: Use native `<button>`, `<a>`, `<form>` elements instead of divs
+- **ARIA attributes**: Add `aria-label`, `aria-controls`, `role` when needed
+- **Keyboard navigation**: All interactive elements are reachable via Tab
+- **Color contrast**: Text meets WCAG AA (4.5:1) or AAA (7:1) standards
+- **Focus management**: Clear focus indicators on interactive elements
+- **Testing Library**: Tests query by accessible role, not implementation
+
+See [docs/A11Y.md](./docs/A11Y.md) for detailed accessibility guidelines.
+
 ### Issues
 
 No issues for now
