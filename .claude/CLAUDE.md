@@ -10,6 +10,8 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - **Discuss approach FIRST** — never code without confirming approach
 - **Review → Test → Commit** per change — no accumulation
 - **Never execute commands** — propose only. Exception: user says "execute", "run", etc.
+  - **ESPECIALLY `git push`** — NEVER push without explicit user approval ("execute" or user provides command)
+  - Risky actions (git push, git reset --hard, rm -rf, etc.) require explicit permission EVERY TIME
 - **Never hallucinate** — if uncertain, say so and read the code first
 - **Ask permission** before consulting external docs (APIs, libraries)
 - **Never `console.log`** — use `console.warn` / `console.error`
