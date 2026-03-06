@@ -11,7 +11,7 @@ import { useTVSeriesRecommendations } from '../../hooks'
 import type { UseQueryResult } from '@tanstack/react-query'
 import type {
   TMDBError,
-  TvSeriesRecommendationsResponse,
+  TvSeriesSimilarResponse,
 } from '@vite-mf-monorepo/tmdb-client'
 import type { FC } from 'react'
 
@@ -20,9 +20,11 @@ interface RecommendedTVCarouselProps {
 }
 
 const RecommendedTVCarousel: FC<RecommendedTVCarouselProps> = ({ id }) => {
+  // Note: Using TvSeriesSimilarResponse as type because recommendations and similar
+  // have identical response structures from TMDB API
   const { data, isLoading, error } = useTVSeriesRecommendations(
     id
-  ) as UseQueryResult<TvSeriesRecommendationsResponse, TMDBError>
+  ) as UseQueryResult<TvSeriesSimilarResponse, TMDBError>
 
   if (isLoading) {
     return <CarouselLoading count={6} />

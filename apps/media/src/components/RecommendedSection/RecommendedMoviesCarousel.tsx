@@ -22,6 +22,8 @@ interface RecommendedMoviesCarouselProps {
 const RecommendedMoviesCarousel: FC<RecommendedMoviesCarouselProps> = ({
   id,
 }) => {
+  // Note: Using MovieSimilarResponse as type because recommendations and similar
+  // have identical response structures from TMDB API
   const { data, isLoading, error } = useMovieRecommendations(
     id
   ) as UseQueryResult<MovieSimilarResponse, TMDBError>
