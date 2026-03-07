@@ -77,8 +77,7 @@ async function convertSvgToJsx(svgContent) {
   const cleanedSvg = cleanSvg(svgContent)
 
   try {
-    const jsx = await svgToJsx(cleanedSvg)
-    return jsx
+    return await svgToJsx(cleanedSvg)
   } catch (error) {
     console.error('Error converting SVG to JSX:', error.message)
     return null
@@ -158,9 +157,9 @@ function createIndexFile(componentNames) {
 }
 
 /**
- * Display SVG list with JSX conversion
+ * Generate SVG components with JSX conversion
  */
-async function displaySvgList(svgs, assetsDir) {
+async function generateSvgComponents(svgs, assetsDir) {
   if (svgs.length === 0) {
     console.warn('No SVG files found')
     return
@@ -203,7 +202,13 @@ async function main() {
   const files = readDirectory(assetsDir)
   const svgs = filterByExtension(files, '.svg')
 
-  await displaySvgList(svgs, assetsDir)
+  await generateSvgComponents(svgs, assetsDir)
 }
 
 main()
+  .then(() => {
+    console.log('✅ All SVG components generated successfully')
+  })
+  .catch((error) => {
+    console.error('Error in main function:', error)
+  })
