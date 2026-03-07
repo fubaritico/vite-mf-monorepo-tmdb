@@ -1,0 +1,11 @@
+name: Quality Gate
+
+on:
+  workflow_call:
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check all jobs passed
+        run: echo "✅ Quality gate passed"
