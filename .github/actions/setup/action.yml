@@ -18,3 +18,7 @@ runs:
     - name: Install dependencies
       run: pnpm install --frozen-lockfile
       shell: bash
+
+    - name: Build packages
+      run: pnpm build:packages
+      shell: bash
