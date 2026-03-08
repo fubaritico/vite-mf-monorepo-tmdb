@@ -21,11 +21,6 @@ jobs:
         run: pnpm coverage
 
       - name: SonarQube Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        with:
-          args: >
-            -Dsonar.branch.name=${{ github.head_ref || github.ref_name }}
-            ${{ github.event_name == 'pull_request' && format('-Dsonar.branch.target={0}', github.base_ref) || '' }}
+        uses: SonarSource/sonarqube-scan-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
