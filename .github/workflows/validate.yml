@@ -31,20 +31,25 @@ jobs:
 
       - uses: ./.github/actions/setup
 
-      - name: Run tests
-        run: pnpm test
-
-      - name: Generate coverage
+      - name: Run tests with coverage
         run: pnpm coverage
 
       - name: Check coverage threshold (80%)
         run: |
           COVERAGE=$(jq '.total.lines.pct' coverage/coverage-summary.json)
+          echo "Line coverage: $COVERAGE%"
           if (( $(echo "$COVERAGE < 80" | bc -l) )); then
-            echo "❌ Coverage $COVERAGE% is below 80%"
+            echo "Coverage $COVERAGE% is below the 80% threshold"
             exit 1
           fi
-          echo "✅ Coverage $COVERAGE% meets threshold"
+          echo "Coverage $COVERAGE% meets the 80% threshold"
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ github.sha }}
+          path: coverage/
+          retention-days: 1
 
   build:
     needs: [lint, type-check, test]
