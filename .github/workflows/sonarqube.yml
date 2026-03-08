@@ -2,10 +2,6 @@ name: SonarQube Analysis
 
 on:
   workflow_call:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main, develop]
 
 jobs:
   sonarqube:
@@ -17,11 +13,13 @@ jobs:
 
       - uses: ./.github/actions/setup
 
-      - name: Run tests with coverage
-        run: pnpm coverage
+      - name: Download coverage artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-${{ github.sha }}
 
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v5
+        uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
