@@ -1,18 +1,15 @@
-name: SonarQube Analysis
+name: Initialize SonarCloud Project
 
 on:
-  workflow_call:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main, develop]
+  workflow_dispatch:
 
 jobs:
-  sonarqube:
+  init:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
       - uses: ./.github/actions/setup
@@ -20,12 +17,8 @@ jobs:
       - name: Run tests with coverage
         run: pnpm coverage
 
-      - name: SonarQube Scan
+      - name: Initialize SonarCloud with main branch
         uses: SonarSource/sonarcloud-github-action@master
-        with:
-          args: >
-            -Dsonar.branch.name=${{ github.head_ref || github.ref_name }}
-            ${{ github.event_name == 'pull_request' && format('-Dsonar.branch.target={0}', github.base_ref) || '' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
