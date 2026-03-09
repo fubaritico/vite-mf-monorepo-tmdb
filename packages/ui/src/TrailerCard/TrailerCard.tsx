@@ -30,7 +30,7 @@ const TrailerCard: FC<TrailerCardProps> = ({
   return (
     <>
       {/* Thumbnail card with play button overlay */}
-      <div
+      <button
         className={clsx(
           'ui:group ui:relative ui:flex ui:aspect-video ui:w-full ui:cursor-pointer ui:overflow-hidden ui:rounded-lg ui:bg-gray-200',
           'ui:transition-transform ui:duration-200 hover:ui:scale-[1.02]',
@@ -39,14 +39,8 @@ const TrailerCard: FC<TrailerCardProps> = ({
         onClick={() => {
           setIsPlaying(true)
         }}
-        role="button"
         tabIndex={0}
         aria-label={`Play ${title}`}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            setIsPlaying(true)
-          }
-        }}
       >
         {/* Thumbnail image */}
         <img
@@ -69,7 +63,7 @@ const TrailerCard: FC<TrailerCardProps> = ({
             {type}
           </div>
         )}
-      </div>
+      </button>
 
       {/* Modal with YouTube embed */}
       <Modal
@@ -97,20 +91,15 @@ const TrailerCard: FC<TrailerCardProps> = ({
           </Button>
 
           {/* Responsive 16:9 iframe container */}
-          <div
-            className="ui:relative ui:w-full ui:max-w-4xl"
-            style={{ paddingBottom: '56.25%' }}
-          >
-            {isPlaying && (
-              <iframe
-                className="ui:absolute ui:inset-0 ui:h-full ui:w-full ui:rounded-lg"
-                src={`https://www.youtube.com/embed/${videoKey}`}
-                title={title}
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            )}
-          </div>
+          {isPlaying && (
+            <iframe
+              className="ui:w-full ui:max-w-4xl ui:aspect-video ui:rounded-lg"
+              src={`https://www.youtube.com/embed/${videoKey}`}
+              title={title}
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          )}
         </div>
       </Modal>
     </>
