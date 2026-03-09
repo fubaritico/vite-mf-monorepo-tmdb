@@ -38,9 +38,15 @@ const Talent: FC<TalentProps> = ({
         },
         className
       )}
+      data-testid="talent"
       {...rest}
     >
-      <Avatar src={imageSrc} alt={name ?? 'Unknown'} size={size} />
+      <Avatar
+        testId="avatar"
+        src={imageSrc}
+        alt={name ?? 'Unknown'}
+        size={size}
+      />
       <div
         className={clsx({ 'ui:flex ui:flex-col': variant === 'horizontal' })}
       >

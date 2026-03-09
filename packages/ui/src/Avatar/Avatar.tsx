@@ -3,12 +3,11 @@ import { useState } from 'react'
 
 import { Icon } from '../Icon'
 
-import type { FC, ImgHTMLAttributes } from 'react'
+import type { ComponentProps, FC } from 'react'
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
 
-export interface AvatarProps
-  extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'> {
+export interface AvatarProps extends Omit<ComponentProps<'img'>, 'src'> {
   /** Image source URL */
   src?: string | null
   /** Alt text for the image */
@@ -17,6 +16,8 @@ export interface AvatarProps
   size?: AvatarSize
   /** Fallback initials to display when no image */
   initials?: string
+  /** For testing purposes */
+  testId?: string
 }
 
 const sizeMap: Record<
@@ -38,6 +39,7 @@ const Avatar: FC<AvatarProps> = ({
   alt,
   size = 'md',
   initials,
+  testId,
   ...rest
 }) => {
   const [hasError, setHasError] = useState(false)
@@ -66,6 +68,7 @@ const Avatar: FC<AvatarProps> = ({
           alt={alt}
           onError={handleError}
           className="ui:h-full ui:w-full ui:object-cover"
+          data-testid={testId}
           {...rest}
         />
       )}
