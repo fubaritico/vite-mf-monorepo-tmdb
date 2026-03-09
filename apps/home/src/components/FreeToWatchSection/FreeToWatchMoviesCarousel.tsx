@@ -8,11 +8,8 @@ import {
 
 import { useFreeToWatchMovies } from '../../hooks/useFreeToWatch'
 
+import type { DiscoverMovieResponse, TMDBError } from '@fubar-it-co/tmdb-client'
 import type { UseQueryResult } from '@tanstack/react-query'
-import type {
-  DiscoverMovieResponse,
-  TMDBError,
-} from '@vite-mf-monorepo/tmdb-client'
 import type { FC } from 'react'
 
 const FreeToWatchMoviesCarousel: FC = () => {

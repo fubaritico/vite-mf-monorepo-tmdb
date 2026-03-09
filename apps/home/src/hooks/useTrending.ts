@@ -1,5 +1,5 @@
+import { trendingAllOptions } from '@fubar-it-co/tmdb-client'
 import { useQuery } from '@tanstack/react-query'
-import { trendingAllOptions } from '@vite-mf-monorepo/tmdb-client'
 
 export const useTrending = (timeWindow: 'day' | 'week' = 'day') => {
   return useQuery({

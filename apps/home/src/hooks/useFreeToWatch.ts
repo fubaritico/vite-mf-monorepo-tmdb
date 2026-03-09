@@ -1,5 +1,5 @@
+import { discoverMovieOptions } from '@fubar-it-co/tmdb-client'
 import { useQuery } from '@tanstack/react-query'
-import { discoverMovieOptions } from '@vite-mf-monorepo/tmdb-client'
 
 export const useFreeToWatchMovies = () => {
   return useQuery({

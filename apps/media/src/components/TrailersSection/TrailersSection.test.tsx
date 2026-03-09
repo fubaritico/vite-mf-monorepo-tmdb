@@ -6,11 +6,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import TrailersSection from './TrailersSection'
 
+import type { MovieVideosResponse, TMDBError } from '@fubar-it-co/tmdb-client'
 import type { UseQueryResult } from '@tanstack/react-query'
-import type {
-  MovieVideosResponse,
-  TMDBError,
-} from '@vite-mf-monorepo/tmdb-client'
 
 vi.mock('react-router-dom', () => ({ useParams: vi.fn() }))
 vi.mock('../../hooks/useMovieVideos', () => ({ useMovieVideos: vi.fn() }))

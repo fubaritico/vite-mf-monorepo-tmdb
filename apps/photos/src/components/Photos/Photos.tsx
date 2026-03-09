@@ -1,9 +1,9 @@
-import { UseQueryResult, useQuery } from '@tanstack/react-query'
 import {
   type MovieImagesResponse,
   TMDBError,
   movieImagesOptions,
-} from '@vite-mf-monorepo/tmdb-client'
+} from '@fubar-it-co/tmdb-client'
+import { UseQueryResult, useQuery } from '@tanstack/react-query'
 import { Spinner } from '@vite-mf-monorepo/ui'
 import { useNavigate, useParams } from 'react-router-dom'
 

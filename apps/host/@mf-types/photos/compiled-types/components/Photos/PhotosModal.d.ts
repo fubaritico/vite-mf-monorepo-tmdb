@@ -1,4 +1,4 @@
-import type { MovieImagesResponse } from '@vite-mf-monorepo/tmdb-client';
+import type { MovieImagesResponse } from '@fubar-it-co/tmdb-client';
 import type { FC } from 'react';
 type Backdrop = NonNullable<MovieImagesResponse['backdrops']>[number];
 interface PhotosModalProps {

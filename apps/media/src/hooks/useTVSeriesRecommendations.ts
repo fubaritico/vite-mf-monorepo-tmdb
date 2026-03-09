@@ -1,5 +1,5 @@
+import { tvSeriesRecommendationsOptions } from '@fubar-it-co/tmdb-client'
 import { useQuery } from '@tanstack/react-query'
-import { tvSeriesRecommendationsOptions } from '@vite-mf-monorepo/tmdb-client'
 
 /**
  * Fetch recommended TV series based on a series ID

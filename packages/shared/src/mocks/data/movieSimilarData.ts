@@ -1,4 +1,4 @@
-import type { MovieSimilarResponse } from '@vite-mf-monorepo/tmdb-client/client'
+import type { MovieSimilarResponse } from '@fubar-it-co/tmdb-client/client'
 
 export const mockMovieSimilar: MovieSimilarResponse = {
   page: 1,

@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { mockMovieCredits } from '@vite-mf-monorepo/shared/mocks'
 import { renderWithRouter } from '@vite-mf-monorepo/shared/test-utils'
 import { useParams } from 'react-router-dom'
@@ -8,11 +9,8 @@ import { useMovieCredits } from '../../hooks/useMovieCredits'
 
 import Cast from './Cast'
 
+import type { MovieCreditsResponse, TMDBError } from '@fubar-it-co/tmdb-client'
 import type { UseQueryResult } from '@tanstack/react-query'
-import type {
-  MovieCreditsResponse,
-  TMDBError,
-} from '@vite-mf-monorepo/tmdb-client'
 
 vi.mock('react-router-dom', async () => {
   const actual =

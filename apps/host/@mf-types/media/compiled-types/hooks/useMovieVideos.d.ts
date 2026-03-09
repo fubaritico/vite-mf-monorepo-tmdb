@@ -1,5 +1,5 @@
 import { UseQueryResult } from '@tanstack/react-query';
-import type { MovieVideosResponse, TMDBError } from '@vite-mf-monorepo/tmdb-client';
+import type { MovieVideosResponse, TMDBError } from '@fubar-it-co/tmdb-client';
 /**
  * Fetch movie videos (trailers, clips, teasers) by movie ID
  * Filters for official YouTube trailers and limits to top 3

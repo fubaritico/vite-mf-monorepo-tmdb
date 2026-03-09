@@ -1,5 +1,5 @@
+import { movieNowPlayingListOptions } from '@fubar-it-co/tmdb-client'
 import { useQuery } from '@tanstack/react-query'
-import { movieNowPlayingListOptions } from '@vite-mf-monorepo/tmdb-client'
 
 export const useNowPlayingMovies = () => {
   return useQuery({

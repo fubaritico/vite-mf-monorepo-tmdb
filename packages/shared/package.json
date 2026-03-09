@@ -38,7 +38,7 @@
     "lint:fix": "eslint ./src --fix"
   },
   "dependencies": {
-    "@vite-mf-monorepo/tmdb-client": "workspace:*",
+    "@fubar-it-co/tmdb-client": "workspace:*",
     "@vite-mf-monorepo/tokens": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",

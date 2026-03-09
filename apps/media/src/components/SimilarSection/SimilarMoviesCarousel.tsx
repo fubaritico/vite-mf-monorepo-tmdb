@@ -9,11 +9,8 @@ import {
 
 import { useMovieSimilar } from '../../hooks'
 
+import type { MovieSimilarResponse, TMDBError } from '@fubar-it-co/tmdb-client'
 import type { UseQueryResult } from '@tanstack/react-query'
-import type {
-  MovieSimilarResponse,
-  TMDBError,
-} from '@vite-mf-monorepo/tmdb-client'
 import type { FC } from 'react'
 
 interface SimilarMoviesCarouselProps {

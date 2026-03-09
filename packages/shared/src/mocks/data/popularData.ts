@@ -1,7 +1,7 @@
 import type {
   MoviePopularListResponse,
   TvSeriesPopularListResponse,
-} from '@vite-mf-monorepo/tmdb-client/client'
+} from '@fubar-it-co/tmdb-client/client'
 
 export const mockPopularMovies: MoviePopularListResponse = {
   page: 1,

@@ -1,5 +1,5 @@
+import { moviePopularListOptions } from '@fubar-it-co/tmdb-client'
 import { useQuery } from '@tanstack/react-query'
-import { moviePopularListOptions } from '@vite-mf-monorepo/tmdb-client'
 
 export const usePopularMovies = () => {
   return useQuery({

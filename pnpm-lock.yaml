@@ -227,15 +227,15 @@ importers:
 
   apps/home:
     dependencies:
+      '@fubar-it-co/tmdb-client':
+        specifier: workspace:*
+        version: link:../../packages/http-client
       '@vite-mf-monorepo/layouts':
         specifier: workspace:*
         version: link:../../packages/layouts
       '@vite-mf-monorepo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
-      '@vite-mf-monorepo/tmdb-client':
-        specifier: workspace:*
-        version: link:../../packages/http-client
       '@vite-mf-monorepo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -427,15 +427,15 @@ importers:
 
   apps/media:
     dependencies:
+      '@fubar-it-co/tmdb-client':
+        specifier: workspace:*
+        version: link:../../packages/http-client
       '@vite-mf-monorepo/layouts':
         specifier: workspace:*
         version: link:../../packages/layouts
       '@vite-mf-monorepo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
-      '@vite-mf-monorepo/tmdb-client':
-        specifier: workspace:*
-        version: link:../../packages/http-client
       '@vite-mf-monorepo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -545,12 +545,12 @@ importers:
 
   apps/photos:
     dependencies:
+      '@fubar-it-co/tmdb-client':
+        specifier: workspace:*
+        version: link:../../packages/http-client
       '@vite-mf-monorepo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
-      '@vite-mf-monorepo/tmdb-client':
-        specifier: workspace:*
-        version: link:../../packages/http-client
       '@vite-mf-monorepo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -743,7 +743,7 @@ importers:
 
   packages/shared:
     dependencies:
-      '@vite-mf-monorepo/tmdb-client':
+      '@fubar-it-co/tmdb-client':
         specifier: workspace:*
         version: link:../http-client
       '@vite-mf-monorepo/tokens':

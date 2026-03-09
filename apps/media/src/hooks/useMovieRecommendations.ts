@@ -1,5 +1,5 @@
+import { movieRecommendationsOptions } from '@fubar-it-co/tmdb-client'
 import { useQuery } from '@tanstack/react-query'
-import { movieRecommendationsOptions } from '@vite-mf-monorepo/tmdb-client'
 
 /**
  * Fetch recommended movies based on a movie ID

@@ -1,4 +1,4 @@
-import type { TvSeriesDetailsResponse } from '@vite-mf-monorepo/tmdb-client/client'
+import type { TvSeriesDetailsResponse } from '@fubar-it-co/tmdb-client/client'
 
 export const mockTVSeriesDetails: TvSeriesDetailsResponse = {
   id: 549,

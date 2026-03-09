@@ -10,10 +10,10 @@
  * @example
  * ```typescript
  * // Import SDK functions
- * import { moviePopularList, movieDetails } from '@vite-mf-monorepo/tmdb-client'
+ * import { moviePopularList, movieDetails } from '@fubar-it-co/tmdb-client'
  *
  * // Use with TanStack Query
- * import { moviePopularListOptions } from '@vite-mf-monorepo/tmdb-client'
+ * import { moviePopularListOptions } from '@fubar-it-co/tmdb-client'
  * const { data } = useQuery(moviePopularListOptions())
  * ```
  *
