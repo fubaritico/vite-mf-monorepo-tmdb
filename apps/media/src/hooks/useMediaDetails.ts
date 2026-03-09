@@ -2,7 +2,7 @@ import {
   type MovieDetailsResponse,
   type TMDBError,
   type TvSeriesDetailsResponse,
-} from '@vite-mf-monorepo/tmdb-client'
+} from '@fubar-it-co/tmdb-client'
 
 import { useMovieDetails } from './useMovieDetails.ts'
 import { useTVDetails } from './useTVDetails.ts'

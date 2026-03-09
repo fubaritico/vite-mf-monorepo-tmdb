@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@vite-mf-monorepo/shared": "workspace:*",
-    "@vite-mf-monorepo/tmdb-client": "workspace:*",
+    "@fubar-it-co/tmdb-client": "workspace:*",
     "@vite-mf-monorepo/ui": "workspace:*",
     "clsx": "catalog:",
     "react": "catalog:",

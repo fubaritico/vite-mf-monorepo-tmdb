@@ -1,5 +1,5 @@
+import { tvSeriesPopularListOptions } from '@fubar-it-co/tmdb-client'
 import { useQuery } from '@tanstack/react-query'
-import { tvSeriesPopularListOptions } from '@vite-mf-monorepo/tmdb-client'
 
 export const usePopularTV = () => {
   return useQuery({

@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest'
 
 import { isMovie } from './typeGuards'
 
-import type { TvSeriesDetailsResponse } from '@vite-mf-monorepo/tmdb-client'
+import type { TvSeriesDetailsResponse } from '@fubar-it-co/tmdb-client'
 
 describe('isMovie', () => {
   it('returns true for a MovieDetailsResponse (has "title" field)', () => {

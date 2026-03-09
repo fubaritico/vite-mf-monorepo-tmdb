@@ -1,13 +1,13 @@
+import { trendingAllOptions } from '@fubar-it-co/tmdb-client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { renderHook, waitFor } from '@testing-library/react'
-import { trendingAllOptions } from '@vite-mf-monorepo/tmdb-client'
 import { describe, expect, it, vi } from 'vitest'
 
 import { useTrending } from './useTrending'
 
 import type { ReactNode } from 'react'
 
-vi.mock('@vite-mf-monorepo/tmdb-client', () => ({
+vi.mock('@fubar-it-co/tmdb-client', () => ({
   trendingAllOptions: vi.fn(),
 }))
 

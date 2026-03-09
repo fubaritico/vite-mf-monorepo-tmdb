@@ -7,11 +7,8 @@ import { useMovieCredits } from '../../hooks/useMovieCredits'
 
 import Crew from './Crew'
 
+import type { MovieCreditsResponse, TMDBError } from '@fubar-it-co/tmdb-client'
 import type { UseQueryResult } from '@tanstack/react-query'
-import type {
-  MovieCreditsResponse,
-  TMDBError,
-} from '@vite-mf-monorepo/tmdb-client'
 import type { Location } from 'react-router-dom'
 
 vi.mock('react-router-dom', () => ({

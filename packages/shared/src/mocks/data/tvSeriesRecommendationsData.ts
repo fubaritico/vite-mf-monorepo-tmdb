@@ -1,4 +1,4 @@
-import type { TvSeriesRecommendationsResponse } from '@vite-mf-monorepo/tmdb-client/client'
+import type { TvSeriesRecommendationsResponse } from '@fubar-it-co/tmdb-client/client'
 
 export const mockTVSeriesRecommendations: TvSeriesRecommendationsResponse = {
   page: 1,

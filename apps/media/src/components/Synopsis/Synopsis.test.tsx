@@ -10,11 +10,8 @@ import { useMediaDetails } from '../../hooks'
 
 import Synopsis from './Synopsis'
 
+import type { MovieDetailsResponse, TMDBError } from '@fubar-it-co/tmdb-client'
 import type { UseQueryResult } from '@tanstack/react-query'
-import type {
-  MovieDetailsResponse,
-  TMDBError,
-} from '@vite-mf-monorepo/tmdb-client'
 import type { Location } from 'react-router-dom'
 
 vi.mock('react-router-dom', () => ({

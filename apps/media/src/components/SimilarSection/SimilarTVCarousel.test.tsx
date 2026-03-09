@@ -8,11 +8,11 @@ import { useTVSeriesSimilar } from '../../hooks'
 
 import SimilarTVCarousel from './SimilarTVCarousel'
 
-import type { UseQueryResult } from '@tanstack/react-query'
 import type {
   TMDBError,
   TvSeriesSimilarResponse,
-} from '@vite-mf-monorepo/tmdb-client'
+} from '@fubar-it-co/tmdb-client'
+import type { UseQueryResult } from '@tanstack/react-query'
 
 vi.mock('../../hooks', () => ({
   useMovieSimilar: vi.fn(),

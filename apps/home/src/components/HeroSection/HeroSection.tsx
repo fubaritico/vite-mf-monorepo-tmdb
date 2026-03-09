@@ -9,11 +9,11 @@ import { Link } from 'react-router-dom'
 
 import { useNowPlayingMovies } from '../../hooks/useNowPlayingMovies'
 
-import type { UseQueryResult } from '@tanstack/react-query'
 import type {
   MovieNowPlayingListResponse,
   TMDBError,
-} from '@vite-mf-monorepo/tmdb-client'
+} from '@fubar-it-co/tmdb-client'
+import type { UseQueryResult } from '@tanstack/react-query'
 import type { FC } from 'react'
 
 const HeroSection: FC = () => {

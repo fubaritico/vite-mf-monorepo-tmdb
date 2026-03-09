@@ -1,9 +1,9 @@
-import { UseQueryResult, useQuery } from '@tanstack/react-query'
 import {
   TMDBError,
   TvSeriesDetailsResponse,
   tvSeriesDetailsOptions,
-} from '@vite-mf-monorepo/tmdb-client'
+} from '@fubar-it-co/tmdb-client'
+import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
 export const useTVDetails = (seriesId: number) => {
   return useQuery({

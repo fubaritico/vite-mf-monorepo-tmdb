@@ -1,7 +1,7 @@
 import type {
   MovieDetailsResponse,
   TvSeriesDetailsResponse,
-} from '@vite-mf-monorepo/tmdb-client'
+} from '@fubar-it-co/tmdb-client'
 
 /**
  * Type guard to check if media is a Media

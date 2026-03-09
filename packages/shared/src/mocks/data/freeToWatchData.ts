@@ -1,7 +1,7 @@
 import type {
   DiscoverMovieResponse,
   DiscoverTvResponse,
-} from '@vite-mf-monorepo/tmdb-client/client'
+} from '@fubar-it-co/tmdb-client/client'
 
 export const mockFreeToWatchMovies: DiscoverMovieResponse = {
   page: 1,

@@ -1,4 +1,4 @@
-# @vite-mf-monorepo/tmdb-client
+# @fubar-it-co/tmdb-client
 
 TMDB API HTTP client generated with [heyAPI](https://heyapi.dev) from the official [OpenAPI specification](https://developer.themoviedb.org/openapi/tmdb-api.json).
 
@@ -22,7 +22,7 @@ pnpm install
 ### SDK Functions
 
 ```typescript
-import { moviePopularList, movieDetails } from '@vite-mf-monorepo/tmdb-client'
+import { moviePopularList, movieDetails } from '@fubar-it-co/tmdb-client'
 
 // Get popular movies
 const { data } = await moviePopularList({ query: { page: 1 } })
@@ -35,7 +35,7 @@ const { data: movie } = await movieDetails({ path: { movie_id: 550 } })
 
 ```typescript
 import { useQuery } from '@tanstack/react-query'
-import { moviePopularListOptions, movieDetailsOptions } from '@vite-mf-monorepo/tmdb-client'
+import { moviePopularListOptions, movieDetailsOptions } from '@fubar-it-co/tmdb-client'
 
 // In a React component
 const { data, isLoading } = useQuery(moviePopularListOptions({ query: { page: 1 } }))
@@ -63,7 +63,7 @@ VITE_TMDB_API_TOKEN=your_tmdb_bearer_token_here
 If the TMDB OpenAPI spec changes, regenerate the client:
 
 ```bash
-pnpm --filter @vite-mf-monorepo/tmdb-client generate
+pnpm --filter @fubar-it-co/tmdb-client generate
 ```
 
 ## File Structure

@@ -1,5 +1,5 @@
+import { movieDetailsOptions } from '@fubar-it-co/tmdb-client'
 import { useQuery } from '@tanstack/react-query'
-import { movieDetailsOptions } from '@vite-mf-monorepo/tmdb-client'
 
 /**
  * Fetch movie details by ID (title, overview, release date, runtime, genres, etc.)

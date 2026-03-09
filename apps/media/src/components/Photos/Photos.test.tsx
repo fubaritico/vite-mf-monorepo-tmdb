@@ -9,11 +9,8 @@ import { useMovieImages } from '../../hooks/useMovieImages'
 
 import Photos from './Photos'
 
+import type { MovieImagesResponse, TMDBError } from '@fubar-it-co/tmdb-client'
 import type { UseQueryResult } from '@tanstack/react-query'
-import type {
-  MovieImagesResponse,
-  TMDBError,
-} from '@vite-mf-monorepo/tmdb-client'
 
 vi.mock('react-router-dom', async () => {
   const actual =

@@ -1,10 +1,7 @@
+import { movieImagesOptions } from '@fubar-it-co/tmdb-client'
 import { UseQueryResult, useQuery } from '@tanstack/react-query'
-import { movieImagesOptions } from '@vite-mf-monorepo/tmdb-client'
 
-import type {
-  MovieImagesResponse,
-  TMDBError,
-} from '@vite-mf-monorepo/tmdb-client'
+import type { MovieImagesResponse, TMDBError } from '@fubar-it-co/tmdb-client'
 
 /**
  * Fetch movie backdrops by movie ID

@@ -1,5 +1,5 @@
+import { tvSeriesSimilarOptions } from '@fubar-it-co/tmdb-client'
 import { useQuery } from '@tanstack/react-query'
-import { tvSeriesSimilarOptions } from '@vite-mf-monorepo/tmdb-client'
 
 /**
  * Fetch similar TV series based on a series ID

@@ -7,11 +7,11 @@ import { useTVSeriesRecommendations } from '../../hooks'
 
 import RecommendedTVCarousel from './RecommendedTVCarousel'
 
-import type { UseQueryResult } from '@tanstack/react-query'
 import type {
   TMDBError,
   TvSeriesRecommendationsResponse,
-} from '@vite-mf-monorepo/tmdb-client'
+} from '@fubar-it-co/tmdb-client'
+import type { UseQueryResult } from '@tanstack/react-query'
 
 vi.mock('../../hooks', () => ({
   useMovieRecommendations: vi.fn(),

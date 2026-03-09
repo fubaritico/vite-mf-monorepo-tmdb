@@ -1,10 +1,7 @@
+import { movieVideosOptions } from '@fubar-it-co/tmdb-client'
 import { UseQueryResult, useQuery } from '@tanstack/react-query'
-import { movieVideosOptions } from '@vite-mf-monorepo/tmdb-client'
 
-import type {
-  MovieVideosResponse,
-  TMDBError,
-} from '@vite-mf-monorepo/tmdb-client'
+import type { MovieVideosResponse, TMDBError } from '@fubar-it-co/tmdb-client'
 
 /**
  * Fetch movie videos (trailers, clips, teasers) by movie ID

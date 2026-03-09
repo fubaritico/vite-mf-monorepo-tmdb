@@ -1,4 +1,4 @@
-import type { MovieVideosResponse } from '@vite-mf-monorepo/tmdb-client/client'
+import type { MovieVideosResponse } from '@fubar-it-co/tmdb-client/client'
 
 /**
  * Mock video data for The Shawshank Redemption (ID 278)

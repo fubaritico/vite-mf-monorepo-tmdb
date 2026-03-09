@@ -11,11 +11,8 @@ import { useState } from 'react'
 
 import { useTrending } from '../../hooks/useTrending'
 
+import type { TMDBError, TrendingAllResponse } from '@fubar-it-co/tmdb-client'
 import type { UseQueryResult } from '@tanstack/react-query'
-import type {
-  TMDBError,
-  TrendingAllResponse,
-} from '@vite-mf-monorepo/tmdb-client'
 import type { FC } from 'react'
 
 type TimeWindow = 'day' | 'week'

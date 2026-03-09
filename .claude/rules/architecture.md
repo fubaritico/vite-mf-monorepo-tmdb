@@ -26,7 +26,7 @@ packages/
 ├── ui/         design system (ui: prefix)
 ├── layouts/    Container, Section, Header, Footer, RootLayout (layout: prefix)
 ├── shared/     utils, mocks, test-utils, tailwind theme
-├── http-client/ TMDB heyAPI client → @vite-mf-monorepo/tmdb-client
+├── http-client/ TMDB heyAPI client → @fubar-it-co/tmdb-client
 └── storybook/  stories for all components
 ```
 

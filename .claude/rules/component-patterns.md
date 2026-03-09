@@ -9,10 +9,10 @@ The `loader` static method enables `queryClient.ensureQueryData` for prefetching
 
 ```typescript
 import { QueryClient, useQuery } from '@tanstack/react-query'
-import { endpointOptions } from '@vite-mf-monorepo/tmdb-client'
+import { endpointOptions } from '@fubar-it-co/tmdb-client'
 import { useLoaderData } from 'react-router-dom'
 
-import type { ResponseType } from '@vite-mf-monorepo/tmdb-client'
+import type { ResponseType } from '@fubar-it-co/tmdb-client'
 import type { LoaderFunctionArgs } from 'react-router-dom'
 import type { FC } from 'react'
 
@@ -282,9 +282,9 @@ import type { FC } from 'react'
 ## Hooks Pattern (apps/[app]/src/hooks/)
 ```typescript
 import { UseQueryResult, useQuery } from '@tanstack/react-query'
-import { endpointOptions } from '@vite-mf-monorepo/tmdb-client'
+import { endpointOptions } from '@fubar-it-co/tmdb-client'
 
-import type { ResponseType, TMDBError } from '@vite-mf-monorepo/tmdb-client'
+import type { ResponseType, TMDBError } from '@fubar-it-co/tmdb-client'
 
 export const useDataHook = (id: number) => {
   return useQuery({
@@ -297,7 +297,7 @@ Rules: one hook per file, return useQuery directly, set staleTime, include ALL d
 
 ## Mocks Pattern (packages/shared/src/mocks/)
 ```
-data/[domain]Data.ts          # typed with TMDB types from @vite-mf-monorepo/tmdb-client
+data/[domain]Data.ts          # typed with TMDB types from @fubar-it-co/tmdb-client
 handlers/[domain]Handlers.ts  # MSW handlers export: { default, loading, error }
 ```
 

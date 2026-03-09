@@ -1,4 +1,4 @@
-import type { TrendingAllResponse } from '@vite-mf-monorepo/tmdb-client/client'
+import type { TrendingAllResponse } from '@fubar-it-co/tmdb-client/client'
 
 export const mockTrendingDay: TrendingAllResponse = {
   page: 1,

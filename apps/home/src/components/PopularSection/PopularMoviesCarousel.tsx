@@ -8,11 +8,11 @@ import {
 
 import { usePopularMovies } from '../../hooks/usePopularMovies'
 
-import type { UseQueryResult } from '@tanstack/react-query'
 import type {
   MoviePopularListResponse,
   TMDBError,
-} from '@vite-mf-monorepo/tmdb-client'
+} from '@fubar-it-co/tmdb-client'
+import type { UseQueryResult } from '@tanstack/react-query'
 import type { FC } from 'react'
 
 const PopularMoviesCarousel: FC = () => {

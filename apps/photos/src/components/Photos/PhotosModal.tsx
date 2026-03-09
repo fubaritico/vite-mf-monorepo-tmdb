@@ -1,6 +1,6 @@
 import { Carousel, CarouselItem, IconButton, Modal } from '@vite-mf-monorepo/ui'
 
-import type { MovieImagesResponse } from '@vite-mf-monorepo/tmdb-client'
+import type { MovieImagesResponse } from '@fubar-it-co/tmdb-client'
 import type { FC, MouseEvent } from 'react'
 
 const BASE_IMAGE_URL = 'https://image.tmdb.org/t/p'

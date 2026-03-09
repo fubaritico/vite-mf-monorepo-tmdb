@@ -1,9 +1,9 @@
-import { UseQueryResult, useQuery } from '@tanstack/react-query'
 import {
   MovieDetailsResponse,
   TMDBError,
   movieDetailsOptions,
-} from '@vite-mf-monorepo/tmdb-client'
+} from '@fubar-it-co/tmdb-client'
+import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
 export const useMovieDetails = (movieId: number) => {
   return useQuery({
