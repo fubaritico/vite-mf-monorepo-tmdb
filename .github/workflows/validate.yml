@@ -60,7 +60,7 @@ jobs:
       - uses: ./.github/actions/setup
 
       - name: Build packages and apps
-        run: pnpm build
+        run: pnpm prod
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
