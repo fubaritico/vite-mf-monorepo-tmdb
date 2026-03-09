@@ -19,7 +19,7 @@ This is a test to check if it was possible to create a project from a previous o
 
 All techs and deps used in this project are the latest versions available at the time of writing this README. Some update maintenance for dependencies will be done in time.
 
-I use IntelliJ for this project, and also the windsurf/cascade plugin with claude sonnet 4.5, getting some cursor flavor while coding.
+I use IntelliJ for this project with claude sonnet 4.6 plugin, getting some cursor flavor while coding.
 
 It's a work in progress, so many future enhancements are planned.
 
@@ -31,7 +31,7 @@ This project demonstrates a **real-world micro-frontend architecture** designed 
 
 The architecture is structured to support multiple autonomous teams:
 
-- **Home & Media Team**: Manages the home page and movie detail pages (`apps/home`, `apps/movie`)
+- **Home & Media Team**: Manages the home page and movie/tv series detail pages (`apps/home`, `apps/media`)
 - **User & Wishlist Team**: Handles user accounts and wishlist features (planned)
 - **Talent Team**: Develops person/talent detail pages (planned, `apps/talent`)
 
@@ -42,7 +42,11 @@ Each team owns their remote application, with full autonomy over their codebase,
 The project setup is designed for **simplicity and efficiency**:
 
 ```bash
-pnpm install  # Install dependencies
+# Requires to have pnpm installed and node >=22.11.0
+# First, get an API key from tmdb by creating an account, it's free 
+# Create a .env.local from .env.local.example file in the root of the project and add your API key
+
+pnpm setup  # Install dependencies and build packages
 pnpm dev  # Start development
 ```
 
@@ -84,7 +88,7 @@ Two commands to get started. No complex configuration, no manual setup steps. Th
    ```
 4. Install dependencies
    ```bash
-   pnpm install
+   pnpm setup
    ```
 5. Start the development server
    ```bash
@@ -123,19 +127,10 @@ The project separates **build-only** commands from **build + server** commands f
 
 #### Root Commands
 
-| Command | Context | Behavior |
-|---------|---------|----------|
-| `pnpm prod` | CI/GitHub Actions/Netlify | Builds all apps (host, home, media, photos) — **no servers started** |
-| `pnpm prod:ordered` | CI/GitHub Actions | Builds apps sequentially: home → media → host — **no servers started** |
+| Command | Context | Behavior                                                              |
+|---------|---------|-----------------------------------------------------------------------|
+| `pnpm prod` | CI/GitHub Actions/Netlify | Builds all apps (host, home, media, photos) — **no servers started**  |
 | `pnpm prod:server` | Local development | Builds all apps **and** starts servers on ports 3000-3003 in parallel |
-| `pnpm prod:server:ordered` | Local development | Builds apps sequentially and starts servers in order: home → media → host |
-
-#### App-Level Commands (host, home, media, photos)
-
-| Command | Behavior |
-|---------|----------|
-| `pnpm prod` | Builds app in production mode only — `vite build --mode production` |
-| `pnpm prod:server` | Builds app AND starts Express.js server — `vite build --mode production & node server.js` |
 
 #### When to Use Each
 
@@ -160,6 +155,33 @@ pnpm prod:server:ordered  # Build all + start all servers (sequential)
 Then open: **http://localhost:3000** (host application)
 
 *Note: Remotes (home, media, photos) run on separate ports but are consumed by the host. You typically only access the host.*
+
+### Continuous Integration & Deployment
+
+**GitHub Actions** validates every PR and push to `main/develop`:
+
+1. **Lint** — ESLint code style
+2. **Type Check** — TypeScript verification
+3. **Test** — Vitest with 80% coverage threshold
+4. **Build** — Builds all apps (`pnpm prod`)
+5. **SonarQube** — Code quality scan
+6. **Quality Gate** — All checks must pass
+
+**Enforcement:**
+- ❌ **Failed checks = no deployment** — GitHub blocks merge
+- ✅ **Successful push to `main`** → Triggers Netlify builds for all 5 apps (host, home, media, photos, storybook)
+
+**Note:** Both GitHub App and CI webhooks can trigger Netlify deploys on main branch merges — builds are queued by Netlify.
+
+### Performance & Quality Metrics
+
+Lighthouse scores (measured on deployed app):
+- **Performance**: 80+
+- **Accessibility (a11y)**: 100
+- **Best Practices**: 100
+- **SEO**: 83
+
+Optimizations applied: responsive images, persistent skeletons (no CLS), Netlify Image CDN, code splitting via Module Federation.
 
 ### Design Tokens
 
@@ -188,9 +210,11 @@ Open http://localhost:6006
 vite-mf-monorepo/
 ├── apps/
 │   ├── host/          # Host application (port 3000)
-│   ├── list/          # List remote - movies grid (port 3001)
-│   └── detail/        # Detail remote - movie page (port 3002)
+│   ├── home/          # Home page - movies/tv series carrousels (port 3001)
+│   ├── detail/        # Media details page (port 3002)
+│   └── photos/        # Routed photos carrousel in lightbox mode (port 30023)
 ├── packages/
+│   ├── layouts/       # Shared component to setup page zoning
 │   ├── shared/        # Shared utils, Vite plugins, Tailwind theme
 │   ├── ui/            # Design system (Button, Card, etc.)
 │   ├── tokens/        # Design tokens (Style Dictionary)
@@ -265,7 +289,7 @@ This project uses **[pa11y](https://www.pa11y.org/)** for automated accessibilit
 
 ```bash
 # Run accessibility audit on all pages
-pnpm run test:a11y
+pnpm test:a11y
 ```
 
 **What pa11y checks**:
@@ -287,16 +311,19 @@ See [docs/A11Y.md](./docs/A11Y.md) for detailed accessibility guidelines.
 
 ### Issues
 
-No issues for now
+The micro frontends architecture doesn't provide good SEO. It's rather meant for big apps like Paas or Saas. It's basically not a good fit for a movie database app or any ecommerce website.
+
+But starting from a public API, it was possible to display complex contents from data.
+
+A better option will be to have another version of the app using a server side rendering architecture based on NextJS getting real good lighthouse scores.
 
 ### Future Enhancements
 
-- Add test utils in the shared package
-- Add tests for error cases
-- Add more tests for the components (details)
 - Add e2e tests with vitest in browser mode
 - Add a detail page for the talent (people) taking part in a movie
+- Make packages like `token`, `layouts` and `ui` available via npm registry for other architectural approaches.
 - For DX, add a .vscode and .cursor rules for Cursor users
+- Create a server side rendering version of the app using NextJS
 
 ### Acknowledgments
 
