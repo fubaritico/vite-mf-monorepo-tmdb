@@ -83,6 +83,38 @@ packages/http-client/
 └── tsconfig.json
 ```
 
+## Publishing
+
+### Local testing with Verdaccio
+
+Start Verdaccio (one-time global install):
+
+```bash
+npm install -g verdaccio
+verdaccio
+```
+
+First time only — register on local Verdaccio (saves token in `.npmrc`):
+
+```bash
+cd packages/http-client
+npm adduser --registry http://localhost:4873/ --userconfig ../../.npmrc
+```
+
+Then publish to Verdaccio:
+
+```bash
+./packages/http-client/publish-local.sh patch
+```
+
+### Publish to npm
+
+```bash
+./packages/http-client/publish.sh patch
+```
+
+Requires `NPM_TOKEN` in `.env` at the monorepo root.
+
 ## Links
 
 - [TMDB API Documentation](https://developer.themoviedb.org/docs)

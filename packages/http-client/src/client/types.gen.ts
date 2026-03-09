@@ -5289,6 +5289,8 @@ export type SearchMultiResponses = {
             video?: boolean;
             vote_average?: number;
             vote_count?: number;
+            name?: string;
+            original_name?: string;
         }>;
         total_pages?: number;
         total_results?: number;
