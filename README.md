@@ -43,11 +43,10 @@ The project setup is designed for **simplicity and efficiency**:
 
 ```bash
 pnpm install  # Install dependencies
-pnpm build:packages  # Build shared packages
 pnpm dev  # Start development
 ```
 
-Three commands to get started. No complex configuration, no manual setup steps. The monorepo structure with shared packages (design system, tokens, API client) ensures consistency while preserving team independence.
+Two commands to get started. No complex configuration, no manual setup steps. The monorepo structure with shared packages (design system, tokens, API client) ensures consistency while preserving team independence.
 
 ### Architecture Benefits
 
@@ -111,12 +110,56 @@ pnpm dev
 |---------|-------------|
 | `pnpm dev` | Start all apps with watch mode for packages |
 | `pnpm reset` | Full reset: clean + install |
-| `pnpm build:packages` | Build tokens, shared, and ui packages |
-| `pnpm storybook` | Start Storybook (requires `pnpm build:packages` first) |
+| `pnpm build:packages` | Rebuild shared packages (use if you modify ui, layouts, or shared) |
+| `pnpm storybook` | Start Storybook |
 | `pnpm kill-ports` | Kill processes on ports 3000, 3001, 3002, 6006 |
 | `pnpm test` | Run tests |
 | `pnpm lint` | Run ESLint |
 | `pnpm type-check` | Run TypeScript type checking |
+
+### Production Build Commands
+
+The project separates **build-only** commands from **build + server** commands for different deployment scenarios:
+
+#### Root Commands
+
+| Command | Context | Behavior |
+|---------|---------|----------|
+| `pnpm prod` | CI/GitHub Actions/Netlify | Builds all apps (host, home, media, photos) — **no servers started** |
+| `pnpm prod:ordered` | CI/GitHub Actions | Builds apps sequentially: home → media → host — **no servers started** |
+| `pnpm prod:server` | Local development | Builds all apps **and** starts servers on ports 3000-3003 in parallel |
+| `pnpm prod:server:ordered` | Local development | Builds apps sequentially and starts servers in order: home → media → host |
+
+#### App-Level Commands (host, home, media, photos)
+
+| Command | Behavior |
+|---------|----------|
+| `pnpm prod` | Builds app in production mode only — `vite build --mode production` |
+| `pnpm prod:server` | Builds app AND starts Express.js server — `vite build --mode production & node server.js` |
+
+#### When to Use Each
+
+**CI/GitHub Actions:**
+```bash
+pnpm prod          # Just build, job terminates quickly
+```
+
+**Netlify (remotes):**
+Each remote uses a custom build script that only builds:
+```bash
+pnpm install && pnpm build:packages && cd apps/home && pnpm build
+# (Netlify serves the dist/ files, no servers needed)
+```
+
+**Local Development** (test servers locally):
+```bash
+pnpm prod:server          # Build all + start all servers (parallel)
+pnpm prod:server:ordered  # Build all + start all servers (sequential)
+```
+
+Then open: **http://localhost:3000** (host application)
+
+*Note: Remotes (home, media, photos) run on separate ports but are consumed by the host. You typically only access the host.*
 
 ### Design Tokens
 

@@ -26,6 +26,9 @@ find . -name "@mf-types" -type d -prune -exec rm -rf {} + 2>/dev/null || true
 echo "📦 Installing dependencies..."
 pnpm install --frozen-lockfile
 
+echo "📦 Building packages..."
+pnpm build:packages
+
 echo "✅ Project reset complete!"
 echo ""
 echo "You can now run: pnpm dev"
