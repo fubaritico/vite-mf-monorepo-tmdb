@@ -11,6 +11,8 @@
     "dev:ordered": "lerna run --stream dev --scope @vite-mf-monorepo/home --scope @vite-mf-monorepo/media --scope @vite-mf-monorepo/host",
     "prod": "lerna run --stream prod",
     "prod:ordered": "lerna run --stream prod --scope @vite-mf-monorepo/home --scope @vite-mf-monorepo/media --scope @vite-mf-monorepo/host",
+    "prod:server": "lerna run --stream prod:server",
+    "prod:server:ordered": "lerna run --stream prod:server --scope @vite-mf-monorepo/home --scope @vite-mf-monorepo/media --scope @vite-mf-monorepo/host",
     "home:dev": "pnpm --filter @vite-mf-monorepo/home dev",
     "media:dev": "pnpm --filter @vite-mf-monorepo/media dev",
     "host:dev": "pnpm --filter @vite-mf-monorepo/host dev",
