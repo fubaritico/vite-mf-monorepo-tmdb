@@ -31,3 +31,7 @@ coverage
 
 # Files and sources
 files
+
+# NPM
+.npmrc
+**/.npmrc

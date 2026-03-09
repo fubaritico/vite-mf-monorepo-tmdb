@@ -1,0 +1,40 @@
+#!/bin/bash
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+log() {
+    echo -e "${2:-$GREEN}$1${NC}"
+}
+
+check_status() {
+    if [ $? -eq 0 ]; then
+        log "✓ $1 completed successfully"
+    else
+        log "✗ $1 failed" "$RED"
+        exit 1
+    fi
+}
+
+log "Checking if Verdaccio is running..." "$YELLOW"
+curl -s http://localhost:4873 > /dev/null
+if [ $? -ne 0 ]; then
+    log "Verdaccio is not running on localhost:4873" "$RED"
+    exit 1
+fi
+check_status "Verdaccio connection"
+
+cd "$(dirname "$0")" || exit 1
+
+log "Building package..." "$YELLOW"
+pnpm build
+check_status "Build"
+
+log "Publishing to Verdaccio..." "$YELLOW"
+npm publish --userconfig ../../.npmrc
+check_status "Publish"
+
+CURRENT_VERSION=$(node -p "require('./package.json').version")
+log "🎉 Package published! Version: ${CURRENT_VERSION}" "$GREEN"
