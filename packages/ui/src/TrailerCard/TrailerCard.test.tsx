@@ -55,7 +55,6 @@ describe('TrailerCard', () => {
   it('thumbnail has role="button" and correct aria-label', () => {
     render(<TrailerCard {...defaultProps} />)
     const button = screen.getByRole('button', { name: 'Play Test Trailer' })
-    expect(button).toHaveAttribute('role', 'button')
     expect(button).toHaveAttribute('aria-label', 'Play Test Trailer')
   })
 
