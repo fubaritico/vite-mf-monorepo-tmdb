@@ -1,4 +1,4 @@
-import { Carousel, CarouselItem, Modal } from '@vite-mf-monorepo/ui'
+import { Carousel, CarouselItem, IconButton, Modal } from '@vite-mf-monorepo/ui'
 
 import type { MovieImagesResponse } from '@vite-mf-monorepo/tmdb-client'
 import type { FC, MouseEvent } from 'react'
@@ -46,7 +46,11 @@ const PhotosModal: FC<PhotosModalProps> = ({
         onNext={onNext}
       >
         {images.map((image, i) => (
-          <CarouselItem key={i} isLightbox onClick={handleCarrouselItemClick}>
+          <CarouselItem
+            key={image.file_path}
+            isLightbox
+            onClick={handleCarrouselItemClick}
+          >
             <img
               src={`${BASE_IMAGE_URL}/w1280${image.file_path ?? ''}`}
               alt={`Backdrop ${String(i + 1)}`}
@@ -55,6 +59,12 @@ const PhotosModal: FC<PhotosModalProps> = ({
           </CarouselItem>
         ))}
       </Carousel>
+      <IconButton
+        icon="XMark"
+        aria-label="Close"
+        onClick={onClose}
+        className="ui:absolute ui:top-4 ui:left-4 ui:text-white hover:ui:bg-white/10 ui:z-10 ui:focus:border-none"
+      />
     </Modal>
   )
 }
