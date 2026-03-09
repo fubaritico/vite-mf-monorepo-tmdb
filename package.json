@@ -10,7 +10,6 @@
     "dev": "pnpm build:packages && concurrently -n packages,apps \"pnpm dev:packages\" \"wait-on packages/shared/dist/index.js packages/ui/dist/index.js packages/layouts/dist/index.js && pnpm dev:apps\"",
     "prod": "lerna run --stream prod",
     "prod:server": "lerna run --stream prod:server",
-    "prod:server:ordered": "lerna run --stream prod:server --scope @vite-mf-monorepo/home --scope @vite-mf-monorepo/media --scope @vite-mf-monorepo/host",
     "type-check": "tsc -p ./ --noEmit",
     "lint": "eslint --ext .ts,.tsx,.js,.jsx .",
     "lint:fix": "eslint --ext .ts,.tsx,.js,.jsx . --fix",
@@ -19,6 +18,7 @@
     "a11y": "pa11y-ci",
     "a11y:report": "pa11y-ci --reporter csv > a11y-report.csv",
     "reset": "./scripts/reset-project.sh",
+    "setup": "./scripts/setup.sh",
     "kill-ports": "./scripts/kill-ports.sh",
     "storybook": "pnpm --filter @vite-mf-monorepo/storybook storybook"
   },
