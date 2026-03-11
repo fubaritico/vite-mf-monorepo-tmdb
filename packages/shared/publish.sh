@@ -78,7 +78,7 @@ git commit -m "docs(shared): update changelog for version bump" --no-verify
 check_status "Changelog commit"
 
 log "Publishing package..." "$YELLOW"
-npm publish --userconfig .npmrc --no-git-checks
+pnpm publish --no-git-checks
 check_status "Publish"
 
 CURRENT_VERSION=$(node -p "require('./package.json').version")
