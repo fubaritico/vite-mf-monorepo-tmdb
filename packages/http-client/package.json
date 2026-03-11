@@ -1,6 +1,6 @@
 {
   "name": "@fubar-it-co/tmdb-client",
-  "version": "0.0.1-Beta2",
+  "version": "0.0.5",
   "description": "TMDB API client generated with heyAPI",
   "type": "module",
   "main": "./dist/index.js",
@@ -15,16 +15,27 @@
       "types": "./dist/client/index.d.ts"
     }
   },
+  "publishConfig": {
+    "access": "restricted"
+  },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "generate": "openapi-ts && node scripts/add-ts-nocheck.js && eslint src --fix",
+    "clean": "rm -rf dist",
     "lint": "eslint . --max-warnings 0",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "generate": "openapi-ts && node scripts/add-ts-nocheck.js && eslint src --fix",
+    "build": "pnpm clean && pnpm generate && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "local-release:patch": "pnpm build && ./publish-local.sh patch",
+    "local-release:minor": "pnpm build && ./publish-local.sh minor",
+    "local-release:major": "pnpm build && ./publish-local.sh major",
+    "release:patch": "pnpm build && ./publish.sh patch",
+    "release:minor": "pnpm build && ./publish.sh minor",
+    "release:major": "pnpm build && ./publish.sh major"
   },
   "dependencies": {
     "@tanstack/react-query": "catalog:"
   },
   "devDependencies": {
+    "conventional-changelog": "catalog:",
     "@eslint/js": "catalog:",
     "@hey-api/openapi-ts": "^0.92.3",
     "eslint": "^9.0.0",

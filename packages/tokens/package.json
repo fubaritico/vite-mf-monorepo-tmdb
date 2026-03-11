@@ -1,8 +1,10 @@
 {
   "name": "@vite-mf-monorepo/tokens",
-  "version": "0.0.1",
-  "private": true,
+  "version": "0.0.2",
   "type": "module",
+  "publishConfig": {
+    "access": "restricted"
+  },
   "exports": {
     ".": {
       "import": {
@@ -17,10 +19,17 @@
     "dist"
   ],
   "scripts": {
-    "build": "style-dictionary build --config sd.config.js",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "build": "pnpm clean && style-dictionary build --config sd.config.js",
+    "local-release:patch": "pnpm build && ./publish-local.sh patch",
+    "local-release:minor": "pnpm build && ./publish-local.sh minor",
+    "local-release:major": "pnpm build && ./publish-local.sh major",
+    "release:patch": "pnpm build && ./publish.sh patch",
+    "release:minor": "pnpm build && ./publish.sh minor",
+    "release:major": "pnpm build && ./publish.sh major"
   },
   "devDependencies": {
+    "conventional-changelog": "catalog:",
     "style-dictionary": "^4.3.0"
   }
 }
