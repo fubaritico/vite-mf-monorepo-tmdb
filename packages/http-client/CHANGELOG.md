@@ -1,4 +1,4 @@
-## <small>0.0.4 (2026-03-11)</small>
+## <small>0.0.5 (2026-03-11)</small>
 
 * docs: add accessibility (a11y) testing guide to README ([62608c9](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/62608c9))
 * docs: add acknowledgment for Nsttt (DTS plugin) ([87ff972](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/87ff972))
@@ -13,6 +13,7 @@
 * docs(claude): migrate rules to .claude/ and add slash command skills ([8e45ec3](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/8e45ec3))
 * docs(claude): remove auto-loaded rules, add model selection and on-demand loading rule ([973cf36](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/973cf36))
 * docs(claude): update session notes — Phase 4.8 done, Phase 4.6 next ([7c08fbe](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/7c08fbe))
+* docs(http-client): update changelog for version bump ([dfdf0f8](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/dfdf0f8))
 * docs(http-client): update changelog for version bump ([4f85338](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/4f85338))
 * docs(http-client): update changelog for version bump ([2f2307c](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/2f2307c))
 * docs(http-client): update changelog for version bump ([dd5003d](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/dd5003d))
