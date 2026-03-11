@@ -7,6 +7,7 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `packages/shared` (mocks, test-utils, utils), `packages/http-client` (TMDB heyAPI client)
 
 ## Critical Workflow Rules
+- **During work**: Explain what you do. Commands, changes, steps — but no unnecessary comments or enumerations.
 - **Discuss approach FIRST** — never code without confirming approach
 - **Review → Test → Commit** per change — no accumulation
 - **Never execute commands** — propose only. Exception: user says "execute", "run", etc.
