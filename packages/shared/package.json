@@ -1,8 +1,10 @@
 {
   "name": "@vite-mf-monorepo/shared",
-  "version": "1.0.0",
-  "private": true,
+  "version": "0.0.1",
   "type": "module",
+  "publishConfig": {
+    "access": "restricted"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -35,7 +37,13 @@
     "build": "pnpm svg && tsc && mkdir -p dist/assets && mv dist/.temp-svg/* dist/assets/ 2>/dev/null && rm -rf dist/.temp-svg src/.temp-svg || true",
     "dev": "tsc --watch",
     "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix"
+    "lint:fix": "eslint ./src --fix",
+    "local-release:patch": "pnpm build && ./publish-local.sh patch",
+    "local-release:minor": "pnpm build && ./publish-local.sh minor",
+    "local-release:major": "pnpm build && ./publish-local.sh major",
+    "release:patch": "pnpm build && ./publish.sh patch",
+    "release:minor": "pnpm build && ./publish.sh minor",
+    "release:major": "pnpm build && ./publish.sh major"
   },
   "dependencies": {
     "@fubar-it-co/tmdb-client": "workspace:*",
@@ -59,6 +67,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "conventional-changelog": "catalog:",
     "glob": "13.0.6",
     "msw": "catalog:",
     "typescript": "catalog:",
