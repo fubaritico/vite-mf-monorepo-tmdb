@@ -102,7 +102,7 @@ git tag -a "http-client-v${CURRENT_VERSION}" -m "http-client Version ${CURRENT_V
 check_status "Tag creation"
 
 log "Pushing new version to repository..." "$YELLOW"
-git push origin main && git push origin --tags
+git push origin release/http-client && git push origin --tags
 check_status "Git push"
 
 # Clean up - remove .npmrc file and unset environment variables
