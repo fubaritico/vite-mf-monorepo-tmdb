@@ -35,7 +35,20 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
+      - name: Check if this is a publish commit
+        id: is_publish
+        run: |
+          MESSAGE=$(git log -1 --pretty=%B)
+          if [[ "$MESSAGE" == *"update changelog"* ]]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Trigger Netlify builds (all 5 apps)
+        if: steps.is_publish.outputs.skip == 'false'
         run: |
           curl -X POST -d '{}' "${{ secrets.NETLIFY_BUILD_HOOK_HOST }}"
           curl -X POST -d '{}' "${{ secrets.NETLIFY_BUILD_HOOK_HOME }}"

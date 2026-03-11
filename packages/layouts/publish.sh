@@ -87,7 +87,7 @@ git tag -a "layouts-v${CURRENT_VERSION}" -m "layouts Version ${CURRENT_VERSION}"
 check_status "Tag creation"
 
 log "Pushing new version to repository..." "$YELLOW"
-git push origin main && git push origin --tags
+git push origin release/layouts && git push origin --tags
 check_status "Git push"
 
 log "Cleaning up..." "$YELLOW"

@@ -87,7 +87,7 @@ git tag -a "tokens-v${CURRENT_VERSION}" -m "tokens Version ${CURRENT_VERSION}" |
 check_status "Tag creation"
 
 log "Pushing new version to repository..." "$YELLOW"
-git push origin main && git push origin --tags
+git push origin release/tokens && git push origin --tags
 check_status "Git push"
 
 log "Cleaning up..." "$YELLOW"
