@@ -728,6 +728,9 @@ importers:
       autoprefixer:
         specifier: 'catalog:'
         version: 10.4.21(postcss@8.5.3)
+      conventional-changelog:
+        specifier: 'catalog:'
+        version: 7.2.0(conventional-commits-filter@5.0.0)
       jsdom:
         specifier: 'catalog:'
         version: 26.0.0
