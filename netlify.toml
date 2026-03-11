@@ -5,9 +5,25 @@
 # Each Netlify site will use this file with different base directories.
 # ============================================================================
 
-[build]
-  base = ""
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- $APP_PATH packages/"
+[[build]]
+  base = "apps/host"
+  publish = "dist"
+
+[[build]]
+  base = "apps/home"
+  publish = "dist"
+
+[[build]]
+  base = "apps/media"
+  publish = "dist"
+
+[[build]]
+  base = "apps/photos"
+  publish = "dist"
+
+[[build]]
+  base = "packages/storybook"
+  publish = "storybook-static"
 
 # Node.js and pnpm versions (applies to all sites)
 [build.environment]

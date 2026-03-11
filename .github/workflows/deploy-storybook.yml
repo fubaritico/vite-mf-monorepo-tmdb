@@ -1,58 +1,38 @@
 name: Deploy Storybook to Netlify
 
 on:
-  push:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
     branches: [main]
-    paths:
-      - 'packages/storybook/**'
-      - 'packages/ui/**'
-      - 'packages/layouts/**'
-      - 'pnpm-lock.yaml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'packages/storybook/**'
-      - 'packages/ui/**'
-      - 'packages/layouts/**'
-      - 'pnpm-lock.yaml'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    needs: [validate]
+    if: github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 10.8.1
+      - uses: ./.github/actions/setup
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install
+      - name: Check if files changed
+        id: changed
+        run: |
+          if git diff --quiet ${{ github.event.workflow_run.before }} ${{ github.event.workflow_run.head_sha }} -- packages/storybook/ packages/ui/ packages/layouts/; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
 
       - name: Build Storybook
-        run: pnpm storybook:build
+        run: pnpm prod
 
       - name: Install Netlify CLI
-        run: npm install -g netlify-cli
+        run: pnpm install -g netlify-cli
 
       - name: Deploy to Netlify (Production)
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: netlify deploy --prod --dir=packages/storybook/storybook-static --no-build
+        if: steps.changed.outputs.changed == 'true'
+        run: netlify deploy --prod --dir=packages/storybook/storybook-static --site=$NETLIFY_SITE_ID_STORYBOOK --no-build
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_STORYBOOK }}
-
-      - name: Deploy to Netlify (Preview)
-        if: github.event_name == 'pull_request'
-        run: netlify deploy --dir=packages/storybook/storybook-static --no-build
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID_STORYBOOK }}
+          NETLIFY_SITE_ID_STORYBOOK: ${{ secrets.NETLIFY_SITE_ID_STORYBOOK }}
