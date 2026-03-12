@@ -12,12 +12,17 @@ jobs:
     if: github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 2
 
       - uses: ./.github/actions/setup
 
       - uses: dorny/paths-filter@v3
         id: filter
         with:
+          base: ${{ github.event.workflow_run.head_sha }}^
+          ref: ${{ github.event.workflow_run.head_sha }}
           filters: |
             storybook:
               - 'packages/storybook/**'
@@ -34,7 +39,7 @@ jobs:
 
       - name: Build Storybook
         if: steps.filter.outputs.storybook == 'true' || steps.filter.outputs.ui == 'true' || steps.filter.outputs.layouts == 'true'
-        run: pnpm prod
+        run: pnpm --filter @vite-mf-monorepo/storybook build
 
       - name: Install Netlify CLI
         if: steps.filter.outputs.storybook == 'true' || steps.filter.outputs.ui == 'true' || steps.filter.outputs.layouts == 'true'
