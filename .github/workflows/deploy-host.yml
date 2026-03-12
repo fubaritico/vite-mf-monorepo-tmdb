@@ -15,26 +15,24 @@ jobs:
 
       - uses: ./.github/actions/setup
 
-      - name: Check if files changed
-        id: changed
-        run: |
-          PARENT=$(git log -1 --format=%P HEAD | awk '{print $1}')
-          if [ -z "$PARENT" ]; then
-            echo "changed=true" >> $GITHUB_OUTPUT
-          elif git diff --quiet $PARENT HEAD -- apps/host/ packages/; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-          else
-            echo "changed=true" >> $GITHUB_OUTPUT
-          fi
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            changed:
+              - 'apps/host/**'
+              - 'packages/**'
 
       - name: Build
+        if: steps.changes.outputs.changed == 'true'
         run: pnpm prod
 
       - name: Install Netlify CLI
+        if: steps.changes.outputs.changed == 'true'
         run: pnpm install -g netlify-cli
 
       - name: Deploy to Netlify (Production)
-        if: steps.changed.outputs.changed == 'true'
+        if: steps.changes.outputs.changed == 'true'
         run: netlify deploy --prod --dir=apps/host/dist --site=$NETLIFY_SITE_ID_HOST --no-build
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

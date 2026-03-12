@@ -1,35 +1,9 @@
 # ============================================================================
 # Netlify Configuration - Monorepo Root
 # ============================================================================
-# This is the main netlify.toml at the root of the monorepo.
-# Each Netlify site will use this file with different base directories.
+# Using GitHub Actions + netlify-cli for deployments (--no-build flag)
+# No [build] sections needed as we pre-build before deploying
 # ============================================================================
-
-[[build]]
-  base = "apps/host"
-  publish = "dist"
-
-[[build]]
-  base = "apps/home"
-  publish = "dist"
-
-[[build]]
-  base = "apps/media"
-  publish = "dist"
-
-[[build]]
-  base = "apps/photos"
-  publish = "dist"
-
-[[build]]
-  base = "packages/storybook"
-  publish = "storybook-static"
-
-# Node.js and pnpm versions (applies to all sites)
-[build.environment]
-  NODE_VERSION = "22.11.0"
-  PNPM_VERSION = "10.8.1"
-  NPM_FLAGS = "--legacy-peer-deps"
 
 # CORS headers — required for Module Federation remotes
 [[headers]]
