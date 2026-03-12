@@ -31,3 +31,6 @@ coverage
 
 # Files and sources
 files
+
+# Local Netlify folder
+.netlify

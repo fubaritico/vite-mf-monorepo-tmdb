@@ -31,16 +31,9 @@ jobs:
         if: steps.changes.outputs.changed == 'true'
         run: pnpm install -g netlify-cli
 
-      - name: Debug - Check Site ID
-        run: |
-          echo "NETLIFY_SITE_ID_HOME is set: $([ -z "$NETLIFY_SITE_ID_HOME" ] && echo 'NO' || echo 'YES')"
-          echo "Length: ${#NETLIFY_SITE_ID_HOME}"
-        env:
-          NETLIFY_SITE_ID_HOME: ${{ secrets.NETLIFY_SITE_ID_HOME }}
-
       - name: Deploy to Netlify (Production)
         if: steps.changes.outputs.changed == 'true'
-        run: netlify deploy --prod --dir=apps/home/dist --site=$NETLIFY_SITE_ID_HOME --no-build --filter home
+        run: netlify deploy --prod --dir=apps/home/dist --site=$NETLIFY_SITE_ID_HOME --no-build --cwd apps/home
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID_HOME: ${{ secrets.NETLIFY_SITE_ID_HOME }}

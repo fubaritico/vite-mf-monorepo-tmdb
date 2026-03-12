@@ -33,7 +33,7 @@ jobs:
 
       - name: Deploy to Netlify (Production)
         if: steps.changes.outputs.changed == 'true'
-        run: netlify deploy --prod --dir=apps/photos/dist --site=$NETLIFY_SITE_ID_PHOTOS --no-build --filter photos
+        run: netlify deploy --prod --dir=apps/photos/dist --site=$NETLIFY_SITE_ID_PHOTOS --no-build --cwd apps/photos
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID_PHOTOS: ${{ secrets.NETLIFY_SITE_ID_PHOTOS }}
