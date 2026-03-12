@@ -15,25 +15,32 @@ jobs:
 
       - uses: ./.github/actions/setup
 
-      - uses: dorny/paths-filter@v2
-        id: changes
+      - uses: dorny/paths-filter@v3
+        id: filter
         with:
           filters: |
-            changed:
+            app:
               - 'apps/photos/**'
+            packages:
               - 'packages/**'
 
+      - name: Debug filters
+        run: |
+          echo "app changed: ${{ steps.filter.outputs.app }}"
+          echo "packages changed: ${{ steps.filter.outputs.packages }}"
+
       - name: Build
-        if: steps.changes.outputs.changed == 'true'
+        if: steps.filter.outputs.app == 'true' || steps.filter.outputs.packages == 'true'
         run: pnpm prod
 
       - name: Install Netlify CLI
-        if: steps.changes.outputs.changed == 'true'
+        if: steps.filter.outputs.app == 'true' || steps.filter.outputs.packages == 'true'
         run: pnpm install -g netlify-cli
 
       - name: Deploy to Netlify (Production)
-        if: steps.changes.outputs.changed == 'true'
-        run: netlify deploy --prod --dir=apps/photos/dist --site=$NETLIFY_SITE_ID_PHOTOS --no-build --cwd apps/photos
+        if: steps.filter.outputs.app == 'true' || steps.filter.outputs.packages == 'true'
+        run: netlify deploy --prod --dir=apps/photos/dist --site=$NETLIFY_SITE_ID_PHOTOS --no-build --cwd apps/photos --message "$DEPLOY_MESSAGE"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID_PHOTOS: ${{ secrets.NETLIFY_SITE_ID_PHOTOS }}
+          DEPLOY_MESSAGE: "${{ github.event.workflow_run.head_commit.message }} (${{ github.event.workflow_run.head_sha }})"
