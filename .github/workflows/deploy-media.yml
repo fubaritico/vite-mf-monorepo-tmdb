@@ -33,7 +33,7 @@ jobs:
 
       - name: Deploy to Netlify (Production)
         if: steps.changes.outputs.changed == 'true'
-        run: netlify deploy --prod --dir=apps/media/dist --site=$NETLIFY_SITE_ID_MEDIA --no-build
+        run: netlify deploy --prod --dir=apps/media/dist --site=$NETLIFY_SITE_ID_MEDIA --no-build --filter media
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID_MEDIA: ${{ secrets.NETLIFY_SITE_ID_MEDIA }}
