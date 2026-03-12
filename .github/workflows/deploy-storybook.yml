@@ -34,7 +34,7 @@ jobs:
 
       - name: Deploy to Netlify (Production)
         if: steps.changes.outputs.changed == 'true'
-        run: netlify deploy --prod --dir=packages/storybook/storybook-static --site=$NETLIFY_SITE_ID_STORYBOOK --no-build --filter storybook
+        run: netlify deploy --prod --dir=packages/storybook/storybook-static --site=$NETLIFY_SITE_ID_STORYBOOK --no-build --cwd packages/storybook
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID_STORYBOOK: ${{ secrets.NETLIFY_SITE_ID_STORYBOOK }}
