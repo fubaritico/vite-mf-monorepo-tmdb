@@ -36,6 +36,17 @@ return query(contentId)
 ```
 **Applied to**: useMediaDetails hook.
 
+### Netlify CLI "multiple projects detected" in pnpm monorepo
+**Problem**: `netlify deploy` scans the entire repo, finds all `package.json` files, and errors with "We've detected multiple projects inside your repository".
+**Symptom**: Error even with `--site` and `--filter` flags set.
+**Root cause**: `--filter home` does not match `@vite-mf-monorepo/home` (full package name required). And even with the correct name, detection runs before the filter applies.
+**Solution**: Use `--cwd apps/<app>` to scope the CLI to a single `package.json`. Keep `--dir` as the full path from the repo root.
+```bash
+netlify deploy --prod --dir=apps/home/dist --site=$SITE_ID --no-build --cwd apps/home
+```
+**Rule**: `--cwd` = directory with the single `package.json`. `--dir` = full path to built assets from repo root.
+**Applied to**: All 5 deploy workflows (deploy-home, deploy-host, deploy-media, deploy-photos, deploy-storybook).
+
 ### TypeScript with NodeNext module resolution
 **Problem**: Requires `.js` extensions for relative imports.
 **Solution**: `import { foo } from './utils.js'` (write .js even though source is .ts).
