@@ -25,7 +25,7 @@ const TrendingSection: FC = () => {
   >
 
   const handleTabChange = (value: string) => {
-    console.warn(value)
+    console.warn(value, 'texte en plus')
     setTimeWindow(value as TimeWindow)
   }
 
