@@ -15,26 +15,35 @@ jobs:
 
       - uses: ./.github/actions/setup
 
-      - uses: dorny/paths-filter@v2
-        id: changes
+      - uses: dorny/paths-filter@v3
+        id: filter
         with:
           filters: |
-            changed:
+            storybook:
               - 'packages/storybook/**'
+            ui:
               - 'packages/ui/**'
+            layouts:
               - 'packages/layouts/**'
 
+      - name: Debug filters
+        run: |
+          echo "storybook changed: ${{ steps.filter.outputs.storybook }}"
+          echo "ui changed: ${{ steps.filter.outputs.ui }}"
+          echo "layouts changed: ${{ steps.filter.outputs.layouts }}"
+
       - name: Build Storybook
-        if: steps.changes.outputs.changed == 'true'
+        if: steps.filter.outputs.storybook == 'true' || steps.filter.outputs.ui == 'true' || steps.filter.outputs.layouts == 'true'
         run: pnpm prod
 
       - name: Install Netlify CLI
-        if: steps.changes.outputs.changed == 'true'
+        if: steps.filter.outputs.storybook == 'true' || steps.filter.outputs.ui == 'true' || steps.filter.outputs.layouts == 'true'
         run: pnpm install -g netlify-cli
 
       - name: Deploy to Netlify (Production)
-        if: steps.changes.outputs.changed == 'true'
-        run: netlify deploy --prod --dir=packages/storybook/storybook-static --site=$NETLIFY_SITE_ID_STORYBOOK --no-build --cwd packages/storybook
+        if: steps.filter.outputs.storybook == 'true' || steps.filter.outputs.ui == 'true' || steps.filter.outputs.layouts == 'true'
+        run: netlify deploy --prod --dir=packages/storybook/storybook-static --site=$NETLIFY_SITE_ID_STORYBOOK --no-build --cwd packages/storybook --message "$DEPLOY_MESSAGE"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID_STORYBOOK: ${{ secrets.NETLIFY_SITE_ID_STORYBOOK }}
+          DEPLOY_MESSAGE: "${{ github.event.workflow_run.head_commit.message }} (${{ github.event.workflow_run.head_sha }})"
