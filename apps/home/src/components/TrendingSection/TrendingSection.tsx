@@ -25,6 +25,7 @@ const TrendingSection: FC = () => {
   >
 
   const handleTabChange = (value: string) => {
+    console.warn(value)
     setTimeWindow(value as TimeWindow)
   }
 
@@ -35,7 +36,7 @@ const TrendingSection: FC = () => {
 
     if (error || !data) {
       const errorMsg =
-        error?.status_message ?? (!data ? 'No data' : 'Failed to load')
+        error?.status_message ?? (data ? 'Failed to load' : 'No data')
       return <Carousel errorMessage={errorMsg} />
     }
 
