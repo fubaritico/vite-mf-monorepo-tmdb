@@ -18,10 +18,14 @@ jobs:
 
       - uses: ./.github/actions/setup
 
+      - name: Get parent SHA
+        id: parent
+        run: echo "sha=$(git rev-parse HEAD^)" >> $GITHUB_OUTPUT
+
       - uses: dorny/paths-filter@v3
         id: filter
         with:
-          base: ${{ github.event.workflow_run.head_sha }}^
+          base: ${{ steps.parent.outputs.sha }}
           ref: ${{ github.event.workflow_run.head_sha }}
           filters: |
             storybook:
