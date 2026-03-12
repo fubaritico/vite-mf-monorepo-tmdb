@@ -18,7 +18,10 @@ jobs:
       - name: Check if files changed
         id: changed
         run: |
-          if git diff --quiet ${{ github.event.workflow_run.before }} ${{ github.event.workflow_run.head_sha }} -- apps/media/ packages/; then
+          PARENT=$(git log -1 --format=%P HEAD | awk '{print $1}')
+          if [ -z "$PARENT" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          elif git diff --quiet $PARENT HEAD -- apps/media/ packages/; then
             echo "changed=false" >> $GITHUB_OUTPUT
           else
             echo "changed=true" >> $GITHUB_OUTPUT
