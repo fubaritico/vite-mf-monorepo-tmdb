@@ -2,9 +2,10 @@
 
 ## Project
 TMDB media app. Lerna + pnpm workspaces. Module Federation.
-- `apps/host` (3000), `apps/home` (3001), `apps/media` (3002)
+- `apps/host` (3000), `apps/home` (3001), `apps/media` (3002), `apps/photos` (3003, `ph:` prefix)
 - `packages/ui` (design system, `ui:` prefix), `packages/layouts` (`layout:` prefix)
 - `packages/shared` (mocks, test-utils, utils), `packages/http-client` (TMDB heyAPI client)
+- `packages/tokens` (design tokens, OKLCH/DTCG format)
 
 ## Critical Workflow Rules
 - **During work**: Explain what you do. Commands, changes, steps — but no unnecessary comments or enumerations.
@@ -13,7 +14,9 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - **Never execute commands** — propose only. Exception: user says "execute", "run", etc.
   - **ESPECIALLY `git push`** — NEVER push without explicit user approval ("execute" or user provides command)
   - Risky actions (git push, git reset --hard, rm -rf, etc.) require explicit permission EVERY TIME
-- **Never hallucinate** — if uncertain, say so and read the code first
+- **Never hallucinate** — if uncertain, say so and read the code first, ask to search online and give sources
+- **Secrets** — toute information sensible (tokens, clés API, credentials) est dans les fichiers `.env*` — jamais dans les rules, memory ou dans le code
+- **Documentation reference** - Always get latest information from context7
 - **Ask permission** before consulting external docs (APIs, libraries)
 - **Never `console.log`** — use `console.warn` / `console.error`
 - **Never explicit `any`** — strict TypeScript
@@ -28,7 +31,7 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `.tsx` for JSX files, `.ts` for pure TS
 - `clsx` for conditional classes
 - `ui:` prefix for all Tailwind classes in packages/ui
-- `mda:` prefix in apps/media, `hm:` in apps/home
+- `mda:` prefix in apps/media, `hm:` in apps/home, `ph:` in apps/photos
 
 ## Architecture Decisions
 - **Embedded queries**: each section fetches its own data (no React Router loaders)
@@ -36,24 +39,15 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - **CSS nth-of-type**: alternating section backgrounds via CSS, not props
 - **theme-no-fonts.css**: remotes import this instead of full theme
 
-## Session Notes (1 Mars 2026)
+## Session Notes (13 Mars 2026)
 
 ### Completed
-- Phase 3.7, 3.11, 3.12, 3.13 ✅
-- Phase 4.1 (media rename), 4.2 (routing), 4.3 (hooks), 4.4 (MediaHero) ✅
-- Phase 4.5 (Synopsis), 4.7 (Crew), 4.7.1 (alternating backgrounds) ✅
+- Phases 3.x, 4.1–4.11 ✅ (media rename, routing, hooks, MediaHero, Synopsis, Crew, Cast, Photos, Trailers, Similar, Recommended)
 - Button polymorphic (as='link' | as='button') ✅
-- Phase 4.8 (Cast Section) ✅
+- component-patterns.md découpé en patterns-ui / patterns-section / patterns-page / patterns-route ✅
 
 ### Next
-- 🎯 Phase 4.6 — Photos Section + PhotoViewer remote (planifié, prêt à coder)
-  - Plan B (host orchestrateur, background location routing) — voir ROADMAP.md §4.6
-  - 10 commits : Modal → Carousel lightbox → apps/photos → host routing → media Photos
-- Phase 4.9 — Trailers & Clips Section
-- Phase 4.10 — You May Also Like Section (similar movies carousel)
-
-### Pending
-- (rien pour l'instant)
+- Consulter `files/ROADMAP.md` pour les prochaines phases
 
 ### Known Issues
 - Font loading in remotes → use `theme-no-fonts.css`
@@ -68,7 +62,11 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 ## Reference Files (load on demand — NOT auto-loaded)
 | File | When to load |
 |---|---|
-| `.claude/rules/component-patterns.md` | Création composant, section, story, test |
+| `.claude/rules/patterns-ui.md` | Création composant UI (packages/ui, layouts), story design system |
+| `.claude/rules/patterns-section.md` | Création section app, hook, mock, test |
+| `.claude/rules/patterns-page.md` | Page orchestrator (Home, Media) — composition de sections, Outlet |
+| `.claude/rules/patterns-route.md` | RouteComponent, router MF, intégration host, modal nested route |
+| `.claude/rules/patterns-remote-setup.md` | Nouveau remote app from scratch — vite.config, CSS, main, host registration |
 | `.claude/rules/architecture.md` | Stack, scripts, CSS, Module Federation |
 | `.claude/rules/troubleshooting.md` | Debug, décision architecturale |
 | `files/ROADMAP.md` | Planification, roadmap |
@@ -81,3 +79,4 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `/story [Name]` — create Storybook story (**mandatory** after every component)
 - `/commit` — prepare conventional commit message
 - `/start-session` — resume a work session
+- `/message-commit` — prepare conventional commit message
