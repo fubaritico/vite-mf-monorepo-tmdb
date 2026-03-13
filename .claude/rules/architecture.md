@@ -20,14 +20,18 @@
 apps/
 ├── host/    port 3000 — consumes remotes
 ├── home/    port 3001 — exposes ./Home, ./routes
-└── media/   port 3002 — exposes ./Media, ./MediaErrorBoundary, ./routes
+├── media/   port 3002 — exposes ./Media, ./MediaErrorBoundary, ./routes
+└── photos/  port 3003 — exposes ./Photos, ./PhotosErrorBoundary, ./router
+             nested child route under /movie/:id and /tv/:id
+             native <dialog> lightbox + Carousel
 
 packages/
-├── ui/         design system (ui: prefix)
+├── ui/         design system (ui: prefix) — 18+ components
 ├── layouts/    Container, Section, Header, Footer, RootLayout (layout: prefix)
-├── shared/     utils, mocks, test-utils, tailwind theme
+├── shared/     utils, mocks, test-utils, tailwind theme, vite plugins
 ├── http-client/ TMDB heyAPI client → @fubar-it-co/tmdb-client
-└── storybook/  stories for all components
+├── tokens/     design tokens (Style Dictionary, OKLCH, DTCG format)
+└── storybook/  stories for all components (port 6006)
 ```
 
 ## CSS Architecture
@@ -36,13 +40,14 @@ packages/
 - `theme-no-fonts.css`: for remotes (no @font-face, avoids broken font paths)
 - packages/ui: `ui:` prefix — `ui:flex ui:items-center`
 - packages/layouts: `layout:` prefix
-- apps/media: `mda:` prefix
 - apps/home: `hm:` prefix
+- apps/media: `mda:` prefix
+- apps/photos: `ph:` prefix
 - Remotes use `vite-plugin-css-injected-by-js` for CSS bundling
 - Custom utilities in `@layer utilities` with escaped prefix: `.mda\:hero-height`
 
 ## Module Federation
-- Bootstrap pattern: `main.tsx` → `await import('./bootstrap')`
+- Bootstrap pattern: app logic inline dans `main.tsx` (pas de fichier bootstrap séparé)
 - Each remote: standalone mode (own router + QueryClient) + MF exposition
 - Shared singletons: react, react-dom, react-router-dom, @tanstack/react-query
 - DTS: remotes generate types → host consumes via tsconfig paths `"*": ["./@mf-types/*"]`
@@ -62,6 +67,8 @@ pnpm coverage         # Vitest + coverage
 
 pnpm reset            # clean install (rm node_modules/dist + pnpm install)
 pnpm generate         # regenerate TMDB API client (packages/http-client)
+pnpm kill-ports       # kill dev servers on ports 3000-3003, 6006
+pnpm storybook        # Storybook on port 6006
 ```
 
 ## Git & Commits
