@@ -158,20 +158,51 @@ Then open: **http://localhost:3000** (host application)
 
 ### Continuous Integration & Deployment
 
-**GitHub Actions** validates every PR and push to `main/develop`:
+#### On push or pull_request to `main` / `develop`
 
-1. **Lint** — ESLint code style
-2. **Type Check** — TypeScript verification
-3. **Test** — Vitest with 80% coverage threshold
-4. **Build** — Builds all apps (`pnpm prod`)
-5. **SonarQube** — Code quality scan
-6. **Quality Gate** — All checks must pass
+The **CI** workflow runs — 3 sequential phases:
 
-**Enforcement:**
-- ❌ **Failed checks = no deployment** — GitHub blocks merge
-- ✅ **Successful push to `main`** → Triggers Netlify builds for all 5 apps (host, home, media, photos, storybook)
+**Phase 1 — Validate** (3 parallel jobs, no dependency between them):
+- **Lint** — ESLint across the entire monorepo
+- **Type Check** — TypeScript `--noEmit` verification
+- **Test** — Vitest with 80% line coverage threshold; uploads coverage as a workflow artifact
 
-**Note:** Both GitHub App and CI webhooks can trigger Netlify deploys on main branch merges — builds are queued by Netlify.
+Once all 3 pass, a **Build** job runs: `pnpm prod` (all apps) and uploads dist artifacts (retained 1 day).
+
+**Phase 2 — SonarQube** (after Validate):
+- Downloads the coverage artifact produced by Phase 1
+- Runs SonarQube scan against SonarCloud
+
+**Phase 3 — Quality Gate** (after Validate + SonarQube, always runs):
+- Checks both phases completed as `success`
+- ❌ If either failed → exits 1, GitHub marks the commit/PR as failed and blocks merge
+
+#### On push to `main` (after CI succeeds)
+
+Five **deploy workflows** run in parallel, each triggered by `workflow_run: ["CI"]` completing with `conclusion == 'success'`.
+
+Each workflow follows the same sequence:
+
+1. Checkout the exact SHA that triggered CI (full git history, `fetch-depth: 0`)
+2. Fetch the parent commit SHA via the GitHub API
+3. Run `paths-filter` comparing changed files between parent SHA and head SHA
+4. Compute a single boolean output (`changed.result`) from the filter outputs
+5. **If `false`** → all remaining steps are skipped (no install, no build, no deploy)
+6. **If `true`** → `pnpm install` + `pnpm build:packages` → `pnpm prod` → `netlify deploy --prod`
+
+**Deploy conditions per workflow:**
+
+| Workflow | Triggers deploy when |
+|---|---|
+| `deploy-home` | `apps/home/**` or `packages/**` changed |
+| `deploy-host` | `apps/host/**` or `packages/**` changed |
+| `deploy-media` | `apps/media/**` or `packages/**` changed |
+| `deploy-photos` | `apps/photos/**` or `packages/**` changed |
+| `deploy-storybook` | `packages/storybook/**`, `packages/ui/**`, or `packages/layouts/**` changed |
+
+#### Manual
+
+- **sonar-init** (`workflow_dispatch`) — initializes the SonarCloud project from `main`; run once on project setup
 
 ### Performance & Quality Metrics
 

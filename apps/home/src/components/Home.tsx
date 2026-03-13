@@ -8,8 +8,6 @@ import TrendingSection from './TrendingSection/TrendingSection'
 import type { FC } from 'react'
 
 const Home: FC = () => {
-  console.warn('[Home] deploy trigger test')
-
   return (
     <>
       {/* Hero Section - Full width, no container */}
