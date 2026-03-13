@@ -211,8 +211,8 @@ vite-mf-monorepo/
 ├── apps/
 │   ├── host/          # Host application (port 3000)
 │   ├── home/          # Home page - movies/tv series carrousels (port 3001)
-│   ├── detail/        # Media details page (port 3002)
-│   └── photos/        # Routed photos carrousel in lightbox mode (port 30023)
+│   ├── media/         # Media details page (port 3002)
+│   └── photos/        # Routed photos carrousel in lightbox mode (port 3003)
 ├── packages/
 │   ├── layouts/       # Shared component to setup page zoning
 │   ├── shared/        # Shared utils, Vite plugins, Tailwind theme
