@@ -83,6 +83,10 @@ Examples:
 - `fix(ui): resolve Button disabled state for link variant`
 - `refactor(shared): extract test utilities to shared package`
 
+## CI/CD Workflows
+
+See [README.md — Continuous Integration & Deployment](../../README.md#continuous-integration--deployment).
+
 ## Forbidden
 ```
 ❌ console.log          → use console.warn / console.error
