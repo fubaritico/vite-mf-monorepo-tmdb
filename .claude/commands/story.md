@@ -9,7 +9,7 @@ Reference: @.claude/rules/component-patterns.md
 
 ## Design System component (packages/ui or packages/layouts)
 
-```typescript
+```typescript jsx
 import { ComponentName } from '@vite-mf-monorepo/ui'
 import type { Meta, StoryObj } from '@storybook/react'
 
@@ -65,7 +65,7 @@ export const WithIcon: Story = { args: { icon: 'Play' } }
 
 ## App component (apps/media, apps/home — embedded query)
 
-```typescript
+```typescript jsx
 import { ComponentName } from '@vite-mf-monorepo/media'  // or /home
 import { componentHandlers } from '@vite-mf-monorepo/shared/mocks'
 import { withRouter } from '../../.storybook/decorators/withRouter'

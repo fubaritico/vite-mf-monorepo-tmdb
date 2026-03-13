@@ -15,7 +15,7 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
   - **ESPECIALLY `git push`** — NEVER push without explicit user approval ("execute" or user provides command)
   - Risky actions (git push, git reset --hard, rm -rf, etc.) require explicit permission EVERY TIME
 - **Never hallucinate** — if uncertain, say so and read the code first, ask to search online and give sources
-- **Secrets** — toute information sensible (tokens, clés API, credentials) est dans les fichiers `.env*` — jamais dans les rules, memory ou dans le code
+- **Secrets** — sensitive information (tokens, API keys, credentials) lives in `.env*` files — never in rules, memory, or code
 - **Documentation reference** - Always get latest information from context7
 - **Ask permission** before consulting external docs (APIs, libraries)
 - **Never `console.log`** — use `console.warn` / `console.error`
@@ -55,30 +55,34 @@ See also: [Production builds](README.md#production-build-commands) · [Setup](RE
 ### Completed
 - Phases 3.x, 4.1–4.11 ✅ (media rename, routing, hooks, MediaHero, Synopsis, Crew, Cast, Photos, Trailers, Similar, Recommended)
 - Button polymorphic (as='link' | as='button') ✅
-- component-patterns.md découpé en patterns-ui / patterns-section / patterns-page / patterns-route ✅
+- component-patterns.md split into patterns-ui / patterns-section / patterns-page / patterns-route ✅
+- CLAUDE.md optimized: Commands section, README anchors, Session State rename, /end-session skill ✅
+- All French text translated to English across .claude/**/*.md ✅
+- README.md stale data fixed (apps/detail/ → apps/media/, port 3003) ✅
+- /end-session and /start-session updated with @ file annotations ✅
 
 ### Next
-- Consulter `files/ROADMAP.md` pour les prochaines phases
+- Check `files/ROADMAP.md` for upcoming phases
 
 ### Known Issues
-- packages/shared exports: ajouter dans `exports` si un nouveau sous-chemin est importé
+- packages/shared exports: add to `exports` when a new subpath is imported
 
 ## Model Selection
-- **Haiku** — questions simples, explications, recherche, status, discussion
+- **Haiku** — simple questions, explanations, research, status, discussion
 - **Sonnet** — code, refactoring, debug, architecture, commits
-- Évaluer la complexité avant de répondre et suggérer Haiku si approprié
+- Assess complexity before answering and suggest Haiku when appropriate
 
 ## Reference Files (load on demand — NOT auto-loaded)
 | File | When to load |
 |---|---|
-| `.claude/rules/patterns-ui.md` | Création composant UI (packages/ui, layouts), story design system |
-| `.claude/rules/patterns-section.md` | Création section app, hook, mock, test |
-| `.claude/rules/patterns-page.md` | Page orchestrator (Home, Media) — composition de sections, Outlet |
-| `.claude/rules/patterns-route.md` | RouteComponent, router MF, intégration host, modal nested route |
-| `.claude/rules/patterns-remote-setup.md` | Nouveau remote app from scratch — vite.config, CSS, main, host registration |
+| `.claude/rules/patterns-ui.md` | Creating UI component (packages/ui, layouts), design system story |
+| `.claude/rules/patterns-section.md` | Creating app section, hook, mock, test |
+| `.claude/rules/patterns-page.md` | Page orchestrator (Home, Media) — section composition, Outlet |
+| `.claude/rules/patterns-route.md` | RouteComponent, MF router, host integration, modal nested route |
+| `.claude/rules/patterns-remote-setup.md` | New remote app from scratch — vite.config, CSS, main, host registration |
 | `.claude/rules/architecture.md` | Stack, scripts, CSS, Module Federation |
-| `.claude/rules/troubleshooting.md` | Debug, décision architecturale |
-| `files/ROADMAP.md` | Planification, roadmap |
+| `.claude/rules/troubleshooting.md` | Debug, architectural decisions |
+| `files/ROADMAP.md` | Planning, roadmap |
 
 **Before coding**: based on the user's task description, ask which reference files are needed — do NOT start coding without the relevant files loaded.
 

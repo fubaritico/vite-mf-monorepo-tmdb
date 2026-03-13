@@ -57,7 +57,7 @@ apps/[app]/src/components/
 Backgrounds are controlled by CSS `nth-of-type`, not by the page component.
 Sections that need a container use `<Container variant="default">` — CSS handles alternation.
 
-CSS dans `@layer components` — à dupliquer dans `index.css` ET `remote-input.css` :
+CSS in `@layer components` — must be duplicated in both `index.css` AND `remote-input.css`:
 
 ```css
 @layer components {
@@ -67,7 +67,7 @@ CSS dans `@layer components` — à dupliquer dans `index.css` ET `remote-input.
 }
 ```
 
-`media-section` est la classe du composant `Container` — jamais `container` (conflit Tailwind).
+`media-section` is the Container component's class — never `container` (Tailwind conflict).
 
 Real example from `apps/home`:
 ```typescript
