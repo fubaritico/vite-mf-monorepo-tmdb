@@ -47,7 +47,7 @@ packages/
 - Custom utilities in `@layer utilities` with escaped prefix: `.mda\:hero-height`
 
 ## Module Federation
-- Bootstrap pattern: app logic inline dans `main.tsx` (pas de fichier bootstrap séparé)
+- Bootstrap pattern: app logic inline in `main.tsx` (no separate bootstrap file)
 - Each remote: standalone mode (own router + QueryClient) + MF exposition
 - Shared singletons: react, react-dom, react-router-dom, @tanstack/react-query
 - DTS: remotes generate types → host consumes via tsconfig paths `"*": ["./@mf-types/*"]`

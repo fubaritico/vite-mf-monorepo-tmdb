@@ -2,7 +2,7 @@ Gather all necessary written context from previous session
 
 ## Steps
 
-1. Ask which rule files are necessary for the session
-2. Read the last session achievements if available
-3. Once referenced, read them and memorize
-4. Remind to the user the next step in the roadmap and/or memory
+1. Read @.claude/CLAUDE.md to load current Session State and reference file list
+2. Ask the user which rule files are needed for this session, based on what's in `### Next`
+3. Read the relevant rule files and memorize their patterns
+4. Remind the user of the next step from `### Next` in CLAUDE.md
