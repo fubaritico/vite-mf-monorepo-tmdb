@@ -16,8 +16,6 @@ jobs:
           ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
 
-      - uses: ./.github/actions/setup
-
       - name: Get parent SHA
         id: parent
         run: |
@@ -38,22 +36,28 @@ jobs:
             layouts:
               - 'packages/layouts/**'
 
-      - name: Debug filters
+      - name: Check if deploy needed
+        id: changed
         run: |
-          echo "storybook changed: ${{ steps.filter.outputs.storybook }}"
-          echo "ui changed: ${{ steps.filter.outputs.ui }}"
-          echo "layouts changed: ${{ steps.filter.outputs.layouts }}"
+          if [[ "${{ steps.filter.outputs.storybook }}" == "true" || "${{ steps.filter.outputs.ui }}" == "true" || "${{ steps.filter.outputs.layouts }}" == "true" ]]; then
+            echo "result=true" >> $GITHUB_OUTPUT
+          else
+            echo "result=false" >> $GITHUB_OUTPUT
+          fi
+
+      - uses: ./.github/actions/setup
+        if: steps.changed.outputs.result == 'true'
 
       - name: Build Storybook
-        if: steps.filter.outputs.storybook == 'true' || steps.filter.outputs.ui == 'true' || steps.filter.outputs.layouts == 'true'
+        if: steps.changed.outputs.result == 'true'
         run: pnpm --filter @vite-mf-monorepo/storybook build
 
       - name: Install Netlify CLI
-        if: steps.filter.outputs.storybook == 'true' || steps.filter.outputs.ui == 'true' || steps.filter.outputs.layouts == 'true'
+        if: steps.changed.outputs.result == 'true'
         run: pnpm install -g netlify-cli
 
       - name: Deploy to Netlify (Production)
-        if: steps.filter.outputs.storybook == 'true' || steps.filter.outputs.ui == 'true' || steps.filter.outputs.layouts == 'true'
+        if: steps.changed.outputs.result == 'true'
         run: netlify deploy --prod --dir=packages/storybook/storybook-static --site=$NETLIFY_SITE_ID_STORYBOOK --no-build --cwd packages/storybook --message "$DEPLOY_MESSAGE"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
