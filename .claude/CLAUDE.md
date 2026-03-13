@@ -33,13 +33,24 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `ui:` prefix for all Tailwind classes in packages/ui
 - `mda:` prefix in apps/media, `hm:` in apps/home, `ph:` in apps/photos
 
+## Commands
+```bash
+pnpm test                              # all tests
+pnpm test -- ComponentName             # single file by name pattern
+pnpm test -- --grep "test description" # single test by name
+pnpm storybook                         # Storybook on port 6006
+pnpm lint:fix                          # auto-fix ESLint
+pnpm type-check                        # TypeScript no-emit
+```
+See also: [Production builds](README.md#production-build-commands) · [Setup](README.md#getting-started) · [CI/CD](README.md#continuous-integration--deployment)
+
 ## Architecture Decisions
 - **Embedded queries**: each section fetches its own data (no React Router loaders)
 - **Function overloads**: for conditional hooks (no conditional hook calls)
 - **CSS nth-of-type**: alternating section backgrounds via CSS, not props
 - **theme-no-fonts.css**: remotes import this instead of full theme
 
-## Session Notes (13 Mars 2026)
+## Session State (updated by `/end-session`)
 
 ### Completed
 - Phases 3.x, 4.1–4.11 ✅ (media rename, routing, hooks, MediaHero, Synopsis, Crew, Cast, Photos, Trailers, Similar, Recommended)
@@ -50,8 +61,6 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - Consulter `files/ROADMAP.md` pour les prochaines phases
 
 ### Known Issues
-- Font loading in remotes → use `theme-no-fonts.css`
-- Tailwind reserved names → never use `container`, use `media-section`
 - packages/shared exports: ajouter dans `exports` si un nouveau sous-chemin est importé
 
 ## Model Selection
@@ -78,5 +87,6 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `/new-section [AppName] [SectionName]` — create embedded-query section in any app
 - `/story [Name]` — create Storybook story (**mandatory** after every component)
 - `/commit` — prepare conventional commit message
+- `/message-commit` — prepare conventional commit message only
 - `/start-session` — resume a work session
-- `/message-commit` — prepare conventional commit message
+- `/end-session` — update Session State in CLAUDE.md before closing
