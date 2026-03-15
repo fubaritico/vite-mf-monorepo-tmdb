@@ -83,8 +83,6 @@ createInstance({
   /* eslint-enable @typescript-eslint/dot-notation */
 })
 
-console.warn('[host] app init')
-
 const root = document.getElementById('root')
 if (!root) {
   throw new Error('root not found')
