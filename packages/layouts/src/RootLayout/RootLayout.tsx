@@ -71,11 +71,18 @@ const RootLayout: FC<RootLayoutProps> = ({
 
       {!hideFooter && (
         <Footer>
-          <div className="layout:text-center">
-            <p className="layout:text-sm layout:text-footer-foreground">
-              © 2026 TMDB Clone. All rights reserved.
-            </p>
-          </div>
+          <p className="layout:text-sm layout:text-footer-foreground layout:text-center">
+            © 2026 TMDB Clone. All rights reserved.{' '}
+            <span className="layout:mx-1">|</span>{' '}
+            <a
+              href="https://github.com/fubaritico/vite-mf-monorepo-tmdb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="layout:text-sm layout:text-footer-foreground layout:no-underline layout:hover:underline layout:hover:text-white"
+            >
+              See project source on GitHub
+            </a>
+          </p>
         </Footer>
       )}
     </div>
