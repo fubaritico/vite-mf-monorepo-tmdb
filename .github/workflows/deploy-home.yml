@@ -44,20 +44,20 @@ jobs:
           fi
 
       - uses: ./.github/actions/setup
-        if: steps.changed.outputs.result == 'true'
+        # if: steps.changed.outputs.result == 'true'
 
       - name: Build
-        if: steps.changed.outputs.result == 'true'
+        # if: steps.changed.outputs.result == 'true'
         run: pnpm prod
         env:
           VITE_TMDB_API_TOKEN: ${{ secrets.VITE_TMDB_API_TOKEN }}
 
       - name: Install Netlify CLI
-        if: steps.changed.outputs.result == 'true'
+        # if: steps.changed.outputs.result == 'true'
         run: pnpm install -g netlify-cli
 
       - name: Deploy to Netlify (Production)
-        if: steps.changed.outputs.result == 'true'
+        # if: steps.changed.outputs.result == 'true'
         run: netlify deploy --prod --dir=apps/home/dist --site=$NETLIFY_SITE_ID_HOME --no-build --cwd apps/home --message "$DEPLOY_MESSAGE"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
