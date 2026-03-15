@@ -83,6 +83,8 @@ createInstance({
   /* eslint-enable @typescript-eslint/dot-notation */
 })
 
+console.warn('[host] app init')
+
 const root = document.getElementById('root')
 if (!root) {
   throw new Error('root not found')
@@ -96,51 +98,3 @@ createRoot(root).render(
     </QueryClientProvider>
   </StrictMode>
 )
-/*
-async function bootstrap() {
-  const root = document.getElementById('root')
-  if (!root) {
-    throw new Error('root not found')
-  }
-
-  try {
-    // Check health of remote applications
-    const [homeHealthy, movieHealthy] = await Promise.all([
-      checkRemoteHealth(HOME_REMOTE_URL),
-      checkRemoteHealth(MOVIE_REMOTE_URL),
-    ])
-
-    if (!homeHealthy || !movieHealthy) {
-      throw new Error('Remote applications are not healthy')
-    }
-
-    createRoot(root).render(
-      <StrictMode>
-        <QueryClientProvider client={queryClient}>
-          <ErrorBoundary>
-            <RouterProvider router={router} />
-          </ErrorBoundary>
-        </QueryClientProvider>
-      </StrictMode>
-    )
-  } catch (error) {
-    console.error('Failed to bootstrap application:', error)
-    createRoot(root).render(
-      <div style={{ padding: '20px', textAlign: 'center' }}>
-        <h1>Application Error</h1>
-        <p>
-          We're having trouble loading the application. Please try again later.
-        </p>
-        <button
-          onClick={() => {
-            window.location.reload()
-          }}
-        >
-          Retry
-        </button>
-      </div>
-    )
-  }
-}
-
-void bootstrap()*/

@@ -7,6 +7,8 @@ import './index.css'
 
 import { queryClient, routes } from './routes'
 
+console.warn('[home] app init')
+
 const router = createBrowserRouter(routes)
 
 const root = document.getElementById('root')

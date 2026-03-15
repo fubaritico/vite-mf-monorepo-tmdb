@@ -7,6 +7,8 @@ import { queryClient, router } from './router'
 
 import './index.css'
 
+console.warn('[photos] app init')
+
 const root = document.getElementById('root')
 if (!root) {
   throw new Error('root not found')
