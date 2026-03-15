@@ -34,3 +34,6 @@ files
 
 # Local Netlify folder
 .netlify
+
+# Claude
+/scripts/check-claude-wordcount.mjs
