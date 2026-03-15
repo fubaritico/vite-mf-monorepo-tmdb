@@ -1,10 +1,10 @@
 ## 🚀 Live Demo
 
-**[https://vite-mf-tmdb.netlify.app](https://vite-mf-tmdb.netlify.app)**
+**<a href="https://vite-mf-tmdb.netlify.app" target="_blank" rel="noopener noreferrer">https://vite-mf-tmdb.netlify.app</a>**
 
 Browse movies, explore detail pages, cast, crew and photos — powered by a micro-frontend architecture deployed on Netlify.
 
-**[https://vite-mf-tmdb-storybook.netlify.app](https://vite-mf-tmdb-storybook.netlify.app)** — Design system Storybook
+**<a href="https://vite-mf-tmdb-storybook.netlify.app" target="_blank" rel="noopener noreferrer">https://vite-mf-tmdb-storybook.netlify.app</a>** — Design system Storybook
 
 ---
 
@@ -77,6 +77,8 @@ Two commands to get started. No complex configuration, no manual setup steps. Th
 - React Testing Library
 - Vitest
 - Storybook
+- SonarQube
+- Sentry
 
 ### Getting Started
 
