@@ -12,7 +12,7 @@ Sentry.init({
     }),
   ],
   tracesSampleRate: import.meta.env.PROD ? 0.1 : 1.0,
-  tracePropagationTargets: [/^https:\/\/api\.themoviedb\.org/],
+  tracePropagationTargets: [],
   replaysSessionSampleRate: 0.1,
   replaysOnErrorSampleRate: 1.0,
   initialScope: { tags: { app: 'host' } },
