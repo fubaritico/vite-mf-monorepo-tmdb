@@ -49,6 +49,8 @@ jobs:
       - name: Build
         if: steps.changed.outputs.result == 'true'
         run: pnpm prod
+        env:
+          VITE_TMDB_API_TOKEN: ${{ secrets.VITE_TMDB_API_TOKEN }}
 
       - name: Install Netlify CLI
         if: steps.changed.outputs.result == 'true'
