@@ -13,6 +13,7 @@
     "prod:server": "vite build --mode production & node server.js"
   },
   "dependencies": {
+    "@sentry/react": "catalog:",
     "@vite-mf-monorepo/layouts": "workspace:*",
     "@vite-mf-monorepo/shared": "workspace:*",
     "@fubar-it-co/tmdb-client": "workspace:*",
@@ -52,6 +53,7 @@
     "vite": "catalog:",
     "vite-plugin-css-injected-by-js": "catalog:",
     "vite-plugin-top-level-await": "catalog:",
-    "vitest": "catalog:"
+    "vitest": "catalog:",
+    "@sentry/vite-plugin": "catalog:"
   }
 }

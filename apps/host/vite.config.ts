@@ -7,6 +7,7 @@ import tailwindcss from '@tailwindcss/vite'
 import { listenForRemoteRebuilds } from '@antdevx/vite-plugin-hmr-sync'
 import { federation } from '@module-federation/vite'
 import { assetPreloadInjection, fontPreloadInjection } from '@vite-mf-monorepo/shared/vite'
+import { sentryVitePlugin } from '@sentry/vite-plugin'
 import dotenv from 'dotenv'
 import { parse } from 'yaml'
 
@@ -130,10 +131,26 @@ export default defineConfig(({ mode }) => {
                 console.warn(`[host] 🔁 Reload triggered by: ${appName}`)
               },
             }),
+            ...(process.env.NODE_ENV === 'production' && process.env.SENTRY_AUTH_TOKEN
+              ? [
+                  sentryVitePlugin({
+                    org: process.env.SENTRY_ORG,
+                    project: process.env.SENTRY_PROJECT,
+                    authToken: process.env.SENTRY_AUTH_TOKEN,
+                    release: { name: `host@${process.env.VITE_GIT_SHA ?? 'local'}` },
+                    sourcemaps: {
+                      assets: './dist/**',
+                      filesToDeleteAfterUpload: './dist/**/*.map',
+                    },
+                    telemetry: false,
+                  }),
+                ]
+              : []),
           ]),
     ],
     build: {
       target: 'esnext',
+      sourcemap: 'hidden',
     },
     server: {
       port: parseInt(process.env.HOST_PORT),

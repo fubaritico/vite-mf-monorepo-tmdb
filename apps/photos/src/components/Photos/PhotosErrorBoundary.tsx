@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/react'
 import { Modal } from '@vite-mf-monorepo/ui'
 import { useNavigate, useRouteError } from 'react-router-dom'
 
@@ -8,6 +9,12 @@ import type { FC } from 'react'
 const PhotosErrorBoundary: FC = () => {
   const error = useRouteError() as Error
   const navigate = useNavigate()
+
+  if (error instanceof Error) {
+    Sentry.captureException(error, {
+      tags: { app: 'photos', boundary: 'route' },
+    })
+  }
 
   const onClose = () => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises

@@ -1,4 +1,7 @@
+import './instrument'
+
 import { createInstance } from '@module-federation/runtime'
+import * as Sentry from '@sentry/react'
 import { QueryClientProvider } from '@tanstack/react-query'
 // import { checkRemoteHealth } from '@vite-mf-monorepo/shared'
 import { StrictMode } from 'react'
@@ -7,7 +10,6 @@ import { RouterProvider } from 'react-router-dom'
 
 import './index.css'
 
-import ErrorBoundary from './components/ErrorBoundary'
 import { queryClient, router } from './router'
 
 // const HOME_REMOTE_URL = `${import.meta.env.VITE_HOME_URL as string}/health`
@@ -87,12 +89,16 @@ const root = document.getElementById('root')
 if (!root) {
   throw new Error('root not found')
 }
-createRoot(root).render(
+createRoot(root, {
+  onUncaughtError: Sentry.reactErrorHandler(),
+  onCaughtError: Sentry.reactErrorHandler(),
+  onRecoverableError: Sentry.reactErrorHandler(),
+}).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <ErrorBoundary>
+      <Sentry.ErrorBoundary fallback={<div>Something went wrong</div>}>
         <RouterProvider router={router} />
-      </ErrorBoundary>
+      </Sentry.ErrorBoundary>
     </QueryClientProvider>
   </StrictMode>
 )

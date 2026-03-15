@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/react'
 import { useRouteError } from 'react-router-dom'
 
 import type { FC } from 'react'
@@ -6,6 +7,12 @@ import '../remote.css'
 
 const MediaErrorBoundary: FC = () => {
   const error = useRouteError() as Error
+
+  if (error instanceof Error) {
+    Sentry.captureException(error, {
+      tags: { app: 'media', boundary: 'route' },
+    })
+  }
 
   return (
     <div className="flex min-h-[50vh] flex-col items-center justify-center p-8 text-center">

@@ -51,6 +51,12 @@ jobs:
         run: pnpm prod
         env:
           VITE_TMDB_API_TOKEN: ${{ secrets.VITE_TMDB_API_TOKEN }}
+          VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
+          VITE_SENTRY_ENVIRONMENT: production
+          VITE_GIT_SHA: ${{ github.event.workflow_run.head_sha }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
 
       - name: Install Netlify CLI
         if: steps.changed.outputs.result == 'true'

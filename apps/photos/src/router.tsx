@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/react'
 import { QueryClient } from '@tanstack/react-query'
 import { createBrowserRouter } from 'react-router-dom'
 
@@ -14,7 +15,10 @@ export const queryClient = new QueryClient({
   },
 })
 
-export const router = createBrowserRouter([
+const sentryCreateBrowserRouter =
+  Sentry.wrapCreateBrowserRouterV7(createBrowserRouter)
+
+export const router = sentryCreateBrowserRouter([
   {
     path: 'movie/:id/photos/:index',
     element: <Photos />,
