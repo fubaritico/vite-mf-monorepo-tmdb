@@ -6,6 +6,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import topLevelAwait from 'vite-plugin-top-level-await'
 import { federation } from '@module-federation/vite'
+import { sentryVitePlugin } from '@sentry/vite-plugin'
 import dotenv from 'dotenv'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 import { parse } from 'yaml'
@@ -115,6 +116,21 @@ export default defineConfig(({ mode }) => {
               hostUrl: `http://localhost:${process.env.HOST_PORT}`,
               endpoint: '/on-child-rebuild',
             }),
+            ...(process.env.NODE_ENV === 'production' && process.env.SENTRY_AUTH_TOKEN
+              ? [
+                  sentryVitePlugin({
+                    org: process.env.SENTRY_ORG,
+                    project: process.env.SENTRY_PROJECT,
+                    authToken: process.env.SENTRY_AUTH_TOKEN,
+                    release: { name: `media@${process.env.VITE_GIT_SHA ?? 'local'}` },
+                    sourcemaps: {
+                      assets: './dist/**',
+                      filesToDeleteAfterUpload: './dist/**/*.map',
+                    },
+                    telemetry: false,
+                  }),
+                ]
+              : []),
           ]),
       tailwindcss(),
       react(),
@@ -122,6 +138,7 @@ export default defineConfig(({ mode }) => {
     build: {
       modulePreload: false,
       target: 'esnext',
+      sourcemap: 'hidden',
       minify: 'esbuild',
       esbuild: {
         minifyIdentifiers: true,

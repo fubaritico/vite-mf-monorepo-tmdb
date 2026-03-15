@@ -225,6 +225,12 @@ All secrets are configured in **GitHub → Settings → Secrets and variables �
 | `VITE_HOME_URL` | `deploy-host` | Production URL of the home remote (`https://vite-mf-tmdb-home.netlify.app`). Baked into the host bundle at build time — used both to configure the Module Federation runtime and as a `<link rel="preload">` in `index.html`. If empty, the host loads its own `remoteEntry.js` instead of the home remote. |
 | `VITE_MEDIA_URL` | `deploy-host` | Production URL of the media remote (`https://vite-mf-tmdb-media.netlify.app`). Same role as `VITE_HOME_URL` for the media micro-frontend. |
 | `VITE_PHOTOS_URL` | `deploy-host` | Production URL of the photos remote (`https://vite-mf-tmdb-photos.netlify.app`). Same role as `VITE_HOME_URL` for the photos micro-frontend. |
+| `VITE_SENTRY_DSN` | all deploy workflows | Sentry project DSN. Public value — safe to embed at build time. Without it, Sentry is silently disabled (`enabled: false`). |
+| `VITE_SENTRY_ENVIRONMENT` | all deploy workflows | Hardcoded to `production` in CI. Controls Sentry environment tag. |
+| `VITE_GIT_SHA` | all deploy workflows | Git commit SHA injected at build time (`github.event.workflow_run.head_sha`). Used as Sentry release identifier per app (e.g. `host@abc1234`). |
+| `SENTRY_AUTH_TOKEN` | all deploy workflows | Sentry internal auth token for source map upload. **Not** `VITE_`-prefixed — never embedded in bundles. |
+| `SENTRY_ORG` | all deploy workflows | Sentry organization slug. Required by `@sentry/vite-plugin` at build time. |
+| `SENTRY_PROJECT` | all deploy workflows | Sentry project slug. Required by `@sentry/vite-plugin` at build time. |
 
 ##### Legacy — Netlify build hooks (no longer used)
 

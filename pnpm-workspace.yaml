@@ -74,3 +74,7 @@ catalog:
 
   # release tools
   conventional-changelog: 7.2.0
+
+  # Sentry
+  '@sentry/react': ^9.0.0
+  '@sentry/vite-plugin': ^3.0.0

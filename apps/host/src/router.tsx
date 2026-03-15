@@ -1,9 +1,13 @@
+import * as Sentry from '@sentry/react'
 import { RootLayout } from '@vite-mf-monorepo/layouts'
 import { createBrowserRouter } from 'react-router-dom'
 
 import queryClient from './queryClient.ts'
 
-const router = createBrowserRouter([
+const sentryCreateBrowserRouter =
+  Sentry.wrapCreateBrowserRouterV7(createBrowserRouter)
+
+const router = sentryCreateBrowserRouter([
   {
     element: <RootLayout />,
     children: [
