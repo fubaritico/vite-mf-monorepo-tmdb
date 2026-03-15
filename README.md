@@ -200,6 +200,54 @@ Each workflow follows the same sequence:
 | `deploy-photos` | `apps/photos/**` or `packages/**` changed |
 | `deploy-storybook` | `packages/storybook/**`, `packages/ui/**`, or `packages/layouts/**` changed |
 
+#### GitHub Actions Secrets
+
+All secrets are configured in **GitHub → Settings → Secrets and variables → Actions**.
+
+> **Important — build-time embedding**: The `VITE_*` variables are not runtime environment variables. Vite replaces them with their literal values inside the JavaScript bundle during `pnpm prod`. If a secret is missing or empty when the build runs, the wrong value is permanently baked into the deployed bundle.
+
+##### Netlify
+
+| Secret | Used by workflow | Description |
+|---|---|---|
+| `NETLIFY_AUTH_TOKEN` | all deploy workflows | Netlify personal access token. Authenticates `netlify-cli` to push builds to any site. |
+| `NETLIFY_SITE_ID_HOME` | `deploy-home` | Unique ID of the `vite-mf-tmdb-home` Netlify site. Passed to `netlify deploy --site`. |
+| `NETLIFY_SITE_ID_HOST` | `deploy-host` | Unique ID of the `vite-mf-tmdb` Netlify site (host app). |
+| `NETLIFY_SITE_ID_MEDIA` | `deploy-media` | Unique ID of the `vite-mf-tmdb-media` Netlify site. |
+| `NETLIFY_SITE_ID_PHOTOS` | `deploy-photos` | Unique ID of the `vite-mf-tmdb-photos` Netlify site. |
+| `NETLIFY_SITE_ID_STORYBOOK` | `deploy-storybook` | Unique ID of the `vite-mf-tmdb-storybook` Netlify site. |
+
+##### Application — build-time variables
+
+| Secret | Used by workflow | Description |
+|---|---|---|
+| `VITE_TMDB_API_TOKEN` | `deploy-home`, `deploy-media`, `deploy-photos`, `deploy-host` | TMDB bearer token. Embedded at build time into every remote bundle via `import.meta.env.VITE_TMDB_API_TOKEN`. Without it, all API calls return HTTP 401 "Invalid API key". |
+| `VITE_HOME_URL` | `deploy-host` | Production URL of the home remote (`https://vite-mf-tmdb-home.netlify.app`). Baked into the host bundle at build time — used both to configure the Module Federation runtime and as a `<link rel="preload">` in `index.html`. If empty, the host loads its own `remoteEntry.js` instead of the home remote. |
+| `VITE_MEDIA_URL` | `deploy-host` | Production URL of the media remote (`https://vite-mf-tmdb-media.netlify.app`). Same role as `VITE_HOME_URL` for the media micro-frontend. |
+| `VITE_PHOTOS_URL` | `deploy-host` | Production URL of the photos remote (`https://vite-mf-tmdb-photos.netlify.app`). Same role as `VITE_HOME_URL` for the photos micro-frontend. |
+
+##### Legacy — Netlify build hooks (no longer used)
+
+These secrets were used when Netlify built the apps itself via its GitHub integration. Each hook is a unique URL that, when called, triggers a Netlify build including the environment variables configured in the Netlify UI.
+
+Since the migration to `netlify-cli` with `--no-build`, the build now runs entirely in GitHub Actions and Netlify only receives the pre-built `dist/` folder. These hooks are no longer called and the `VITE_*` variables that were previously set in the Netlify UI must now be declared as GitHub Actions secrets (see section above).
+
+| Secret | Description |
+|---|---|
+| `NETLIFY_BUILD_HOOK_HOME` | Netlify build hook URL for the home app — replaced by `deploy-home.yml` |
+| `NETLIFY_BUILD_HOOK_HOST` | Netlify build hook URL for the host app — replaced by `deploy-host.yml` |
+| `NETLIFY_BUILD_HOOK_MEDIA` | Netlify build hook URL for the media app — replaced by `deploy-media.yml` |
+| `NETLIFY_BUILD_HOOK_PHOTOS` | Netlify build hook URL for the photos app — replaced by `deploy-photos.yml` |
+| `NETLIFY_BUILD_HOOK_STORYBOOK` | Netlify build hook URL for Storybook — replaced by `deploy-storybook.yml` |
+
+##### SonarQube
+
+| Secret | Used by workflow | Description |
+|---|---|---|
+| `SONAR_TOKEN` | `sonarqube` | SonarCloud authentication token. |
+| `SONAR_HOST_URL` | `sonarqube` | SonarCloud server URL (e.g. `https://sonarcloud.io`). |
+| `SONAR_PROJECT_KEY` | `sonarqube` | Unique key identifying the project in SonarCloud. |
+
 #### Manual
 
 - **sonar-init** (`workflow_dispatch`) — initializes the SonarCloud project from `main`; run once on project setup
