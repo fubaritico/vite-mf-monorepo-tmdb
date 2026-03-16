@@ -35,5 +35,11 @@ files
 # Local Netlify folder
 .netlify
 
+# E2E
+packages/e2e/src/traces/
+packages/e2e/src/reports/report.html
+packages/e2e/src/reports/report.json
+
 # Claude
 /scripts/check-claude-wordcount.mjs
+/.agent-workspace

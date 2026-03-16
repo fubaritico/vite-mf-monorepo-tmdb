@@ -20,7 +20,13 @@
     "reset": "./scripts/reset-project.sh",
     "setup": "./scripts/setup.sh",
     "kill-ports": "./scripts/kill-ports.sh",
-    "storybook": "pnpm --filter @vite-mf-monorepo/storybook storybook"
+    "storybook": "pnpm --filter @vite-mf-monorepo/storybook storybook",
+    "test:e2e": "pnpm --filter @vite-mf-monorepo/e2e test",
+    "test:e2e:smoke": "pnpm --filter @vite-mf-monorepo/e2e test:smoke",
+    "test:e2e:ui": "pnpm --filter @vite-mf-monorepo/e2e test:ui",
+    "test:e2e:trace": "pnpm --filter @vite-mf-monorepo/e2e test:trace",
+    "test:e2e:codegen": "pnpm --filter @vite-mf-monorepo/e2e test:codegen",
+    "test:e2e:ci": "pnpm --filter @vite-mf-monorepo/e2e test:ci"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
@@ -51,7 +57,9 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.24.1",
     "vitest": "^3.1.2",
+    "cross-env": "^7.0.3",
     "wait-on": "^9.0.3",
+    "wait-port": "^1.1.0",
     "yaml": "^2.8.0"
   },
   "engines": {

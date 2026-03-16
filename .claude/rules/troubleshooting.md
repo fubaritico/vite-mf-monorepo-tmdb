@@ -58,6 +58,72 @@ netlify deploy --prod --dir=apps/home/dist --site=$SITE_ID --no-build --cwd apps
 **Problem**: Requires `.js` extensions for relative imports.
 **Solution**: `import { foo } from './utils.js'` (write .js even though source is .ts).
 
+### Cucumber.js does not support `.ts` config files
+**Problem**: `@cucumber/cucumber` v11 throws `Unsupported configuration file extension ".ts"`.
+**Solution**: Use `.cjs` extension (`cucumber.config.cjs`) with `module.exports` syntax.
+**Rule**: If `package.json` has `"type": "module"`, config must be `.cjs` (not `.js`).
+**Applied to**: packages/e2e/src/cucumber.config.cjs
+
+### Cucumber.js ESM/CJS conflict with ts-node
+**Problem**: `"type": "module"` in `package.json` makes `.ts` files ESM. `--require` with `ts-node/register` uses `require()` which fails with `ERR_REQUIRE_ESM`.
+**Solution**: Remove `"type": "module"` from `packages/e2e/package.json` — the E2E package uses CommonJS via ts-node.
+**Rule**: E2E test packages using `ts-node/register` + `--require` must not be ESM.
+
+### Cucumber.js step timeout too short for MF remote loading
+**Problem**: Default Cucumber step timeout is 5s. Module Federation remotes loaded via `lazy()` can take longer on cold start (first hit builds + fetches remote bundles).
+**Symptom**: `Error: function timed out, ensure the promise resolves within 5000 milliseconds` on `waitForRemote()`.
+**Solution**: Add `{ timeout: 15_000 }` to any step that waits for cross-remote navigation.
+```typescript
+Then<E2EWorld>('the home page is visible', { timeout: 15_000 }, async function () {
+  await this.waitForRemote('home')
+})
+```
+**Rule**: All steps calling `waitForRemote()` or navigating between MF remotes need explicit timeout >= 15s.
+
+### Playwright `mf-ready-photos` sentinel "resolved to hidden"
+**Problem**: Photos remote wraps content in `<div data-testid="mf-ready-photos">` but the child is a `<dialog>` shown via `showModal()` (top layer). Playwright considers the wrapping div "hidden" because dialog content is in the top layer, not in normal DOM flow.
+**Symptom**: `waitForSelector('[data-testid="mf-ready-photos"]')` times out with "locator resolved to hidden".
+**Solution**: For photos, wait for the `dialog[open]` element instead of the sentinel.
+```typescript
+await photosPage.getDialog().waitFor({ state: 'visible', timeout: 10_000 })
+```
+**Rule**: MF sentinels wrapping `<dialog>` top-layer content are not "visible" to Playwright. Use `dialog[open]` as the readiness check.
+
+### Playwright strict mode violation on ambiguous selectors
+**Problem**: `button[aria-label="Next"]` matches multiple elements (carousel nav in photos dialog + carousel navs in media page behind it).
+**Symptom**: `locator.click: Error: strict mode violation: locator resolved to 3 elements`.
+**Solution**: Scope selectors to the relevant container.
+```typescript
+// Bad: matches all "Next" buttons on the page
+this.page.locator('button[aria-label="Next"]')
+// Good: scoped to the dialog
+this.getDialog().locator('button[aria-label="Next"]')
+```
+**Rule**: Always scope Playwright selectors to the nearest unique container, especially when `<dialog>` overlays other content.
+
+### `wait-port` only accepts one port argument
+**Problem**: `wait-port 3000 3001 3002 3003` only waits for port 3000 — extra arguments are ignored. Tests start before all servers are ready.
+**Symptom**: `Failed to fetch dynamically imported module: http://localhost:3001/remoteEntry.js` — remote not built yet.
+**Solution**: Use `wait-on` (already in devDeps) which supports multiple HTTP targets and waits for ALL to respond 200.
+```bash
+# Bad
+wait-port 3000 3001 3002 3003
+# Good
+wait-on http://localhost:3000 http://localhost:3001 http://localhost:3002 http://localhost:3003
+```
+**Rule**: Always use `wait-on` with full HTTP URLs for multi-server readiness checks.
+**Applied to**: root package.json `test:e2e` and `test:e2e:smoke` scripts.
+
+### `prod:server` build race condition
+**Problem**: `vite build --mode production & node server.js` (with `&`) starts the server before the build finishes. Server serves empty/stale `dist/` folder.
+**Symptom**: 404s or stale content when tests run immediately after server starts.
+**Solution**: Change `&` to `&&` so build completes before server starts. Lerna still runs all 4 apps in parallel.
+```json
+"prod:server": "vite build --mode production && node server.js"
+```
+**Rule**: Never `&` between build and serve — always `&&`.
+**Applied to**: All 4 apps (host, home, media, photos).
+
 ---
 
 ## Key Architectural Decisions
