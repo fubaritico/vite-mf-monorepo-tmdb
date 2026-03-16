@@ -17,6 +17,7 @@
   - [Production Builds](#production-builds)
   - [Storybook](#storybook)
   - [Testing](#testing)
+  - [E2E Testing](#e2e-testing)
   - [Accessibility](#accessibility)
 - [Design Tokens](#design-tokens)
 - [Error Monitoring (Sentry)](#error-monitoring-sentry)
@@ -97,6 +98,7 @@ vite-mf-monorepo/
 │   ├── ui/            # Design system (Button, Card, etc.)
 │   ├── tokens/        # Design tokens (Style Dictionary)
 │   ├── http-client/   # TMDB API client (heyAPI + TanStack Query)
+│   ├── e2e/           # E2E tests (Cucumber.js + Playwright)
 │   └── storybook/     # Storybook for UI components
 └── scripts/           # Utility scripts (reset, kill-ports)
 ```
@@ -185,6 +187,71 @@ Uses **Vitest** and **React Testing Library**. Tests are co-located with compone
 pnpm test       # Run tests
 pnpm coverage   # Run tests with coverage (HTML report in coverage/)
 ```
+
+### E2E Testing
+
+End-to-end tests use **Cucumber.js** (Gherkin scenarios) + **Playwright** (browser automation). Tests live in `packages/e2e/`. Gherkin's plain-English syntax lets QA and product stakeholders read, write, and validate scenarios without touching code — bridging the gap between business requirements and automated tests.
+
+#### First run
+
+Playwright browsers are installed automatically on first run. To skip (e.g. CI with pre-cached browsers):
+
+```bash
+E2E_SKIP_BROWSER_INSTALL=true pnpm test:e2e
+```
+
+#### Run modes
+
+| Command | Description | Browser | Tracing |
+|---------|-------------|---------|---------|
+| `pnpm test:e2e` | Headless run (CI default) | Hidden | No |
+| `pnpm test:e2e:smoke` | Headless, `@smoke` scenarios only | Hidden | No |
+| `pnpm test:e2e:ui` | Headed run — see the browser | Visible | No |
+| `pnpm test:e2e:trace` | Headed + trace recording | Visible | Yes |
+| `pnpm test:e2e:codegen` | Opens Playwright Codegen to record selectors | Visible | No |
+| `pnpm test:e2e:ci` | Headless + retry on failure | Hidden | No |
+
+Each command is fully self-contained: it kills busy ports, installs Playwright browsers if needed, builds and starts all 4 MF apps, polls until every server responds, runs Cucumber, then shuts everything down cleanly.
+
+#### Trace Viewer
+
+After running with `test:e2e:trace`, traces are saved in `packages/e2e/src/traces/`. Open them with:
+
+```bash
+pnpm --filter @vite-mf-monorepo/e2e test:show-trace
+```
+
+The Trace Viewer provides a timeline of actions with DOM snapshots, network requests, console logs, and a pick-locator tool — similar to Cypress's test runner.
+
+#### Environment variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `E2E_BASE_URL` | `http://localhost:3000` | Host URL used in step definitions |
+| `E2E_HEADLESS` | `true` | `false` to see the browser |
+| `E2E_TRACE` | `false` | `true` to record Playwright traces |
+| `E2E_SKIP_BROWSER_INSTALL` | `false` | `true` to skip automatic Chromium install |
+| `E2E_POLL_INTERVAL` | `1000` | Polling interval (ms) when waiting for servers |
+| `E2E_SERVICE_BOOT_TIMEOUT` | `120000` | Max wait time (ms) for servers to start |
+
+#### Scenarios
+
+| Tag | Feature | Scenarios |
+|---|---|---|
+| `@smoke` | Application health | Host loads without MF errors, detail page is accessible |
+| `@home` | Browse media | Carousels displayed with visible titles |
+| `@navigation` | Browse media | Navigate from home to detail page via poster |
+| `@detail` | Browse media | Detail page shows title, synopsis, rating |
+| `@photos` | Browse media | Open photo viewer, navigate photos, close viewer |
+
+#### Architecture
+
+- **Orchestration script** — `scripts/run-e2e.mjs` manages the full lifecycle: port cleanup, browser install, 4 individual server processes (one per MF app), HTTP polling, Cucumber execution, and graceful shutdown (SIGINT/SIGTERM/SIGKILL)
+- **Page Objects** — `HomePage`, `MediaPage`, `PhotosPage` encapsulate selectors and actions (no assertions)
+- **MF Sentinels** — each remote wraps its root in `data-testid="mf-ready-{name}"` / `mf-error-{name}` / `mf-loading-{name}"`; the `waitForRemote()` helper waits for the ready sentinel and checks no error sentinel is present
+- **Scoped selectors** — Playwright selectors are scoped to the nearest container (e.g. `dialog[open]`) to avoid strict mode violations when overlays duplicate elements from the background page
+
+[⬆ Back to top](#table-of-contents)
 
 ### Accessibility
 
@@ -399,7 +466,6 @@ The micro-frontend architecture is not ideal for SEO. It's better suited for lar
 
 ## Future Enhancements
 
-- E2E tests with Vitest in browser mode
 - Talent detail page (`apps/talent`)
 - Publish `tokens`, `layouts`, and `ui` packages to npm for reuse in other architectures
 - `.vscode` and `.cursor` rules for Cursor/VS Code users

@@ -22,7 +22,7 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - **Always create a Storybook story** after every component (`/story`)
 - **Model**: Haiku for questions/research, Sonnet for code/commits — suggest Haiku when appropriate
 
-## Code Conventions
+## Code Conventionsyes
 - Functional components: `const Name: FC<NameProps> = ({ ... }) => { ... }`
 - Import order: external → @vite-mf-monorepo/* → relative → `import type` (newlines between groups)
 - `clsx` for conditional classes
@@ -33,6 +33,8 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 ### Completed
 - Sentry error monitoring: instrument.ts per app, MF-aware init, wrapCreateBrowserRouterV7, React 19 hooks, source maps upload
 - /sonar skill: fetches SonarCloud issues by severity via REST API
+- README.md restructured: TOC, heading hierarchy, back-to-top links, Sentry section
+- Agent files translated from French to English (6 files in .claude/agents/)
 
 ### Next
 - Check `files/ROADMAP.md` for upcoming phases

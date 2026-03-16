@@ -1,0 +1,26 @@
+{
+  "name": "@vite-mf-monorepo/e2e",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "test": "node ./scripts/run-e2e.mjs",
+    "test:smoke": "node ./scripts/run-e2e.mjs --tags @smoke",
+    "test:ui": "cross-env E2E_HEADLESS=false node ./scripts/run-e2e.mjs",
+    "test:ui:smoke": "cross-env E2E_HEADLESS=false node ./scripts/run-e2e.mjs --tags @smoke",
+    "test:trace": "cross-env E2E_HEADLESS=false E2E_TRACE=true node ./scripts/run-e2e.mjs",
+    "test:show-trace": "npx playwright show-trace",
+    "test:codegen": "node ./scripts/run-codegen.mjs",
+    "test:ci": "cross-env E2E_HEADLESS=true node ./scripts/run-e2e.mjs --retry 1",
+    "test:run": "cucumber-js --config cucumber.config.cjs",
+    "test:install-browsers": "npx playwright install chromium --with-deps"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.2.0",
+    "@playwright/test": "^1.52.0",
+    "@testing-library/dom": "^10.4.0",
+    "cross-env": "^7.0.3",
+    "@types/node": "^22.15.0",
+    "ts-node": "^10.9.2",
+    "typescript": "catalog:"
+  }
+}

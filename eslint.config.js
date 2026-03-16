@@ -33,6 +33,7 @@ export default tseslint.config(
       '**/postcss.config.js',
       '**/openapi-ts.config.ts',
       '**/sd.config.js',
+      '**/*.cjs',
       '**/dist/**',
       '**/@mf-types/**',
       '**/.__mf__temp/**',
