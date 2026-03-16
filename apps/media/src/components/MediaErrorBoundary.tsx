@@ -15,7 +15,10 @@ const MediaErrorBoundary: FC = () => {
   }
 
   return (
-    <div className="flex min-h-[50vh] flex-col items-center justify-center p-8 text-center">
+    <div
+      data-testid="mf-error-media"
+      className="flex min-h-[50vh] flex-col items-center justify-center p-8 text-center"
+    >
       <h2 className="mb-4 text-2xl text-destructive">Movie Not Found</h2>
       <p className="mb-8 text-muted-foreground">{error.message}</p>
       <a href="/" className="text-primary underline-offset-4 hover:underline">

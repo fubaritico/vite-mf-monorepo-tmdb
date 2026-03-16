@@ -15,7 +15,7 @@ import '../remote.css'
 
 const Media: FC = () => {
   return (
-    <>
+    <div data-testid="mf-ready-media">
       {/* Hero Section - Full width, no container */}
       <MediaHero />
 
@@ -42,7 +42,7 @@ const Media: FC = () => {
 
       {/* Recommendations Section */}
       <RecommendedSection />
-    </>
+    </div>
   )
 }
 
