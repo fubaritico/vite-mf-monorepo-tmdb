@@ -22,7 +22,12 @@ const PhotosErrorBoundary: FC = () => {
   }
 
   return (
-    <Modal isOpen onClose={onClose} aria-label="Erreur">
+    <Modal
+      isOpen
+      onClose={onClose}
+      aria-label="Erreur"
+      data-testid="mf-error-photos"
+    >
       <div className="ph:flex ph:items-center ph:justify-center ph:w-full ph:h-full">
         <div className="ph:text-white ph:text-center">
           <h2 className="ph:text-2xl ph:mb-4">Erreur</h2>

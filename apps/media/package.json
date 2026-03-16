@@ -10,7 +10,7 @@
     "lint:fix": "eslint ./src --fix",
     "test": "vitest run",
     "prod": "vite build --mode production",
-    "prod:server": "vite build --mode production & node server.js"
+    "prod:server": "vite build --mode production && node server.js"
   },
   "dependencies": {
     "@sentry/react": "catalog:",

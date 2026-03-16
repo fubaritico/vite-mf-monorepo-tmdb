@@ -37,7 +37,10 @@ const Photos: FC = () => {
 
   if (error)
     return (
-      <div className="ph:fixed ph:inset-0 ph:z-50 ph:flex ph:items-center ph:justify-center ph:bg-black/80">
+      <div
+        data-testid="mf-error-photos"
+        className="ph:fixed ph:inset-0 ph:z-50 ph:flex ph:items-center ph:justify-center ph:bg-black/80"
+      >
         <span className="ph:text-white">
           <span className="ph:font-bold">{error.status_code}</span> |{' '}
           {error.status_message}
@@ -47,7 +50,10 @@ const Photos: FC = () => {
 
   if (isLoading) {
     return (
-      <div className="ph:fixed ph:inset-0 ph:z-50 ph:flex ph:items-center ph:justify-center ph:bg-black/80">
+      <div
+        data-testid="mf-loading-photos"
+        className="ph:fixed ph:inset-0 ph:z-50 ph:flex ph:items-center ph:justify-center ph:bg-black/80"
+      >
         <Spinner />
       </div>
     )
@@ -90,13 +96,15 @@ const Photos: FC = () => {
       : undefined
 
   return (
-    <PhotosModal
-      images={backdrops}
-      initialIndex={safeIndex}
-      onClose={handleClose}
-      onPrev={handlePrev}
-      onNext={handleNext}
-    />
+    <div data-testid="mf-ready-photos">
+      <PhotosModal
+        images={backdrops}
+        initialIndex={safeIndex}
+        onClose={handleClose}
+        onPrev={handlePrev}
+        onNext={handleNext}
+      />
+    </div>
   )
 }
 

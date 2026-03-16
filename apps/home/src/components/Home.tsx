@@ -9,7 +9,7 @@ import type { FC } from 'react'
 
 const Home: FC = () => {
   return (
-    <>
+    <div data-testid="mf-ready-home">
       {/* Hero Section - Full width, no container */}
       <HeroSection />
 
@@ -33,7 +33,7 @@ const Home: FC = () => {
           <FreeToWatchSection />
         </Section>
       </Container>
-    </>
+    </div>
   )
 }
 
