@@ -1,305 +1,95 @@
-## 🚀 Live Demo
+## Live Demo
 
-**<a href="https://vite-mf-tmdb.netlify.app" target="_blank" rel="noopener noreferrer">https://vite-mf-tmdb.netlify.app</a>**
-
-Browse movies, explore detail pages, cast, crew and photos — powered by a micro-frontend architecture deployed on Netlify.
+**<a href="https://vite-mf-tmdb.netlify.app" target="_blank" rel="noopener noreferrer">https://vite-mf-tmdb.netlify.app</a>** — Browse movies, explore detail pages, cast, crew and photos.
 
 **<a href="https://vite-mf-tmdb-storybook.netlify.app" target="_blank" rel="noopener noreferrer">https://vite-mf-tmdb-storybook.netlify.app</a>** — Design system Storybook
 
 ---
 
-## Monorepo Micro Front End \w React, Vite, @module-federation/vite Lerna & Pnpm
+## Table of Contents
 
-This project is a grid of movies that uses micro frontends architecture. A detail page is accessed by clicking on a movie card. It is built using React, Vite, Lerna, and Pnpm. The project is structured as a monorepo, which allows for easy management of multiple packages and applications.
-The micro frontends are loaded dynamically in the host application, allowing for a modular and scalable architecture. The project is designed to be easy to understand and extend, making it a great starting point for anyone looking to learn about micro frontends.
+- [Overview](#overview)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Architecture & Features](#architecture--features)
+- [Development](#development)
+  - [Useful Commands](#useful-commands)
+  - [Production Builds](#production-builds)
+  - [Storybook](#storybook)
+  - [Testing](#testing)
+  - [Accessibility](#accessibility)
+- [Design Tokens](#design-tokens)
+- [CI/CD & Deployment](#cicd--deployment)
+  - [CI Workflow](#ci-workflow)
+  - [Deploy Workflows](#deploy-workflows)
+  - [GitHub Actions Secrets](#github-actions-secrets)
+- [Performance & Quality](#performance--quality)
+- [Known Limitations](#known-limitations)
+- [Future Enhancements](#future-enhancements)
+- [Acknowledgments](#acknowledgments)
 
-The project is designed to be easy to understand and extend, making it a great starting point for anyone looking to setup a micro frontends project.
+---
 
-This is a test to check if it was possible to create a project from a previous one used as an inspiration to produce good model context, using the same tech stack.
+## Overview
 
-All techs and deps used in this project are the latest versions available at the time of writing this README. Some update maintenance for dependencies will be done in time.
+A **real-world micro-frontend architecture** built with React, Vite, and Module Federation, designed for **multi-team collaboration** on a single application. Different teams can work independently on distinct features while maintaining a cohesive user experience.
 
-I use IntelliJ for this project with claude sonnet 4.6 plugin, getting some cursor flavor while coding.
+### Technologies
 
-It's a work in progress, so many future enhancements are planned.
-
-## Project Purpose
-
-This project demonstrates a **real-world micro-frontend architecture** designed for **multi-team collaboration** on a single application. It showcases how different teams can work independently on distinct features while maintaining a cohesive user experience.
+React · Vite · TypeScript · @module-federation/vite · Lerna · pnpm · React Router · TanStack Query · Tailwind CSS v4 · Style Dictionary · Vitest · React Testing Library · Storybook · SonarQube · Sentry
 
 ### Team Organization
 
-The architecture is structured to support multiple autonomous teams:
+| Team | Scope | Apps |
+|---|---|---|
+| Home & Media | Home page, movie/TV detail pages | `apps/home`, `apps/media` |
+| User & Wishlist | User accounts and wishlist features | Planned |
+| Talent | Person/talent detail pages | Planned (`apps/talent`) |
 
-- **Home & Media Team**: Manages the home page and movie/tv series detail pages (`apps/home`, `apps/media`)
-- **User & Wishlist Team**: Handles user accounts and wishlist features (planned)
-- **Talent Team**: Develops person/talent detail pages (planned, `apps/talent`)
+Each team owns their remote application with full autonomy over codebase, deployment, and release cycle.
 
-Each team owns their remote application, with full autonomy over their codebase, deployment, and release cycle.
+[⬆ Back to top](#table-of-contents)
 
-### Developer Experience
+---
 
-The project setup is designed for **simplicity and efficiency**:
+## Getting Started
 
-```bash
-# Requires to have pnpm installed and node >=22.11.0
-# First, get an API key from tmdb by creating an account, it's free 
-# Create a .env.local from .env.local.example file in the root of the project and add your API key
-
-pnpm setup  # Install dependencies and build packages
-pnpm dev  # Start development
-```
-
-Two commands to get started. No complex configuration, no manual setup steps. The monorepo structure with shared packages (design system, tokens, API client) ensures consistency while preserving team independence.
-
-### Architecture Benefits
-
-- **Independent deployment**: Each remote can be deployed separately
-- **Team autonomy**: Teams work on isolated codebases with minimal coordination
-- **Shared foundation**: Common design system, tokens, and utilities ensure consistency
-- **Type safety**: TypeScript types are generated and shared between remotes and host
-- **Scalability**: New teams and features can be added without disrupting existing work
-
-### Technologies Used
-- React
-- Vite
-- Typescript
-- @module-federation/vite
-- Lerna
-- eslint
-- prettier
-- commitlint
-- Pnpm
-- React Router
-- React Query
-- Tailwind CSS v4 (shared theme across remote/host)
-- Style Dictionary (design tokens)
-- React Testing Library
-- Vitest
-- Storybook
-- SonarQube
-- Sentry
-
-### Getting Started
+> Requires pnpm installed and Node >= 22.11.0
 
 1. Clone the repository
-2. Subscribe to TMDB API and get your API key
-3. Create a `.env.local` file in the root of the project and add your API key
+2. Get a free [TMDB API key](https://www.themoviedb.org/) and create `.env.local` at the project root:
    ```bash
    VITE_TMDB_API_TOKEN=your_bearer_token
    ```
-4. Install dependencies
+3. Install dependencies and start:
    ```bash
-   pnpm setup
+   pnpm setup  # Install dependencies and build packages
+   pnpm dev    # Start development
    ```
-5. Start the development server
-   ```bash
-   pnpm dev
-   ```
-6. Open your browser and navigate to `http://localhost:3000`
+4. Open http://localhost:3000
 
-### Reset Scenario
+### Reset
 
-If you need to reset the project (clean install, clear caches):
+If you need a clean install (removes `node_modules`, `dist` folders, and reinstalls):
 
 ```bash
-# Full reset: removes node_modules, dist folders, and reinstalls
 pnpm reset
-
-# Then start dev
 pnpm dev
 ```
 
-### Useful Commands
+[⬆ Back to top](#table-of-contents)
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start all apps with watch mode for packages |
-| `pnpm reset` | Full reset: clean + install |
-| `pnpm build:packages` | Rebuild shared packages (use if you modify ui, layouts, or shared) |
-| `pnpm storybook` | Start Storybook |
-| `pnpm kill-ports` | Kill processes on ports 3000, 3001, 3002, 6006 |
-| `pnpm test` | Run tests |
-| `pnpm lint` | Run ESLint |
-| `pnpm type-check` | Run TypeScript type checking |
+---
 
-### Production Build Commands
-
-The project separates **build-only** commands from **build + server** commands for different deployment scenarios:
-
-#### Root Commands
-
-| Command | Context | Behavior                                                              |
-|---------|---------|-----------------------------------------------------------------------|
-| `pnpm prod` | CI/GitHub Actions/Netlify | Builds all apps (host, home, media, photos) — **no servers started**  |
-| `pnpm prod:server` | Local development | Builds all apps **and** starts servers on ports 3000-3003 in parallel |
-
-#### When to Use Each
-
-**CI/GitHub Actions:**
-```bash
-pnpm prod          # Just build, job terminates quickly
-```
-
-**Netlify (remotes):**
-Each remote uses a custom build script that only builds:
-```bash
-pnpm install && pnpm build:packages && cd apps/home && pnpm build
-# (Netlify serves the dist/ files, no servers needed)
-```
-
-**Local Development** (test servers locally):
-```bash
-pnpm prod:server          # Build all + start all servers (parallel)
-pnpm prod:server:ordered  # Build all + start all servers (sequential)
-```
-
-Then open: **http://localhost:3000** (host application)
-
-*Note: Remotes (home, media, photos) run on separate ports but are consumed by the host. You typically only access the host.*
-
-### Continuous Integration & Deployment
-
-#### On push or pull_request to `main` / `develop`
-
-The **CI** workflow runs — 3 sequential phases:
-
-**Phase 1 — Validate** (3 parallel jobs, no dependency between them):
-- **Lint** — ESLint across the entire monorepo
-- **Type Check** — TypeScript `--noEmit` verification
-- **Test** — Vitest with 80% line coverage threshold; uploads coverage as a workflow artifact
-
-Once all 3 pass, a **Build** job runs: `pnpm prod` (all apps) and uploads dist artifacts (retained 1 day).
-
-**Phase 2 — SonarQube** (after Validate):
-- Downloads the coverage artifact produced by Phase 1
-- Runs SonarQube scan against SonarCloud
-
-**Phase 3 — Quality Gate** (after Validate + SonarQube, always runs):
-- Checks both phases completed as `success`
-- ❌ If either failed → exits 1, GitHub marks the commit/PR as failed and blocks merge
-
-#### On push to `main` (after CI succeeds)
-
-Five **deploy workflows** run in parallel, each triggered by `workflow_run: ["CI"]` completing with `conclusion == 'success'`.
-
-Each workflow follows the same sequence:
-
-1. Checkout the exact SHA that triggered CI (full git history, `fetch-depth: 0`)
-2. Fetch the parent commit SHA via the GitHub API
-3. Run `paths-filter` comparing changed files between parent SHA and head SHA
-4. Compute a single boolean output (`changed.result`) from the filter outputs
-5. **If `false`** → all remaining steps are skipped (no install, no build, no deploy)
-6. **If `true`** → `pnpm install` + `pnpm build:packages` → `pnpm prod` → `netlify deploy --prod`
-
-**Deploy conditions per workflow:**
-
-| Workflow | Triggers deploy when |
-|---|---|
-| `deploy-home` | `apps/home/**` or `packages/**` changed |
-| `deploy-host` | `apps/host/**` or `packages/**` changed |
-| `deploy-media` | `apps/media/**` or `packages/**` changed |
-| `deploy-photos` | `apps/photos/**` or `packages/**` changed |
-| `deploy-storybook` | `packages/storybook/**`, `packages/ui/**`, or `packages/layouts/**` changed |
-
-#### GitHub Actions Secrets
-
-All secrets are configured in **GitHub → Settings → Secrets and variables → Actions**.
-
-> **Important — build-time embedding**: The `VITE_*` variables are not runtime environment variables. Vite replaces them with their literal values inside the JavaScript bundle during `pnpm prod`. If a secret is missing or empty when the build runs, the wrong value is permanently baked into the deployed bundle.
-
-##### Netlify
-
-| Secret | Used by workflow | Description |
-|---|---|---|
-| `NETLIFY_AUTH_TOKEN` | all deploy workflows | Netlify personal access token. Authenticates `netlify-cli` to push builds to any site. |
-| `NETLIFY_SITE_ID_HOME` | `deploy-home` | Unique ID of the `vite-mf-tmdb-home` Netlify site. Passed to `netlify deploy --site`. |
-| `NETLIFY_SITE_ID_HOST` | `deploy-host` | Unique ID of the `vite-mf-tmdb` Netlify site (host app). |
-| `NETLIFY_SITE_ID_MEDIA` | `deploy-media` | Unique ID of the `vite-mf-tmdb-media` Netlify site. |
-| `NETLIFY_SITE_ID_PHOTOS` | `deploy-photos` | Unique ID of the `vite-mf-tmdb-photos` Netlify site. |
-| `NETLIFY_SITE_ID_STORYBOOK` | `deploy-storybook` | Unique ID of the `vite-mf-tmdb-storybook` Netlify site. |
-
-##### Application — build-time variables
-
-| Secret | Used by workflow | Description |
-|---|---|---|
-| `VITE_TMDB_API_TOKEN` | `deploy-home`, `deploy-media`, `deploy-photos`, `deploy-host` | TMDB bearer token. Embedded at build time into every remote bundle via `import.meta.env.VITE_TMDB_API_TOKEN`. Without it, all API calls return HTTP 401 "Invalid API key". |
-| `VITE_HOME_URL` | `deploy-host` | Production URL of the home remote (`https://vite-mf-tmdb-home.netlify.app`). Baked into the host bundle at build time — used both to configure the Module Federation runtime and as a `<link rel="preload">` in `index.html`. If empty, the host loads its own `remoteEntry.js` instead of the home remote. |
-| `VITE_MEDIA_URL` | `deploy-host` | Production URL of the media remote (`https://vite-mf-tmdb-media.netlify.app`). Same role as `VITE_HOME_URL` for the media micro-frontend. |
-| `VITE_PHOTOS_URL` | `deploy-host` | Production URL of the photos remote (`https://vite-mf-tmdb-photos.netlify.app`). Same role as `VITE_HOME_URL` for the photos micro-frontend. |
-| `VITE_SENTRY_DSN` | all deploy workflows | Sentry project DSN. Public value — safe to embed at build time. Without it, Sentry is silently disabled (`enabled: false`). |
-| `VITE_SENTRY_ENVIRONMENT` | all deploy workflows | Hardcoded to `production` in CI. Controls Sentry environment tag. |
-| `VITE_GIT_SHA` | all deploy workflows | Git commit SHA injected at build time (`github.event.workflow_run.head_sha`). Used as Sentry release identifier per app (e.g. `host@abc1234`). |
-| `SENTRY_AUTH_TOKEN` | all deploy workflows | Sentry internal auth token for source map upload. **Not** `VITE_`-prefixed — never embedded in bundles. |
-| `SENTRY_ORG` | all deploy workflows | Sentry organization slug. Required by `@sentry/vite-plugin` at build time. |
-| `SENTRY_PROJECT` | all deploy workflows | Sentry project slug. Required by `@sentry/vite-plugin` at build time. |
-
-##### Legacy — Netlify build hooks (no longer used)
-
-These secrets were used when Netlify built the apps itself via its GitHub integration. Each hook is a unique URL that, when called, triggers a Netlify build including the environment variables configured in the Netlify UI.
-
-Since the migration to `netlify-cli` with `--no-build`, the build now runs entirely in GitHub Actions and Netlify only receives the pre-built `dist/` folder. These hooks are no longer called and the `VITE_*` variables that were previously set in the Netlify UI must now be declared as GitHub Actions secrets (see section above).
-
-| Secret | Description |
-|---|---|
-| `NETLIFY_BUILD_HOOK_HOME` | Netlify build hook URL for the home app — replaced by `deploy-home.yml` |
-| `NETLIFY_BUILD_HOOK_HOST` | Netlify build hook URL for the host app — replaced by `deploy-host.yml` |
-| `NETLIFY_BUILD_HOOK_MEDIA` | Netlify build hook URL for the media app — replaced by `deploy-media.yml` |
-| `NETLIFY_BUILD_HOOK_PHOTOS` | Netlify build hook URL for the photos app — replaced by `deploy-photos.yml` |
-| `NETLIFY_BUILD_HOOK_STORYBOOK` | Netlify build hook URL for Storybook — replaced by `deploy-storybook.yml` |
-
-##### SonarQube
-
-| Secret | Used by workflow | Description |
-|---|---|---|
-| `SONAR_TOKEN` | `sonarqube` | SonarCloud authentication token. |
-| `SONAR_HOST_URL` | `sonarqube` | SonarCloud server URL (e.g. `https://sonarcloud.io`). |
-| `SONAR_PROJECT_KEY` | `sonarqube` | Unique key identifying the project in SonarCloud. |
-
-#### Manual
-
-- **sonar-init** (`workflow_dispatch`) — initializes the SonarCloud project from `main`; run once on project setup
-
-### Performance & Quality Metrics
-
-Lighthouse scores (measured on deployed app):
-- **Performance**: 80+
-- **Accessibility (a11y)**: 100
-- **Best Practices**: 100
-- **SEO**: 83
-
-Optimizations applied: responsive images, persistent skeletons (no CLS), Netlify Image CDN, code splitting via Module Federation.
-
-### Design Tokens
-
-This project uses [Style Dictionary](https://styledictionary.com/) to manage design tokens. Tokens are defined in JSON format following the [DTCG specification](https://tr.designtokens.org/format/) and are automatically compiled to CSS custom properties and Tailwind CSS theme.
-
-The tokens package generates:
-- **CSS variables** for use in any CSS
-- **Tailwind @theme** for Tailwind v4 integration
-- **JavaScript/TypeScript exports** for programmatic access
-
-See [packages/tokens/README.md](./packages/tokens/README.md) for detailed documentation.
-
-### Storybook
-
-To run Storybook for the design system:
-
-```bash
-pnpm --filter @vite-mf-monorepo/storybook storybook
-```
-
-Open http://localhost:6006
-
-### Project Structure
+## Project Structure
 
 ```
 vite-mf-monorepo/
 ├── apps/
 │   ├── host/          # Host application (port 3000)
-│   ├── home/          # Home page - movies/tv series carrousels (port 3001)
+│   ├── home/          # Home page - movies/tv series carousels (port 3001)
 │   ├── media/         # Media details page (port 3002)
-│   └── photos/        # Routed photos carrousel in lightbox mode (port 3003)
+│   └── photos/        # Routed photos carousel in lightbox mode (port 3003)
 ├── packages/
 │   ├── layouts/       # Shared component to setup page zoning
 │   ├── shared/        # Shared utils, Vite plugins, Tailwind theme
@@ -310,108 +100,285 @@ vite-mf-monorepo/
 └── scripts/           # Utility scripts (reset, kill-ports)
 ```
 
-### Project features
+[⬆ Back to top](#table-of-contents)
 
-- Micro frontends architecture
-- Dynamic loading of micro frontends
-- HMR enabled not only on host but on remotes as well when working in dev mode (not really full HMR, triggers a full reload)
-- Modular and scalable architecture
-- Easy to understand and extend
-- Types generation in dev mode to allow host/consumer to get types from remote, now it's possible to do it with Vite
-- Responsive design
-- Tailwind CSS v4 with shared theme tokens
-- Easy to add new micro frontends
+---
+
+## Architecture & Features
+
+### Architecture Benefits
+
+- **Independent deployment** — each remote can be deployed separately
+- **Team autonomy** — teams work on isolated codebases with minimal coordination
+- **Shared foundation** — common design system, tokens, and utilities ensure consistency
+- **Type safety** — TypeScript types are generated and shared between remotes and host
+- **Scalability** — new teams and features can be added without disrupting existing work
+
+### Key Features
+
+- Dynamic loading of micro frontends via Module Federation
+- HMR on both host and remotes in dev mode (triggers a full reload)
+- Types generation in dev mode for host/consumer type safety
+- Responsive design with Tailwind CSS v4 shared theme tokens
 - Each remote is standalone and can be deployed independently
-- For production mode (locally), each part of the application is hosted in a expressJS server
+- Production mode uses Express.js servers locally
+
+[⬆ Back to top](#table-of-contents)
+
+---
+
+## Development
+
+### Useful Commands
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start all apps with watch mode for packages |
+| `pnpm reset` | Full reset: clean + install |
+| `pnpm build:packages` | Rebuild shared packages (if you modify ui, layouts, or shared) |
+| `pnpm storybook` | Start Storybook |
+| `pnpm kill-ports` | Kill processes on ports 3000, 3001, 3002, 6006 |
+| `pnpm test` | Run tests |
+| `pnpm lint` | Run ESLint |
+| `pnpm type-check` | Run TypeScript type checking |
+
+### Production Builds
+
+The project separates **build-only** commands from **build + server** commands:
+
+| Command | Context | Behavior |
+|---------|---------|---------|
+| `pnpm prod` | CI / GitHub Actions / Netlify | Builds all apps — **no servers started** |
+| `pnpm prod:server` | Local development | Builds all apps **and** starts servers on ports 3000-3003 |
+| `pnpm prod:server:ordered` | Local development | Same as above, but sequential |
+
+**CI / GitHub Actions:**
+```bash
+pnpm prod          # Just build, job terminates quickly
+```
+
+**Netlify (remotes)** — each remote uses a custom build script:
+```bash
+pnpm install && pnpm build:packages && cd apps/home && pnpm build
+```
+
+**Local testing:**
+```bash
+pnpm prod:server   # Build all + start all servers
+```
+Then open http://localhost:3000. Remotes run on separate ports but are consumed by the host.
+
+### Storybook
+
+```bash
+pnpm --filter @vite-mf-monorepo/storybook storybook
+```
+
+Open http://localhost:6006
 
 ### Testing
 
-This project uses Vitest and React Testing Library for testing. The tests are located in the `components` folder of each package. To run the tests, use the following command at the root of the project:
+Uses **Vitest** and **React Testing Library**. Tests are co-located with components.
 
 ```bash
-pnpm t
-```   
-
-Some extra tests will be added in the future, but for now, the focus is on the main features of the project.
-
-#### Coverage
-
-To run the tests with coverage, use the following command at the root of the project:
-
-```bash
-pnpm coverage
+pnpm test       # Run tests
+pnpm coverage   # Run tests with coverage (HTML report in coverage/)
 ```
 
-This will generate a coverage report in the `coverage` folder of each package. The coverage report will be generated in HTML format, and you can open it in your browser to see the coverage details.
+### Accessibility
 
-With Intellij, you can open the coverage report by right-clicking on the `coverage` folder and selecting "Open in Browser". This will open the coverage report in your default browser.
+This project prioritizes accessible UIs following WCAG guidelines.
 
-### Accessibility (a11y)
+#### Testing Approach
 
-This project prioritizes **accessible user interfaces** by following WCAG guidelines and automated testing.
-
-#### Testing Accessibility
-
-Tests use **React Testing Library's semantic queries** to ensure components are accessible:
+Tests use **React Testing Library's semantic queries**:
 
 ```typescript
-// ✅ Good: Query by semantic roles (mimics how users interact)
+// ✅ Query by semantic roles (mimics how users interact)
 screen.getByRole('button', { name: /submit/i })
 screen.getByRole('tab', { name: /today/i })
 screen.getByRole('tabpanel', { name: /content/i })
 
-// ❌ Bad: Query by implementation (brittle, not accessible)
+// ❌ Query by implementation (brittle, not accessible)
 screen.getByText('Click me')
 container.querySelector('.btn')
 ```
 
-**Key patterns**:
-- Use `getByRole()` for interactive elements (button, tab, dialog, tabpanel)
-- Target specific panels when elements appear in multiple locations (e.g., tabs rendering all panels)
-- Use `.querySelector()` scoped to a specific container to avoid "Found multiple elements" errors
-
 #### pa11y Automation
 
-This project uses **[pa11y](https://www.pa11y.org/)** for automated accessibility scanning. Configuration is in `.pa11yci.json`:
+[pa11y](https://www.pa11y.org/) runs automated WCAG 2.1 scans (contrast, ARIA, semantic HTML, heading hierarchy, keyboard navigation):
 
 ```bash
-# Run accessibility audit on all pages
 pnpm test:a11y
 ```
 
-**What pa11y checks**:
-- WCAG 2.1 compliance (contrast, aria attributes, semantic HTML)
-- Broken links and missing alt text
-- Form labels and keyboard navigation
-- Page structure and heading hierarchy
+#### Best Practices Applied
 
-#### Accessibility Best Practices Applied
+- **Semantic HTML** — native `<button>`, `<a>`, `<form>` over divs
+- **ARIA attributes** — `aria-label`, `aria-controls`, `role` where needed
+- **Keyboard navigation** — all interactive elements reachable via Tab
+- **Color contrast** — WCAG AA (4.5:1) or AAA (7:1) standards
+- **Focus management** — clear focus indicators on interactive elements
 
-- **Semantic HTML**: Use native `<button>`, `<a>`, `<form>` elements instead of divs
-- **ARIA attributes**: Add `aria-label`, `aria-controls`, `role` when needed
-- **Keyboard navigation**: All interactive elements are reachable via Tab
-- **Color contrast**: Text meets WCAG AA (4.5:1) or AAA (7:1) standards
-- **Focus management**: Clear focus indicators on interactive elements
-- **Testing Library**: Tests query by accessible role, not implementation
+See [docs/A11Y.md](./docs/A11Y.md) for detailed guidelines.
 
-See [docs/A11Y.md](./docs/A11Y.md) for detailed accessibility guidelines.
+[⬆ Back to top](#table-of-contents)
 
-### Issues
+---
 
-The micro frontends architecture doesn't provide good SEO. It's rather meant for big apps like Paas or Saas. It's basically not a good fit for a movie database app or any ecommerce website.
+## Design Tokens
 
-But starting from a public API, it was possible to display complex contents from data.
+Uses [Style Dictionary](https://styledictionary.com/) with tokens defined in JSON following the [DTCG specification](https://tr.designtokens.org/format/). Tokens are compiled to:
 
-A better option will be to have another version of the app using a server side rendering architecture based on NextJS getting real good lighthouse scores.
+- **CSS variables** for use in any CSS
+- **Tailwind @theme** for Tailwind v4 integration
+- **JavaScript/TypeScript exports** for programmatic access
 
-### Future Enhancements
+See [packages/tokens/README.md](./packages/tokens/README.md) for detailed documentation.
 
-- Add e2e tests with vitest in browser mode
-- Add a detail page for the talent (people) taking part in a movie
-- Make packages like `token`, `layouts` and `ui` available via npm registry for other architectural approaches.
-- For DX, add a .vscode and .cursor rules for Cursor users
-- Create a server side rendering version of the app using NextJS
+[⬆ Back to top](#table-of-contents)
 
-### Acknowledgments
+---
+
+## CI/CD & Deployment
+
+### CI Workflow
+
+Runs on push or pull_request to `main` / `develop` — 3 sequential phases:
+
+**Phase 1 — Validate** (3 parallel jobs):
+- **Lint** — ESLint across the entire monorepo
+- **Type Check** — TypeScript `--noEmit` verification
+- **Test** — Vitest with 80% line coverage threshold; uploads coverage artifact
+
+Once all 3 pass, a **Build** job runs: `pnpm prod` (all apps), uploads dist artifacts (retained 1 day).
+
+**Phase 2 — SonarQube** (after Validate):
+- Downloads the coverage artifact from Phase 1
+- Runs SonarQube scan against SonarCloud
+
+**Phase 3 — Quality Gate** (after Validate + SonarQube, always runs):
+- Checks both phases completed as `success`
+- If either failed → exits 1, blocks merge
+
+### Deploy Workflows
+
+Five deploy workflows run in parallel on push to `main` after CI succeeds (`workflow_run: [\"CI\"]` with `conclusion == 'success'`).
+
+Each workflow:
+1. Checks out the exact SHA that triggered CI (full history)
+2. Fetches parent commit SHA via GitHub API
+3. Runs `paths-filter` comparing changed files
+4. **If nothing changed** → skips entirely (no install, no build, no deploy)
+5. **If changed** → `pnpm install` + `pnpm build:packages` → `pnpm prod` → `netlify deploy --prod`
+
+| Workflow | Triggers deploy when |
+|---|---|
+| `deploy-home` | `apps/home/**` or `packages/**` changed |
+| `deploy-host` | `apps/host/**` or `packages/**` changed |
+| `deploy-media` | `apps/media/**` or `packages/**` changed |
+| `deploy-photos` | `apps/photos/**` or `packages/**` changed |
+| `deploy-storybook` | `packages/storybook/**`, `packages/ui/**`, or `packages/layouts/**` changed |
+
+#### Manual Workflows
+
+- **sonar-init** (`workflow_dispatch`) — initializes the SonarCloud project from `main`; run once on setup
+
+### GitHub Actions Secrets
+
+All secrets are configured in **GitHub → Settings → Secrets and variables → Actions**.
+
+> **Important — build-time embedding**: `VITE_*` variables are replaced with literal values in the JavaScript bundle during `pnpm prod`. If a secret is missing at build time, the wrong value is permanently baked into the deployed bundle.
+
+#### Netlify
+
+| Secret | Used by | Description |
+|---|---|---|
+| `NETLIFY_AUTH_TOKEN` | all deploy workflows | Personal access token for `netlify-cli` |
+| `NETLIFY_SITE_ID_HOME` | `deploy-home` | Site ID for `vite-mf-tmdb-home` |
+| `NETLIFY_SITE_ID_HOST` | `deploy-host` | Site ID for `vite-mf-tmdb` (host app) |
+| `NETLIFY_SITE_ID_MEDIA` | `deploy-media` | Site ID for `vite-mf-tmdb-media` |
+| `NETLIFY_SITE_ID_PHOTOS` | `deploy-photos` | Site ID for `vite-mf-tmdb-photos` |
+| `NETLIFY_SITE_ID_STORYBOOK` | `deploy-storybook` | Site ID for `vite-mf-tmdb-storybook` |
+
+#### Application (build-time variables)
+
+| Secret | Used by | Description |
+|---|---|---|
+| `VITE_TMDB_API_TOKEN` | home, media, photos, host | TMDB bearer token. Without it, all API calls return HTTP 401. |
+| `VITE_HOME_URL` | host | Production URL of the home remote. If empty, host loads its own `remoteEntry.js`. |
+| `VITE_MEDIA_URL` | host | Production URL of the media remote. |
+| `VITE_PHOTOS_URL` | host | Production URL of the photos remote. |
+| `VITE_SENTRY_DSN` | all deploy workflows | Sentry project DSN. Without it, Sentry is silently disabled. |
+| `VITE_SENTRY_ENVIRONMENT` | all deploy workflows | Hardcoded to `production` in CI. |
+| `VITE_GIT_SHA` | all deploy workflows | Git commit SHA used as Sentry release identifier. |
+| `SENTRY_AUTH_TOKEN` | all deploy workflows | Sentry auth token for source map upload. **Not** `VITE_`-prefixed — never embedded in bundles. |
+| `SENTRY_ORG` | all deploy workflows | Sentry organization slug. |
+| `SENTRY_PROJECT` | all deploy workflows | Sentry project slug. |
+
+#### SonarQube
+
+| Secret | Used by | Description |
+|---|---|---|
+| `SONAR_TOKEN` | `sonarqube` | SonarCloud authentication token |
+| `SONAR_HOST_URL` | `sonarqube` | SonarCloud server URL |
+| `SONAR_PROJECT_KEY` | `sonarqube` | Project key in SonarCloud |
+
+#### Legacy — Netlify build hooks (no longer used)
+
+These secrets were used when Netlify built the apps itself via its GitHub integration. Since the migration to `netlify-cli` with `--no-build`, builds run entirely in GitHub Actions and Netlify only receives the pre-built `dist/` folder. These hooks are no longer called.
+
+| Secret | Description |
+|---|---|
+| `NETLIFY_BUILD_HOOK_HOME` | Replaced by `deploy-home.yml` |
+| `NETLIFY_BUILD_HOOK_HOST` | Replaced by `deploy-host.yml` |
+| `NETLIFY_BUILD_HOOK_MEDIA` | Replaced by `deploy-media.yml` |
+| `NETLIFY_BUILD_HOOK_PHOTOS` | Replaced by `deploy-photos.yml` |
+| `NETLIFY_BUILD_HOOK_STORYBOOK` | Replaced by `deploy-storybook.yml` |
+
+[⬆ Back to top](#table-of-contents)
+
+---
+
+## Performance & Quality
+
+Lighthouse scores (measured on deployed app):
+
+| Metric | Score |
+|---|---|
+| Performance | 80+ |
+| Accessibility | 100 |
+| Best Practices | 100 |
+| SEO | 83 |
+
+Optimizations: responsive images, persistent skeletons (no CLS), Netlify Image CDN, code splitting via Module Federation.
+
+[⬆ Back to top](#table-of-contents)
+
+---
+
+## Known Limitations
+
+The micro-frontend architecture is not ideal for SEO. It's better suited for large SaaS/PaaS applications than a public-facing movie database or e-commerce site. However, starting from a public API, it was possible to display complex content and demonstrate the architecture's strengths.
+
+[⬆ Back to top](#table-of-contents)
+
+---
+
+## Future Enhancements
+
+- E2E tests with Vitest in browser mode
+- Talent detail page (`apps/talent`)
+- Publish `tokens`, `layouts`, and `ui` packages to npm for reuse in other architectures
+- `.vscode` and `.cursor` rules for Cursor/VS Code users
+- Server-side rendering version with Next.js
+
+[⬆ Back to top](#table-of-contents)
+
+---
+
+## Acknowledgments
 
 Special thanks to [Nsttt](https://github.com/Nsttt) for his work on the DTS (TypeScript declarations) plugin integration with `@module-federation/vite`. His contributions to the Module Federation ecosystem made it possible to have proper type generation between remotes and host in dev mode, which is essential for a good DX in a micro-frontend architecture.
+
+[⬆ Back to top](#table-of-contents)
