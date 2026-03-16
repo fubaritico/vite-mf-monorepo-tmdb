@@ -47,6 +47,13 @@ netlify deploy --prod --dir=apps/home/dist --site=$SITE_ID --no-build --cwd apps
 **Rule**: `--cwd` = directory with the single `package.json`. `--dir` = full path to built assets from repo root.
 **Applied to**: All 5 deploy workflows (deploy-home, deploy-host, deploy-media, deploy-photos, deploy-storybook).
 
+### Sentry tracePropagationTargets CORS issue with third-party APIs
+**Problem**: Setting `tracePropagationTargets` to a third-party API (e.g. TMDB) causes Sentry to inject `sentry-trace` and `baggage` headers. Third-party CORS policies block these → all API calls fail.
+**Symptom**: TMDB returns `{"status_code":7,"status_message":"Invalid API key"}` — looks like auth but is actually CORS.
+**Solution**: `tracePropagationTargets: []` — disables header injection on all outgoing requests.
+**Rule**: Never target third-party APIs. Only use for services you control CORS headers of.
+**Applied to**: all 4 instrument.ts files.
+
 ### TypeScript with NodeNext module resolution
 **Problem**: Requires `.js` extensions for relative imports.
 **Solution**: `import { foo } from './utils.js'` (write .js even though source is .ts).

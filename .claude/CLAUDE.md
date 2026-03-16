@@ -30,6 +30,10 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 
 ## Session State (updated by `/end-session`)
 
+### Completed
+- Sentry error monitoring: instrument.ts per app, MF-aware init, wrapCreateBrowserRouterV7, React 19 hooks, source maps upload
+- /sonar skill: fetches SonarCloud issues by severity via REST API
+
 ### Next
 - Check `files/ROADMAP.md` for upcoming phases
 
