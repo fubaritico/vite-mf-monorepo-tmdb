@@ -19,6 +19,7 @@
   - [Testing](#testing)
   - [Accessibility](#accessibility)
 - [Design Tokens](#design-tokens)
+- [Error Monitoring (Sentry)](#error-monitoring-sentry)
 - [CI/CD & Deployment](#cicd--deployment)
   - [CI Workflow](#ci-workflow)
   - [Deploy Workflows](#deploy-workflows)
@@ -235,6 +236,37 @@ Uses [Style Dictionary](https://styledictionary.com/) with tokens defined in JSO
 - **JavaScript/TypeScript exports** for programmatic access
 
 See [packages/tokens/README.md](./packages/tokens/README.md) for detailed documentation.
+
+[⬆ Back to top](#table-of-contents)
+
+---
+
+## Error Monitoring (Sentry)
+
+Each app (host, home, media, photos) initializes Sentry independently via an `instrument.ts` file imported before the application bootstraps.
+
+### What's Captured
+
+- **Errors** — unhandled exceptions, promise rejections, React component errors (via React 19 hooks)
+- **Performance** — browser tracing with configurable sample rate (10% in production, 100% in development)
+- **Session Replay** — 10% of sessions recorded, 100% on error
+
+### Configuration
+
+Each app tags events with its own name (`app: 'host'`, `app: 'home'`, etc.) and uses a unique release identifier (`host@<git-sha>`) for source map association.
+
+| Environment variable | Purpose |
+|---|---|
+| `VITE_SENTRY_DSN` | Project DSN — if empty, Sentry is silently disabled |
+| `VITE_SENTRY_ENVIRONMENT` | Environment tag (`production` in CI) |
+| `VITE_GIT_SHA` | Git SHA used as release identifier |
+| `SENTRY_AUTH_TOKEN` | Auth token for source map upload (build-time only, not embedded) |
+
+### Key Decisions
+
+- **`tracePropagationTargets: []`** — disables `sentry-trace` header injection on outgoing requests to avoid CORS issues with third-party APIs (TMDB)
+- **`ChunkLoadError` filtered** — Module Federation chunk failures are dropped to reduce noise
+- **Source maps** uploaded via `@sentry/vite-plugin` during CI builds
 
 [⬆ Back to top](#table-of-contents)
 
