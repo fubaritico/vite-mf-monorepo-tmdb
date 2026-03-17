@@ -1,0 +1,41 @@
+name: Claude PR Review
+
+on:
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'packages/**'
+
+jobs:
+  claude-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          direct_prompt: |
+            This is a monorepo with micro-frontends: apps/home, apps/host, apps/media, apps/photos + packages/storybook.
+
+            This PR touches packages/**. Analyze the diff and:
+            1. List which apps are impacted and why (be specific: which import, which component, which type)
+            2. Flag any renamed exports, changed prop types, or removed APIs that could cause runtime breaks
+               even if TypeScript didn't catch them across module federation boundaries
+            3. Flag any missing story updates in packages/storybook if a UI component changed
+
+            Be concise. Only flag real issues, not style opinions.
+
+  pr-description:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          direct_prompt: |
+            Write a concise PR description based on the diff.
+            Format: one sentence summary, then bullet points of what changed.
+            Update the PR body with it.
