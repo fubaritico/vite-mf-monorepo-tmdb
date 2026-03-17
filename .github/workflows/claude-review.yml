@@ -7,10 +7,11 @@ on:
       - 'packages/**'
 
 jobs:
-  generate-token:
+  claude-review:
     runs-on: ubuntu-latest
-    outputs:
-      token: ${{ steps.app-token.outputs.token }}
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - name: Generate GitHub App token
         id: app-token
@@ -18,20 +19,11 @@ jobs:
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
-
-  claude-review:
-    needs: [generate-token]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-      id-token: write
-    steps:
       - uses: actions/checkout@v4
       - uses: anthropics/claude-code-action@beta
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          github_token: ${{ needs.generate-token.outputs.token }}
+          github_token: ${{ steps.app-token.outputs.token }}
           direct_prompt: |
             This is a monorepo with micro-frontends: apps/home, apps/host, apps/media, apps/photos + packages/storybook.
 
@@ -45,17 +37,21 @@ jobs:
             If no issues found, approve the PR.
 
   pr-description:
-    needs: [generate-token]
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
-      id-token: write
     steps:
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - uses: actions/checkout@v4
       - uses: anthropics/claude-code-action@beta
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          github_token: ${{ needs.generate-token.outputs.token }}
+          github_token: ${{ steps.app-token.outputs.token }}
           direct_prompt: |
             Write a concise PR description based on the diff.
             Format: one sentence summary, then bullet points of what changed.
