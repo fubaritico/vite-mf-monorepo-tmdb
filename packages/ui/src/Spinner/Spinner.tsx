@@ -7,9 +7,6 @@ export interface SpinnerProps {
 }
 
 const Spinner: FC<SpinnerProps> = ({ className }) => {
-  console.warn(
-    'Spinner is deprecated and will be removed in a future version. Use Skeleton instead.'
-  )
   return (
     <div
       role="status"
