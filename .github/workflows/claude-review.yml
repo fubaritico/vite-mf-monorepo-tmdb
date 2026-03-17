@@ -34,7 +34,12 @@ jobs:
             3. Flag any missing story updates in packages/storybook if a UI component changed
 
             Be concise. Only flag real issues, not style opinions.
-            If no issues found, approve the PR.
+
+            After your analysis, if no breaking issues are found, submit an approving review using:
+            gh pr review $PR_NUMBER --approve --body "LGTM — no breaking changes detected across module federation boundaries."
+
+            If breaking issues are found, submit a review requesting changes using:
+            gh pr review $PR_NUMBER --request-changes --body "<your findings>"
 
   pr-description:
     runs-on: ubuntu-latest
