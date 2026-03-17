@@ -4,7 +4,7 @@ exports[`Spinner > renders with custom className 1`] = `
 <div>
   <div
     aria-label="Loading"
-    class="ui:rounded-full ui:border-white/20 ui:border-t-white ui:animate-spin ui:size-12 ui:border-4 ui:custom-class"
+    class="ui:rounded-full ui:animate-spin ui:size-12 ui:border-4 ui:border-white/20 ui:border-t-white ui:custom-class"
     role="status"
   />
 </div>
@@ -14,7 +14,7 @@ exports[`Spinner > renders with default props 1`] = `
 <div>
   <div
     aria-label="Loading"
-    class="ui:rounded-full ui:border-white/20 ui:border-t-white ui:animate-spin ui:size-12 ui:border-4"
+    class="ui:rounded-full ui:animate-spin ui:size-12 ui:border-4 ui:border-white/20 ui:border-t-white"
     role="status"
   />
 </div>
