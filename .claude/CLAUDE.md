@@ -35,12 +35,18 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - /sonar skill: fetches SonarCloud issues by severity via REST API
 - README.md restructured: TOC, heading hierarchy, back-to-top links, Sentry section
 - Agent files translated from French to English (6 files in .claude/agents/)
+- E2E testing: Cucumber.js + Playwright, 8 scenarios (2 smoke + 6 browse-media), orchestration script, page objects, MF sentinels
+- MF sentinels: data-testid mf-ready/mf-error/mf-loading on all 3 remotes
+- E2E run modes: headless, headed, trace, codegen via orchestration scripts (packages/e2e/scripts/)
+- Pre-commit hook: smoke E2E added after lint/typecheck/test
+- README.md: E2E section with run modes, env vars, architecture
 
 ### Next
-- Check `files/ROADMAP.md` for upcoming phases
+- Commit pending E2E changes (2 commits — see end of previous session for exact commands)
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported
+- `.env.production` overrides `VITE_*_URL` with Netlify URLs during `--mode production` builds; E2E script injects localhost overrides via `localRemoteEnv`
 
 ## Reference Files (load on demand — NOT auto-loaded)
 | File | When to load |
