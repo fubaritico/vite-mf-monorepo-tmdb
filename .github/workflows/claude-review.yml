@@ -21,6 +21,7 @@ jobs:
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
       - uses: actions/checkout@v4
       - uses: anthropics/claude-code-action@beta
+        id: claude-review
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ steps.app-token.outputs.token }}
@@ -35,11 +36,22 @@ jobs:
 
             Be concise. Only flag real issues, not style opinions.
 
-            After your analysis, if no breaking issues are found, submit an approving review using:
-            gh pr review $PR_NUMBER --approve --body "LGTM — no breaking changes detected across module federation boundaries."
+            At the very end of your analysis, output exactly one of these two verdicts on its own line:
+            VERDICT: APPROVE
+            VERDICT: REQUEST_CHANGES
 
-            If breaking issues are found, submit a review requesting changes using:
-            gh pr review $PR_NUMBER --request-changes --body "<your findings>"
+      - name: Auto-approve if no issues
+        if: always()
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          COMMENT=$(gh pr view ${{ github.event.pull_request.number }} --json comments --jq '.comments[] | select(.author.login == "fubaritico-claude-reviewer[bot]") | .body' | tail -1)
+          if echo "$COMMENT" | grep -q "VERDICT: APPROVE"; then
+            gh pr review ${{ github.event.pull_request.number }} --approve --body "LGTM — no breaking changes detected across module federation boundaries."
+          elif echo "$COMMENT" | grep -q "VERDICT: REQUEST_CHANGES"; then
+            BODY=$(echo "$COMMENT" | sed -n '/Breaking Changes/,/VERDICT/p' | head -n -1)
+            gh pr review ${{ github.event.pull_request.number }} --request-changes --body "$BODY"
+          fi
 
   pr-description:
     runs-on: ubuntu-latest
