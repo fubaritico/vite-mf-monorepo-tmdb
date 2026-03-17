@@ -1,4 +1,4 @@
-# E2E Tests
+# E2E Tests (WIP)
 
 End-to-end tests for the vite-mf-monorepo using **Cucumber.js** (Gherkin BDD scenarios) + **Playwright** (browser automation).
 
