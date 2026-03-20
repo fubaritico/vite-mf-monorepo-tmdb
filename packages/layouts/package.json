@@ -1,56 +1,32 @@
 {
   "name": "@vite-mf-monorepo/layouts",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Layout components for vite-mf-monorepo",
   "type": "module",
   "publishConfig": {
     "access": "public"
   },
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     },
     "./react-router": {
-      "import": {
-        "types": "./dist/react-router/index.d.ts",
-        "default": "./dist/react-router/index.js"
-      },
-      "require": {
-        "types": "./dist/react-router/index.d.cts",
-        "default": "./dist/react-router/index.cjs"
-      }
+      "types": "./dist/react-router/index.d.ts",
+      "default": "./dist/react-router/index.js"
     },
     "./next": {
-      "import": {
-        "types": "./dist/next/index.d.ts",
-        "default": "./dist/next/index.js"
-      },
-      "require": {
-        "types": "./dist/next/index.d.cts",
-        "default": "./dist/next/index.cjs"
-      }
+      "types": "./dist/next/index.d.ts",
+      "default": "./dist/next/index.js"
     },
     "./*": {
-      "import": {
-        "types": "./dist/*/index.d.ts",
-        "default": "./dist/*/index.js"
-      },
-      "require": {
-        "types": "./dist/*/index.d.cts",
-        "default": "./dist/*/index.cjs"
-      }
+      "types": "./dist/*/index.d.ts",
+      "default": "./dist/*/index.js"
     },
-    "./styles.css": "./dist/index.css"
+    "./styles.css": "./dist/styles.css"
   },
   "sideEffects": [
     "*.css"
@@ -61,7 +37,7 @@
   "scripts": {
     "build:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css",
     "build:js": "tsup",
-    "build": "pnpm build:css && pnpm build:js",
+    "build": "pnpm build:js && pnpm build:css",
     "dev": "tsup --watch",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -76,7 +52,13 @@
   },
   "peerDependencies": {
     "react": "catalog:",
-    "react-dom": "catalog:"
+    "react-dom": "catalog:",
+    "react-router-dom": "catalog:"
+  },
+  "peerDependenciesMeta": {
+    "react-router-dom": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@tailwindcss/postcss": "catalog:",
@@ -99,7 +81,6 @@
   "dependencies": {
     "@vite-mf-monorepo/shared": "workspace:*",
     "@vite-mf-monorepo/ui": "workspace:*",
-    "clsx": "catalog:",
-    "react-router-dom": "catalog:"
+    "clsx": "catalog:"
   }
 }

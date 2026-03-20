@@ -49,7 +49,7 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `@vite-mf-monorepo/shared@0.0.3` published: bundled CSS exports (`./theme.css`, `./theme-no-fonts.css`, `./fonts.css`) with all `@fontsource` and `@vite-mf-monorepo/tokens` imports inlined, font files (.woff/.woff2) copied to `dist/files/`, postcss-import build step, `copy-fonts.js` script
 
 ### Next
-- Commit shared CSS bundling changes, then continue making packages usable for React Router and Next.js: `packages/ui` is next
+- Continue making packages usable for React Router and Next.js: `packages/ui` is next
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported
