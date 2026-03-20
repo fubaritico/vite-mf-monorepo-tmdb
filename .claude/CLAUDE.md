@@ -45,14 +45,17 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - All 5 npm packages switched to public access (`publishConfig.access: "public"`)
 - Both npm orgs (`@fubar-it-co`, `@vite-mf-monorepo`) downgraded from Pro to Free ($0/mth)
 - npm 2FA configured with Touch ID (security key "stephane")
+- `@vite-mf-monorepo/layouts@0.2.0` published: added `/next` (Server Component RootLayout) and `/react-router` entry points, CJS output alongside ESM, `dist/` added to ESLint ignores
 
 ### Next
-- Résoudre le blocage merge auto : l'approval de la GitHub App n'est pas reconnue comme "reviewer with write access" par GitHub rulesets. Options : PAT machine user, ou garder le bot pour review/commentaires et approval manuelle
+- Continue making packages usable for React Router and Next.js: `packages/ui` is next
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported
 - `.env.production` overrides `VITE_*_URL` with Netlify URLs during `--mode production` builds; E2E script injects localhost overrides via `localRemoteEnv`
 - GitHub Apps ne comptent pas comme "reviewers with write access" pour les rulesets — leur approval ne débloque pas le merge même avec bypass list
+- `packages/layouts/publish.sh` git push fails — tries to push `release/layouts` branch that doesn't exist
+- `packages/layouts/.npmrc` contains npm token, not in `.gitignore` — must not be committed
 
 ## Reference Files (load on demand — NOT auto-loaded)
 | File | When to load |
