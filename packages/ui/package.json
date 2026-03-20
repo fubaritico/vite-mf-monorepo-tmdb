@@ -4,7 +4,7 @@
   "description": "Design system components for vite-mf-monorepo",
   "type": "module",
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
