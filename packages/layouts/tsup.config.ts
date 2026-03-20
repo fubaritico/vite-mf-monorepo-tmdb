@@ -7,7 +7,7 @@ export default defineConfig((options) => ({
   dts: true,
   clean: !options.watch,
   sourcemap: true,
-  external: ['react', 'react-dom', 'react-router-dom'],
+  external: ['react', 'react-dom', 'react-router-dom', 'next'],
   esbuildOptions(esbuildOpts) {
     esbuildOpts.jsx = 'automatic'
   },
