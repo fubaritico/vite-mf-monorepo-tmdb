@@ -3,7 +3,7 @@
   "version": "0.0.4",
   "type": "module",
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "exports": {
     ".": {
