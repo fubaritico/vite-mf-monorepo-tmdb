@@ -1,6 +1,6 @@
 {
   "name": "@vite-mf-monorepo/layouts",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Layout components for vite-mf-monorepo",
   "type": "module",
   "publishConfig": {
@@ -51,12 +51,16 @@
     "release:major": "pnpm build && ./publish.sh major"
   },
   "peerDependencies": {
+    "next": ">=14",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router-dom": "catalog:"
   },
   "peerDependenciesMeta": {
     "react-router-dom": {
+      "optional": true
+    },
+    "next": {
       "optional": true
     }
   },
@@ -72,6 +76,7 @@
     "autoprefixer": "catalog:",
     "conventional-changelog": "catalog:",
     "jsdom": "catalog:",
+    "next": "^16.2.0",
     "postcss": "catalog:",
     "tailwindcss": "catalog:",
     "tsup": "catalog:",

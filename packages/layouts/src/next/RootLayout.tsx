@@ -1,4 +1,6 @@
+import { LogoT } from '@vite-mf-monorepo/shared/assets'
 import clsx from 'clsx'
+import Link from 'next/link'
 
 import { Footer } from '../Footer'
 import { Header } from '../Header'
@@ -6,16 +8,12 @@ import { Header } from '../Header'
 import type { HTMLAttributes, ReactNode } from 'react'
 
 export interface NextRootLayoutProps extends HTMLAttributes<HTMLDivElement> {
-  /** Logo or brand element */
-  logo?: ReactNode
   /** Page content */
   children: ReactNode
   /** Hide default header */
   hideHeader?: boolean
   /** Hide default footer */
   hideFooter?: boolean
-  /** Footer content */
-  footerContent?: ReactNode
 }
 
 /**
@@ -24,14 +22,23 @@ export interface NextRootLayoutProps extends HTMLAttributes<HTMLDivElement> {
  * Uses children prop instead of Outlet.
  */
 export default function RootLayout({
-  logo,
   children,
   hideHeader = false,
   hideFooter = false,
-  footerContent,
   className,
   ...rest
 }: Readonly<NextRootLayoutProps>) {
+  const TMDBLogo = () => (
+    <Link href="/" className="layout:no-underline">
+      <div className="layout:flex layout:items-center layout:gap-2">
+        <LogoT />
+        <span className="layout:text-white layout:font-bold layout:text-xl">
+          TMDB
+        </span>
+      </div>
+    </Link>
+  )
+
   return (
     <div
       className={clsx(
@@ -40,11 +47,26 @@ export default function RootLayout({
       )}
       {...rest}
     >
-      {!hideHeader && <Header logo={logo} />}
+      {!hideHeader && <Header logo={<TMDBLogo />} />}
 
       <main className="layout:flex-1">{children}</main>
 
-      {!hideFooter && <Footer>{footerContent}</Footer>}
+      {!hideFooter && (
+        <Footer>
+          <p className="layout:text-sm layout:text-footer-foreground layout:text-center">
+            © 2026 TMDB Clone. All rights reserved.{' '}
+            <span className="layout:mx-1">|</span>{' '}
+            <a
+              href="https://github.com/fubaritico/vite-mf-monorepo-tmdb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="layout:text-sm layout:text-footer-foreground layout:no-underline layout:hover:underline layout:hover:text-white"
+            >
+              See project source on GitHub
+            </a>
+          </p>
+        </Footer>
+      )}
     </div>
   )
 }
