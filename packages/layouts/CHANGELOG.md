@@ -1,4 +1,4 @@
-## 0.3.0 (2026-03-20)
+## <small>0.3.1 (2026-03-20)</small>
 
 * fix: fix on svg export script ([bd8d80a](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/bd8d80a))
 * fix: generated missing remote types in host ([75cd7da](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/75cd7da))
@@ -23,6 +23,7 @@
 * fix(host): use no-cors mode in health check to bypass CORS restrictions ([9244398](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/9244398))
 * fix(host): use remoteEntry.js for health checks instead of /health endpoint ([44ccb06](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/44ccb06))
 * fix(images): prioritize hero images, defer carousel posters ([77222ca](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/77222ca))
+* fix(layouts): used proper syntax for next layout ([d83d6be](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/d83d6be))
 * fix(layouts): used proper syntax for next layout ([bfc33ae](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/bfc33ae))
 * fix(media): remove unnecessary String() conversion in useTVSeriesSimilar hook ([894cbf7](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/894cbf7))
 * fix(media): use correct types for RecommendedSection carousels ([afb5000](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/afb5000))
@@ -66,6 +67,7 @@
 * docs(http-client): update changelog for version bump ([2f2307c](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/2f2307c))
 * docs(http-client): update changelog for version bump ([dd5003d](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/dd5003d))
 * docs(http-client): update changelog for version bump ([1a7a80e](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/1a7a80e))
+* docs(layouts): update changelog for version bump ([fe3739f](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/fe3739f))
 * docs(layouts): update changelog for version bump ([7a45f0e](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/7a45f0e))
 * docs(layouts): update changelog for version bump ([803a4c4](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/803a4c4))
 * docs(layouts): update changelog for version bump ([4fedd50](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/4fedd50))
