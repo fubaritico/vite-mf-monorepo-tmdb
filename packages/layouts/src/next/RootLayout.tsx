@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { Footer } from '../Footer'
 import { Header } from '../Header'
 
-import type { FC, HTMLAttributes, ReactNode } from 'react'
+import type { HTMLAttributes, ReactNode } from 'react'
 
 export interface NextRootLayoutProps extends HTMLAttributes<HTMLDivElement> {
   /** Logo or brand element */
@@ -23,7 +23,7 @@ export interface NextRootLayoutProps extends HTMLAttributes<HTMLDivElement> {
  * Server Component — scroll-to-top is handled natively by Next.js.
  * Uses children prop instead of Outlet.
  */
-const RootLayout: FC<NextRootLayoutProps> = ({
+export default function RootLayout({
   logo,
   children,
   hideHeader = false,
@@ -31,7 +31,7 @@ const RootLayout: FC<NextRootLayoutProps> = ({
   footerContent,
   className,
   ...rest
-}) => {
+}: Readonly<NextRootLayoutProps>) {
   return (
     <div
       className={clsx(
@@ -48,5 +48,3 @@ const RootLayout: FC<NextRootLayoutProps> = ({
     </div>
   )
 }
-
-export default RootLayout
