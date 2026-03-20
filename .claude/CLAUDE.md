@@ -46,9 +46,10 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - Both npm orgs (`@fubar-it-co`, `@vite-mf-monorepo`) downgraded from Pro to Free ($0/mth)
 - npm 2FA configured with Touch ID (security key "stephane")
 - `@vite-mf-monorepo/layouts@0.2.0` published: added `/next` (Server Component RootLayout) and `/react-router` entry points, CJS output alongside ESM, `dist/` added to ESLint ignores
+- `@vite-mf-monorepo/shared@0.0.3` published: bundled CSS exports (`./theme.css`, `./theme-no-fonts.css`, `./fonts.css`) with all `@fontsource` and `@vite-mf-monorepo/tokens` imports inlined, font files (.woff/.woff2) copied to `dist/files/`, postcss-import build step, `copy-fonts.js` script
 
 ### Next
-- Continue making packages usable for React Router and Next.js: `packages/ui` is next
+- Commit shared CSS bundling changes, then continue making packages usable for React Router and Next.js: `packages/ui` is next
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported
