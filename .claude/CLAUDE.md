@@ -40,13 +40,16 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - E2E run modes: headless, headed, trace, codegen via orchestration scripts (packages/e2e/scripts/)
 - Pre-commit hook: smoke E2E added after lint/typecheck/test
 - README.md: E2E section with run modes, env vars, architecture
+- Claude PR reviewer: workflow `claude-review.yml` with GitHub App `fubaritico-claude-reviewer`, auto review + verdict APPROVE/REQUEST_CHANGES, auto PR description
+- `postinstall` script: `chmod +x scripts/*.sh` safety net for first-time cloners
 
 ### Next
-- Commit pending E2E changes (2 commits — see end of previous session for exact commands)
+- Résoudre le blocage merge auto : l'approval de la GitHub App n'est pas reconnue comme "reviewer with write access" par GitHub rulesets. Options : PAT machine user, ou garder le bot pour review/commentaires et approval manuelle
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported
 - `.env.production` overrides `VITE_*_URL` with Netlify URLs during `--mode production` builds; E2E script injects localhost overrides via `localRemoteEnv`
+- GitHub Apps ne comptent pas comme "reviewers with write access" pour les rulesets — leur approval ne débloque pas le merge même avec bypass list
 
 ## Reference Files (load on demand — NOT auto-loaded)
 | File | When to load |
