@@ -42,6 +42,9 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - README.md: E2E section with run modes, env vars, architecture
 - Claude PR reviewer: workflow `claude-review.yml` with GitHub App `fubaritico-claude-reviewer`, auto review + verdict APPROVE/REQUEST_CHANGES, auto PR description
 - `postinstall` script: `chmod +x scripts/*.sh` safety net for first-time cloners
+- All 5 npm packages switched to public access (`publishConfig.access: "public"`)
+- Both npm orgs (`@fubar-it-co`, `@vite-mf-monorepo`) downgraded from Pro to Free ($0/mth)
+- npm 2FA configured with Touch ID (security key "stephane")
 
 ### Next
 - Résoudre le blocage merge auto : l'approval de la GitHub App n'est pas reconnue comme "reviewer with write access" par GitHub rulesets. Options : PAT machine user, ou garder le bot pour review/commentaires et approval manuelle
