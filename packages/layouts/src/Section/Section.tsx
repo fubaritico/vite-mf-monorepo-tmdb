@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-import type { FC, HTMLAttributes } from 'react'
+import type { HTMLAttributes } from 'react'
 
 /** Section max-width variants */
 export type SectionMaxWidth = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full'
@@ -18,14 +18,14 @@ export interface SectionProps extends HTMLAttributes<HTMLElement> {
  * Section component for page sections.
  * Provides max-width, horizontal padding, and vertical spacing.
  */
-const Section: FC<SectionProps> = ({
+export default function Section({
   title,
   maxWidth = 'xl',
   spacing = 'md',
   className,
   children,
   ...rest
-}) => {
+}: Readonly<SectionProps>) {
   return (
     <section
       className={clsx(
@@ -54,5 +54,3 @@ const Section: FC<SectionProps> = ({
     </section>
   )
 }
-
-export default Section

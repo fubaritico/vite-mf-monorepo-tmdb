@@ -2,7 +2,7 @@ import clsx from 'clsx'
 
 import { Container } from '../Container'
 
-import type { FC, HTMLAttributes } from 'react'
+import type { HTMLAttributes } from 'react'
 
 export interface FooterProps extends HTMLAttributes<HTMLElement> {
   /** Footer content */
@@ -13,7 +13,11 @@ export interface FooterProps extends HTMLAttributes<HTMLElement> {
  * Footer component for application footer.
  * Uses flexbox sticky behavior to stay at bottom when content is short.
  */
-const Footer: FC<FooterProps> = ({ className, children, ...rest }) => {
+export default function Footer({
+  className,
+  children,
+  ...rest
+}: Readonly<FooterProps>) {
   return (
     <footer
       className={clsx(
@@ -27,5 +31,3 @@ const Footer: FC<FooterProps> = ({ className, children, ...rest }) => {
     </footer>
   )
 }
-
-export default Footer

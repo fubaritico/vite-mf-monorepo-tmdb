@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 import { Section } from '../Section'
 
-import type { FC, HTMLAttributes, ReactNode } from 'react'
+import type { HTMLAttributes, ReactNode } from 'react'
 
 /** Header display variant */
 export type HeaderVariant = 'extended' | 'compact'
@@ -27,7 +27,7 @@ export interface HeaderProps extends HTMLAttributes<HTMLElement> {
  * Header component with sticky positioning.
  * Supports extended and compact variants with optional auto-transition on scroll.
  */
-const Header: FC<HeaderProps> = ({
+export default function Header({
   variant = 'extended',
   autoCompact = false,
   scrollThreshold = 50,
@@ -35,7 +35,7 @@ const Header: FC<HeaderProps> = ({
   className,
   children,
   ...rest
-}) => {
+}: Readonly<HeaderProps>) {
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
@@ -80,5 +80,3 @@ const Header: FC<HeaderProps> = ({
     </header>
   )
 }
-
-export default Header
