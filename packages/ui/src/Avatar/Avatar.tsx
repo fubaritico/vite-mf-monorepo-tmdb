@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import { Icon } from '../Icon'
 
-import type { ComponentProps, FC } from 'react'
+import type { ComponentProps } from 'react'
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
 
@@ -33,7 +33,7 @@ const sizeMap: Record<
   '3xl': { container: 'ui:h-32 ui:w-32', icon: 64, text: 'ui:text-3xl' },
 }
 
-const Avatar: FC<AvatarProps> = ({
+function Avatar({
   className,
   src,
   alt,
@@ -41,7 +41,7 @@ const Avatar: FC<AvatarProps> = ({
   initials,
   testId,
   ...rest
-}) => {
+}: Readonly<AvatarProps>) {
   const [hasError, setHasError] = useState(false)
   const { container, icon, text } = sizeMap[size]
 

@@ -4,7 +4,7 @@ import { Avatar } from '../Avatar'
 import { Typography } from '../Typography'
 
 import type { AvatarSize } from '../Avatar'
-import type { FC, HTMLAttributes } from 'react'
+import type { HTMLAttributes } from 'react'
 
 export interface TalentProps extends HTMLAttributes<HTMLDivElement> {
   /** Full name of the talent (actor, director, writer, etc.) */
@@ -19,7 +19,7 @@ export interface TalentProps extends HTMLAttributes<HTMLDivElement> {
   size?: AvatarSize
 }
 
-const Talent: FC<TalentProps> = ({
+function Talent({
   name,
   role,
   imageSrc,
@@ -27,7 +27,7 @@ const Talent: FC<TalentProps> = ({
   size = 'lg',
   className,
   ...rest
-}) => {
+}: Readonly<TalentProps>) {
   return (
     <div
       className={clsx(

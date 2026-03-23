@@ -1,7 +1,5 @@
 import clsx from 'clsx'
 
-import type { FC } from 'react'
-
 export interface CarouselPaginationProps {
   /** Total number of items */
   total: number
@@ -18,12 +16,12 @@ export interface CarouselPaginationProps {
  * Active dot is displayed as a capsule (wider), inactive dots are circles.
  * Supports light mode for dark backgrounds (white dots).
  */
-const CarouselPagination: FC<CarouselPaginationProps> = ({
+function CarouselPagination({
   total,
   current,
   light = false,
   className,
-}) => {
+}: Readonly<CarouselPaginationProps>) {
   if (total === 0) return null
 
   return (

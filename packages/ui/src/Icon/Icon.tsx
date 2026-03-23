@@ -88,7 +88,7 @@ import {
   XMarkIcon as XMarkIcon24,
 } from '@heroicons/react/24/outline'
 
-import type { ComponentType, FC, SVGProps } from 'react'
+import type { ComponentType, SVGProps } from 'react'
 
 type HeroIcon = ComponentType<SVGProps<SVGSVGElement>>
 
@@ -225,7 +225,7 @@ export interface IconProps extends SVGProps<SVGSVGElement> {
   size?: IconSize
 }
 
-const Icon: FC<IconProps> = ({ name, size = 24, className, ...rest }) => {
+function Icon({ name, size = 24, className, ...rest }: Readonly<IconProps>) {
   let IconComponent: HeroIcon
 
   if (size <= 16) {

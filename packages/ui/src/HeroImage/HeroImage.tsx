@@ -3,8 +3,6 @@ import { useState } from 'react'
 
 import { Skeleton } from '../Skeleton'
 
-import type { FC } from 'react'
-
 export interface HeroImageProps {
   /** Backdrop path from TMDB API */
   backdropPath?: string | null
@@ -16,7 +14,7 @@ export interface HeroImageProps {
  * HeroImage component for displaying optimized backdrop images with responsive sources
  * and gradient overlay. Used in hero sections across the application.
  */
-const HeroImage: FC<HeroImageProps> = ({ backdropPath, title }) => {
+function HeroImage({ backdropPath, title }: Readonly<HeroImageProps>) {
   const [loading, setLoading] = useState(true)
 
   const backdropPathMobile = backdropPath

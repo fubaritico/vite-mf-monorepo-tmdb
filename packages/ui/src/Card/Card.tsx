@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-import type { FC, HTMLAttributes } from 'react'
+import type { HTMLAttributes } from 'react'
 
 export type CardVariant = 'default' | 'outline' | 'elevated' | 'ghost'
 
@@ -18,12 +18,12 @@ const variantStyles: Record<CardVariant, string> = {
   ghost: 'ui:rounded-md',
 }
 
-const Card: FC<CardProps> = ({
+function Card({
   className,
   variant = 'default',
   children,
   ...rest
-}) => {
+}: Readonly<CardProps>) {
   return (
     <div className={clsx(variantStyles[variant], className)} {...rest}>
       {children}

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-import type { FC, HTMLAttributes } from 'react'
+import type { HTMLAttributes } from 'react'
 
 export interface CarouselItemProps extends HTMLAttributes<HTMLDivElement> {
   /** Whether this is a hero item (full width with snap) */
@@ -13,13 +13,13 @@ export interface CarouselItemProps extends HTMLAttributes<HTMLDivElement> {
  * Wrapper for individual carousel items.
  * For hero and lightbox variants, items take full width and snap to center.
  */
-const CarouselItem: FC<CarouselItemProps> = ({
+function CarouselItem({
   children,
   isHero = false,
   isLightbox = false,
   className,
   ...rest
-}) => {
+}: Readonly<CarouselItemProps>) {
   return (
     <div
       className={clsx(

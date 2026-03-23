@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 
 import type { RatingSize } from './Rating'
-import type { FC } from 'react'
 
 const circleSizeMap: Record<
   RatingSize,
@@ -33,14 +32,14 @@ export interface CircleRatingProps {
   trackClassName?: string
 }
 
-const CircleRating: FC<CircleRatingProps> = ({
+function CircleRating({
   percent,
   size,
   showValue,
   value,
   max,
   trackClassName,
-}) => {
+}: Readonly<CircleRatingProps>) {
   const { size: svgSize, stroke, fontSize } = circleSizeMap[size]
   const radius = (svgSize - stroke) / 2
   const circumference = 2 * Math.PI * radius

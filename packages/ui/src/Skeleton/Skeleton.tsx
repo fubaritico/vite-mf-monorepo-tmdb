@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-import type { ComponentProps, FC } from 'react'
+import type { ComponentProps } from 'react'
 
 export interface SkeletonProps extends ComponentProps<'div'> {
   /** Shape variant */
@@ -20,7 +20,7 @@ export interface SkeletonProps extends ComponentProps<'div'> {
  *
  * Composable primitive for building loading states with shimmer effect.
  */
-const Skeleton: FC<SkeletonProps> = ({
+function Skeleton({
   variant = 'rectangle',
   width,
   height,
@@ -28,7 +28,7 @@ const Skeleton: FC<SkeletonProps> = ({
   rounded = true,
   className,
   ...rest
-}) => {
+}: Readonly<SkeletonProps>) {
   return (
     <div
       className={clsx(

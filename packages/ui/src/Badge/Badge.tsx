@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { Icon } from '../Icon'
 
 import type { IconName } from '../Icon'
-import type { FC, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 export type BadgeVariant = 'default' | 'secondary' | 'outline' | 'destructive'
 export type BadgeSize = 'sm' | 'md' | 'lg'
@@ -32,14 +32,14 @@ const sizeMap: Record<
   lg: { padding: 'ui:px-3 ui:py-1', text: 'ui:text-sm', iconSize: 16 },
 }
 
-const Badge: FC<BadgeProps> = ({
+function Badge({
   children,
   variant = 'default',
   size = 'md',
   icon,
   textClassName,
   className,
-}) => {
+}: Readonly<BadgeProps>) {
   const { padding, text, iconSize } = sizeMap[size]
 
   return (

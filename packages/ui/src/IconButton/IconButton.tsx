@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { Icon } from '../Icon'
 
 import type { IconName, IconSize } from '../Icon'
-import type { ButtonHTMLAttributes, FC } from 'react'
+import type { ButtonHTMLAttributes } from 'react'
 
 export interface IconButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -24,14 +24,14 @@ const sizeMap: Record<'sm' | 'md' | 'lg', { button: string; icon: IconSize }> =
     lg: { button: 'ui:h-12 ui:w-12', icon: 24 },
   }
 
-const IconButton: FC<IconButtonProps> = ({
+function IconButton({
   className,
   icon,
   variant = 'ghost',
   size = 'md',
   disabled,
   ...rest
-}) => {
+}: Readonly<IconButtonProps>) {
   const { button: buttonSize, icon: iconSize } = sizeMap[size]
 
   return (

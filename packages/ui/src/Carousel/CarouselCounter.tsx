@@ -1,7 +1,5 @@
 import clsx from 'clsx'
 
-import type { FC } from 'react'
-
 export interface CarouselCounterProps {
   /** Current index (0-based) — displayed as 1-based */
   current: number
@@ -15,11 +13,11 @@ export interface CarouselCounterProps {
  * Counter for Carousel lightbox variant.
  * Displays current position as "3 / 20" (1-indexed).
  */
-const CarouselCounter: FC<CarouselCounterProps> = ({
+function CarouselCounter({
   current,
   total,
   className,
-}) => {
+}: Readonly<CarouselCounterProps>) {
   return (
     <div
       className={clsx(

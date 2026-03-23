@@ -1,12 +1,10 @@
 import clsx from 'clsx'
 
-import type { FC } from 'react'
-
 export interface SpinnerProps {
   className?: string
 }
 
-const Spinner: FC<SpinnerProps> = ({ className }) => {
+function Spinner({ className }: Readonly<SpinnerProps>) {
   return (
     <div
       role="status"

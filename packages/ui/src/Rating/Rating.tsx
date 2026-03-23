@@ -3,8 +3,6 @@ import clsx from 'clsx'
 import CircleRating from './CircleRating'
 import StarsRating from './StarsRating'
 
-import type { FC } from 'react'
-
 export type RatingVariant = 'circle' | 'stars'
 export type RatingSize = 'sm' | 'md' | 'lg'
 
@@ -25,7 +23,7 @@ export interface RatingProps {
   className?: string
 }
 
-const Rating: FC<RatingProps> = ({
+function Rating({
   value,
   max = 10,
   variant = 'circle',
@@ -33,7 +31,7 @@ const Rating: FC<RatingProps> = ({
   showValue = true,
   trackClassName,
   className,
-}) => {
+}: Readonly<RatingProps>) {
   const clampedValue = Math.max(0, Math.min(value, max))
   const percent = (clampedValue / max) * 100
 

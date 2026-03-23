@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Icon } from '../Icon'
 
-import type { FC, ImgHTMLAttributes, ReactNode } from 'react'
+import type { ImgHTMLAttributes, ReactNode } from 'react'
 
 export type ImageState = 'loading' | 'loaded' | 'error'
 
@@ -38,7 +38,7 @@ export interface ImageProps
   loading?: ImageLoading
 }
 
-const Image: FC<ImageProps> = ({
+function Image({
   src,
   alt,
   blurDataUrl,
@@ -52,7 +52,7 @@ const Image: FC<ImageProps> = ({
   onError,
   loading = 'eager',
   ...rest
-}) => {
+}: Readonly<ImageProps>) {
   const imgRef = useRef<HTMLImageElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [state, setState] = useState<ImageState>('loading')
