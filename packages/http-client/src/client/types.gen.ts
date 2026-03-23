@@ -2406,7 +2406,12 @@ export type MovieDetailsResponses = {
     200: {
         adult?: boolean;
         backdrop_path?: string;
-        belongs_to_collection?: unknown;
+        belongs_to_collection?: {
+            id?: number;
+            name?: string;
+            poster_path?: string;
+            backdrop_path?: string;
+        };
         budget?: number;
         genres?: Array<{
             id?: number;
@@ -2415,6 +2420,7 @@ export type MovieDetailsResponses = {
         homepage?: string;
         id?: number;
         imdb_id?: string;
+        origin_country?: Array<string>;
         original_language?: string;
         original_title?: string;
         overview?: string;

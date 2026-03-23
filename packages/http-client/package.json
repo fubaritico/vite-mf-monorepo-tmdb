@@ -1,6 +1,6 @@
 {
   "name": "@fubar-it-co/tmdb-client",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "TMDB API client generated with heyAPI",
   "type": "module",
   "main": "./dist/index.js",
@@ -15,6 +15,12 @@
       "types": "./dist/client/index.d.ts"
     }
   },
+  "files": [
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md",
+    "dist"
+  ],
   "publishConfig": {
     "access": "public"
   },
