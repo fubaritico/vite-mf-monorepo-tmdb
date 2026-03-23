@@ -18,20 +18,86 @@
 ## Project Structure
 ```
 apps/
-├── host/    port 3000 — consumes remotes
-├── home/    port 3001 — exposes ./Home, ./routes
-├── media/   port 3002 — exposes ./Media, ./MediaErrorBoundary, ./routes
-└── photos/  port 3003 — exposes ./Photos, ./PhotosErrorBoundary, ./router
-             nested child route under /movie/:id and /tv/:id
-             native <dialog> lightbox + Carousel
+├── host/           port 3000 — consumes remotes
+│   └── src/
+│       ├── main.tsx, router.tsx, queryClient.ts, instrument.ts
+│       └── index.css
+├── home/           port 3001 — exposes ./Home, ./routes
+│   └── src/
+│       ├── main.tsx, routes.tsx, instrument.ts
+│       ├── index.css, remote-input.css, remote.css (generated)
+│       ├── components/
+│       │   ├── Home.tsx
+│       │   ├── HeroSection/, TrendingSection/
+│       │   ├── PopularSection/, FreeToWatchSection/
+│       │   └── [Section]/  → Section.tsx, Section.test.tsx, index.ts
+│       └── hooks/  → useTrending.ts, usePopularMovies.ts, ...
+├── media/          port 3002 — exposes ./Media, ./MediaErrorBoundary, ./routes
+│   └── src/
+│       ├── main.tsx, routes.tsx, instrument.ts
+│       ├── index.css, remote-input.css, remote.css (generated)
+│       ├── components/
+│       │   ├── Media.tsx, MediaErrorBoundary.tsx
+│       │   ├── MediaHero/, Synopsis/, Crew/, Cast/
+│       │   ├── Photos/, TrailersSection/
+│       │   ├── SimilarSection/, RecommendedSection/
+│       │   └── [Section]/  → Section.tsx, Section.test.tsx, index.ts
+│       ├── hooks/  → useMediaDetails.ts, useMovieCredits.ts, ...
+│       └── utils/  → typeGuards.ts, formatters.ts, ...
+└── photos/         port 3003 — exposes ./Photos, ./PhotosErrorBoundary, ./router
+                    nested child route under /movie/:id and /tv/:id
+    └── src/
+        ├── main.tsx, router.tsx, instrument.ts
+        ├── index.css, remote-input.css, remote.css (generated)
+        ├── components/Photos/  → Photos.tsx, PhotosModal.tsx, PhotosErrorBoundary.tsx
+        └── hooks/  → useMovieImages.ts
 
 packages/
-├── ui/         design system (ui: prefix) — 18+ components
-├── layouts/    Container, Section, Header, Footer, RootLayout (layout: prefix)
-├── shared/     utils, mocks, test-utils, tailwind theme, vite plugins
-├── http-client/ TMDB heyAPI client → @fubar-it-co/tmdb-client
-├── tokens/     design tokens (Style Dictionary, OKLCH, DTCG format)
-└── storybook/  stories for all components (port 6006)
+├── ui/             design system (ui: prefix) — 20+ components
+│   ├── tsup.config.ts, postcss.config.js, publish.sh
+│   └── src/
+│       ├── index.ts (barrel), styles.css
+│       └── [Component]/  → Component.tsx, Component.test.tsx, index.ts
+│           (Avatar, Badge, Button, Card, Carousel, HeroImage, Icon,
+│            IconButton, Image, Modal, MovieCard, Rating, Skeleton,
+│            Spinner, Tabs, Talent, TrailerCard, Typography)
+├── layouts/        Container, Section, Header, Footer, RootLayout (layout: prefix)
+│   ├── tsup.config.ts, postcss.config.js, publish.sh
+│   └── src/
+│       ├── index.ts (barrel), styles.css
+│       ├── Container/, Section/, Header/, Footer/, RootLayout/
+│       ├── next/         → Server Component RootLayout
+│       └── react-router/ → React Router entry point
+├── shared/         utils, mocks, test-utils, tailwind theme, vite plugins
+│   ├── postcss.config.js, publish.sh
+│   └── src/
+│       ├── tailwind/   → theme.css, theme-no-fonts.css
+│       ├── fonts/      → fonts.css (@fontsource imports)
+│       ├── utils/      → tmdbImage.ts, healthCheck.ts, retry.ts, ...
+│       ├── vite/       → tailwindRemoteCss.ts, notifyHostOnHmr.ts, ...
+│       ├── test-utils/ → renderWithReactQuery.tsx, renderWithRouter.tsx, ...
+│       └── mocks/
+│           ├── data/     → 16 mock data files (real TMDB payloads)
+│           └── handlers/ → 16 MSW handler files
+├── http-client/    TMDB heyAPI client → @fubar-it-co/tmdb-client (auto-generated)
+│   ├── openapi-ts.config.ts, publish.sh
+│   └── src/
+│       ├── index.ts, tmdb-config.ts
+│       └── client/  → *.gen.ts (DO NOT EDIT — pnpm generate)
+├── tokens/         design tokens (Style Dictionary, OKLCH, DTCG format)
+│   ├── sd.config.js, publish.sh
+│   ├── tokens/  → color/, font.json, radius.json, shadow.json, spacing.json
+│   └── dist/    → css/, js/, ts/, tailwind/ (generated)
+├── storybook/      stories for all components (port 6006)
+│   ├── .storybook/ → main.ts, preview.ts, decorators/
+│   └── src/stories/ → 39+ story files
+└── e2e/            Cucumber.js + Playwright
+    ├── cucumber.config.cjs
+    └── src/
+        ├── features/         → smoke.feature, browse-media.feature
+        ├── step-definitions/ → smoke.steps.ts, browse-media.steps.ts
+        ├── page-objects/     → HomePage.ts, MediaPage.ts, PhotosPage.ts
+        └── support/          → world.ts, hooks.ts
 ```
 
 ## CSS Architecture
