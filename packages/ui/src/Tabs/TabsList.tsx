@@ -4,11 +4,11 @@ import { useRef } from 'react'
 import { useTabsContext } from './TabsContext'
 import { TabsListContext } from './TabsListContext'
 
-import type { FC, HTMLAttributes } from 'react'
+import type { HTMLAttributes } from 'react'
 
 export type TabsListProps = HTMLAttributes<HTMLDivElement>
 
-const TabsList: FC<TabsListProps> = ({ className, children, ...rest }) => {
+function TabsList({ className, children, ...rest }: Readonly<TabsListProps>) {
   const { variant } = useTabsContext()
   const triggersRef = useRef<string[]>([])
   const disabledRef = useRef<Set<string>>(new Set())

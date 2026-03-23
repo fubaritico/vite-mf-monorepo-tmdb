@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useTabsContext } from './TabsContext'
 import { useTabsListContext } from './TabsListContext'
 
-import type { ButtonHTMLAttributes, FC, KeyboardEvent, ReactNode } from 'react'
+import type { ButtonHTMLAttributes, KeyboardEvent, ReactNode } from 'react'
 
 export interface TabsTriggerProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -14,14 +14,14 @@ export interface TabsTriggerProps
   icon?: ReactNode
 }
 
-const TabsTrigger: FC<TabsTriggerProps> = ({
+function TabsTrigger({
   value,
   icon,
   disabled,
   className,
   children,
   ...rest
-}) => {
+}: Readonly<TabsTriggerProps>) {
   const {
     value: activeValue,
     onValueChange,

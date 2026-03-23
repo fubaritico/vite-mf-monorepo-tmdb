@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { Icon } from '../Icon'
 
 import type { ButtonProps } from './Button.types'
-import type { FC } from 'react'
 
 const iconSizeMap = {
   sm: 16,
@@ -12,7 +11,7 @@ const iconSizeMap = {
   lg: 24,
 } as const
 
-const Button: FC<ButtonProps> = (props) => {
+function Button(props: Readonly<ButtonProps>) {
   const {
     variant = 'primary',
     size = 'md',

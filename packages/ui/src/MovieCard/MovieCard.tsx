@@ -7,9 +7,8 @@ import { Rating } from '../Rating'
 import { Typography } from '../Typography'
 
 import type { MovieCardProps } from './MovieCard.types'
-import type { FC } from 'react'
 
-const MovieCard: FC<MovieCardProps> = ({
+function MovieCard({
   id,
   title,
   posterUrl,
@@ -19,7 +18,7 @@ const MovieCard: FC<MovieCardProps> = ({
   imageLoading = 'lazy',
   as = 'card',
   ...rest
-}) => {
+}: Readonly<MovieCardProps>) {
   // Extract conditional props based on 'as' variant
   const to = 'to' in rest ? rest.to : undefined
   const onClick = 'onClick' in rest ? rest.onClick : undefined

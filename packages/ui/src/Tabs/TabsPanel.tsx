@@ -2,7 +2,7 @@ import clsx from 'clsx'
 
 import { useTabsContext } from './TabsContext'
 
-import type { FC, HTMLAttributes, ReactNode } from 'react'
+import type { HTMLAttributes, ReactNode } from 'react'
 
 export interface TabsPanelProps extends HTMLAttributes<HTMLDivElement> {
   /** Value that identifies this panel (must match a Tabs.Trigger value) */
@@ -16,7 +16,7 @@ export interface TabsPanelProps extends HTMLAttributes<HTMLDivElement> {
  * Automatically hidden/shown based on active tab value.
  * Provides proper ARIA attributes for accessibility.
  */
-const TabsPanel: FC<TabsPanelProps> = ({ value, children, ...rest }) => {
+function TabsPanel({ value, children, ...rest }: Readonly<TabsPanelProps>) {
   const { value: activeValue, prefix } = useTabsContext()
   const isActive = value === activeValue
 

@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { createElement } from 'react'
 
-import type { ElementType, FC, HTMLAttributes, ReactNode } from 'react'
+import type { ElementType, HTMLAttributes, ReactNode } from 'react'
 
 export type TypographyVariant =
   | 'h1'
@@ -71,13 +71,13 @@ const variantToTag: Record<TypographyVariant, ElementType> = {
   blockquote: 'blockquote',
 }
 
-const Typography: FC<TypographyProps> = ({
+function Typography({
   variant,
   as,
   className,
   children,
   ...rest
-}) => {
+}: Readonly<TypographyProps>) {
   const Component = as ?? variantToTag[variant]
 
   return createElement(

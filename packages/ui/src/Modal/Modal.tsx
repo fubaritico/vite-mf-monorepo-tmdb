@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useEffect, useRef } from 'react'
 
-import type { FC, MouseEvent, ReactNode } from 'react'
+import type { MouseEvent, ReactNode } from 'react'
 
 export interface ModalProps {
   /** Whether the modal is open */
@@ -18,14 +18,14 @@ export interface ModalProps {
   onOverlayClick?: () => void
 }
 
-const Modal: FC<ModalProps> = ({
+function Modal({
   isOpen,
   onClose,
   children,
   'aria-label': ariaLabel,
   className,
   onOverlayClick,
-}) => {
+}: Readonly<ModalProps>) {
   const ref = useRef<HTMLDialogElement>(null)
 
   /**

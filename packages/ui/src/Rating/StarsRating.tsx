@@ -4,7 +4,6 @@ import { Icon } from '../Icon'
 
 import type { IconSize } from '../Icon'
 import type { RatingSize } from './Rating'
-import type { FC } from 'react'
 
 const starsSizeMap: Record<RatingSize, IconSize> = {
   sm: 16,
@@ -25,13 +24,13 @@ export interface StarsRatingProps {
   max: number
 }
 
-const StarsRating: FC<StarsRatingProps> = ({
+function StarsRating({
   percent,
   size,
   showValue,
   value,
   max,
-}) => {
+}: Readonly<StarsRatingProps>) {
   const iconSize = starsSizeMap[size]
 
   return (

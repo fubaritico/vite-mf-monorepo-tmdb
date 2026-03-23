@@ -4,8 +4,6 @@ import { useState } from 'react'
 import { Button } from '../Button'
 import { Modal } from '../Modal'
 
-import type { FC } from 'react'
-
 export interface TrailerCardProps {
   /** YouTube video ID */
   videoKey: string
@@ -17,12 +15,12 @@ export interface TrailerCardProps {
   className?: string
 }
 
-const TrailerCard: FC<TrailerCardProps> = ({
+function TrailerCard({
   videoKey,
   title,
   type = 'Trailer',
   className,
-}) => {
+}: Readonly<TrailerCardProps>) {
   const [isPlaying, setIsPlaying] = useState(false)
 
   const thumbnailUrl = `https://img.youtube.com/vi/${videoKey}/hqdefault.jpg`

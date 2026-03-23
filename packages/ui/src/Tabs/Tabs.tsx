@@ -6,7 +6,7 @@ import TabsList from './TabsList'
 import TabsPanel from './TabsPanel'
 import TabsTrigger from './TabsTrigger'
 
-import type { FC, HTMLAttributes } from 'react'
+import type { HTMLAttributes } from 'react'
 
 /** Tabs visual variant */
 export type TabsVariant = 'underline' | 'pills'
@@ -30,11 +30,7 @@ export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
  * Supports underline and pills variants.
  * Uses Compound Component pattern.
  */
-const Tabs: FC<TabsProps> & {
-  List: typeof TabsList
-  Trigger: typeof TabsTrigger
-  Panel: typeof TabsPanel
-} = ({
+function Tabs({
   defaultValue = '',
   value,
   onValueChange,
@@ -43,7 +39,7 @@ const Tabs: FC<TabsProps> & {
   className,
   children,
   ...rest
-}) => {
+}: Readonly<TabsProps>) {
   const [internalValue, setInternalValue] = useState(defaultValue)
 
   const activeValue = value ?? internalValue

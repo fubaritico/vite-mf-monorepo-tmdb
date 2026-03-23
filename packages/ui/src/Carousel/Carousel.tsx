@@ -12,7 +12,7 @@ import CarouselError from './CarouselError'
 import CarouselNavigation from './CarouselNavigation'
 import CarouselPagination from './CarouselPagination'
 
-import type { FC, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 /** Carousel visual variant */
 export type CarouselVariant = 'standard' | 'hero' | 'lightbox'
@@ -76,7 +76,7 @@ export interface CarouselProps {
  * - hero: single panoramic item with snap
  * - lightbox: single item per view, ghost arrows, counter (for PhotoViewer)
  */
-const Carousel: FC<CarouselProps> = ({
+function Carousel({
   children,
   variant = 'standard',
   showPagination = true,
@@ -92,7 +92,7 @@ const Carousel: FC<CarouselProps> = ({
   onNext,
   disableAnimation = false,
   disableScroll = false,
-}) => {
+}: Readonly<CarouselProps>) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [totalPositions, setTotalPositions] = useState(1)
 

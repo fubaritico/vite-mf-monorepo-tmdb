@@ -2,8 +2,6 @@ import clsx from 'clsx'
 
 import { IconButton } from '../IconButton'
 
-import type { FC } from 'react'
-
 /** Position mode for navigation buttons */
 export type CarouselNavigationPosition = 'inline' | 'sides' | 'sides-inset'
 
@@ -32,7 +30,7 @@ export interface CarouselNavigationProps {
  * - sides: absolute, centered on the carousel edges (overhangs container — standard carousel)
  * - sides-inset: absolute, inside the container with padding (lightbox, fullscreen contexts)
  */
-const CarouselNavigation: FC<CarouselNavigationProps> = ({
+function CarouselNavigation({
   onPrev,
   onNext,
   canPrev,
@@ -41,7 +39,7 @@ const CarouselNavigation: FC<CarouselNavigationProps> = ({
   position = 'inline',
   iconVariant = 'secondary',
   className,
-}) => {
+}: Readonly<CarouselNavigationProps>) {
   if (position === 'sides') {
     return (
       <>

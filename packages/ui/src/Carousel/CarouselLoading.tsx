@@ -1,7 +1,5 @@
 import Skeleton from '../Skeleton/Skeleton'
 
-import type { FC } from 'react'
-
 export interface CarouselLoadingProps {
   /** Number of skeleton cards to display */
   count?: number
@@ -23,14 +21,14 @@ export interface CarouselLoadingProps {
  * Displays a horizontal scrollable list of skeleton placeholders
  * matching the structure of MovieCard components.
  */
-const CarouselLoading: FC<CarouselLoadingProps> = ({
+function CarouselLoading({
   count = 6,
   cardWidth = 150,
   cardHeight = 225,
   showTitle = true,
   showSubtitle = true,
   rounded = true,
-}) => {
+}: Readonly<CarouselLoadingProps>) {
   return (
     <div className="ui:overflow-x-auto ui:flex ui:gap-4">
       {Array.from({ length: count }).map((_, i) => (
