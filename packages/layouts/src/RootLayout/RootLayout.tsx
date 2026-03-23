@@ -6,7 +6,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 import { Footer } from '../Footer'
 import { Header } from '../Header'
 
-import type { FC, HTMLAttributes } from 'react'
+import type { HTMLAttributes } from 'react'
 
 export interface RootLayoutProps extends HTMLAttributes<HTMLDivElement> {
   /** Hide default header */
@@ -20,12 +20,12 @@ export interface RootLayoutProps extends HTMLAttributes<HTMLDivElement> {
  * Provides the main application layout with sticky header and footer.
  * Uses flexbox to ensure footer stays at bottom when content is short.
  */
-const RootLayout: FC<RootLayoutProps> = ({
+export default function RootLayout({
   hideHeader = false,
   hideFooter = false,
   className,
   ...rest
-}) => {
+}: Readonly<RootLayoutProps>) {
   const { pathname } = useLocation()
   const prevPathnameRef = useRef(pathname)
 
@@ -88,5 +88,3 @@ const RootLayout: FC<RootLayoutProps> = ({
     </div>
   )
 }
-
-export default RootLayout

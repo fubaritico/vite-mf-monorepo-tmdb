@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-import type { FC, HTMLAttributes } from 'react'
+import type { HTMLAttributes } from 'react'
 
 export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
   /** Background variant */
@@ -11,12 +11,12 @@ export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
  * Container component for full-width sections with background variants.
  * Wraps content with optional background color.
  */
-const Container: FC<ContainerProps> = ({
+export default function Container({
   variant = 'default',
   className,
   children,
   ...rest
-}) => {
+}: Readonly<ContainerProps>) {
   return (
     <div
       className={clsx(
@@ -33,5 +33,3 @@ const Container: FC<ContainerProps> = ({
     </div>
   )
 }
-
-export default Container
