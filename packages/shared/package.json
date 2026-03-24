@@ -1,6 +1,6 @@
 {
   "name": "@vite-mf-monorepo/shared",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "publishConfig": {
     "access": "public"
@@ -60,15 +60,15 @@
   "dependencies": {
     "@fubar-it-co/tmdb-client": "workspace:*",
     "@vite-mf-monorepo/tokens": "workspace:*",
-    "react": "catalog:",
-    "react-dom": "catalog:",
-    "react-router-dom": "catalog:",
     "svg-to-jsx": "^1.0.4",
     "svgr": "^2.0.0"
   },
   "peerDependencies": {
     "@tanstack/react-query": "catalog:",
-    "@testing-library/react": "catalog:"
+    "@testing-library/react": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router-dom": "catalog:"
   },
   "devDependencies": {
     "@fontsource/inter": "catalog:",
