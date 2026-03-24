@@ -19,6 +19,7 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - **Never `console.log`** — use `console.warn` / `console.error`
 - **Never explicit `any`** — strict TypeScript
 - **Always run** lint + typecheck + test + Storybook before commit
+- **Always ask** user to run pnpm dev, pnpm prod:server and pnpm storybook after having modified a component
 - **Always create a Storybook story** after every component (`/story`)
 - **Model**: Haiku for questions/research, Sonnet for code/commits — suggest Haiku when appropriate
 
@@ -49,10 +50,10 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `@vite-mf-monorepo/shared@0.0.3` published: bundled CSS exports (`./theme.css`, `./theme-no-fonts.css`, `./fonts.css`) with all `@fontsource` and `@vite-mf-monorepo/tokens` imports inlined, font files (.woff/.woff2) copied to `dist/files/`, postcss-import build step, `copy-fonts.js` script
 - `@vite-mf-monorepo/layouts` switched to unbundled ESM build: `bundle: false` in tsup, CJS dropped, `'use client'` directive on Header preserved in output, `react-router-dom` moved to optional peerDependency, CSS side-effect import removed from barrel, build order fixed (js then css)
 - `@vite-mf-monorepo/ui` switched to unbundled ESM build (same approach as layouts)
-- `@vite-mf-monorepo/shared@0.0.4`: moved react, react-dom, react-router-dom from dependencies to peerDependencies (fixes dual React in consumers)
+- `@vite-mf-monorepo/shared@0.0.4`: moved react, react-dom, react-router-dom from dependencies to peerDependencies (fixes dual React in consumers) — published to npm
 
 ### Next
-- Republish `@vite-mf-monorepo/shared@0.0.4` to npm
+- (none)
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported

@@ -1,14 +1,26 @@
-import clsx from 'clsx'
-import { Link } from 'react-router-dom'
-
 import { Card } from '../Card'
 import { Image } from '../Image'
 import { Rating } from '../Rating'
 import { Typography } from '../Typography'
 
-import type { MovieCardProps } from './MovieCard.types'
+import { getMovieCardClasses } from './MovieCard.utils'
 
-function MovieCard({
+import type { ImageLoading } from '../Image'
+import type { ReactNode } from 'react'
+
+interface MovieCardContentProps {
+  id: number
+  title: string
+  posterUrl: string
+  voteAverage: number
+  year?: number | null
+  className?: string
+  imageLoading?: ImageLoading
+  isInteractive: boolean
+  onClick?: (() => void) | undefined
+}
+
+export default function MovieCardContent({
   id,
   title,
   posterUrl,
@@ -16,32 +28,16 @@ function MovieCard({
   year,
   className,
   imageLoading = 'lazy',
-  as = 'card',
-  ...rest
-}: Readonly<MovieCardProps>) {
-  // Extract conditional props based on 'as' variant
-  const to = 'to' in rest ? rest.to : undefined
-  const onClick = 'onClick' in rest ? rest.onClick : undefined
-
-  // Determine if card should be interactive
-  const isInteractive = as === 'link' || as === 'button'
-
-  const cardContent = (
+  isInteractive,
+  onClick,
+}: Readonly<MovieCardContentProps>): ReactNode {
+  return (
     <Card
       variant="ghost"
-      className={clsx(
-        'ui:group ui:relative ui:flex ui:flex-col ui:overflow-hidden',
-        isInteractive && [
-          'ui:cursor-pointer',
-          'ui:transition-transform ui:duration-200',
-          'hover:ui:scale-[1.02]',
-        ],
-        className
-      )}
-      onClick={as === 'button' ? onClick : undefined}
+      className={getMovieCardClasses(isInteractive, className)}
+      onClick={onClick}
       data-testid={`movie-card-${String(id)}`}
     >
-      {/* Poster */}
       <div className="ui:relative ui:aspect-[2/3] ui:w-full ui:overflow-hidden ui:rounded-md ui:bg-gray-200">
         <Image
           src={posterUrl}
@@ -50,7 +46,6 @@ function MovieCard({
           aspectRatio={undefined}
           className="ui:h-full ui:w-full ui:object-cover"
         />
-        {/* Rating badge */}
         <div className="ui:absolute ui:bottom-2 ui:right-2 ui:flex ui:items-center ui:justify-center ui:rounded-full ui:bg-white/80 ui:p-1">
           <Rating
             value={voteAverage}
@@ -62,7 +57,6 @@ function MovieCard({
         </div>
       </div>
 
-      {/* Content */}
       <div className="ui:mt-2 ui:flex ui:flex-col ui:gap-0.5 ui:px-1">
         <Typography
           variant="label"
@@ -83,16 +77,4 @@ function MovieCard({
       </div>
     </Card>
   )
-
-  if (as === 'link' && to) {
-    return (
-      <Link to={to} className="ui:block ui:no-underline ui:text-inherit">
-        {cardContent}
-      </Link>
-    )
-  }
-
-  return cardContent
 }
-
-export default MovieCard

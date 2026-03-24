@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { renderWithRouter } from '@vite-mf-monorepo/shared/test-utils'
 import { describe, expect, it } from 'vitest'
 
-import Button from './Button'
+import { Button } from '../react-router/Button'
 
 describe('Button (as="button")', () => {
   it('renders children correctly', () => {

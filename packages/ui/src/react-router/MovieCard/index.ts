@@ -1,8 +1,8 @@
-export { MovieCard } from '../react-router/MovieCard'
+export { default as MovieCard } from './MovieCard'
 export type {
   MovieCardProps,
   MovieCardBaseProps,
   MovieCardAsCard,
   MovieCardAsLink,
   MovieCardAsButton,
-} from '../react-router/MovieCard'
+} from './MovieCard.types'

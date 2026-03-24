@@ -1,27 +1,38 @@
 import clsx from 'clsx'
-import { Link } from 'react-router-dom'
 
-import { Icon } from '../Icon'
+import type { IconName } from '../Icon'
+import type { ReactNode } from 'react'
 
-import type { ButtonProps } from './Button.types'
+export type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'destructive'
+  | 'outline'
+  | 'ghost'
+export type ButtonSize = 'sm' | 'md' | 'lg'
 
-const iconSizeMap = {
+export const iconSizeMap = {
   sm: 16,
   md: 20,
   lg: 24,
 } as const
 
-function Button(props: Readonly<ButtonProps>) {
-  const {
-    variant = 'primary',
-    size = 'md',
-    icon,
-    iconPosition = 'left',
-    className,
-    children,
-  } = props
+export interface ButtonVisualInput {
+  variant?: ButtonVariant
+  size?: ButtonSize
+  icon?: IconName
+  iconPosition?: 'left' | 'right'
+  className?: string
+  children?: ReactNode
+}
 
-  const classes = clsx(
+export function getButtonClasses({
+  variant = 'primary',
+  size = 'md',
+  iconPosition = 'left',
+  className,
+}: ButtonVisualInput) {
+  return clsx(
     'ui:inline-flex ui:items-center ui:justify-center ui:cursor-pointer ui:gap-2 ui:font-roboto ui:font-medium ui:transition-colors',
     'ui:rounded ui:border ui:border-transparent',
     'ui:focus:outline-none ui:focus:ring-2 ui:focus:ring-ring ui:focus:ring-offset-2',
@@ -47,55 +58,8 @@ function Button(props: Readonly<ButtonProps>) {
     },
     className
   )
-
-  const content = (
-    <>
-      {icon && <Icon name={icon} size={iconSizeMap[size]} />}
-      {children}
-    </>
-  )
-
-  if (props.as === 'link') {
-    const {
-      as: _,
-      variant: _v,
-      size: _s,
-      icon: _i,
-      iconPosition: _ip,
-      className: _c,
-      children: _ch,
-      ...linkProps
-    } = props
-
-    return (
-      <Link className={classes} {...linkProps}>
-        {content}
-      </Link>
-    )
-  }
-
-  const {
-    as: _,
-    variant: _v,
-    size: _s,
-    icon: _i,
-    iconPosition: _ip,
-    className: _c,
-    children: _ch,
-    ...buttonProps
-  } = props
-
-  return (
-    <button
-      className={clsx(
-        classes,
-        'ui:disabled:pointer-events-none ui:disabled:opacity-50'
-      )}
-      {...buttonProps}
-    >
-      {content}
-    </button>
-  )
 }
 
-export default Button
+export function getButtonDisabledClasses(classes: string) {
+  return clsx(classes, 'ui:disabled:pointer-events-none ui:disabled:opacity-50')
+}
