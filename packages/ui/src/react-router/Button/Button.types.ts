@@ -1,4 +1,4 @@
-import type { IconName } from '../Icon'
+import type { IconName } from '../../Icon'
 import type { ButtonHTMLAttributes } from 'react'
 import type { LinkProps } from 'react-router-dom'
 

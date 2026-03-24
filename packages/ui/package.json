@@ -16,6 +16,18 @@
         "default": "./dist/index.js"
       }
     },
+    "./react-router": {
+      "import": {
+        "types": "./dist/react-router/index.d.ts",
+        "default": "./dist/react-router/index.js"
+      }
+    },
+    "./next": {
+      "import": {
+        "types": "./dist/next/index.d.ts",
+        "default": "./dist/next/index.js"
+      }
+    },
     "./*": {
       "import": {
         "types": "./dist/*/index.d.ts",
@@ -47,9 +59,18 @@
     "release:major": "pnpm build && ./publish.sh major"
   },
   "peerDependencies": {
+    "next": ">=14",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router-dom": "catalog:"
+  },
+  "peerDependenciesMeta": {
+    "react-router-dom": {
+      "optional": true
+    },
+    "next": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@tailwindcss/postcss": "catalog:",
@@ -63,6 +84,7 @@
     "autoprefixer": "catalog:",
     "conventional-changelog": "catalog:",
     "jsdom": "catalog:",
+    "next": "^16.2.0",
     "postcss": "catalog:",
     "react-router-dom": "catalog:",
     "tailwindcss": "catalog:",
