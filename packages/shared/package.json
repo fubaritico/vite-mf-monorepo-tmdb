@@ -1,6 +1,6 @@
 {
   "name": "@vite-mf-monorepo/shared",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "publishConfig": {
     "access": "public"
@@ -60,6 +60,7 @@
   "dependencies": {
     "@fubar-it-co/tmdb-client": "workspace:*",
     "@vite-mf-monorepo/tokens": "workspace:*",
+    "msw": "catalog:",
     "svg-to-jsx": "^1.0.4",
     "svgr": "^2.0.0"
   },
@@ -84,7 +85,6 @@
     "postcss-cli": "^11.0.1",
     "postcss-import": "^16.1.0",
     "glob": "13.0.6",
-    "msw": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"
   }

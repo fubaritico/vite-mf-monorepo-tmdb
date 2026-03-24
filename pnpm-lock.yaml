@@ -821,6 +821,9 @@ importers:
       '@vite-mf-monorepo/tokens':
         specifier: workspace:*
         version: link:../tokens
+      msw:
+        specifier: 'catalog:'
+        version: 2.8.3(@types/node@22.14.0)(typescript@5.7.2)
       react:
         specifier: 'catalog:'
         version: 19.2.4
@@ -867,9 +870,6 @@ importers:
       glob:
         specifier: 13.0.6
         version: 13.0.6
-      msw:
-        specifier: 'catalog:'
-        version: 2.8.3(@types/node@22.14.0)(typescript@5.7.2)
       postcss:
         specifier: 'catalog:'
         version: 8.5.3
