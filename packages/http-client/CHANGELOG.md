@@ -1,4 +1,4 @@
-## <small>0.0.10 (2026-03-25)</small>
+## <small>0.0.11 (2026-03-25)</small>
 
 * chore: add postinstall script to ensure shell scripts are executable ([8808374](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/8808374))
 * chore: added exception to .gitignore ([97736d5](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/97736d5))
@@ -11,6 +11,7 @@
 * chore: update .windsurfrules with current project state ([e879115](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/e879115))
 * chore: updated react from 19.0.0 to 19.1.0 ([5ab9f01](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/5ab9f01))
 * chore: upgraded react react-dom and types ([3b5a7f4](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/3b5a7f4))
+* chore: version bump for @fubar-it-co/tmdb-client to 0.0.10 ([e06f3e5](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/e06f3e5))
 * chore: version bump for @fubar-it-co/tmdb-client to 0.0.9 ([f3010cd](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/f3010cd))
 * chore: version bump for ui to 0.2.0 ([20e4667](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/20e4667))
 * chore: version bump for ui to 0.4.0 ([d4191a8](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/d4191a8))
