@@ -11,14 +11,14 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - **Be concise** — no recap, no enumerations, no unsolicited explanations. Act, then report briefly if needed.
 - **Discuss approach FIRST** — never code without confirming approach
 - **Review → Test → Commit** per change — no accumulation
-- **Never execute commands** — propose only. Exception: user says "execute", "run", etc.
+- **Never execute commands** — propose only. Exceptions: (1) user says "execute", "run", etc. (2) `pnpm type-check && pnpm lint && pnpm test` from root — MUST run after every code change, never skip
 - **Risky actions** (git push, reset --hard, rm -rf) require explicit permission EVERY TIME
 - **Never hallucinate** — if uncertain, read code first
 - **Always use context7** for any question about an API, library, or package
 - **Secrets** — live in `.env*` files — never in rules, memory, or code
 - **Never `console.log`** — use `console.warn` / `console.error`
 - **Never explicit `any`** — strict TypeScript
-- **Always run** lint + typecheck + test + Storybook before commit
+- **Always run** lint + typecheck + test once a set of modifications is done
 - **Always ask** user to run pnpm dev, pnpm prod:server and pnpm storybook after having modified a component
 - **Always create a Storybook story** after every component (`/story`)
 - **Model**: Haiku for questions/research, Sonnet for code/commits — suggest Haiku when appropriate
@@ -51,9 +51,13 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `@vite-mf-monorepo/layouts` switched to unbundled ESM build: `bundle: false` in tsup, CJS dropped, `'use client'` directive on Header preserved in output, `react-router-dom` moved to optional peerDependency, CSS side-effect import removed from barrel, build order fixed (js then css)
 - `@vite-mf-monorepo/ui` switched to unbundled ESM build (same approach as layouts)
 - `@vite-mf-monorepo/shared@0.0.4`: moved react, react-dom, react-router-dom from dependencies to peerDependencies (fixes dual React in consumers) — published to npm
+- `@vite-mf-monorepo/ui@0.2.0` published: split Button and MovieCard into `./react-router` and `./next` entry points, shared visual logic extracted (`Button.utils.ts`, `MovieCardContent.tsx`), `next` as optional peerDep, Tailwind `@source` fixed for `.ts` files
+- `@vite-mf-monorepo/ui` published: added HeroImage `/next` variant (`next/image` with `fill`+`priority`+`sizes`, persistent skeleton, gradient overlay), exported from `./next` entry point
+- CLAUDE.md rule updated: `pnpm type-check && pnpm lint && pnpm test` from root is now a mandatory self-run exception (no longer propose-only)
+- `@vite-mf-monorepo/ui`: added `NextImage` component (`src/next/Image/`) — reusable `next/image` wrapper with `data-state`, opacity transition, error fallback, `blurDataURL` auto-toggle; `MovieCard /next` now uses local `MovieCardContent` with `NextImage`; `HeroImage /next` refactored to use `NextImage`; `blurDataURL` added to `MovieCardBaseProps`; `next/image` added to tsup externals
 
 ### Next
-- (none)
+- Build and publish `@vite-mf-monorepo/ui` (version bump already at 0.3.0), then update `nextjs-multizone-tmdb` consumer to use new `NextImage`-powered components
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported
@@ -61,6 +65,7 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - GitHub Apps ne comptent pas comme "reviewers with write access" pour les rulesets — leur approval ne débloque pas le merge même avec bypass list
 - `packages/layouts/publish.sh` git push fails — tries to push `release/layouts` branch that doesn't exist
 - `packages/layouts/.npmrc` contains npm token, not in `.gitignore` — must not be committed
+- `packages/ui/.npmrc` contains npm token, not in `.gitignore` — must not be committed
 
 ## Reference Files (load on demand — NOT auto-loaded)
 | File | When to load |
