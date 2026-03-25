@@ -1,4 +1,4 @@
-## <small>0.0.13 (2026-03-25)</small>
+## <small>0.0.14 (2026-03-25)</small>
 
 * docs: add accessibility (a11y) testing guide to README ([62608c9](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/62608c9))
 * docs: add acknowledgment for Nsttt (DTS plugin) ([87ff972](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/87ff972))
@@ -23,6 +23,7 @@
 * docs(claude): update rules and add message-commit command ([0369b5f](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/0369b5f))
 * docs(claude): update rules and add message-commit command ([c7a447b](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/c7a447b))
 * docs(claude): update session notes — Phase 4.8 done, Phase 4.6 next ([7c08fbe](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/7c08fbe))
+* docs(http-client): update changelog for version bump ([eba43cc](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/eba43cc))
 * docs(http-client): update changelog for version bump ([e4fbdff](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/e4fbdff))
 * docs(http-client): update changelog for version bump ([a38f07b](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/a38f07b))
 * docs(http-client): update changelog for version bump ([789b3d8](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/789b3d8))
