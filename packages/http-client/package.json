@@ -1,6 +1,6 @@
 {
   "name": "@fubar-it-co/tmdb-client",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "TMDB API client generated with heyAPI",
   "type": "module",
   "main": "./dist/index.js",
@@ -41,9 +41,10 @@
     "@tanstack/react-query": "catalog:"
   },
   "devDependencies": {
-    "conventional-changelog": "catalog:",
     "@eslint/js": "catalog:",
     "@hey-api/openapi-ts": "^0.92.3",
+    "@types/node": "catalog:",
+    "conventional-changelog": "catalog:",
     "eslint": "^9.0.0",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:",

@@ -724,6 +724,9 @@ importers:
       '@hey-api/openapi-ts':
         specifier: ^0.92.3
         version: 0.92.3(magicast@0.3.5)(typescript@5.7.2)
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.14.0
       conventional-changelog:
         specifier: 'catalog:'
         version: 7.2.0(conventional-commits-filter@5.0.0)
@@ -738,7 +741,7 @@ importers:
         version: 8.24.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.7.2)
       vite:
         specifier: 'catalog:'
-        version: 6.3.4(@types/node@25.2.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2)
+        version: 6.3.4(@types/node@22.14.0)(jiti@2.6.1)(lightningcss@1.29.2)(yaml@2.8.2)
 
   packages/layouts:
     dependencies:

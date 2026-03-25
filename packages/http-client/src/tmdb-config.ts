@@ -17,7 +17,10 @@ import type { Config } from './client/client/types.gen'
  * TMDB API Bearer token from environment variables.
  * Must be set in `.env.local` at the monorepo root.
  */
-const TMDB_API_TOKEN = import.meta.env.VITE_TMDB_API_TOKEN
+const TMDB_API_TOKEN =
+  typeof process !== 'undefined'
+    ? process.env.VITE_TMDB_API_TOKEN
+    : import.meta.env.VITE_TMDB_API_TOKEN
 
 /**
  * Creates the client configuration for TMDB API requests.
@@ -41,7 +44,7 @@ export const createClientConfig = <T extends Config>(config: T): T => {
     baseUrl: 'https://api.themoviedb.org',
     headers: {
       ...existingHeaders,
-      Authorization: `Bearer ${TMDB_API_TOKEN}`,
+      Authorization: `Bearer ${String(TMDB_API_TOKEN)}`,
     },
   }
 }
