@@ -1,4 +1,4 @@
-## <small>0.0.9 (2026-03-25)</small>
+## <small>0.0.10 (2026-03-25)</small>
 
 * chore: add postinstall script to ensure shell scripts are executable ([8808374](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/8808374))
 * chore: added exception to .gitignore ([97736d5](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/97736d5))
@@ -11,6 +11,7 @@
 * chore: update .windsurfrules with current project state ([e879115](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/e879115))
 * chore: updated react from 19.0.0 to 19.1.0 ([5ab9f01](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/5ab9f01))
 * chore: upgraded react react-dom and types ([3b5a7f4](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/3b5a7f4))
+* chore: version bump for @fubar-it-co/tmdb-client to 0.0.9 ([f3010cd](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/f3010cd))
 * chore: version bump for ui to 0.2.0 ([20e4667](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/20e4667))
 * chore: version bump for ui to 0.4.0 ([d4191a8](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/d4191a8))
 * chore(cleaning): remove typos an consoles ([3935c3a](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/3935c3a))
@@ -53,6 +54,7 @@
 * docs(claude): update rules and add message-commit command ([0369b5f](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/0369b5f))
 * docs(claude): update rules and add message-commit command ([c7a447b](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/c7a447b))
 * docs(claude): update session notes — Phase 4.8 done, Phase 4.6 next ([7c08fbe](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/7c08fbe))
+* docs(http-client): update changelog for version bump ([789b3d8](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/789b3d8))
 * docs(http-client): update changelog for version bump ([127744d](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/127744d))
 * docs(http-client): update changelog for version bump ([480b4dc](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/480b4dc))
 * docs(http-client): update changelog for version bump ([db881b8](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/db881b8))

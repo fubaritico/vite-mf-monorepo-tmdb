@@ -1,6 +1,6 @@
 {
   "name": "@fubar-it-co/tmdb-client",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "TMDB API client generated with heyAPI",
   "type": "module",
   "main": "./dist/index.js",
