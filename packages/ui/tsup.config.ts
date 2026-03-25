@@ -15,7 +15,7 @@ export default defineConfig((options) => ({
   treeshake: true,
   splitting: true,
   sourcemap: true,
-  external: ['react', 'react-dom', 'react-router-dom', 'next', 'next/link'],
+  external: ['react', 'react-dom', 'react-router-dom', 'next', 'next/link', 'next/image'],
   esbuildOptions(esbuildOpts) {
     esbuildOpts.jsx = 'automatic'
   },

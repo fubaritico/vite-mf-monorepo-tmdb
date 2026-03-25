@@ -1,7 +1,5 @@
-import Image from 'next/image'
-import { useState } from 'react'
-
 import { Skeleton } from '../../Skeleton'
+import { NextImage } from '../Image'
 
 export interface NextHeroImageProps {
   /** Backdrop path from TMDB API (e.g. "/abc123.jpg") */
@@ -11,34 +9,37 @@ export interface NextHeroImageProps {
 }
 
 function HeroImage({ backdropPath, title }: Readonly<NextHeroImageProps>) {
-  const [loading, setLoading] = useState(true)
-
   const src = backdropPath
     ? `https://image.tmdb.org/t/p/original${backdropPath}`
     : undefined
 
   return (
     <>
-      {loading && (
+      {src ? (
+        <NextImage
+          src={src}
+          alt={title ?? 'Unknown'}
+          fill
+          preload
+          sizes="100vw"
+          className="ui:h-full ui:w-full"
+          fallback={
+            <Skeleton
+              data-testid="hero-image-skeleton"
+              variant="rectangle"
+              width="ui:relative ui:w-full ui:h-full ui:hero-height ui:z-0"
+              aspectRatio="21/9"
+              rounded={false}
+            />
+          }
+        />
+      ) : (
         <Skeleton
           data-testid="hero-image-skeleton"
           variant="rectangle"
           width="ui:relative ui:w-full ui:h-full ui:hero-height ui:z-0"
           aspectRatio="21/9"
           rounded={false}
-        />
-      )}
-      {src && (
-        <Image
-          src={src}
-          alt={title ?? 'Unknown'}
-          fill
-          priority
-          sizes="100vw"
-          className="ui:relative ui:h-full ui:w-full ui:object-cover ui:object-center ui:z-0"
-          onLoad={() => {
-            setLoading(false)
-          }}
         />
       )}
       {/* Gradient Overlay */}

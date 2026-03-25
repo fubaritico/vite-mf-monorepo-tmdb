@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 
 import HeroImage from './HeroImage'
 
@@ -11,16 +11,13 @@ vi.mock('next/image', () => ({
   ),
 }))
 
-describe('HeroImage (next)', () => {
-  beforeEach(() => {
-    Object.defineProperty(HTMLImageElement.prototype, 'complete', {
-      get() {
-        return false
-      },
-      configurable: true,
-    })
-  })
+vi.mock('../../Icon', () => ({
+  Icon: ({ name, ...props }: { name: string }) => (
+    <span data-testid="icon" data-name={name} {...props} />
+  ),
+}))
 
+describe('HeroImage (next)', () => {
   it('should render image with correct alt text', () => {
     render(<HeroImage backdropPath="/path/to/image.jpg" title="Test Movie" />)
     expect(screen.getByAltText('Test Movie')).toBeInTheDocument()
@@ -31,21 +28,33 @@ describe('HeroImage (next)', () => {
     expect(screen.getByAltText('Unknown')).toBeInTheDocument()
   })
 
-  it('should show skeleton in loading state', () => {
-    render(<HeroImage backdropPath="/path/to/image.jpg" title="Test Movie" />)
+  it('should show skeleton when no backdrop path', () => {
+    render(<HeroImage backdropPath={null} title="Test Movie" />)
     expect(screen.getByTestId('hero-image-skeleton')).toBeInTheDocument()
   })
 
-  it('should hide skeleton after image loads', async () => {
-    render(<HeroImage backdropPath="/path/to/image.jpg" title="Test Movie" />)
-    expect(screen.getByTestId('hero-image-skeleton')).toBeInTheDocument()
+  it('should render gradient overlay', () => {
+    const { container } = render(
+      <HeroImage backdropPath="/path/to/image.jpg" title="Test Movie" />
+    )
+    const overlay = container.querySelector('.ui\\:bg-gradient-to-t')
+    expect(overlay).toBeInTheDocument()
+  })
 
-    fireEvent.load(screen.getByAltText('Test Movie'))
+  it('should show fallback skeleton on image error', async () => {
+    render(<HeroImage backdropPath="/path/to/image.jpg" title="Test Movie" />)
+    fireEvent.error(screen.getByAltText('Test Movie'))
 
     await waitFor(() => {
-      expect(
-        screen.queryByTestId('hero-image-skeleton')
-      ).not.toBeInTheDocument()
+      expect(screen.getByTestId('hero-image-skeleton')).toBeInTheDocument()
     })
+  })
+
+  it('should construct TMDB original URL', () => {
+    render(<HeroImage backdropPath="/abc123.jpg" title="Test" />)
+    expect(screen.getByAltText('Test')).toHaveAttribute(
+      'src',
+      'https://image.tmdb.org/t/p/original/abc123.jpg'
+    )
   })
 })

@@ -17,6 +17,8 @@ export interface MovieCardBaseProps {
   className?: string
   /** Image loading strategy ('lazy' | 'eager'). Default: 'lazy' */
   imageLoading?: ImageLoading
+  /** Base64 blur data URL for next/image placeholder="blur" */
+  blurDataURL?: string
 }
 
 export interface MovieCardAsCard extends MovieCardBaseProps {
