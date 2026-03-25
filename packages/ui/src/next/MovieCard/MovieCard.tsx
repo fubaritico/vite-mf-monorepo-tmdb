@@ -1,7 +1,8 @@
 import Link from 'next/link'
 
 import { getMovieCardLinkClasses } from '../../MovieCard/MovieCard.utils'
-import MovieCardContent from '../../MovieCard/MovieCardContent'
+
+import MovieCardContent from './MovieCardContent'
 
 import type { NextMovieCardProps } from './MovieCard.types'
 
@@ -13,6 +14,7 @@ function MovieCard({
   year,
   className,
   imageLoading = 'lazy',
+  blurDataURL,
   as = 'card',
   ...rest
 }: Readonly<NextMovieCardProps>) {
@@ -32,6 +34,7 @@ function MovieCard({
       imageLoading={imageLoading}
       isInteractive={isInteractive}
       onClick={as === 'button' ? onClick : undefined}
+      blurDataURL={blurDataURL}
     />
   )
 
