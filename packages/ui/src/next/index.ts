@@ -5,6 +5,9 @@ export type {
   NextButtonAsLink,
 } from './Button'
 
+export { HeroImage } from './HeroImage'
+export type { NextHeroImageProps } from './HeroImage'
+
 export { MovieCard } from './MovieCard'
 export type {
   NextMovieCardProps,
