@@ -2,18 +2,25 @@ import { screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { mockMovieVideos } from '@vite-mf-monorepo/shared/mocks'
 import { renderWithReactQuery } from '@vite-mf-monorepo/shared/test-utils'
+import { useLocation, useParams } from 'react-router-dom'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+
+import { useMediaVideos } from '../../hooks'
 
 import TrailersSection from './TrailersSection'
 
 import type { MovieVideosResponse, TMDBError } from '@fubar-it-co/tmdb-client'
 import type { UseQueryResult } from '@tanstack/react-query'
 
-vi.mock('react-router-dom', () => ({ useParams: vi.fn() }))
-vi.mock('../../hooks/useMovieVideos', () => ({ useMovieVideos: vi.fn() }))
+vi.mock('react-router-dom', async () => {
+  const actual =
+    await vi.importActual<typeof import('react-router-dom')>('react-router-dom')
+  return { ...actual, useParams: vi.fn(), useLocation: vi.fn() }
+})
 
-const { useParams } = await import('react-router-dom')
-const { useMovieVideos } = await import('../../hooks/useMovieVideos')
+vi.mock('../../hooks', () => ({
+  useMediaVideos: vi.fn(),
+}))
 
 const createMockQueryResult = <T,>(
   overrides: Partial<UseQueryResult<T, TMDBError>> = {}
@@ -47,10 +54,17 @@ describe('TrailersSection', () => {
     HTMLDialogElement.prototype.showModal = vi.fn()
     HTMLDialogElement.prototype.close = vi.fn()
     vi.mocked(useParams).mockReturnValue({ id: '278' })
+    vi.mocked(useLocation).mockReturnValue({
+      pathname: '/movie/278',
+      search: '',
+      hash: '',
+      state: null,
+      key: 'default',
+    })
   })
 
   it('should render loading state', () => {
-    vi.mocked(useMovieVideos).mockReturnValue(
+    vi.mocked(useMediaVideos).mockReturnValue(
       createMockQueryResult<MovieVideosResponse>({
         isLoading: true,
         isPending: true,
@@ -67,7 +81,7 @@ describe('TrailersSection', () => {
   // TODO: find a way to call dialog.close, no way to run the line in Modal the calls that method
   // @see: https://github.com/jsdom/jsdom/issues/3294
   it.skip('should render trailers when data is loaded', () => {
-    vi.mocked(useMovieVideos).mockReturnValue(
+    vi.mocked(useMediaVideos).mockReturnValue(
       createMockQueryResult<MovieVideosResponse>({
         data: mockMovieVideos,
         isLoading: false,
@@ -88,7 +102,7 @@ describe('TrailersSection', () => {
   })
 
   it('should render nothing when no trailers are available', () => {
-    vi.mocked(useMovieVideos).mockReturnValue(
+    vi.mocked(useMediaVideos).mockReturnValue(
       createMockQueryResult<MovieVideosResponse>({
         data: { id: 278, results: [] },
         isLoading: false,
@@ -103,7 +117,7 @@ describe('TrailersSection', () => {
   })
 
   it('should render nothing on error', () => {
-    vi.mocked(useMovieVideos).mockReturnValue(
+    vi.mocked(useMediaVideos).mockReturnValue(
       createMockQueryResult<MovieVideosResponse>({
         isLoading: false,
         isError: true,
