@@ -57,8 +57,11 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `@vite-mf-monorepo/ui`: added `NextImage` component (`src/next/Image/`) — reusable `next/image` wrapper with `data-state`, opacity transition, error fallback, `blurDataURL` auto-toggle; `MovieCard /next` now uses local `MovieCardContent` with `NextImage`; `HeroImage /next` refactored to use `NextImage`; `blurDataURL` added to `MovieCardBaseProps`; `next/image` added to tsup externals
 - `@vite-mf-monorepo/ui` switched to unbundled ESM build: `bundle: false` with glob entry (`src/**/*.{ts,tsx}`), dist mirrors src structure, `'use client'` directives preserved per-file naturally (no plugin needed), `minify: true` for JS, `--minify` for CSS, build order fixed (JS then CSS), export path corrected to `dist/styles.css`
 
+- `@vite-mf-monorepo/ui@0.4.12` published: added `as="zone-link"` variant to MovieCard and Button `/next` exports — plain `<a>` tag for cross-zone navigation in Next.js Multi-Zones, visually identical to `as="link"`, with tests
+- `@vite-mf-monorepo/layouts@0.4.2` published: added `crossZoneHome` prop to `next/RootLayout` — renders logo as plain `<a href="/">` instead of `next/link` for multi-zone setups, with tests
+
 ### Next
-- Publish `@vite-mf-monorepo/ui` (version already at 0.4.10), continue testing in `nextjs-multizone-tmdb` consumer
+- Apply cross-zone changes in `nextjs-multizone-tmdb` consumer: `as="zone-link"` on cross-zone MovieCard/Button links, `crossZoneHome` on non-home zone layouts
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported
