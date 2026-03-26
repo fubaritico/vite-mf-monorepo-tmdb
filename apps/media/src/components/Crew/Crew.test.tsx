@@ -3,7 +3,7 @@ import { mockMovieCredits } from '@vite-mf-monorepo/shared/mocks'
 import { useLocation, useParams } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
 
-import { useMovieCredits } from '../../hooks/useMovieCredits'
+import { useMediaCredits } from '../../hooks'
 
 import Crew from './Crew'
 
@@ -16,8 +16,8 @@ vi.mock('react-router-dom', () => ({
   useLocation: vi.fn(),
 }))
 
-vi.mock('../../hooks/useMovieCredits', () => ({
-  useMovieCredits: vi.fn(),
+vi.mock('../../hooks', () => ({
+  useMediaCredits: vi.fn(),
 }))
 
 const createMockQueryResult = <T,>(
@@ -63,7 +63,7 @@ describe('Crew', () => {
       status: 'success',
     })
 
-    vi.mocked(useMovieCredits).mockReturnValue(mockResult)
+    vi.mocked(useMediaCredits).mockReturnValue(mockResult)
 
     render(<Crew />)
 
@@ -83,7 +83,7 @@ describe('Crew', () => {
     vi.mocked(useLocation).mockReturnValue({
       pathname: '/movie/278',
     } as Location)
-    vi.mocked(useMovieCredits).mockReturnValue(
+    vi.mocked(useMediaCredits).mockReturnValue(
       createMockQueryResult<MovieCreditsResponse>({
         isLoading: true,
         isPending: true,
@@ -103,7 +103,7 @@ describe('Crew', () => {
     vi.mocked(useLocation).mockReturnValue({
       pathname: '/movie/278',
     } as Location)
-    vi.mocked(useMovieCredits).mockReturnValue(
+    vi.mocked(useMediaCredits).mockReturnValue(
       createMockQueryResult<MovieCreditsResponse>({
         error: {
           success: false,
@@ -127,7 +127,7 @@ describe('Crew', () => {
     vi.mocked(useLocation).mockReturnValue({
       pathname: '/movie/278',
     } as Location)
-    vi.mocked(useMovieCredits).mockReturnValue(
+    vi.mocked(useMediaCredits).mockReturnValue(
       createMockQueryResult<MovieCreditsResponse>({
         data: {
           id: 278,

@@ -1,17 +1,24 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
 import { getImageUrl } from '@vite-mf-monorepo/shared'
 import { Skeleton, Talent, Typography } from '@vite-mf-monorepo/ui'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
-import { useMovieCredits } from '../../hooks/useMovieCredits'
+import { useMediaCredits } from '../../hooks'
+import { getMediaTypeFromPath } from '../../utils'
 
 import type { FC } from 'react'
 
 const Crew: FC = () => {
+  const location = useLocation()
   const { id } = useParams<{ id: string }>()
   const contentId = Number(id)
+  const mediaType = getMediaTypeFromPath(location.pathname)
 
-  const { data: credits, isLoading, error } = useMovieCredits(contentId)
+  const {
+    data: credits,
+    isLoading,
+    error,
+  } = useMediaCredits(mediaType, contentId)
 
   if (isLoading) {
     return (
