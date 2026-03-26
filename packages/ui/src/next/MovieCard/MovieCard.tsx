@@ -23,7 +23,7 @@ function MovieCard({
   const href = 'href' in rest ? rest.href : undefined
   const onClick = 'onClick' in rest ? rest.onClick : undefined
 
-  const isInteractive = as === 'link' || as === 'button'
+  const isInteractive = as === 'link' || as === 'zone-link' || as === 'button'
 
   const cardContent = (
     <MovieCardContent
@@ -45,6 +45,14 @@ function MovieCard({
       <Link href={href} className={getMovieCardLinkClasses()}>
         {cardContent}
       </Link>
+    )
+  }
+
+  if (as === 'zone-link' && href) {
+    return (
+      <a href={href} className={getMovieCardLinkClasses()}>
+        {cardContent}
+      </a>
     )
   }
 

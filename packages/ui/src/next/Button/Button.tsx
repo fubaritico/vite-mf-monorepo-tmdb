@@ -47,6 +47,25 @@ function Button(props: Readonly<NextButtonProps>) {
     )
   }
 
+  if (props.as === 'zone-link') {
+    const {
+      as: _,
+      variant: _v,
+      size: _s,
+      icon: _i,
+      iconPosition: _ip,
+      className: _c,
+      children: _ch,
+      ...anchorProps
+    } = props
+
+    return (
+      <a className={classes} {...anchorProps}>
+        {content}
+      </a>
+    )
+  }
+
   const {
     as: _,
     variant: _v,

@@ -14,7 +14,16 @@ export interface NextMovieCardAsLink extends MovieCardBaseProps {
   onClick?: never
 }
 
+export interface NextMovieCardAsZoneLink extends MovieCardBaseProps {
+  /** Render as a plain anchor for cross-zone navigation (multi-zones). */
+  as: 'zone-link'
+  /** Navigation path (required when as="zone-link") */
+  href: string
+  onClick?: never
+}
+
 export type NextMovieCardProps =
   | MovieCardAsCard
   | NextMovieCardAsLink
+  | NextMovieCardAsZoneLink
   | MovieCardAsButton
