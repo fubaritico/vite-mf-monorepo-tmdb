@@ -25,4 +25,16 @@ export type NextButtonAsLink = ButtonVisualProps &
     children?: React.ReactNode
   }
 
-export type NextButtonProps = NextButtonAsButton | NextButtonAsLink
+export type NextButtonAsZoneLink = ButtonVisualProps & {
+  /** Render as a plain anchor for cross-zone navigation (multi-zones). */
+  as: 'zone-link'
+  /** Navigation URL */
+  href: string
+  className?: string
+  children?: React.ReactNode
+}
+
+export type NextButtonProps =
+  | NextButtonAsButton
+  | NextButtonAsLink
+  | NextButtonAsZoneLink
