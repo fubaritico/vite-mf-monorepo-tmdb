@@ -14,6 +14,14 @@ export interface NextRootLayoutProps extends HTMLAttributes<HTMLDivElement> {
   hideHeader?: boolean
   /** Hide default footer */
   hideFooter?: boolean
+  /**
+   * When true, the logo link renders a plain `<a href="/">` instead of
+   * `<Link href="/">` from next/link. Required in multi-zone setups where
+   * the home route lives in a different zone.
+   *
+   * @default false
+   */
+  crossZoneHome?: boolean
 }
 
 /**
@@ -25,19 +33,29 @@ export default function RootLayout({
   children,
   hideHeader = false,
   hideFooter = false,
+  crossZoneHome = false,
   className,
   ...rest
 }: Readonly<NextRootLayoutProps>) {
-  const TMDBLogo = () => (
-    <Link href="/" className="layout:no-underline">
-      <div className="layout:flex layout:items-center layout:gap-2">
-        <LogoT />
-        <span className="layout:text-white layout:font-bold layout:text-xl">
-          TMDB
-        </span>
-      </div>
-    </Link>
+  const logoContent = (
+    <div className="layout:flex layout:items-center layout:gap-2">
+      <LogoT />
+      <span className="layout:text-white layout:font-bold layout:text-xl">
+        TMDB
+      </span>
+    </div>
   )
+
+  const TMDBLogo = () =>
+    crossZoneHome ? (
+      <a href="/" className="layout:no-underline">
+        {logoContent}
+      </a>
+    ) : (
+      <Link href="/" className="layout:no-underline">
+        {logoContent}
+      </Link>
+    )
 
   return (
     <div
