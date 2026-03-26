@@ -1,4 +1,4 @@
-## <small>0.4.3 (2026-03-26)</small>
+## <small>0.4.4 (2026-03-26)</small>
 
 * feat: add navigation to movie detail page ([467740b](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/467740b))
 * feat: add Netlify deployment configuration ([8a0936a](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/8a0936a))
@@ -59,6 +59,7 @@
 * feat(publish): add changelog generation and npm scope configuration to shared package ([79ed782](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/79ed782))
 * feat(publish): add changelog generation and npm scope configuration to ui package ([07cd7ec](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/07cd7ec))
 * feat(react-query): implementation of react query for micro front end ([288ace6](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/288ace6))
+* feat(root-layout): added project url property ([fdee16a](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/fdee16a))
 * feat(scripts): add script to stop all running servers ([85fc92d](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/85fc92d))
 * feat(servers): add configuration and scripts to launch the app in dev mode ([c642af0](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/c642af0))
 * feat(shared): add bundled CSS exports with inlined fonts and tokens ([c3db8d2](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/c3db8d2))
@@ -127,6 +128,7 @@
 * docs(http-client): update changelog for version bump ([2f2307c](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/2f2307c))
 * docs(http-client): update changelog for version bump ([dd5003d](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/dd5003d))
 * docs(http-client): update changelog for version bump ([1a7a80e](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/1a7a80e))
+* docs(layouts): update changelog for version bump ([dda5729](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/dda5729))
 * docs(layouts): update changelog for version bump ([0efc40b](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/0efc40b))
 * docs(layouts): update changelog for version bump ([b57c91d](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/b57c91d))
 * docs(layouts): update changelog for version bump ([09194ac](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/09194ac))

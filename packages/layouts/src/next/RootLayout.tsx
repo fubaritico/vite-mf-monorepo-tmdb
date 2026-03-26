@@ -75,7 +75,7 @@ export default function RootLayout({
             © 2026 TMDB Clone. All rights reserved.{' '}
             <span className="layout:mx-1">|</span>{' '}
             <a
-              href="https://github.com/fubaritico/vite-mf-monorepo-tmdb"
+              href="https://github.com/fubaritico/nextjs-multizone-tmdb"
               target="_blank"
               rel="noopener noreferrer"
               className="layout:text-sm layout:text-footer-foreground layout:no-underline layout:hover:underline layout:hover:text-white"
