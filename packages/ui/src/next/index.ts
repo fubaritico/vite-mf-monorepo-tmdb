@@ -1,3 +1,5 @@
+'use client'
+
 export { Button } from './Button'
 export type {
   NextButtonProps,

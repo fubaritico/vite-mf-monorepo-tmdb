@@ -2,12 +2,13 @@
 
 import clsx from 'clsx'
 import Image from 'next/image'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Icon } from '../../Icon'
 
 import type { NextImageProps } from './NextImage.types'
-import type { ImageState } from '../../Image/Image'
+import type { ImageState } from '../../Image'
+import type { SyntheticEvent } from 'react'
 
 function NextImage({
   fallback,
@@ -21,9 +22,20 @@ function NextImage({
 }: Readonly<NextImageProps>) {
   const [state, setState] = useState<ImageState>('loading')
 
-  const handleLoad = useCallback(
-    (e: React.SyntheticEvent<HTMLImageElement>) => {
+  const wrapperRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const img = wrapperRef.current?.querySelector('img')
+
+    if (img?.complete && img.naturalWidth > 0) {
       setState('loaded')
+    }
+  }, [])
+
+  const handleLoad = useCallback(
+    (e: SyntheticEvent<HTMLImageElement>) => {
+      setState('loaded')
+
       if (typeof onLoad === 'function') {
         onLoad(e as Parameters<typeof onLoad>[0])
       }
@@ -32,8 +44,9 @@ function NextImage({
   )
 
   const handleError = useCallback(
-    (e: React.SyntheticEvent<HTMLImageElement>) => {
+    (e: SyntheticEvent<HTMLImageElement>) => {
       setState('error')
+
       if (typeof onError === 'function') {
         onError(e as Parameters<typeof onError>[0])
       }
@@ -57,6 +70,7 @@ function NextImage({
       className={clsx('ui:relative ui:overflow-hidden ui:bg-muted', className)}
       style={aspectRatio ? { aspectRatio, ...style } : style}
       data-state={state}
+      ref={wrapperRef}
     >
       {state === 'error' ? (
         (fallback ?? defaultFallback)
