@@ -12,9 +12,9 @@ const TrailersSection: FC = () => {
 
   if (isLoading) {
     return (
-      <Section title="Trailers & Clips">
+      <Section>
         <Typography variant="h2" className="mda:mb-6">
-          Photos
+          Trailers & Clips
         </Typography>
         <div className="mda:grid mda:gap-4 mda:grid-cols-1 mda:md:grid-cols-2 mda:lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, i) => (
@@ -38,7 +38,7 @@ const TrailersSection: FC = () => {
     <Container variant="default">
       <Section maxWidth="xl" spacing="md">
         <Typography variant="h2" className="mda:mb-6">
-          Photos
+          Trailers & Clips
         </Typography>
         <div className="mda:grid mda:gap-4 mda:grid-cols-1 mda:md:grid-cols-2 mda:lg:grid-cols-3">
           {data.results.map((video) => (
