@@ -1,6 +1,7 @@
 export { useMediaCredits } from './useMediaCredits';
 export { useMediaDetails } from './useMediaDetails';
 export { useMediaImages } from './useMediaImages';
+export { useMediaVideos } from './useMediaVideos';
 export { useMovieCredits } from './useMovieCredits';
 export { useMovieDetails } from './useMovieDetails';
 export { useMovieImages } from './useMovieImages';
@@ -11,3 +12,4 @@ export { useTVDetails } from './useTVDetails';
 export { useTVImages } from './useTVImages';
 export { useTVSeriesRecommendations } from './useTVSeriesRecommendations';
 export { useTVSeriesSimilar } from './useTVSeriesSimilar';
+export { useTVVideos } from './useTVVideos';
