@@ -1,17 +1,22 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
 import { getImageUrl } from '@vite-mf-monorepo/shared'
 import { Icon, Skeleton, Typography } from '@vite-mf-monorepo/ui'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 
-import { useMovieImages } from '../../hooks/useMovieImages'
+import { useMediaImages } from '../../hooks'
+import { getMediaTypeFromPath } from '../../utils'
 
 import type { FC } from 'react'
 
 const PHOTOS_IN_GRID = 4
 
 const Photos: FC = () => {
+  const location = useLocation()
   const { id } = useParams<{ id: string }>()
-  const { data, isLoading, error } = useMovieImages(Number(id))
+  const contentId = Number(id)
+  const mediaType = getMediaTypeFromPath(location.pathname)
+
+  const { data, isLoading, error } = useMediaImages(mediaType, contentId)
 
   if (isLoading) {
     return (
