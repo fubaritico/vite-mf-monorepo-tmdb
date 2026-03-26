@@ -1,14 +1,19 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
 import { Skeleton, TrailerCard, Typography } from '@vite-mf-monorepo/ui'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
-import { useMovieVideos } from '../../hooks/useMovieVideos'
+import { useMediaVideos } from '../../hooks'
+import { getMediaTypeFromPath } from '../../utils'
 
 import type { FC } from 'react'
 
 const TrailersSection: FC = () => {
+  const location = useLocation()
   const { id } = useParams<{ id: string }>()
-  const { data, isLoading, error } = useMovieVideos(Number(id))
+  const contentId = Number(id)
+  const mediaType = getMediaTypeFromPath(location.pathname)
+
+  const { data, isLoading, error } = useMediaVideos(mediaType, contentId)
 
   if (isLoading) {
     return (
