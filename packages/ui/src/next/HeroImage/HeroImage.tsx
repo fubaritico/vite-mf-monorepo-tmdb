@@ -24,12 +24,13 @@ function HeroImage({ backdropPath, title }: Readonly<NextHeroImageProps>) {
           fill
           preload
           sizes="100vw"
-          className="ui:h-full ui:w-full"
+          className="ui:relative ui:h-full ui:w-full ui:z-0"
+          imageClassName="ui:h-auto! ui:w-full"
           fallback={
             <Skeleton
               data-testid="hero-image-skeleton"
               variant="rectangle"
-              width="ui:relative ui:w-full ui:h-full ui:hero-height ui:z-0"
+              width="ui:relative ui:w-full ui:h-full ui:aspect-[21/9] ui:lg:max-h-[440px] ui:z-0"
               aspectRatio="21/9"
               rounded={false}
             />
@@ -39,7 +40,7 @@ function HeroImage({ backdropPath, title }: Readonly<NextHeroImageProps>) {
         <Skeleton
           data-testid="hero-image-skeleton"
           variant="rectangle"
-          width="ui:relative ui:w-full ui:h-full ui:hero-height ui:z-0"
+          width="ui:relative ui:w-full ui:h-auto ui:aspect-[21/9] ui:lg:max-h-[440px] ui:z-0"
           aspectRatio="21/9"
           rounded={false}
         />

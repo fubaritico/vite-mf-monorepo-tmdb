@@ -15,6 +15,7 @@ function NextImage({
   aspectRatio,
   blurDataURL,
   className,
+  imageClassName,
   onLoad,
   onError,
   style,
@@ -79,7 +80,8 @@ function NextImage({
           {...rest}
           className={clsx(
             'ui:transition-opacity ui:duration-300',
-            state === 'loaded' ? 'ui:opacity-100' : 'ui:opacity-0'
+            state === 'loaded' ? 'ui:opacity-100' : 'ui:opacity-0',
+            imageClassName
           )}
           onLoad={handleLoad}
           onError={handleError}

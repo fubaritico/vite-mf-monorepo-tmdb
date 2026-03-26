@@ -8,4 +8,6 @@ export interface NextImageProps extends Omit<ImageProps, 'placeholder'> {
   aspectRatio?: string
   /** Base64 blur data URL — auto-sets placeholder="blur" when provided */
   blurDataURL?: string
+  /** Classes applied directly to the `<Image>` element (e.g. object-cover) */
+  imageClassName?: string
 }
