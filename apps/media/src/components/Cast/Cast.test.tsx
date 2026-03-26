@@ -2,10 +2,10 @@ import { screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { mockMovieCredits } from '@vite-mf-monorepo/shared/mocks'
 import { renderWithRouter } from '@vite-mf-monorepo/shared/test-utils'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
 
-import { useMovieCredits } from '../../hooks/useMovieCredits'
+import { useMediaCredits } from '../../hooks'
 
 import Cast from './Cast'
 
@@ -15,11 +15,11 @@ import type { UseQueryResult } from '@tanstack/react-query'
 vi.mock('react-router-dom', async () => {
   const actual =
     await vi.importActual<typeof import('react-router-dom')>('react-router-dom')
-  return { ...actual, useParams: vi.fn() }
+  return { ...actual, useParams: vi.fn(), useLocation: vi.fn() }
 })
 
-vi.mock('../../hooks/useMovieCredits', () => ({
-  useMovieCredits: vi.fn(),
+vi.mock('../../hooks', () => ({
+  useMediaCredits: vi.fn(),
 }))
 
 const createMockQueryResult = <T,>(
@@ -54,7 +54,14 @@ const createMockQueryResult = <T,>(
 describe('Cast', () => {
   it('renders top 10 cast members', () => {
     vi.mocked(useParams).mockReturnValue({ id: '278' })
-    vi.mocked(useMovieCredits).mockReturnValue(
+    vi.mocked(useLocation).mockReturnValue({
+      pathname: '/movie/278',
+      search: '',
+      hash: '',
+      state: null,
+      key: 'default',
+    })
+    vi.mocked(useMediaCredits).mockReturnValue(
       createMockQueryResult<MovieCreditsResponse>({
         data: mockMovieCredits,
         isLoading: false,
@@ -74,7 +81,14 @@ describe('Cast', () => {
 
   it('renders loading skeleton', () => {
     vi.mocked(useParams).mockReturnValue({ id: '278' })
-    vi.mocked(useMovieCredits).mockReturnValue(
+    vi.mocked(useLocation).mockReturnValue({
+      pathname: '/movie/278',
+      search: '',
+      hash: '',
+      state: null,
+      key: 'default',
+    })
+    vi.mocked(useMediaCredits).mockReturnValue(
       createMockQueryResult<MovieCreditsResponse>({
         isLoading: true,
         isPending: true,
@@ -91,7 +105,14 @@ describe('Cast', () => {
 
   it('renders nothing on error', () => {
     vi.mocked(useParams).mockReturnValue({ id: '278' })
-    vi.mocked(useMovieCredits).mockReturnValue(
+    vi.mocked(useLocation).mockReturnValue({
+      pathname: '/movie/278',
+      search: '',
+      hash: '',
+      state: null,
+      key: 'default',
+    })
+    vi.mocked(useMediaCredits).mockReturnValue(
       createMockQueryResult<MovieCreditsResponse>({
         error: {
           success: false,
@@ -110,7 +131,14 @@ describe('Cast', () => {
 
   it('renders nothing when cast is empty', () => {
     vi.mocked(useParams).mockReturnValue({ id: '278' })
-    vi.mocked(useMovieCredits).mockReturnValue(
+    vi.mocked(useLocation).mockReturnValue({
+      pathname: '/movie/278',
+      search: '',
+      hash: '',
+      state: null,
+      key: 'default',
+    })
+    vi.mocked(useMediaCredits).mockReturnValue(
       createMockQueryResult<MovieCreditsResponse>({
         data: { id: 278, cast: [], crew: [] },
         isSuccess: true,

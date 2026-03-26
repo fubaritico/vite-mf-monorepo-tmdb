@@ -1,8 +1,11 @@
+export { useMediaCredits } from './useMediaCredits';
 export { useMediaDetails } from './useMediaDetails';
+export { useMovieCredits } from './useMovieCredits';
 export { useMovieDetails } from './useMovieDetails';
 export { useMovieImages } from './useMovieImages';
 export { useMovieRecommendations } from './useMovieRecommendations';
 export { useMovieSimilar } from './useMovieSimilar';
+export { useTVCredits } from './useTVCredits';
 export { useTVDetails } from './useTVDetails';
 export { useTVSeriesRecommendations } from './useTVSeriesRecommendations';
 export { useTVSeriesSimilar } from './useTVSeriesSimilar';
