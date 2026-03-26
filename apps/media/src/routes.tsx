@@ -18,7 +18,9 @@ export const queryClient = new QueryClient({
 
 export const routes: RouteObject[] = [
   {
-    element: <RootLayout />,
+    element: (
+      <RootLayout projectUrl="https://github.com/fubaritico/vite-mf-monorepo-tmdb" />
+    ),
     children: [
       {
         path: 'movie/:id',

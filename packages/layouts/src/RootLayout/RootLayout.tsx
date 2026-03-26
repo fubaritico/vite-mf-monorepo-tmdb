@@ -13,6 +13,8 @@ export interface RootLayoutProps extends HTMLAttributes<HTMLDivElement> {
   hideHeader?: boolean
   /** Hide default footer */
   hideFooter?: boolean
+  /** URL of the project's GitHub repository */
+  projectUrl?: string
 }
 
 /**
@@ -24,6 +26,7 @@ export default function RootLayout({
   hideHeader = false,
   hideFooter = false,
   className,
+  projectUrl,
   ...rest
 }: Readonly<RootLayoutProps>) {
   const { pathname } = useLocation()
@@ -75,7 +78,7 @@ export default function RootLayout({
             © 2026 TMDB Clone. All rights reserved.{' '}
             <span className="layout:mx-1">|</span>{' '}
             <a
-              href="https://github.com/fubaritico/vite-mf-monorepo-tmdb"
+              href={projectUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="layout:text-sm layout:text-footer-foreground layout:no-underline layout:hover:underline layout:hover:text-white"

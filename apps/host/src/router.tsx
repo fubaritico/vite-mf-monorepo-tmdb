@@ -9,7 +9,9 @@ const sentryCreateBrowserRouter =
 
 const router = sentryCreateBrowserRouter([
   {
-    element: <RootLayout />,
+    element: (
+      <RootLayout projectUrl="https://github.com/fubaritico/vite-mf-monorepo-tmdb" />
+    ),
     children: [
       {
         path: '/',
