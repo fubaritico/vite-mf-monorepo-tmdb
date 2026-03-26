@@ -1,0 +1,19 @@
+import type { TvSeriesVideosResponse } from '@fubar-it-co/tmdb-client/client'
+
+export const mockTVSeriesVideos: TvSeriesVideosResponse = {
+  id: 1396,
+  results: [
+    {
+      iso_639_1: 'en',
+      iso_3166_1: 'US',
+      name: 'Series Trailer',
+      key: 'XZ8daibM3AE',
+      site: 'YouTube',
+      size: 480,
+      type: 'Trailer',
+      official: true,
+      published_at: '2013-03-25T16:28:54.000Z',
+      id: '5759db2fc3a3683e7c003df7',
+    },
+  ],
+}
