@@ -55,9 +55,10 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `@vite-mf-monorepo/ui` published: added HeroImage `/next` variant (`next/image` with `fill`+`priority`+`sizes`, persistent skeleton, gradient overlay), exported from `./next` entry point
 - CLAUDE.md rule updated: `pnpm type-check && pnpm lint && pnpm test` from root is now a mandatory self-run exception (no longer propose-only)
 - `@vite-mf-monorepo/ui`: added `NextImage` component (`src/next/Image/`) — reusable `next/image` wrapper with `data-state`, opacity transition, error fallback, `blurDataURL` auto-toggle; `MovieCard /next` now uses local `MovieCardContent` with `NextImage`; `HeroImage /next` refactored to use `NextImage`; `blurDataURL` added to `MovieCardBaseProps`; `next/image` added to tsup externals
+- `@vite-mf-monorepo/ui` switched to unbundled ESM build: `bundle: false` with glob entry (`src/**/*.{ts,tsx}`), dist mirrors src structure, `'use client'` directives preserved per-file naturally (no plugin needed), `minify: true` for JS, `--minify` for CSS, build order fixed (JS then CSS), export path corrected to `dist/styles.css`
 
 ### Next
-- Build and publish `@vite-mf-monorepo/ui` (version bump already at 0.3.0), then update `nextjs-multizone-tmdb` consumer to use new `NextImage`-powered components
+- Publish `@vite-mf-monorepo/ui` (version already at 0.4.10), continue testing in `nextjs-multizone-tmdb` consumer
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported
