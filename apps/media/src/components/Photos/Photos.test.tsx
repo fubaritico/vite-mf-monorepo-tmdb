@@ -2,10 +2,10 @@ import { screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { mockMovieImages } from '@vite-mf-monorepo/shared/mocks'
 import { renderWithRouter } from '@vite-mf-monorepo/shared/test-utils'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
 
-import { useMovieImages } from '../../hooks/useMovieImages'
+import { useMediaImages } from '../../hooks'
 
 import Photos from './Photos'
 
@@ -15,11 +15,16 @@ import type { UseQueryResult } from '@tanstack/react-query'
 vi.mock('react-router-dom', async () => {
   const actual =
     await vi.importActual<typeof import('react-router-dom')>('react-router-dom')
-  return { ...actual, useParams: vi.fn(), useNavigate: vi.fn(() => vi.fn()) }
+  return {
+    ...actual,
+    useParams: vi.fn(),
+    useLocation: vi.fn(),
+    useNavigate: vi.fn(() => vi.fn()),
+  }
 })
 
-vi.mock('../../hooks/useMovieImages', () => ({
-  useMovieImages: vi.fn(),
+vi.mock('../../hooks', () => ({
+  useMediaImages: vi.fn(),
 }))
 
 const createMockQueryResult = <T,>(
@@ -54,7 +59,14 @@ const createMockQueryResult = <T,>(
 describe('Photos', () => {
   it('renders heading, photo buttons and CTA tile', () => {
     vi.mocked(useParams).mockReturnValue({ id: '278' })
-    vi.mocked(useMovieImages).mockReturnValue(
+    vi.mocked(useLocation).mockReturnValue({
+      pathname: '/movie/278',
+      search: '',
+      hash: '',
+      state: null,
+      key: 'default',
+    })
+    vi.mocked(useMediaImages).mockReturnValue(
       createMockQueryResult<MovieImagesResponse>({
         data: mockMovieImages,
         isLoading: false,
@@ -76,7 +88,14 @@ describe('Photos', () => {
 
   it('renders loading skeleton', () => {
     vi.mocked(useParams).mockReturnValue({ id: '278' })
-    vi.mocked(useMovieImages).mockReturnValue(
+    vi.mocked(useLocation).mockReturnValue({
+      pathname: '/movie/278',
+      search: '',
+      hash: '',
+      state: null,
+      key: 'default',
+    })
+    vi.mocked(useMediaImages).mockReturnValue(
       createMockQueryResult<MovieImagesResponse>({
         isLoading: true,
         isPending: true,
@@ -93,7 +112,14 @@ describe('Photos', () => {
 
   it('renders nothing on error', () => {
     vi.mocked(useParams).mockReturnValue({ id: '278' })
-    vi.mocked(useMovieImages).mockReturnValue(
+    vi.mocked(useLocation).mockReturnValue({
+      pathname: '/movie/278',
+      search: '',
+      hash: '',
+      state: null,
+      key: 'default',
+    })
+    vi.mocked(useMediaImages).mockReturnValue(
       createMockQueryResult<MovieImagesResponse>({
         error: {
           success: false,
@@ -112,7 +138,14 @@ describe('Photos', () => {
 
   it('renders nothing when backdrops are empty', () => {
     vi.mocked(useParams).mockReturnValue({ id: '278' })
-    vi.mocked(useMovieImages).mockReturnValue(
+    vi.mocked(useLocation).mockReturnValue({
+      pathname: '/movie/278',
+      search: '',
+      hash: '',
+      state: null,
+      key: 'default',
+    })
+    vi.mocked(useMediaImages).mockReturnValue(
       createMockQueryResult<MovieImagesResponse>({
         data: { id: 278, backdrops: [], logos: [], posters: [] },
         isSuccess: true,
