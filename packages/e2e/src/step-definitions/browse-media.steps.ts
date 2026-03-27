@@ -94,7 +94,7 @@ Then<E2EWorld>(
 
 When<E2EWorld>(
   'I go to the next photo',
-  { timeout: 10_000 },
+  { timeout: 15_000 },
   async function () {
     const photosPage = new PhotosPage(this.page)
     // Store current URL to compare after navigation

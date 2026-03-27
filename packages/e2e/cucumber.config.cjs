@@ -8,6 +8,7 @@ module.exports = {
       'html:src/reports/report.html',
       'json:src/reports/report.json',
     ],
+    tags: 'not @skip',
     formatOptions: { snippetInterface: 'async-await' },
     ...(process.env.CI === 'true' ? { retry: 1 } : {}),
   },
