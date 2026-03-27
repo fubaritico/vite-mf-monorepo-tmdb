@@ -30,6 +30,7 @@ export class PhotosPage {
   }
 
   async navigateNext(): Promise<void> {
+    await this.getNextButton().waitFor({ state: 'visible', timeout: 10_000 })
     await this.getNextButton().click()
   }
 
