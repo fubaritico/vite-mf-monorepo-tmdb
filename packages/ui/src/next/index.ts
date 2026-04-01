@@ -10,8 +10,8 @@ export type {
 export { HeroImage } from './HeroImage'
 export type { NextHeroImageProps } from './HeroImage'
 
-export { NextImage } from './Image'
-export type { NextImageProps } from './Image'
+export { NextImage, NextImageClient } from './Image'
+export type { NextImageProps, NextImageClientProps } from './Image'
 
 export { MovieCard } from './MovieCard'
 export type {
