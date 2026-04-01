@@ -1,5 +1,3 @@
-'use client'
-
 import { Card } from '../../Card'
 import { getMovieCardClasses } from '../../MovieCard/MovieCard.utils'
 import { Rating } from '../../Rating'

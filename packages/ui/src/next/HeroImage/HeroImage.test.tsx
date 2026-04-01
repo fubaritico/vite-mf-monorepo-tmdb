@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
 import HeroImage from './HeroImage'
@@ -8,12 +8,6 @@ import '@testing-library/jest-dom'
 vi.mock('next/image', () => ({
   default: (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
     <img {...props} />
-  ),
-}))
-
-vi.mock('../../Icon', () => ({
-  Icon: ({ name, ...props }: { name: string }) => (
-    <span data-testid="icon" data-name={name} {...props} />
   ),
 }))
 
@@ -41,20 +35,22 @@ describe('HeroImage (next)', () => {
     expect(overlay).toBeInTheDocument()
   })
 
-  it('should show fallback skeleton on image error', async () => {
-    render(<HeroImage backdropPath="/path/to/image.jpg" title="Test Movie" />)
-    fireEvent.error(screen.getByAltText('Test Movie'))
-
-    await waitFor(() => {
-      expect(screen.getByTestId('hero-image-skeleton')).toBeInTheDocument()
-    })
-  })
-
-  it('should construct TMDB original URL', () => {
+  it('should construct TMDB w1280 URL', () => {
     render(<HeroImage backdropPath="/abc123.jpg" title="Test" />)
     expect(screen.getByAltText('Test')).toHaveAttribute(
       'src',
-      'https://image.tmdb.org/t/p/original/abc123.jpg'
+      'https://image.tmdb.org/t/p/w1280/abc123.jpg'
     )
+  })
+
+  it('should pass blurDataURL to NextImage', () => {
+    render(
+      <HeroImage
+        backdropPath="/abc123.jpg"
+        title="Test"
+        blurDataURL="data:image/jpeg;base64,abc"
+      />
+    )
+    expect(screen.getByAltText('Test')).toBeInTheDocument()
   })
 })

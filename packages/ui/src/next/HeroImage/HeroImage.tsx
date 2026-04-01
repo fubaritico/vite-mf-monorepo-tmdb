@@ -1,5 +1,3 @@
-'use client'
-
 import { Skeleton } from '../../Skeleton'
 import { NextImage } from '../Image'
 
@@ -8,11 +6,17 @@ export interface NextHeroImageProps {
   backdropPath?: string | null
   /** Alt text for the image */
   title?: string | null
+  /** Base64 blur data URL for instant placeholder */
+  blurDataURL?: string
 }
 
-function HeroImage({ backdropPath, title }: Readonly<NextHeroImageProps>) {
+function HeroImage({
+  backdropPath,
+  title,
+  blurDataURL,
+}: Readonly<NextHeroImageProps>) {
   const src = backdropPath
-    ? `https://image.tmdb.org/t/p/original${backdropPath}`
+    ? `https://image.tmdb.org/t/p/w1280${backdropPath}`
     : undefined
 
   return (
@@ -25,16 +29,7 @@ function HeroImage({ backdropPath, title }: Readonly<NextHeroImageProps>) {
           preload
           sizes="100vw"
           className="ui:relative ui:h-full ui:w-full ui:z-0"
-          imageClassName="ui:h-auto! ui:w-full"
-          fallback={
-            <Skeleton
-              data-testid="hero-image-skeleton"
-              variant="rectangle"
-              width="ui:relative ui:w-full ui:h-full ui:aspect-[21/9] ui:lg:max-h-[440px] ui:z-0"
-              aspectRatio="21/9"
-              rounded={false}
-            />
-          }
+          blurDataURL={blurDataURL}
         />
       ) : (
         <Skeleton
