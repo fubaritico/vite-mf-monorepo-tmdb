@@ -8,6 +8,7 @@ function NextImage({
   blurDataURL,
   className,
   imageClassName,
+  imageStyle,
   style,
   ...rest
 }: Readonly<NextImageProps>) {
@@ -19,6 +20,7 @@ function NextImage({
       <Image
         {...rest}
         className={imageClassName}
+        style={imageStyle}
         placeholder={blurDataURL ? 'blur' : 'empty'}
         blurDataURL={blurDataURL}
       />

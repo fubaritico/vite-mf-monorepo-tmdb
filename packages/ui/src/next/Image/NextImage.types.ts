@@ -1,4 +1,5 @@
 import type { ImageProps } from 'next/image'
+import type { CSSProperties } from 'react'
 
 export interface NextImageProps extends Omit<ImageProps, 'placeholder'> {
   /** Container aspect ratio (e.g. '2/3', '16/9') */
@@ -7,4 +8,6 @@ export interface NextImageProps extends Omit<ImageProps, 'placeholder'> {
   blurDataURL?: string
   /** Classes applied directly to the `<Image>` element */
   imageClassName?: string
+  /** Inline styles applied directly to the `<Image>` element (overrides fill defaults) */
+  imageStyle?: CSSProperties
 }
