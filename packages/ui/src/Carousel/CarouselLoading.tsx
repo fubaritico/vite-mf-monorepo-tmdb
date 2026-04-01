@@ -30,7 +30,10 @@ function CarouselLoading({
   rounded = true,
 }: Readonly<CarouselLoadingProps>) {
   return (
-    <div className="ui:overflow-x-auto ui:flex ui:gap-4">
+    <div
+      className="ui:overflow-x-auto ui:flex ui:gap-4"
+      data-testid="carousel-loading"
+    >
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}

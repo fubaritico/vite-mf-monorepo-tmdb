@@ -4,6 +4,7 @@ exports[`Skeleton > renders circle variant 1`] = `
 <div>
   <div
     class="ui:relative ui:overflow-hidden ui:bg-muted ui-skeleton-shimmer ui:rounded-full"
+    data-testid="skeleton"
   />
 </div>
 `;
@@ -12,6 +13,7 @@ exports[`Skeleton > renders default (rectangle variant) 1`] = `
 <div>
   <div
     class="ui:relative ui:overflow-hidden ui:bg-muted ui-skeleton-shimmer ui:rounded-lg"
+    data-testid="skeleton"
   />
 </div>
 `;
@@ -20,6 +22,7 @@ exports[`Skeleton > renders line variant 1`] = `
 <div>
   <div
     class="ui:relative ui:overflow-hidden ui:bg-muted ui-skeleton-shimmer ui:rounded"
+    data-testid="skeleton"
   />
 </div>
 `;
@@ -28,6 +31,7 @@ exports[`Skeleton > renders line with rounded=false 1`] = `
 <div>
   <div
     class="ui:relative ui:overflow-hidden ui:bg-muted ui-skeleton-shimmer"
+    data-testid="skeleton"
   />
 </div>
 `;
@@ -36,6 +40,7 @@ exports[`Skeleton > renders rectangle with rounded=false 1`] = `
 <div>
   <div
     class="ui:relative ui:overflow-hidden ui:bg-muted ui-skeleton-shimmer"
+    data-testid="skeleton"
   />
 </div>
 `;
@@ -44,6 +49,7 @@ exports[`Skeleton > renders with aspectRatio 1`] = `
 <div>
   <div
     class="ui:relative ui:overflow-hidden ui:bg-muted ui-skeleton-shimmer ui:rounded-lg"
+    data-testid="skeleton"
     style="aspect-ratio: 16 / 9;"
   />
 </div>
@@ -53,6 +59,7 @@ exports[`Skeleton > renders with custom className 1`] = `
 <div>
   <div
     class="ui:relative ui:overflow-hidden ui:bg-muted ui-skeleton-shimmer ui:rounded-lg ui:custom"
+    data-testid="skeleton"
   />
 </div>
 `;
@@ -61,6 +68,7 @@ exports[`Skeleton > renders with width and height 1`] = `
 <div>
   <div
     class="ui:relative ui:overflow-hidden ui:bg-muted ui-skeleton-shimmer ui:rounded-lg 200px 100px"
+    data-testid="skeleton"
   />
 </div>
 `;
