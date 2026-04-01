@@ -1,4 +1,4 @@
-## <small>0.5.5 (2026-04-01)</small>
+## <small>0.5.6 (2026-04-01)</small>
 
 * docs: add accessibility (a11y) testing guide to README ([62608c9](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/62608c9))
 * docs: add acknowledgment for Nsttt (DTS plugin) ([87ff972](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/87ff972))
@@ -69,6 +69,7 @@
 * docs(tokens): update changelog for version bump ([02bc860](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/02bc860))
 * docs(ui): add JSDoc comments to Rating subcomponent props ([9234971](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/9234971))
 * docs(ui): add JSDoc documentation to Carousel components ([101dc1e](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/101dc1e))
+* docs(ui): update changelog for version bump ([a1b62c4](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/a1b62c4))
 * docs(ui): update changelog for version bump ([553190c](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/553190c))
 * docs(ui): update changelog for version bump ([62fd716](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/62fd716))
 * docs(ui): update changelog for version bump ([d6bb59f](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/d6bb59f))
