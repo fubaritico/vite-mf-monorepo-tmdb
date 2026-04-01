@@ -29,6 +29,7 @@ function HeroImage({
           preload
           sizes="100vw"
           className="ui:relative ui:h-full ui:w-full ui:z-0"
+          style={{ objectFit: 'cover' }}
           blurDataURL={blurDataURL}
         />
       ) : (
