@@ -43,6 +43,7 @@ function Skeleton({
         height,
         className
       )}
+      data-testid="skeleton"
       style={aspectRatio ? { aspectRatio } : undefined}
       {...rest}
     />

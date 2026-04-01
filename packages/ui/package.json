@@ -1,6 +1,6 @@
 {
   "name": "@vite-mf-monorepo/ui",
-  "version": "0.4.21",
+  "version": "0.4.22",
   "description": "Design system components for vite-mf-monorepo",
   "type": "module",
   "publishConfig": {
@@ -51,12 +51,12 @@
     "test:watch": "vitest",
     "lint": "eslint . --max-warnings 0",
     "typecheck": "tsc --noEmit",
-    "local-release:patch": "pnpm build && ./publish-local.sh patch",
-    "local-release:minor": "pnpm build && ./publish-local.sh minor",
-    "local-release:major": "pnpm build && ./publish-local.sh major",
-    "release:patch": "pnpm build && ./publish.sh patch",
-    "release:minor": "pnpm build && ./publish.sh minor",
-    "release:major": "pnpm build && ./publish.sh major"
+    "local-release:patch": "./publish-local.sh patch",
+    "local-release:minor": "./publish-local.sh minor",
+    "local-release:major": "./publish-local.sh major",
+    "release:patch": "./publish.sh patch",
+    "release:minor": "./publish.sh minor",
+    "release:major": "./publish.sh major"
   },
   "peerDependencies": {
     "next": ">=14",
