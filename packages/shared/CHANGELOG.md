@@ -1,4 +1,4 @@
-## 0.1.0 (2026-04-02)
+## <small>0.1.1 (2026-04-02)</small>
 
 * docs: add accessibility (a11y) testing guide to README ([62608c9](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/62608c9))
 * docs: add acknowledgment for Nsttt (DTS plugin) ([87ff972](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/87ff972))
@@ -62,6 +62,7 @@
 * docs(readme): document all GitHub Actions secrets with build-time embedding explanation ([88169e0](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/88169e0))
 * docs(rules): add comprehensive Windsurf Cascade rules ([5b5b80a](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/5b5b80a))
 * docs(rules): document officially supported TMDB image sizes ([5c03094](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/5c03094))
+* docs(shared): update changelog for version bump ([1823bad](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/1823bad))
 * docs(shared): update changelog for version bump ([99223c2](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/99223c2))
 * docs(shared): update changelog for version bump ([f02ba7b](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/f02ba7b))
 * docs(shared): update changelog for version bump ([7d9b6c1](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/7d9b6c1))
