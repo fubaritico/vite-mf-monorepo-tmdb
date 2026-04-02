@@ -60,7 +60,10 @@ export default function Header({
         'layout:sticky layout:top-0 layout:z-50',
         'layout:bg-black layout:text-white layout:drop-shadow-2xl',
         'layout:transition-all layout:duration-300',
-        isCompact ? 'layout:h-16' : 'layout:h-20',
+        {
+          'layout:h-16': isCompact,
+          'layout:h-20': !isCompact,
+        },
         className
       )}
       {...rest}
@@ -68,7 +71,8 @@ export default function Header({
       <Section
         spacing="sm"
         maxWidth="xl"
-        className="layout:h-full layout:flex layout:items-center layout:justify-between layout:py-0"
+        className="layout:h-full layout:flex layout:justify-between layout:py-0"
+        direction="row"
       >
         {logo && <div className="layout:flex layout:items-center">{logo}</div>}
         {children && (

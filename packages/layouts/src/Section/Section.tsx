@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import { cn } from '@vite-mf-monorepo/shared'
 
 import type { ComponentProps } from 'react'
 
@@ -12,6 +12,8 @@ export interface SectionProps extends ComponentProps<'section'> {
   maxWidth?: SectionMaxWidth
   /** Vertical spacing */
   spacing?: 'sm' | 'md' | 'lg'
+  /** flex direction for contents */
+  direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse'
 }
 
 /**
@@ -24,13 +26,28 @@ export default function Section({
   spacing = 'md',
   className,
   children,
+  direction = 'column',
   ...rest
 }: Readonly<SectionProps>) {
+  const flexDirectionClass = ((): Record<string, boolean> => {
+    switch (direction) {
+      case 'row-reverse':
+        return { 'layout:flex-row-reverse': true }
+      case 'column':
+        return { 'layout:flex-col': true }
+      case 'column-reverse':
+        return { 'layout:flex-col-reverse': true }
+      case 'row':
+      default:
+        return { 'layout:flex-row': true }
+    }
+  })()
+
   return (
     <section
-      className={clsx(
+      className={cn(
         'layout:mx-auto layout:px-4 sm:layout:px-5 md:layout:px-6 lg:layout:px-8',
-        'layout:flex layout:flex-col layout:gap-4',
+        'layout:flex layout:flex-col layout:gap-4 layout:justify-start',
         {
           'layout:max-w-screen-sm': maxWidth === 'sm',
           'layout:max-w-screen-md': maxWidth === 'md',
@@ -41,6 +58,7 @@ export default function Section({
           'layout:py-6': spacing === 'sm',
           'layout:py-12': spacing === 'md',
           'layout:py-16': spacing === 'lg',
+          ...flexDirectionClass,
         },
         className
       )}
