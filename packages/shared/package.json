@@ -1,6 +1,6 @@
 {
   "name": "@vite-mf-monorepo/shared",
-  "version": "0.0.6",
+  "version": "0.1.2",
   "type": "module",
   "publishConfig": {
     "access": "public"
@@ -67,6 +67,8 @@
   "peerDependencies": {
     "@tanstack/react-query": "catalog:",
     "@testing-library/react": "catalog:",
+    "clsx": "catalog:",
+    "tailwind-merge": "^3.5.0",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router-dom": "catalog:"

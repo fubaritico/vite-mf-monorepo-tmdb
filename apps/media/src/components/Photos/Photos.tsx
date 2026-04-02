@@ -1,6 +1,7 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
 import { getImageUrl } from '@vite-mf-monorepo/shared'
 import { Icon, Skeleton, Typography } from '@vite-mf-monorepo/ui'
+import clsx from 'clsx'
 import { Link, useLocation, useParams } from 'react-router-dom'
 
 import { useMediaImages } from '../../hooks'
@@ -34,7 +35,7 @@ const Photos: FC = () => {
             />
             {Array.from({ length: 3 }).map((_, i) => (
               <Skeleton
-                key={i}
+                key={String(i) + '-photos-skeleton'}
                 variant="rectangle"
                 width="100%"
                 height="100%"
@@ -74,7 +75,7 @@ const Photos: FC = () => {
           >
             <img
               src={getImageUrl(photos[0]?.file_path, 'w780')}
-              alt="Photo 1"
+              alt="Photograph 1"
               className="mda:w-full mda:h-full mda:object-cover mda:transition-transform mda:duration-200 hover:mda:scale-105"
             />
           </Link>
@@ -89,7 +90,7 @@ const Photos: FC = () => {
             >
               <img
                 src={getImageUrl(photo.file_path, 'w300')}
-                alt={`Photo ${String(i + 2)}`}
+                alt={`Photograph ${String(i + 2)}`}
                 className="mda:w-full mda:h-full mda:object-cover mda:transition-transform mda:duration-200 hover:mda:scale-105"
               />
             </Link>
@@ -98,7 +99,12 @@ const Photos: FC = () => {
           {/* CTA tile — "X photos" */}
           <Link
             to={`photos/${photos[0]?.id ?? ''}`}
-            className="mda:aspect-video mda:md:aspect-auto mda:flex mda:flex-col mda:items-center mda:justify-center mda:gap-2 mda:rounded-md mda:bg-muted mda:transition-colors hover:mda:bg-muted/70 mda:focus-visible:outline-none mda:focus-visible:ring-2 mda:focus-visible:ring-ring"
+            className={clsx(
+              'mda:aspect-video mda:md:aspect-auto mda:flex mda:flex-col',
+              'mda:items-center mda:justify-center mda:gap-2 mda:rounded-md mda:bg-muted',
+              'mda:transition-colors hover:mda:bg-muted/70 mda:focus-visible:outline-none',
+              'mda:focus-visible:ring-2 mda:focus-visible:ring-ring mda:[.media-section:nth-of-type(odd)_&]:bg-white'
+            )}
             aria-label={`View all ${String(total)} photos`}
           >
             <Icon
@@ -110,7 +116,7 @@ const Photos: FC = () => {
               variant="body"
               className="mda:text-badge-foreground mda:font-semibold"
             >
-              {total} photos
+              {total} photo{total > 1 && 's'}
             </Typography>
           </Link>
         </div>
