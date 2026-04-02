@@ -65,7 +65,7 @@ function HeroImage({ backdropPath, title }: Readonly<HeroImageProps>) {
               setLoading(false)
             }}
             alt={title ?? 'Unknown'}
-            className="ui:relative ui:h-full ui:w-full ui:object-cover ui:object-center ui:z-0"
+            className="ui:absolute ui:w-full ui:object-cover ui:object-center ui:z-0 ui:h-auto! ui:top-1/2 ui:-translate-y-1/2 ui:xl:top-0 ui:xl:-translate-y-0"
           />
         )}
       </picture>
