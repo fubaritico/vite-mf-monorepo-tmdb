@@ -25,15 +25,11 @@ function HeroImage({
         <NextImage
           src={src}
           alt={title ?? 'Unknown'}
-          fill
           preload
+          fill
           sizes="100vw"
           className="ui:relative ui:h-full ui:w-full ui:z-0"
-          imageStyle={{
-            objectFit: 'cover',
-            objectPosition: 'center',
-            height: 'auto',
-          }}
+          imageClassName="ui:object-cover ui:object-center ui:h-auto!"
           blurDataURL={blurDataURL}
         />
       ) : (
