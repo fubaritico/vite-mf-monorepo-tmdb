@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import type { HTMLAttributes } from 'react'
 
 export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
-  /** Background variant */
+  /** Background variant 'default' for transparent background, 'muted' for light grey background */
   variant?: 'default' | 'muted'
 }
 

@@ -10,6 +10,7 @@ import { useLocation, useParams } from 'react-router-dom'
 
 import { useMediaDetails } from '../../hooks'
 import { formatRuntime, getMediaTypeFromPath, isMovie } from '../../utils'
+import { isTvSeries } from '../../utils/typeGuards.ts'
 
 import type { FC } from 'react'
 
@@ -51,11 +52,11 @@ const MediaHero: FC = () => {
   const title = isMovie(media) ? media.title : media.name
   const releaseDate = isMovie(media) ? media.release_date : media.first_air_date
   const runtime = isMovie(media) ? media.runtime : undefined
-  const numberOfSeasons = !isMovie(media)
-    ? (media as { number_of_seasons?: number }).number_of_seasons
+  const numberOfSeasons = isTvSeries(media)
+    ? media.number_of_seasons
     : undefined
-  const numberOfEpisodes = !isMovie(media)
-    ? (media as { number_of_episodes?: number }).number_of_episodes
+  const numberOfEpisodes = isTvSeries(media)
+    ? media.number_of_episodes
     : undefined
 
   const releaseYear = releaseDate
@@ -68,9 +69,6 @@ const MediaHero: FC = () => {
       {/* Backdrop Image */}
       <div className="mda:relative mda:hero-height mda:w-full mda:overflow-hidden">
         <HeroImage backdropPath={media.backdrop_path} />
-
-        {/* Gradient Overlay */}
-        <div className="mda:absolute mda:inset-0 mda:bg-gradient-to-t mda:from-black/80 mda:via-black/40 mda:to-transparent mda:z-1 mda:top-0 mda:left-0 mda:right-0 mda:bottom-0" />
 
         {/* Content Overlay */}
         <div

@@ -1,11 +1,11 @@
 import clsx from 'clsx'
 
-import type { HTMLAttributes } from 'react'
+import type { ComponentProps } from 'react'
 
 /** Section max-width variants */
 export type SectionMaxWidth = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full'
 
-export interface SectionProps extends HTMLAttributes<HTMLElement> {
+export interface SectionProps extends ComponentProps<'section'> {
   /** Section title */
   title?: string
   /** Maximum width variant */
@@ -30,6 +30,7 @@ export default function Section({
     <section
       className={clsx(
         'layout:mx-auto layout:px-4 sm:layout:px-5 md:layout:px-6 lg:layout:px-8',
+        'layout:flex layout:flex-col layout:gap-4',
         {
           'layout:max-w-screen-sm': maxWidth === 'sm',
           'layout:max-w-screen-md': maxWidth === 'md',

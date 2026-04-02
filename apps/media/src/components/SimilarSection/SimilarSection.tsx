@@ -20,15 +20,13 @@ const SimilarSection: FC = () => {
   return (
     <Container variant="default">
       <Section maxWidth="xl" spacing="md">
-        <div className="mda:flex mda:flex-col mda:gap-4">
-          <Typography variant="h2">You may also like</Typography>
+        <Typography variant="h2">You may also like</Typography>
 
-          {mediaType === 'movie' ? (
-            <SimilarMoviesCarousel id={Number(id)} />
-          ) : (
-            <SimilarTVCarousel id={Number(id)} />
-          )}
-        </div>
+        {mediaType === 'movie' ? (
+          <SimilarMoviesCarousel id={Number(id)} />
+        ) : (
+          <SimilarTVCarousel id={Number(id)} />
+        )}
       </Section>
     </Container>
   )
