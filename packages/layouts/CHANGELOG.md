@@ -1,4 +1,4 @@
-## <small>0.4.5 (2026-04-02)</small>
+## <small>0.4.6 (2026-04-02)</small>
 
 * docs: add accessibility (a11y) testing guide to README ([62608c9](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/62608c9))
 * docs: add acknowledgment for Nsttt (DTS plugin) ([87ff972](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/87ff972))
@@ -41,6 +41,7 @@
 * docs(http-client): update changelog for version bump ([2f2307c](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/2f2307c))
 * docs(http-client): update changelog for version bump ([dd5003d](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/dd5003d))
 * docs(http-client): update changelog for version bump ([1a7a80e](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/1a7a80e))
+* docs(layouts): update changelog for version bump ([b0a9e05](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/b0a9e05))
 * docs(layouts): update changelog for version bump ([dda5729](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/dda5729))
 * docs(layouts): update changelog for version bump ([0efc40b](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/0efc40b))
 * docs(layouts): update changelog for version bump ([b57c91d](https://github.com/fubaritico/vite-mf-monorepo-tmdb/commit/b57c91d))
