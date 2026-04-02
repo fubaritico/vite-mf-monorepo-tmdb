@@ -88,6 +88,9 @@
   .mda\:grid {
     display: grid;
   }
+  .mda\:aspect-\[21\/9\] {
+    aspect-ratio: 21/9;
+  }
   .mda\:aspect-video {
     aspect-ratio: var(--mda-aspect-video);
   }
@@ -289,6 +292,11 @@
   .mda\:lg\:bottom-8 {
     @media (width >= 64rem) {
       bottom: var(--mda-spacing-8);
+    }
+  }
+  .mda\:lg\:max-h-\[440px\] {
+    @media (width >= 64rem) {
+      max-height: 440px;
     }
   }
   .mda\:lg\:grid-cols-3 {

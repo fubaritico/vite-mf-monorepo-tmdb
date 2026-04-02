@@ -35,7 +35,7 @@ const HeroSection: FC = () => {
 
   if (error || !data) {
     const errorMsg =
-      error?.status_message ?? (!data ? 'No data' : 'Failed to load')
+      error?.status_message ?? (data ? 'Failed to load' : 'No data')
     return <Carousel variant="hero" rounded={false} errorMessage={errorMsg} />
   }
 
@@ -52,7 +52,7 @@ const HeroSection: FC = () => {
             to={`/movie/${String(item.id)}`}
             className="hm:block hm:no-underline"
           >
-            <div className="hm:relative hm:hero-height hm:w-full hm:overflow-hidden">
+            <div className="hm:relative hm:aspect-[21/9] hm:lg:max-h-[440px] hm:w-full hm:overflow-hidden">
               <HeroImage backdropPath={item.backdrop_path} title={item.title} />
 
               {/* Content Overlay */}

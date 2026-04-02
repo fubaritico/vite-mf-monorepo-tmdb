@@ -67,7 +67,7 @@ const MediaHero: FC = () => {
   return (
     <div className="mda:relative mda:w-full">
       {/* Backdrop Image */}
-      <div className="mda:relative mda:hero-height mda:w-full mda:overflow-hidden">
+      <div className="mda:relative mda:aspect-[21/9] mda:lg:max-h-[440px] mda:w-full mda:overflow-hidden">
         <HeroImage backdropPath={media.backdrop_path} />
 
         {/* Content Overlay */}

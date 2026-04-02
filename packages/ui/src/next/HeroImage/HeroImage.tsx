@@ -29,7 +29,7 @@ function HeroImage({
           fill
           sizes="100vw"
           className="ui:relative ui:h-full ui:w-full ui:z-0"
-          imageClassName="ui:object-cover ui:object-center ui:h-auto!"
+          imageClassName="ui:object-cover ui:object-center ui:h-auto! ui:top-1/2! ui:-translate-y-1/2 ui:xl:top-0! ui:xl:-translate-y-0"
           blurDataURL={blurDataURL}
         />
       ) : (

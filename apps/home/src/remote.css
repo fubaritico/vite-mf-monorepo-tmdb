@@ -47,6 +47,9 @@
   .hm\:flex {
     display: flex;
   }
+  .hm\:aspect-\[21\/9\] {
+    aspect-ratio: 21/9;
+  }
   .hm\:w-full {
     width: 100%;
   }
@@ -110,6 +113,11 @@
   .hm\:lg\:bottom-10 {
     @media (width >= 64rem) {
       bottom: var(--hm-spacing-10);
+    }
+  }
+  .hm\:lg\:max-h-\[440px\] {
+    @media (width >= 64rem) {
+      max-height: 440px;
     }
   }
   .hm\:lg\:px-5 {
