@@ -66,9 +66,10 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `NextImage` `imageClassName` prop + `HeroImage /next` sizing (`aspect-[21/9]` + `max-h-[440px]`)
 - E2E: skip flaky "Navigating to the next photo" scenario (`@skip` tag + `not @skip` filter in cucumber config), bump timeout to 15s, add waitFor on Next button
 - `@vite-mf-monorepo/ui@0.4.22` published: added `data-testid` to CarouselLoading (`carousel-loading`), Skeleton (`skeleton`), CarouselError (`carousel-error`) for consumer test assertions; removed redundant `pnpm build` from release scripts
+- `@vite-mf-monorepo/ui@0.5.6` published: split `NextImage` into server and client variants — `NextImage` (no `'use client'`, full opacity, SSR-safe) and `NextImageClient` (fade-in, error fallback, `data-state`); `HeroImage` and `MovieCardContent` now server-compatible; `HeroImage` uses `w1280` instead of `original`, accepts `blurDataURL`; added `imageStyle` and `imageClassName` props to `NextImage`
 
 ### Next
-- Apply cross-zone changes in `nextjs-multizone-tmdb` consumer: `as="zone-link"` on cross-zone MovieCard/Button links, `crossZoneHome` on non-home zone layouts
+- Apply cross-zone changes in `nextjs-multizone-tmdb` consumer: `as="zone-link"` on cross-zone MovieCard/Button links, `crossZoneHome` on non-home zone layouts, pass `blurDataURL` to `HeroImage` and `MovieCard`
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported
