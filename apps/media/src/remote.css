@@ -32,6 +32,7 @@
     --mda-color-white: #ffffff;
     --mda-breakpoint-xl: 80rem;
     --mda-font-weight-semibold: 600;
+    --mda-font-weight-bold: 700;
     --mda-radius-md: 0.5rem;
     --mda-aspect-video: 16 / 9;
     --mda-default-transition-duration: 150ms;
@@ -69,6 +70,9 @@
   }
   .mda\:col-span-2 {
     grid-column: span 2 / span 2;
+  }
+  .mda\:mt-3 {
+    margin-top: var(--mda-spacing-3);
   }
   .mda\:mb-1 {
     margin-bottom: var(--mda-spacing-1);
@@ -119,9 +123,6 @@
   .mda\:flex-col {
     flex-direction: column;
   }
-  .mda\:flex-row {
-    flex-direction: row;
-  }
   .mda\:flex-wrap {
     flex-wrap: wrap;
   }
@@ -153,6 +154,12 @@
       margin-block-end: calc(var(--mda-spacing-2) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
+  .mda\:gap-x-8 {
+    column-gap: var(--mda-spacing-8);
+  }
+  .mda\:gap-y-2 {
+    row-gap: var(--mda-spacing-2);
+  }
   .mda\:overflow-hidden {
     overflow: hidden;
   }
@@ -167,6 +174,10 @@
   }
   .mda\:px-4 {
     padding-inline: var(--mda-spacing-4);
+  }
+  .mda\:font-bold {
+    --tw-font-weight: var(--mda-font-weight-bold);
+    font-weight: var(--mda-font-weight-bold);
   }
   .mda\:font-semibold {
     --tw-font-weight: var(--mda-font-weight-semibold);
@@ -189,6 +200,9 @@
   }
   .mda\:italic {
     font-style: italic;
+  }
+  .mda\:opacity-80 {
+    opacity: 80%;
   }
   .mda\:opacity-90 {
     opacity: 90%;
@@ -227,6 +241,11 @@
   .mda\:sm\:bottom-5 {
     @media (width >= 40rem) {
       bottom: var(--mda-spacing-5);
+    }
+  }
+  .mda\:sm\:mt-4 {
+    @media (width >= 40rem) {
+      margin-top: var(--mda-spacing-4);
     }
   }
   .mda\:sm\:mb-2 {

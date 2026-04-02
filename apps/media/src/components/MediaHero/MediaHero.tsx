@@ -8,7 +8,7 @@ import {
 import clsx from 'clsx'
 import { useLocation, useParams } from 'react-router-dom'
 
-import { useMediaDetails } from '../../hooks'
+import { useMediaCredits, useMediaDetails } from '../../hooks'
 import { formatRuntime, getMediaTypeFromPath, isMovie } from '../../utils'
 import { isTvSeries } from '../../utils/typeGuards.ts'
 
@@ -26,6 +26,7 @@ const MediaHero: FC = () => {
     isLoading,
     error,
   } = useMediaDetails(mediaType, contentId)
+  const { data: credits } = useMediaCredits(mediaType, contentId)
 
   if (isLoading) {
     return (
@@ -63,6 +64,11 @@ const MediaHero: FC = () => {
     ? new Date(releaseDate).getFullYear().toString()
     : undefined
   const genreNames = media.genres?.map((g) => g.name ?? '') ?? []
+
+  const director = credits?.crew?.find((c) => c.job === 'Director')
+  const writers = credits?.crew
+    ?.filter((c) => c.department === 'Writing')
+    .slice(0, 2)
 
   return (
     <div className="mda:relative mda:w-full">
@@ -188,6 +194,44 @@ const MediaHero: FC = () => {
                   <Badge key={genre} variant="secondary" size="sm">
                     {genre}
                   </Badge>
+                ))}
+              </div>
+            )}
+
+            {/* Crew */}
+            {(director ?? (writers && writers.length > 0)) && (
+              <div className="mda:mt-3 mda:sm:mt-4 mda:flex mda:flex-wrap mda:gap-x-8 mda:gap-y-2">
+                {director && (
+                  <div>
+                    <Typography
+                      variant="body"
+                      className="mda:font-bold mda:text-white! mda:text-shadow-strong"
+                    >
+                      {director.name}
+                    </Typography>
+                    <Typography
+                      variant="body-sm"
+                      className="mda:text-white! mda:opacity-80 mda:text-shadow-strong"
+                    >
+                      Director
+                    </Typography>
+                  </div>
+                )}
+                {writers?.map((writer) => (
+                  <div key={writer.id}>
+                    <Typography
+                      variant="body"
+                      className="mda:font-bold mda:text-white! mda:text-shadow-strong"
+                    >
+                      {writer.name}
+                    </Typography>
+                    <Typography
+                      variant="body-sm"
+                      className="mda:text-white! mda:opacity-80 mda:text-shadow-strong"
+                    >
+                      {writer.job}
+                    </Typography>
+                  </div>
                 ))}
               </div>
             )}

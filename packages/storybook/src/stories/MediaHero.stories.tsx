@@ -1,6 +1,8 @@
 import { MediaHero } from '@vite-mf-monorepo/media'
 import {
+  movieCreditsHandlers,
   movieDetailsHandlers,
+  tvSeriesCreditsHandlers,
   tvSeriesDetailsHandlers,
 } from '@vite-mf-monorepo/shared/mocks'
 
@@ -23,7 +25,10 @@ export const Movie: Story = {
   parameters: {
     layout: 'fullscreen',
     msw: {
-      handlers: [movieDetailsHandlers.movieDetails],
+      handlers: [
+        movieDetailsHandlers.movieDetails,
+        movieCreditsHandlers.movieCredits,
+      ],
     },
   },
   decorators: [withRouter('/movie/278')],
@@ -32,7 +37,10 @@ export const Movie: Story = {
 export const TVSeries: Story = {
   parameters: {
     msw: {
-      handlers: [tvSeriesDetailsHandlers.tvSeriesDetails],
+      handlers: [
+        tvSeriesDetailsHandlers.tvSeriesDetails,
+        tvSeriesCreditsHandlers.tvSeriesCredits,
+      ],
     },
   },
   decorators: [withRouter('/tv/549')],

@@ -12,10 +12,6 @@ vi.mock('./Synopsis', () => ({
   Synopsis: () => <div data-testid="synopsis">Synopsis</div>,
 }))
 
-vi.mock('./Crew', () => ({
-  Crew: () => <div data-testid="crew">Crew</div>,
-}))
-
 vi.mock('./Photos', () => ({
   Photos: () => <div data-testid="photos">Photos</div>,
 }))
@@ -45,12 +41,11 @@ vi.mock('../remote.css', () => ({}))
 import Media from './Media'
 
 describe('Media', () => {
-  it('renders all 8 sections', () => {
+  it('renders all 7 sections', () => {
     renderWithRouter(<Media />)
 
     expect(screen.getByTestId('media-hero')).toBeInTheDocument()
     expect(screen.getByTestId('synopsis')).toBeInTheDocument()
-    expect(screen.getByTestId('crew')).toBeInTheDocument()
     expect(screen.getByTestId('photos')).toBeInTheDocument()
     expect(screen.getByTestId('cast')).toBeInTheDocument()
     expect(screen.getByTestId('trailers-section')).toBeInTheDocument()
@@ -68,12 +63,6 @@ describe('Media', () => {
     renderWithRouter(<Media />)
 
     expect(screen.getByTestId('synopsis')).toBeInTheDocument()
-  })
-
-  it('renders Crew section', () => {
-    renderWithRouter(<Media />)
-
-    expect(screen.getByTestId('crew')).toBeInTheDocument()
   })
 
   it('renders Photos section', () => {
@@ -116,7 +105,6 @@ describe('Media', () => {
     const expectedOrder = [
       'media-hero',
       'synopsis',
-      'crew',
       'photos',
       'cast',
       'trailers-section',
