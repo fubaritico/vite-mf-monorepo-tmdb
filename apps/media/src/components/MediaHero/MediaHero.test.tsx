@@ -5,8 +5,10 @@ import {
   renderComponentWithRouter,
 } from '@vite-mf-monorepo/shared'
 import {
+  mockMovieCredits,
   mockMovieDetails,
   mockTVSeriesDetails,
+  movieCreditsHandlers,
   movieDetailsHandlers,
   tvSeriesDetailsHandlers,
 } from '@vite-mf-monorepo/shared/mocks'
@@ -123,6 +125,45 @@ describe('MediaHero - Loading & Error States', () => {
       expect(
         screen.getByText('The resource you requested could not be found.')
       ).toBeInTheDocument()
+    })
+  })
+})
+
+describe('MediaHero - Crew', () => {
+  it('should display director name and role', async () => {
+    server.use(
+      movieDetailsHandlers.movieDetails,
+      movieCreditsHandlers.movieCredits
+    )
+
+    renderComponentWithRouter(<MediaHero />, '/movie/278')
+
+    const director = mockMovieCredits.crew?.find((c) => c.job === 'Director')
+
+    await waitFor(() => {
+      expect(
+        screen.getAllByText(director?.name ?? '').length
+      ).toBeGreaterThanOrEqual(1)
+      expect(screen.getByText('Director')).toBeInTheDocument()
+    })
+  })
+
+  it('should display writer roles', async () => {
+    server.use(
+      movieDetailsHandlers.movieDetails,
+      movieCreditsHandlers.movieCredits
+    )
+
+    renderComponentWithRouter(<MediaHero />, '/movie/278')
+
+    const writers = mockMovieCredits.crew
+      ?.filter((c) => c.department === 'Writing')
+      .slice(0, 2)
+
+    await waitFor(() => {
+      for (const writer of writers ?? []) {
+        expect(screen.getByText(writer.job ?? '')).toBeInTheDocument()
+      }
     })
   })
 })

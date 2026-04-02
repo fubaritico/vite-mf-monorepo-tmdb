@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
 import { Cast } from './Cast'
-import { Crew } from './Crew'
 import { MediaHero } from './MediaHero'
 import { Photos } from './Photos'
 import { RecommendedSection } from './RecommendedSection'
@@ -21,9 +20,6 @@ const Media: FC = () => {
 
       {/* Synopsis Section - White background */}
       <Synopsis />
-
-      {/* Crew Section - White background */}
-      <Crew />
 
       {/* Photos Section */}
       <Photos />

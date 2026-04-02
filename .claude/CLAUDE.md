@@ -69,7 +69,7 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `@vite-mf-monorepo/ui@0.5.6` published: split `NextImage` into server and client variants — `NextImage` (no `'use client'`, full opacity, SSR-safe) and `NextImageClient` (fade-in, error fallback, `data-state`); `HeroImage` and `MovieCardContent` now server-compatible; `HeroImage` uses `w1280` instead of `original`, accepts `blurDataURL`; added `imageStyle` and `imageClassName` props to `NextImage`
 
 ### Next
-- Apply cross-zone changes in `nextjs-multizone-tmdb` consumer: `as="zone-link"` on cross-zone MovieCard/Button links, `crossZoneHome` on non-home zone layouts, pass `blurDataURL` to `HeroImage` and `MovieCard`
+- (none)
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported
