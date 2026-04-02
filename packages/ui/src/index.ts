@@ -21,6 +21,9 @@ export type { IconButtonProps } from './IconButton'
 export { Image } from './Image'
 export type { AspectRatio, ImageProps, ImageState } from './Image'
 
+export { Input } from './Input'
+export type { InputProps, InputSize, InputMessageType } from './Input'
+
 export { HeroImage } from './HeroImage'
 export type { HeroImageProps } from './HeroImage'
 
