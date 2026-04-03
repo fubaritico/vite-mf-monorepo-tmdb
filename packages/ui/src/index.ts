@@ -24,6 +24,9 @@ export type { AspectRatio, ImageProps, ImageState } from './Image'
 export { Input } from './Input'
 export type { InputProps, InputSize, InputMessageType } from './Input'
 
+export { Menu } from './Menu'
+export type { MenuProps, MenuItemProps, MenuVariant } from './Menu'
+
 export { HeroImage } from './HeroImage'
 export type { HeroImageProps } from './HeroImage'
 
