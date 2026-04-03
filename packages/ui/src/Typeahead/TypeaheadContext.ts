@@ -36,8 +36,12 @@ export interface TypeaheadContextValue {
   getActiveEntry: (
     index: number
   ) => { value: string; disabled: boolean } | undefined
+  /** Whether the dropdown renders in a Portal (avoids overflow clipping) */
+  portal: boolean
   /** Ref to the root wrapper div (used for click-outside detection) */
   rootRef: RefObject<HTMLDivElement | null>
+  /** Ref to the input element (used for portal menu positioning) */
+  inputRef: RefObject<HTMLInputElement | null>
 }
 
 export const TypeaheadContext = createContext<TypeaheadContextValue | null>(

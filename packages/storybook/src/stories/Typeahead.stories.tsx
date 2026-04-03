@@ -32,6 +32,9 @@ const meta = {
     clearOnSelect: {
       control: 'boolean',
     },
+    portal: {
+      control: 'boolean',
+    },
   },
 } satisfies Meta<typeof Typeahead>
 
@@ -42,6 +45,7 @@ const PlaygroundComponent = (args: {
   variant?: 'light' | 'dark'
   debounceMs?: number
   clearOnSelect?: boolean
+  portal?: boolean
 }) => {
   const [results, setResults] = useState(allFruits)
   const [selected, setSelected] = useState<string>()
@@ -70,6 +74,7 @@ const PlaygroundComponent = (args: {
         variant={args.variant}
         debounceMs={args.debounceMs}
         clearOnSelect={args.clearOnSelect}
+        portal={args.portal}
         onSearch={handleSearch}
         onSelect={handleSelect}
       >
@@ -106,12 +111,14 @@ export const Playground: Story = {
     variant: 'light',
     debounceMs: 0,
     clearOnSelect: true,
+    portal: false,
   },
   render: (args) => (
     <PlaygroundComponent
       variant={args.variant}
       debounceMs={args.debounceMs}
       clearOnSelect={args.clearOnSelect}
+      portal={args.portal}
     />
   ),
 }
@@ -289,6 +296,71 @@ const ShowcaseComponent = () => {
                 </Typeahead.Item>
               </Typeahead.Menu>
             </Typeahead>
+          </div>
+        </div>
+      </div>
+
+      {/* Portal mode — overflow clipping demo */}
+      <div>
+        <h2 className="ui:text-xl ui:font-bold ui:mb-4">
+          Portal (overflow: hidden)
+        </h2>
+        <div className="ui:grid ui:grid-cols-2 ui:gap-6">
+          <div>
+            <h3 className="ui:text-sm ui:font-semibold ui:mb-2">
+              Without Portal (clipped)
+            </h3>
+            <div
+              style={{ height: 80, overflow: 'hidden' }}
+              className="ui:rounded-md ui:border ui:border-dashed ui:border-red-400 ui:p-2"
+            >
+              <Typeahead onSelect={() => undefined}>
+                <Typeahead.Input
+                  inputSize="sm"
+                  placeholder="Clipped..."
+                  icon="MagnifyingGlass"
+                />
+                <Typeahead.Menu>
+                  <Typeahead.Item index={0} value="1">
+                    Apple
+                  </Typeahead.Item>
+                  <Typeahead.Item index={1} value="2">
+                    Banana
+                  </Typeahead.Item>
+                  <Typeahead.Item index={2} value="3">
+                    Cherry
+                  </Typeahead.Item>
+                </Typeahead.Menu>
+              </Typeahead>
+            </div>
+          </div>
+          <div>
+            <h3 className="ui:text-sm ui:font-semibold ui:mb-2">
+              With Portal (escapes)
+            </h3>
+            <div
+              style={{ height: 80, overflow: 'hidden' }}
+              className="ui:rounded-md ui:border ui:border-dashed ui:border-green-500 ui:p-2"
+            >
+              <Typeahead portal onSelect={() => undefined}>
+                <Typeahead.Input
+                  inputSize="sm"
+                  placeholder="Escapes..."
+                  icon="MagnifyingGlass"
+                />
+                <Typeahead.Menu>
+                  <Typeahead.Item index={0} value="1">
+                    Apple
+                  </Typeahead.Item>
+                  <Typeahead.Item index={1} value="2">
+                    Banana
+                  </Typeahead.Item>
+                  <Typeahead.Item index={2} value="3">
+                    Cherry
+                  </Typeahead.Item>
+                </Typeahead.Menu>
+              </Typeahead>
+            </div>
           </div>
         </div>
       </div>

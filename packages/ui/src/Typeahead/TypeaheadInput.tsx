@@ -43,6 +43,7 @@ const TypeaheadInput: FC<TypeaheadInputProps> = (props) => {
     getActiveEntry,
     selectItem,
     getItemId,
+    inputRef,
   } = context
 
   const activeDescendant = activeIndex >= 0 ? getItemId(activeIndex) : undefined
@@ -119,6 +120,7 @@ const TypeaheadInput: FC<TypeaheadInputProps> = (props) => {
   return (
     <Input
       {...props}
+      ref={inputRef}
       value={inputValue}
       onChange={handleChange}
       onKeyDown={handleKeyDown}

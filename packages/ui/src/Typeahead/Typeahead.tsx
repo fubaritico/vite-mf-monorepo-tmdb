@@ -34,6 +34,8 @@ export interface TypeaheadProps
   minChars?: number
   /** Whether to clear the input after selecting an item (default: true) */
   clearOnSelect?: boolean
+  /** Render the dropdown in a Portal to avoid overflow clipping (default: false) */
+  portal?: boolean
   /** Color scheme for the dropdown menu and items */
   variant?: 'light' | 'dark'
   /** Compound children: Typeahead.Input, Typeahead.Menu, etc. */
@@ -69,6 +71,7 @@ function Typeahead({
   debounceMs = 0,
   minChars = 2,
   clearOnSelect = true,
+  portal = false,
   variant = 'light',
   className,
   children,
@@ -80,6 +83,7 @@ function Typeahead({
   const itemsRef = useRef<Map<number, ItemEntry>>(new Map())
   const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
   const rootRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const menuId = useId()
 
   /** Invokes onSearch with optional debounce, cancelling any pending call */
@@ -104,10 +108,13 @@ function Typeahead({
     }
   }, [])
 
-  /** Closes the menu when clicking outside the root wrapper */
+  /** Closes the menu when clicking outside the root wrapper (and portal menu if portaled) */
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+      const target = e.target as Node
+      if (rootRef.current && !rootRef.current.contains(target)) {
+        const portalMenu = document.getElementById(menuId)
+        if (portalMenu?.contains(target)) return
         setIsOpen(false)
         setActiveIndex(-1)
       }
@@ -116,7 +123,7 @@ function Typeahead({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [])
+  }, [menuId])
 
   /** Registers a Typeahead.Item in the internal registry for keyboard navigation */
   const registerItem = useCallback(
@@ -230,7 +237,9 @@ function Typeahead({
       selectItem,
       navigateItems,
       getActiveEntry,
+      portal,
       rootRef,
+      inputRef,
     }),
     [
       isOpen,
@@ -239,6 +248,7 @@ function Typeahead({
       variant,
       minChars,
       menuId,
+      portal,
       setInputValue,
       registerItem,
       unregisterItem,

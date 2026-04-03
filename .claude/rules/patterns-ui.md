@@ -5,9 +5,9 @@
 ```typescript
 import clsx from 'clsx'
 
-import type { FC, HTMLAttributes } from 'react'
+import type { ComponentProps, FC } from 'react'
 
-export interface ComponentNameProps extends HTMLAttributes<HTMLDivElement> {
+export interface ComponentNameProps extends ComponentProps<'div'> {
   /** Prop description */
   propName?: string
   size?: 'sm' | 'md' | 'lg'
@@ -61,9 +61,35 @@ packages/ui/src/ComponentName/
 Rules:
 - `ui:` prefix on ALL Tailwind classes
 - No domain logic
-- Extend HTML attributes
+- Extend with `ComponentProps` (see below), never `HTMLAttributes`
 - Export interface as named, component as default
 - `clsx` for conditional classes
+
+## ComponentProps Rule
+
+Always use `ComponentProps` from React — never `HTMLAttributes` or `InputHTMLAttributes`.
+
+```typescript
+// Extending an intrinsic HTML element:
+import type { ComponentProps } from 'react'
+export interface ButtonProps extends ComponentProps<'button'> { ... }
+export interface InputProps extends ComponentProps<'input'> { ... }
+export interface ListProps extends ComponentProps<'ul'> { ... }
+
+// Composing another component (deriving its props):
+import type { ComponentProps } from 'react'
+import { Input } from '../Input'
+export type TypeaheadInputProps = Omit<ComponentProps<typeof Input>, 'value' | 'onChange'>
+
+// Composing with extension:
+export interface MenuItemProps extends Omit<ComponentProps<typeof ListboxItem>, 'variant' | 'ref'> {
+  value: string
+  index: number
+}
+```
+
+**Why**: `ComponentProps` includes `ref` (React 19), `key`, and all HTML attributes in one type.
+It also works uniformly for intrinsic elements (`'div'`, `'input'`) and custom components (`typeof Input`).
 
 ## CSS Prefix per Package/App
 | Location | Prefix |
