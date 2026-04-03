@@ -1,13 +1,15 @@
 import clsx from 'clsx'
 import { useCallback, useId, useMemo, useRef, useState } from 'react'
 
+import { ListboxList } from '../Listbox'
+
 import { MenuContext } from './MenuContext'
 import MenuItem from './MenuItem'
 
 import type { MenuVariant } from './MenuContext'
-import type { HTMLAttributes, KeyboardEvent } from 'react'
+import type { ComponentProps, KeyboardEvent } from 'react'
 
-export interface MenuProps extends HTMLAttributes<HTMLUListElement> {
+export interface MenuProps extends ComponentProps<typeof ListboxList> {
   /** Currently selected item value (controls aria-selected highlight) */
   selectedValue?: string
   /** Color scheme: light (default) or dark */
@@ -122,8 +124,6 @@ function Menu({
 
   const activeDescendant = activeIndex >= 0 ? getItemId(activeIndex) : undefined
 
-  const isDark = variant === 'dark'
-
   const contextValue = useMemo(
     () => ({
       activeIndex,
@@ -149,24 +149,17 @@ function Menu({
 
   return (
     <MenuContext.Provider value={contextValue}>
-      <ul
+      <ListboxList
+        variant={variant}
         role="listbox"
         tabIndex={0}
         aria-activedescendant={activeDescendant}
         onKeyDown={handleKeyDown}
-        className={clsx(
-          'ui:m-0 ui:list-none ui:rounded-md ui:border ui:p-1 ui:shadow-md',
-          'ui:focus:outline-none',
-          'ui:max-h-60 ui:overflow-y-auto',
-          isDark
-            ? 'ui:border-neutral-700 ui:bg-neutral-900'
-            : 'ui:border-border ui:bg-popover',
-          className
-        )}
+        className={clsx('ui:m-0 ui:focus:outline-none', className)}
         {...rest}
       >
         {children}
-      </ul>
+      </ListboxList>
     </MenuContext.Provider>
   )
 }
