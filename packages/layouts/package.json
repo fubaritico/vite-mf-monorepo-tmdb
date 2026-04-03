@@ -1,6 +1,6 @@
 {
   "name": "@vite-mf-monorepo/layouts",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "description": "Layout components for vite-mf-monorepo",
   "type": "module",
   "publishConfig": {
@@ -36,7 +36,7 @@
   ],
   "scripts": {
     "build:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css",
-    "build:js": "tsup",
+    "build:js": "tsup && tsc -p tsconfig.build.json",
     "build": "pnpm build:js && pnpm build:css",
     "dev": "tsup --watch",
     "test": "vitest run",

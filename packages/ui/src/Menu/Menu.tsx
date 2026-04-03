@@ -9,7 +9,8 @@ import MenuItem from './MenuItem'
 import type { MenuVariant } from './MenuContext'
 import type { ComponentProps, KeyboardEvent } from 'react'
 
-export interface MenuProps extends ComponentProps<typeof ListboxList> {
+export interface MenuProps
+  extends Omit<ComponentProps<typeof ListboxList>, 'onSelect'> {
   /** Currently selected item value (controls aria-selected highlight) */
   selectedValue?: string
   /** Color scheme: light (default) or dark */
