@@ -70,9 +70,15 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - Merged standalone Crew section into MediaHero — director and writers display inline in hero overlay; removed Crew component, tests, storybook story, barrel exports; added credits MSW handlers to MediaHero stories
 - `Input` component in `packages/ui`: three sizes (sm/md/lg), optional right icon (IconName), label with auto htmlFor/id, info/error message with aria-describedby/aria-invalid, destructive styling on error, Storybook story (Playground + Showcase, controls disabled on Showcase), 25 tests
 - `Menu` compound component in `packages/ui`: `Menu` + `Menu.Item` via context, `role="listbox"`/`role="option"` ARIA pattern, keyboard nav (Arrow Up/Down, Home/End, Enter/Space, Escape), `variant` prop (`light`/`dark`) with primary/secondary color states (hover, selected, active, disabled), item register/unregister lifecycle for dynamic lists, Storybook story (Playground with inline-radio controls + Showcase 3-col grid), 28 tests
+- `Portal` component in `packages/ui`: refactored with `useState` + proper cleanup, exported from barrel with `PortalProps` type
+- `Listbox` base components: extracted `ListboxList` and `ListboxItem` shared visual primitives, composed by both `Menu` and `Typeahead`
+- Refactored `Menu`/`MenuItem` to compose `ListboxList`/`ListboxItem` base components
+- `Typeahead` compound component in `packages/ui`: `Typeahead.Input` (composing Input, combobox ARIA), `Typeahead.Menu`/`Item` (composing Listbox), `Typeahead.Empty`, `Typeahead.Highlight` (bold matching chars), `minChars` prop (default: 2), debounced `onSearch`, click-outside dismiss, `clearOnSelect`, `portal` prop for overflow escape (fixed positioning via `inputRef` + scroll/resize tracking), light/dark variant, 52 tests, Storybook story (Playground + Showcase with overflow demo)
+- Applied `ComponentProps<'element'>` / `ComponentProps<typeof Component>` pattern to `Input`, `Menu`, `MenuItem`, `ListboxList`, all Typeahead sub-components
+- Added `ComponentProps` rule to `patterns-ui.md` — always use over `HTMLAttributes`
 
 ### Next
-- Typeahead feature: Input done, Menu done. Next is **(3) Typeahead** — compound component composing Input + Menu with shared context for search state, keyboard nav, open/close. Typeahead calls TMDB search endpoint for talents or movies, displays suggestions via renderItem. After UI components, create search page wiring with hooks + debounce. Work in Storybook first.
+- Integrate Typeahead in Header: call TMDB search API (multi-search endpoint), display suggestions with renderItem, on select redirect to search/result page displaying a list of results. Load `patterns-section.md` + `architecture.md`.
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported
