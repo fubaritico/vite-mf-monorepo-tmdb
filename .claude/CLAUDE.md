@@ -67,9 +67,12 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - E2E: skip flaky "Navigating to the next photo" scenario (`@skip` tag + `not @skip` filter in cucumber config), bump timeout to 15s, add waitFor on Next button
 - `@vite-mf-monorepo/ui@0.4.22` published: added `data-testid` to CarouselLoading (`carousel-loading`), Skeleton (`skeleton`), CarouselError (`carousel-error`) for consumer test assertions; removed redundant `pnpm build` from release scripts
 - `@vite-mf-monorepo/ui@0.5.6` published: split `NextImage` into server and client variants — `NextImage` (no `'use client'`, full opacity, SSR-safe) and `NextImageClient` (fade-in, error fallback, `data-state`); `HeroImage` and `MovieCardContent` now server-compatible; `HeroImage` uses `w1280` instead of `original`, accepts `blurDataURL`; added `imageStyle` and `imageClassName` props to `NextImage`
+- Merged standalone Crew section into MediaHero — director and writers display inline in hero overlay; removed Crew component, tests, storybook story, barrel exports; added credits MSW handlers to MediaHero stories
+- `Input` component in `packages/ui`: three sizes (sm/md/lg), optional right icon (IconName), label with auto htmlFor/id, info/error message with aria-describedby/aria-invalid, destructive styling on error, Storybook story (Playground + Showcase, controls disabled on Showcase), 25 tests
+- `Menu` compound component in `packages/ui`: `Menu` + `Menu.Item` via context, `role="listbox"`/`role="option"` ARIA pattern, keyboard nav (Arrow Up/Down, Home/End, Enter/Space, Escape), `variant` prop (`light`/`dark`) with primary/secondary color states (hover, selected, active, disabled), item register/unregister lifecycle for dynamic lists, Storybook story (Playground with inline-radio controls + Showcase 3-col grid), 28 tests
 
 ### Next
-- (none)
+- Typeahead feature: Input done, Menu done. Next is **(3) Typeahead** — compound component composing Input + Menu with shared context for search state, keyboard nav, open/close. Typeahead calls TMDB search endpoint for talents or movies, displays suggestions via renderItem. After UI components, create search page wiring with hooks + debounce. Work in Storybook first.
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported
