@@ -509,6 +509,29 @@ describe('Typeahead', () => {
     expect(screen.getByRole('listbox')).toBeInTheDocument()
   })
 
+  // --- portal ---
+
+  it('should render menu in a portal when portal is enabled', async () => {
+    renderTypeahead({ portal: true })
+    await userEvent.type(screen.getByRole('combobox'), 'a')
+    const listbox = screen.getByRole('listbox')
+    expect(listbox.closest('#portal')).toBeInTheDocument()
+  })
+
+  it('should render menu inline when portal is disabled', async () => {
+    renderTypeahead({ portal: false })
+    await userEvent.type(screen.getByRole('combobox'), 'a')
+    const listbox = screen.getByRole('listbox')
+    expect(listbox.closest('#portal')).not.toBeInTheDocument()
+  })
+
+  it('should position portal menu with fixed positioning', async () => {
+    renderTypeahead({ portal: true })
+    await userEvent.type(screen.getByRole('combobox'), 'a')
+    const listbox = screen.getByRole('listbox')
+    expect(listbox.style.position).toBe('fixed')
+  })
+
   it('should render full text when no match in Highlight', async () => {
     render(
       <Typeahead onSearch={vi.fn()} onSelect={vi.fn()}>
