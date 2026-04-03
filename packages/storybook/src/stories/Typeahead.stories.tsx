@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
+/* The mock */
 const allFruits = [
   { id: '1', label: 'Apple', emoji: '🍎' },
   { id: '2', label: 'Banana', emoji: '🍌' },
