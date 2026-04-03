@@ -74,5 +74,17 @@ export type { TalentProps } from './Talent'
 export { Typography } from './Typography'
 export type { TypographyProps, TypographyVariant } from './Typography'
 
+export { Portal } from './Portal'
+export type { PortalProps } from './Portal'
+
 export { Spinner } from './Spinner'
 export type { SpinnerProps } from './Spinner'
+
+export { Typeahead } from './Typeahead'
+export type {
+  TypeaheadProps,
+  TypeaheadItemProps,
+  TypeaheadEmptyProps,
+  TypeaheadInputProps,
+  TypeaheadMenuProps,
+} from './Typeahead'
