@@ -1,18 +1,18 @@
-import clsx from 'clsx'
 import { useContext, useEffect, useRef } from 'react'
+
+import { ListboxItem } from '../Listbox'
 
 import { MenuContext } from './MenuContext'
 
-import type { FC, LiHTMLAttributes, ReactNode } from 'react'
+import type { ComponentProps, FC } from 'react'
 
 export interface MenuItemProps
-  extends Omit<LiHTMLAttributes<HTMLLIElement>, 'children'> {
+  extends Omit<
+    ComponentProps<typeof ListboxItem>,
+    'variant' | 'isActive' | 'isSelected' | 'ref'
+  > {
   /** Unique value identifying this item, passed to onSelect */
   value: string
-  /** Whether the item is non-interactive */
-  disabled?: boolean
-  /** Item content (text or rich JSX) */
-  children: ReactNode
   /** Position index for keyboard navigation ordering */
   index: number
 }
@@ -37,7 +37,6 @@ const MenuItem: FC<MenuItemProps> = ({
     unregisterItem,
     getItemId,
   } = context
-  const isDark = variant === 'dark'
   const ref = useRef<HTMLLIElement>(null)
 
   const isActive = activeIndex === index
@@ -63,40 +62,21 @@ const MenuItem: FC<MenuItemProps> = ({
   }
 
   return (
-    <li
+    <ListboxItem
       ref={ref}
       id={itemId}
-      role="option"
+      variant={variant}
+      isActive={isActive}
+      isSelected={isSelected}
+      disabled={disabled}
       aria-selected={isSelected}
-      aria-disabled={disabled || undefined}
       data-active={isActive || undefined}
-      className={clsx(
-        'ui:cursor-pointer ui:select-none ui:rounded ui:px-3 ui:py-2 ui:text-sm ui:font-roboto ui:transition-colors',
-        isDark ? 'ui:text-neutral-200' : 'ui:text-foreground',
-        disabled && 'ui:pointer-events-none ui:opacity-50',
-        !disabled &&
-          !isActive &&
-          !isSelected &&
-          (isDark
-            ? 'ui:hover:bg-neutral-800 ui:hover:text-white'
-            : 'ui:hover:bg-secondary ui:hover:text-secondary-foreground'),
-        isActive &&
-          !disabled &&
-          (isDark
-            ? 'ui:bg-primary/25 ui:text-white'
-            : 'ui:bg-primary/20 ui:text-primary-foreground'),
-        isSelected &&
-          !isActive &&
-          (isDark
-            ? 'ui:bg-primary/15 ui:font-medium ui:text-primary'
-            : 'ui:bg-primary/10 ui:font-medium ui:text-primary-hover'),
-        className
-      )}
+      className={className}
       onClick={handleClick}
       {...rest}
     >
       {children}
-    </li>
+    </ListboxItem>
   )
 }
 

@@ -4,12 +4,12 @@ import { useId } from 'react'
 import { Icon } from '../Icon'
 
 import type { IconName } from '../Icon'
-import type { FC, InputHTMLAttributes } from 'react'
+import type { ComponentProps, FC } from 'react'
 
 export type InputSize = 'sm' | 'md' | 'lg'
 export type InputMessageType = 'error' | 'info'
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends ComponentProps<'input'> {
   inputSize?: InputSize
   icon?: IconName
   label?: string
