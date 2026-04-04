@@ -53,6 +53,7 @@ jobs:
           VITE_HOME_URL: ${{ secrets.VITE_HOME_URL }}
           VITE_MEDIA_URL: ${{ secrets.VITE_MEDIA_URL }}
           VITE_PHOTOS_URL: ${{ secrets.VITE_PHOTOS_URL }}
+          VITE_SEARCH_URL: ${{ secrets.VITE_SEARCH_URL }}
           VITE_TMDB_API_TOKEN: ${{ secrets.VITE_TMDB_API_TOKEN }}
           VITE_SENTRY_DSN: ${{ secrets.VITE_SENTRY_DSN }}
           VITE_SENTRY_ENVIRONMENT: production
