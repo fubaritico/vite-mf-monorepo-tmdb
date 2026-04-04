@@ -1,8 +1,5 @@
 import * as Sentry from '@sentry/react'
 
-/**
- * Sentry initialization for the host application
- */
 Sentry.init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
   environment: import.meta.env.VITE_SENTRY_ENVIRONMENT ?? 'production',
