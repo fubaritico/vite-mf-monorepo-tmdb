@@ -80,6 +80,13 @@ const router = sentryCreateBrowserRouter([
           },
         ],
       },
+      {
+        path: 'search',
+        async lazy() {
+          const { default: Search } = await import('search/Search')
+          return { Component: Search }
+        },
+      },
     ],
   },
 ])
