@@ -69,6 +69,16 @@ const moduleFederationConfig = {
       entryGlobalName: 'photos',
       sharedScope: 'default',
     },
+    search: {
+      type: 'module',
+      name: 'search',
+      entry:
+        process.env.NODE_ENV === 'production'
+          ? `${process.env.VITE_SEARCH_URL}/remoteEntry.js`
+          : `http://localhost:${process.env.REMOTE_SEARCH_PORT}/remoteEntry.js`,
+      entryGlobalName: 'search',
+      sharedScope: 'default',
+    },
   },
   shared: {
     react: {
@@ -124,7 +134,7 @@ export default defineConfig(({ mode }) => {
             }),
             federation(moduleFederationConfig),
             listenForRemoteRebuilds({
-              allowedApps: ['home', 'media', 'photos'],
+              allowedApps: ['home', 'media', 'photos', 'search'],
               endpoint: '/on-child-rebuild',
               hotPayload: { type: 'full-reload', path: '*' },
               onRebuild: (appName) => {
