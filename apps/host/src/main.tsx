@@ -34,6 +34,11 @@ createInstance({
       alias: 'photos',
       entry: `${import.meta.env.VITE_PHOTOS_URL as string}/remoteEntry.js`,
     },
+    {
+      name: 'search',
+      alias: 'search',
+      entry: `${import.meta.env.VITE_SEARCH_URL as string}/remoteEntry.js`,
+    },
   ],
   /* eslint-disable @typescript-eslint/dot-notation -- consistent bracket notation for all keys */
   shared: {

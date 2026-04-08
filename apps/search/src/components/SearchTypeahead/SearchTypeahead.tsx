@@ -1,0 +1,210 @@
+import { useIsMobile } from '@vite-mf-monorepo/shared'
+import { Drawer, Typeahead, Typography } from '@vite-mf-monorepo/ui'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
+import '../../remote.css'
+
+import { useSearchMulti } from '../../hooks/useSearchMulti'
+
+import ResultsContent from './ResultsContent'
+import {
+  getPersonDepartment,
+  getResultLabel,
+  getResultRoute,
+  isMovie,
+  isPerson,
+  isTv,
+} from './searchTypeahead.utils'
+
+import type { FC } from 'react'
+
+/**
+ * Header search typeahead exposed via Module Federation from the search remote.
+ *
+ * - **Desktop (≥md)**: renders a Typeahead with a portal dropdown grouped
+ *   by Movies, TV Shows, and People.
+ * - **Mobile (<md)**: renders a bottom Drawer that opens on input and
+ *   stays visible while the user keeps typing.
+ * - **Enter without selection**: navigates to `/search?q=...`
+ * - **Select a movie/tv item**: navigates to `/movie/:id` or `/tv/:id`
+ * - **Person items**: displayed but disabled (no talent page yet)
+ */
+const SearchTypeahead: FC = () => {
+  const [searchQuery, setSearchQuery] = useState('')
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const navigate = useNavigate()
+  const isMobile = useIsMobile()
+  const { data } = useSearchMulti(searchQuery)
+
+  const results = data?.results ?? []
+  const movies = results.filter(isMovie).slice(0, 4)
+  const tvShows = results.filter(isTv).slice(0, 4)
+  const persons = results.filter(isPerson).slice(0, 4)
+  const hasResults =
+    movies.length > 0 || tvShows.length > 0 || persons.length > 0
+
+  const handleSelect = (value: string) => {
+    setDrawerOpen(false)
+    void navigate(value)
+  }
+
+  const handleSearch = (value: string) => {
+    setSearchQuery(value)
+    if (isMobile && value.length >= 2) {
+      setDrawerOpen(true)
+    } else if (value.length < 2) {
+      setDrawerOpen(false)
+    }
+  }
+
+  /** Navigates to the search page on Enter when no item is highlighted */
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && searchQuery.length >= 2) {
+      const activeElement = document.querySelector('[aria-activedescendant]')
+      const hasActiveItem = activeElement?.getAttribute('aria-activedescendant')
+
+      if (!hasActiveItem) {
+        e.preventDefault()
+        setDrawerOpen(false)
+        void navigate(`/search?q=${encodeURIComponent(searchQuery)}`)
+      }
+    }
+  }
+
+  return (
+    <div
+      onKeyDown={handleKeyDown}
+      className="sr:w-40 sr:sm:w-56 sr:md:w-72 sr:lg:w-96"
+    >
+      <Typeahead
+        onSearch={handleSearch}
+        onSelect={handleSelect}
+        debounceMs={300}
+        minChars={2}
+        clearOnSelect={false}
+        portal={!isMobile}
+        variant="dark"
+      >
+        <Typeahead.Input
+          placeholder="Search..."
+          icon="MagnifyingGlass"
+          inputSize="sm"
+        />
+        {!isMobile && (
+          <Typeahead.Menu>
+            <ResultsContent
+              movies={movies}
+              tvShows={tvShows}
+              persons={persons}
+              onNavigate={handleSelect}
+            />
+            {!hasResults && searchQuery.length >= 2 && (
+              <Typeahead.Empty>No results found</Typeahead.Empty>
+            )}
+          </Typeahead.Menu>
+        )}
+      </Typeahead>
+
+      {isMobile && (
+        <Drawer
+          open={drawerOpen && hasResults}
+          onClose={() => {
+            setDrawerOpen(false)
+          }}
+          variant="dark"
+        >
+          <Drawer.Header>
+            <Typography variant="caption">Search results</Typography>
+          </Drawer.Header>
+          <Drawer.Body>
+            <div className="sr:flex sr:flex-col sr:gap-4">
+              {movies.length > 0 && (
+                <div>
+                  <Typography
+                    variant="overline"
+                    className="sr:block sr:px-2 sr:py-0.5"
+                  >
+                    Movies
+                  </Typography>
+                  {movies.map((r) => {
+                    const route = getResultRoute(r)
+                    return (
+                      <Link
+                        key={r.id}
+                        to={route ?? ''}
+                        onClick={() => {
+                          handleSelect(route ?? '')
+                        }}
+                        className="sr:flex sr:items-center sr:gap-2 sr:px-2 sr:py-1.5 sr:no-underline sr:text-neutral-200 sr:hover:bg-neutral-800 sr:rounded sr:text-xs"
+                      >
+                        <span>{getResultLabel(r)}</span>
+                        {r.release_date && (
+                          <span className="sr:ml-auto sr:opacity-50">
+                            {new Date(r.release_date).getFullYear()}
+                          </span>
+                        )}
+                      </Link>
+                    )
+                  })}
+                </div>
+              )}
+
+              {tvShows.length > 0 && (
+                <div>
+                  <Typography
+                    variant="overline"
+                    className="sr:block sr:px-2 sr:py-0.5"
+                  >
+                    TV Shows
+                  </Typography>
+                  {tvShows.map((r) => {
+                    const route = getResultRoute(r)
+                    return (
+                      <Link
+                        key={r.id}
+                        to={route ?? ''}
+                        onClick={() => {
+                          handleSelect(route ?? '')
+                        }}
+                        className="sr:flex sr:items-center sr:gap-2 sr:px-2 sr:py-1.5 sr:no-underline sr:text-neutral-200 sr:hover:bg-neutral-800 sr:rounded sr:text-xs"
+                      >
+                        <span>{getResultLabel(r)}</span>
+                      </Link>
+                    )
+                  })}
+                </div>
+              )}
+
+              {persons.length > 0 && (
+                <div>
+                  <Typography
+                    variant="overline"
+                    className="sr:block sr:px-2 sr:py-0.5"
+                  >
+                    People
+                  </Typography>
+                  {persons.map((r) => (
+                    <div
+                      key={r.id}
+                      className="sr:flex sr:items-center sr:gap-2 sr:px-2 sr:py-1.5 sr:opacity-50 sr:text-neutral-200 sr:text-xs"
+                    >
+                      <span>{getResultLabel(r)}</span>
+                      {getPersonDepartment(r) && (
+                        <span className="sr:ml-auto sr:opacity-50">
+                          {getPersonDepartment(r)}
+                        </span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </Drawer.Body>
+        </Drawer>
+      )}
+    </div>
+  )
+}
+
+export default SearchTypeahead

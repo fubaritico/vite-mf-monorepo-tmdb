@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/react'
 import { RootLayout } from '@vite-mf-monorepo/layouts'
 import { createBrowserRouter } from 'react-router-dom'
 
+import { HeaderSearch } from './components/HeaderSearch'
 import queryClient from './queryClient.ts'
 
 const sentryCreateBrowserRouter =
@@ -10,7 +11,10 @@ const sentryCreateBrowserRouter =
 const router = sentryCreateBrowserRouter([
   {
     element: (
-      <RootLayout projectUrl="https://github.com/fubaritico/vite-mf-monorepo-tmdb" />
+      <RootLayout
+        projectUrl="https://github.com/fubaritico/vite-mf-monorepo-tmdb"
+        headerChildren={<HeaderSearch />}
+      />
     ),
     children: [
       {
