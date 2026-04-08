@@ -18,6 +18,7 @@ export type TypographyVariant =
   | 'caption-xs'
   | 'label'
   | 'muted'
+  | 'overline'
   | 'blockquote'
 
 export interface TypographyProps extends HTMLAttributes<HTMLElement> {
@@ -49,6 +50,8 @@ const variantStyles: Record<TypographyVariant, string> = {
   label:
     'ui:font-inter ui:text-xs ui:sm:text-sm ui:font-medium ui:text-foreground',
   muted: 'ui:font-inter ui:text-xs ui:sm:text-sm ui:text-muted-foreground',
+  overline:
+    'ui:font-inter ui:text-xs ui:font-semibold ui:uppercase ui:tracking-wider ui:text-muted-foreground',
   blockquote:
     'ui:font-inter ui:text-xs ui:sm:text-sm ui:md:text-base ui:border-l-4 ui:border-border ui:pl-4 ui:italic ui:text-muted-foreground',
 }
@@ -68,6 +71,7 @@ const variantToTag: Record<TypographyVariant, ElementType> = {
   'caption-xs': 'span',
   label: 'label',
   muted: 'p',
+  overline: 'span',
   blockquote: 'blockquote',
 }
 
