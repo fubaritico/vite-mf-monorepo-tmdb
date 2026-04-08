@@ -40,13 +40,13 @@ const Input: FC<InputProps> = ({
       aria-invalid={hasError || undefined}
       aria-describedby={messageId}
       className={clsx(
-        'ui:w-full ui:rounded ui:border ui:bg-background ui:font-roboto ui:text-foreground ui:transition-colors',
+        'ui:w-full ui:rounded ui:border ui:bg-background ui:font-roboto ui:text-foreground ui:transition-[border-color,background-color]',
         'ui:placeholder:text-muted-foreground',
-        'ui:focus:outline-none ui:focus:ring-2 ui:focus:ring-offset-2',
+        'ui:focus:outline-2 ui:focus:outline-offset-2',
         'ui:disabled:pointer-events-none ui:disabled:opacity-50',
         hasError
-          ? 'ui:border-destructive ui:focus:ring-destructive'
-          : 'ui:border-input ui:focus:ring-primary',
+          ? 'ui:border-destructive ui:focus:outline-destructive'
+          : 'ui:border-input ui:focus:outline-primary',
         {
           'ui:h-8 ui:px-3 ui:text-sm': inputSize === 'sm',
           'ui:h-10 ui:px-4 ui:text-base': inputSize === 'md',
