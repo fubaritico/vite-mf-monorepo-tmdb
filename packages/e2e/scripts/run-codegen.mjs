@@ -64,6 +64,7 @@ const localRemoteEnv = {
   VITE_HOME_URL: 'http://localhost:3001',
   VITE_MEDIA_URL: 'http://localhost:3002',
   VITE_PHOTOS_URL: 'http://localhost:3003',
+  VITE_SEARCH_URL: 'http://localhost:3004',
 }
 
 const services = [
@@ -71,6 +72,7 @@ const services = [
   { name: 'home',   filter: '@vite-mf-monorepo/home',   port: 3001 },
   { name: 'media',  filter: '@vite-mf-monorepo/media',  port: 3002 },
   { name: 'photos', filter: '@vite-mf-monorepo/photos', port: 3003 },
+  { name: 'search', filter: '@vite-mf-monorepo/search', port: 3004 },
 ].map((s) => ({
   ...s,
   command: ['pnpm', '--filter', s.filter, 'prod:server'],

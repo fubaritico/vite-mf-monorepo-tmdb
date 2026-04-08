@@ -26,6 +26,7 @@ const remoteConfig: ModuleFederationOptions = {
   filename: 'remoteEntry.js',
   exposes: {
     './Search': './src/components/Search',
+    './SearchTypeahead': './src/components/SearchTypeahead/SearchTypeahead',
     './routes': './src/routes',
   },
   shared: {
