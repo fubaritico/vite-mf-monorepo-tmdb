@@ -12,6 +12,14 @@ export type { ButtonProps } from './Button'
 export { Card } from './Card'
 export type { CardProps, CardVariant } from './Card'
 
+export { Drawer } from './Drawer'
+export type {
+  DrawerProps,
+  DrawerHeaderProps,
+  DrawerBodyProps,
+  DrawerVariant,
+} from './Drawer'
+
 export { Icon } from './Icon'
 export type { IconProps, IconName, IconSize } from './Icon'
 

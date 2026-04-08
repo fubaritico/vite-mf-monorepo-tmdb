@@ -10,7 +10,7 @@ export interface IconButtonProps
   /** Icon name to display */
   icon: IconName
   /** Visual variant of the button */
-  variant?: 'primary' | 'secondary' | 'ghost' | 'outline'
+  variant?: 'primary' | 'secondary' | 'ghost' | 'ghost-dark' | 'outline'
   /** Size of the button */
   size?: 'sm' | 'md' | 'lg'
   /** Accessible label for screen readers */
@@ -47,6 +47,8 @@ function IconButton({
             variant === 'secondary',
           'ui:hover:bg-accent ui:hover:text-accent-foreground':
             variant === 'ghost',
+          'ui:text-neutral-400 ui:hover:text-white ui:hover:bg-neutral-800':
+            variant === 'ghost-dark',
           'ui:border ui:border-input ui:bg-background ui:hover:bg-accent ui:hover:text-accent-foreground':
             variant === 'outline',
         },
