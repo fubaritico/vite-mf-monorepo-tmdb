@@ -35,7 +35,7 @@ const SearchTypeahead: FC = () => {
   const [drawerOpen, setDrawerOpen] = useState(false)
   const navigate = useNavigate()
   const isMobile = useIsMobile()
-  const { data } = useSearchMulti(searchQuery)
+  const { data, isError } = useSearchMulti(searchQuery)
 
   const results = data?.results ?? []
   const movies = results.filter(isMovie).slice(0, 4)
@@ -99,8 +99,13 @@ const SearchTypeahead: FC = () => {
               persons={persons}
               onNavigate={handleSelect}
             />
-            {!hasResults && searchQuery.length >= 2 && (
+            {!hasResults && searchQuery.length >= 2 && !isError && (
               <Typeahead.Empty>No results found</Typeahead.Empty>
+            )}
+            {isError && searchQuery.length >= 2 && (
+              <Typeahead.Empty>
+                Search unavailable — check your connection
+              </Typeahead.Empty>
             )}
           </Typeahead.Menu>
         )}
@@ -108,17 +113,27 @@ const SearchTypeahead: FC = () => {
 
       {isMobile && (
         <Drawer
-          open={drawerOpen && hasResults}
+          open={drawerOpen && (hasResults || isError)}
           onClose={() => {
             setDrawerOpen(false)
           }}
           variant="dark"
         >
           <Drawer.Header>
-            <Typography variant="caption">Search results</Typography>
+            <Typography variant="caption">
+              {isError ? 'Search unavailable' : 'Search results'}
+            </Typography>
           </Drawer.Header>
           <Drawer.Body>
             <div className="sr:flex sr:flex-col sr:gap-4">
+              {isError && (
+                <Typography
+                  variant="body"
+                  className="sr:px-2 sr:py-4 sr:text-neutral-400"
+                >
+                  Check your connection and try again.
+                </Typography>
+              )}
               {movies.length > 0 && (
                 <div>
                   <Typography

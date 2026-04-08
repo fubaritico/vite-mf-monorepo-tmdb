@@ -2,6 +2,9 @@ import { Suspense, lazy } from 'react'
 
 import type { FC } from 'react'
 
+/**
+ * Header search typeahead exposed via Module Federation from the search remote.
+ */
 const SearchTypeahead = lazy(() =>
   import('search/SearchTypeahead').then((m) => ({
     default: m.default,

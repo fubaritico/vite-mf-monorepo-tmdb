@@ -10,6 +10,7 @@ import '@vite-mf-monorepo/ui/styles.css'
 import '../src/styles.css'
 import '../../../apps/home/src/remote.css'
 import '../../../apps/media/src/remote.css'
+import '../../../apps/search/src/remote.css'
 
 // Initialize MSW
 initialize({

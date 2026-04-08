@@ -3,6 +3,7 @@
 @layer theme {
   :root, :host {
     --sr-color-neutral-200: oklch(92.2% 0 0);
+    --sr-color-neutral-400: oklch(70.8% 0 0);
     --sr-color-neutral-800: oklch(26.9% 0 0);
     --sr-text-xs: 0.75rem;
     --sr-text-xs--line-height: calc(1 / 0.75);
@@ -67,6 +68,9 @@
   .sr\:py-1\.5 {
     padding-block: var(--sr-spacing-1\.5);
   }
+  .sr\:py-4 {
+    padding-block: var(--sr-spacing-4);
+  }
   .sr\:text-xs {
     font-size: var(--sr-text-xs);
     line-height: var(--tw-leading, var(--sr-text-xs--line-height));
@@ -76,6 +80,9 @@
   }
   .sr\:text-neutral-200 {
     color: var(--sr-color-neutral-200);
+  }
+  .sr\:text-neutral-400 {
+    color: var(--sr-color-neutral-400);
   }
   .sr\:no-underline {
     text-decoration-line: none;

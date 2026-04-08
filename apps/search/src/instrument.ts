@@ -4,7 +4,7 @@ if (!Sentry.isInitialized()) {
   Sentry.init({
     dsn: import.meta.env.VITE_SENTRY_DSN,
     environment: import.meta.env.VITE_SENTRY_ENVIRONMENT ?? 'production',
-    release: `search@${String(import.meta.env.VITE_GIT_SHA ?? 'local')}`,
+    release: `search@${import.meta.env.VITE_GIT_SHA ?? 'local'}`,
     integrations: [
       Sentry.browserTracingIntegration(),
       Sentry.replayIntegration({
