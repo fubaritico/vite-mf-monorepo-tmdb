@@ -11,6 +11,10 @@ const SearchTypeahead = lazy(() =>
   }))
 )
 
+/**
+ * Header search typeahead component.
+ * @constructor
+ */
 const HeaderSearch: FC = () => {
   return (
     <Suspense>

@@ -44,11 +44,21 @@ const SearchTypeahead: FC = () => {
   const hasResults =
     movies.length > 0 || tvShows.length > 0 || persons.length > 0
 
+  /**
+   *
+   * @param value
+   */
   const handleSelect = (value: string) => {
     setDrawerOpen(false)
     void navigate(value)
   }
 
+  /**
+   * Handles search input changes.
+   * - Opens the drawer on mobile when input length is >= 2
+   * - Closes the drawer when input length is < 2
+   * - Updates search query
+   */
   const handleSearch = (value: string) => {
     setSearchQuery(value)
     if (isMobile && value.length >= 2) {
