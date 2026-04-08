@@ -6,7 +6,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 import { Footer } from '../Footer'
 import { Header } from '../Header'
 
-import type { HTMLAttributes } from 'react'
+import type { HTMLAttributes, ReactNode } from 'react'
 
 export interface RootLayoutProps extends HTMLAttributes<HTMLDivElement> {
   /** Hide default header */
@@ -15,6 +15,8 @@ export interface RootLayoutProps extends HTMLAttributes<HTMLDivElement> {
   hideFooter?: boolean
   /** URL of the project's GitHub repository */
   projectUrl?: string
+  /** Content rendered inside the Header (e.g. search typeahead) */
+  headerChildren?: ReactNode
 }
 
 /**
@@ -27,6 +29,7 @@ export default function RootLayout({
   hideFooter = false,
   className,
   projectUrl,
+  headerChildren,
   ...rest
 }: Readonly<RootLayoutProps>) {
   const { pathname } = useLocation()
@@ -66,7 +69,7 @@ export default function RootLayout({
       )}
       {...rest}
     >
-      {!hideHeader && <Header logo={<TMDBLogo />} />}
+      {!hideHeader && <Header logo={<TMDBLogo />}>{headerChildren}</Header>}
 
       <main className="layout:flex-1">
         <Outlet />
