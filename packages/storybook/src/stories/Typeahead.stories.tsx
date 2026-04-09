@@ -42,6 +42,11 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+/**
+ *
+ * @param args
+ * @constructor
+ */
 const PlaygroundComponent = (args: {
   variant?: 'light' | 'dark'
   debounceMs?: number
