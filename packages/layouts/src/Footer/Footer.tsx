@@ -21,7 +21,7 @@ export default function Footer({
   return (
     <footer
       className={clsx(
-        'layout:bg-black layout:text-white layout:py-8',
+        'layout:bg-black layout:text-white layout:py-4 layout:sm:py-6 layout:md:py-8',
         'layout:border-t layout:border-border',
         className
       )}

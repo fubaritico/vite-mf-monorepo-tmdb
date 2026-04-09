@@ -23,7 +23,7 @@ const Photos: FC = () => {
     return (
       <Container variant="default">
         <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mda:mb-6">
+          <Typography variant="h2" className="mda:mb-0 mda:md:mb-3 mda:lg:mb-6">
             Photos
           </Typography>
           <div className="mda:grid mda:grid-cols-2 mda:md:grid-cols-4 mda:md:grid-rows-2 mda:md:h-72 mda:gap-2">
@@ -63,7 +63,7 @@ const Photos: FC = () => {
   return (
     <Container variant="default">
       <Section maxWidth="xl" spacing="md">
-        <Typography variant="h2" className="mda:mb-6">
+        <Typography variant="h2" className="mda:mb-0 mda:md:mb-3 mda:lg:mb-6">
           Photos
         </Typography>
         <div className="mda:grid mda:grid-cols-2 mda:md:grid-cols-4 mda:md:grid-rows-2 mda:md:h-72 mda:gap-2">

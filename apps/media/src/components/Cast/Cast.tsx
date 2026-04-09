@@ -24,7 +24,7 @@ const Cast: FC = () => {
     return (
       <Container variant="default">
         <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mda:mb-6">
+          <Typography variant="h2" className="mda:mb-0 mda:md:mb-3 mda:lg:mb-6">
             Cast
           </Typography>
           <div className="mda:grid mda:grid-cols-2 mda:gap-6">
@@ -51,10 +51,10 @@ const Cast: FC = () => {
   return (
     <Container variant="default">
       <Section maxWidth="xl" spacing="md">
-        <Typography variant="h2" className="mda:mb-6">
+        <Typography variant="h2" className="mda:mb-0 mda:md:mb-3 mda:lg:mb-6">
           Cast
         </Typography>
-        <div className="mda:grid mda:grid-cols-2 mda:gap-6 mda:mb-8">
+        <div className="mda:grid mda:grid-cols-2 mda:gap-6 mda:mb-0 mda:md:mb-4 mda:lg:mb-8">
           {topCast.map((actor) => (
             <Talent
               key={actor.credit_id}

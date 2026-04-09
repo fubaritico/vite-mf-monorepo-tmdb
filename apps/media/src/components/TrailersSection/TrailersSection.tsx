@@ -18,7 +18,7 @@ const TrailersSection: FC = () => {
   if (isLoading) {
     return (
       <Section>
-        <Typography variant="h2" className="mda:mb-6">
+        <Typography variant="h2" className="mda:mb-0 mda:md:mb-3 mda:lg:mb-6">
           Trailers & Clips
         </Typography>
         <div className="mda:grid mda:gap-4 mda:grid-cols-1 mda:md:grid-cols-2 mda:lg:grid-cols-3">
@@ -42,7 +42,7 @@ const TrailersSection: FC = () => {
   return (
     <Container variant="default">
       <Section maxWidth="xl" spacing="md">
-        <Typography variant="h2" className="mda:mb-6">
+        <Typography variant="h2" className="mda:mb-0 mda:md:mb-3 mda:lg:mb-6">
           Trailers & Clips
         </Typography>
         <div className="mda:grid mda:gap-4 mda:grid-cols-1 mda:md:grid-cols-2 mda:lg:grid-cols-3">
