@@ -77,7 +77,7 @@ const SearchTypeahead: FC = () => {
       if (!hasActiveItem) {
         e.preventDefault()
         setDrawerOpen(false)
-        void navigate(`/search?q=${encodeURIComponent(searchQuery)}`)
+        void navigate(`/search/${encodeURIComponent(searchQuery)}`)
       }
     }
   }
