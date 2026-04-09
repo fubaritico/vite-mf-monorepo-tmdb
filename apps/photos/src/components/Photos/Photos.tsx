@@ -21,6 +21,7 @@ type BackdropWithId = NonNullable<MovieImagesResponse['backdrops']>[number] & {
   id: string
 }
 
+/** Full-screen photo lightbox — nested route under /movie/:id and /tv/:id. */
 const Photos: FC = () => {
   const { id, index } = useParams<{ id: string; index: string }>()
   const navigate = useNavigate()

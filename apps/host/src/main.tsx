@@ -15,7 +15,11 @@ import { queryClient, router } from './router'
 // const HOME_REMOTE_URL = `${import.meta.env.VITE_HOME_URL as string}/health`
 // const MOVIE_REMOTE_URL = `${import.meta.env.VITE_MEDIA_URL as string}/health`
 
-// Initialize module federation runtime
+/**
+ * Initialize Module Federation runtime with all remote applications.
+ * Shared dependencies (react, react-dom, react-router-dom, @tanstack/react-query)
+ * are singletons to avoid duplicate instances across remotes.
+ */
 createInstance({
   name: 'host',
   remotes: [

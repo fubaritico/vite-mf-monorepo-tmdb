@@ -2,7 +2,7 @@
 
 ## Project
 TMDB media app. Lerna + pnpm workspaces. Module Federation.
-- `apps/host` (3000), `apps/home` (3001), `apps/media` (3002), `apps/photos` (3003, `ph:` prefix)
+- `apps/host` (3000), `apps/home` (3001), `apps/media` (3002), `apps/photos` (3003, `ph:` prefix), `apps/search` (3004, `sr:` prefix)
 - `packages/ui` (design system, `ui:` prefix), `packages/layouts` (`layout:` prefix)
 - `packages/shared` (mocks, test-utils, utils), `packages/http-client` (TMDB heyAPI client)
 - `packages/tokens` (design tokens, OKLCH/DTCG format)
@@ -27,7 +27,8 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - Functional components: `const Name: FC<NameProps> = ({ ... }) => { ... }`
 - Import order: external → @vite-mf-monorepo/* → relative → `import type` (newlines between groups)
 - `clsx` for conditional classes
-- CSS prefixes: `ui:` (packages/ui), `layout:` (layouts), `mda:` (media), `hm:` (home), `ph:` (photos)
+- CSS prefixes: `ui:` (packages/ui), `layout:` (layouts), `mda:` (media), `hm:` (home), `ph:` (photos), `sr:` (search)
+- When creating style with prefix, it MUST be in this order: prefix:modifier:style. ex: `layout:md:py-4`
 
 ## Session State (updated by `/end-session`)
 
@@ -76,9 +77,36 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `Typeahead` compound component in `packages/ui`: `Typeahead.Input` (composing Input, combobox ARIA), `Typeahead.Menu`/`Item` (composing Listbox), `Typeahead.Empty`, `Typeahead.Highlight` (bold matching chars), `minChars` prop (default: 2), debounced `onSearch`, click-outside dismiss, `clearOnSelect`, `portal` prop for overflow escape (fixed positioning via `inputRef` + scroll/resize tracking), light/dark variant, 52 tests, Storybook story (Playground + Showcase with overflow demo)
 - Applied `ComponentProps<'element'>` / `ComponentProps<typeof Component>` pattern to `Input`, `Menu`, `MenuItem`, `ListboxList`, all Typeahead sub-components
 - Added `ComponentProps` rule to `patterns-ui.md` — always use over `HTMLAttributes`
+- `fix(ui,layouts)`: replaced tsup DTS worker with `tsc --emitDeclarationOnly` — tsup's DTS worker OOMs with 92+ files, now uses separate `tsconfig.build.json`; fixed `MenuProps.onSelect` type conflict with native `onSelect` via `Omit`
+- `apps/search` remote scaffolded: new MF remote on port 3004 (prefix `sr:`), exposes `./Search` and `./routes`, registered in host federation config and router (`/search`), MF sentinel `data-testid="mf-ready-search"`, Sentry instrument, deploy-search.yml workflow, VITE_SEARCH_URL added to deploy-host.yml, kill-ports.sh updated with ports 3003+3004
+- `patterns-remote-setup.md` rewritten: full step-by-step operational guide (7 steps) covering files, host wiring, CI/CD, Netlify, GitHub secrets, checklist
+- `Drawer` compound component in `packages/ui`: Header, Body sub-components, Portal rendering, dark/light variants, overlay with click-to-close, Escape key, slide-up animation, 16 tests
+- `IconButton` `ghost-dark` variant for dark backgrounds
+- Moved `useIsMobile` from `shared/utils/` to `shared/hooks/` with barrel file
+- `RootLayout` accepts `headerChildren` prop for header slot injection
+- `SearchTypeahead` in `apps/search`: mobile Drawer + desktop Typeahead, `useSearchMulti` hook (debounced), grouped results (movies, TV, people) with person department display, 11 component tests + 5 hook tests
+- `HeaderSearch` wrapper in `apps/host`, integrated via `headerChildren` in RootLayout
+- E2E orchestration (`run-e2e.mjs`, `run-codegen.mjs`) updated to include search service (port 3004, 5 services total)
+- Storybook story for `Drawer`: Playground (variant + overlay controls) + Showcase (Light, Dark, Overlay, Scrollable)
+- Storybook story for `SearchTypeahead`: live TMDB API (no mocks), catch-all router for item clicks, centered layout
+- Search app registered in Storybook: alias in `main.ts`, tsconfig paths, `remote.css` in preview
+- `SearchTypeahead` error state: `isError` handling — desktop "Search unavailable" in Typeahead.Empty, mobile Drawer error header + message
+- `Input` focus ring: migrated from `ring-2 ring-offset-2` (v3 box-shadow hack) to `outline-2 outline-offset-2` (v4 native CSS), removed `transition-colors` on outline to prevent black-to-orange flash
+- `fix(ci)`: corrected `SEARCH_PHOTOS_PORT` → `REMOTE_SEARCH_PORT` typo in `e2e.yml`
+- `fix(search)`: removed unnecessary `String()` in `instrument.ts`
+- Search results page (Phase 2): route changed to `/search/:query`, `useSearchMultiInfinite` hook (TanStack `useInfiniteQuery` with pagination), `SearchMedia` component (movies/TV rows with poster, title, year, stars rating, divider lines, "More results" button), `SearchPeople` component (actors/directors with Avatar, department, known_for), `Search.tsx` page orchestrator (hero image, dark search bar, grouped results by movies/TV/actors/directors), utility functions (`isActor`, `isDirector`, `getResultYear`, `getPersonKnownFor`, `getProfileImageUrl`, `getPosterUrl`)
+- `HeaderSearch` hides on `/search/:query` via `useMatch` — no duplicate search input on results page
+- Document title set dynamically: `Search results for "query"` on search page
+- Search results page tests: 10 SearchMedia tests + 6 SearchPeople tests
+- README.md updated: search app added to Team Organization, Deploy Workflows (5→6), Netlify secrets (`NETLIFY_SITE_ID_SEARCH`), application secrets (`VITE_SEARCH_URL`)
+- Responsive CSS pass (mobile/tablet, iPhone 12 Pro reference): HeroSection line-clamp-3 on mobile, Carousel nav buttons hidden on mobile via `useIsMobile` + pagination dots centered, touch swipe handling (touchstart/touchend, 50px threshold, `touch-action-pan-x`), Section/Header/Footer responsive padding/height tiers, media section title margins responsive (`mb-0` mobile, `mb-3` tablet, `mb-6` desktop)
+- MediaHero: tagline hidden on mobile (`useIsMobile`), title truncated on mobile (`truncate` + `sm:whitespace-normal`)
+- PhotosModal: swipe support without triggering click-to-close (`swipedRef` pattern — touchStart resets, touchMove sets, click handler skips `onClose` when swiped)
+- `useIsMobile` SSR/jsdom guard: `typeof window.matchMedia !== 'function'` check prevents test crashes
+- CSS prefix ordering rule added to CLAUDE.md: `prefix:modifier:style` (e.g. `layout:md:py-4`)
 
 ### Next
-- Integrate Typeahead in Header: call TMDB search API (multi-search endpoint), display suggestions with renderItem, on select redirect to search/result page displaying a list of results. Load `patterns-section.md` + `architecture.md`.
+- **Phase 4**: Storybook stories for SearchMedia and SearchPeople
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported
@@ -88,6 +116,7 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `packages/layouts/.npmrc` contains npm token, not in `.gitignore` — must not be committed
 - `packages/ui/.npmrc` contains npm token, not in `.gitignore` — must not be committed
 - E2E "Navigating to the next photo in the carousel" scenario flaky in CI (timeout on Next button click) — skipped with `@skip` tag, needs investigation
+- Stale `apps/host/@mf-types/search/compiled-types/components/SearchMovies/` directory from rename to SearchMedia — can be deleted
 
 ## Reference Files (load on demand — NOT auto-loaded)
 | File | When to load |
