@@ -9,22 +9,25 @@ describe('Header', () => {
     expect(screen.getByRole('banner')).toBeInTheDocument()
   })
 
-  it('applies extended height (h-20) by default', () => {
+  it('applies extended height by default (responsive)', () => {
     render(<Header />)
     const header = screen.getByRole('banner')
-    expect(header).toHaveClass('layout:h-20')
+    expect(header).toHaveClass('layout:h-14')
+    expect(header).toHaveClass('layout:lg:h-20')
   })
 
-  it('applies compact height (h-16) when variant="compact"', () => {
+  it('applies compact height when variant="compact" (responsive)', () => {
     render(<Header variant="compact" />)
     const header = screen.getByRole('banner')
-    expect(header).toHaveClass('layout:h-16')
+    expect(header).toHaveClass('layout:h-12')
+    expect(header).toHaveClass('layout:lg:h-16')
   })
 
-  it('applies extended height when variant="extended"', () => {
+  it('applies extended height when variant="extended" (responsive)', () => {
     render(<Header variant="extended" />)
     const header = screen.getByRole('banner')
-    expect(header).toHaveClass('layout:h-20')
+    expect(header).toHaveClass('layout:h-14')
+    expect(header).toHaveClass('layout:lg:h-20')
   })
 
   it('renders logo when logo prop provided', () => {
@@ -95,7 +98,8 @@ describe('Header', () => {
     const header = screen.getByRole('banner')
 
     // Should always stay extended when autoCompact=false
-    expect(header).toHaveClass('layout:h-20')
+    expect(header).toHaveClass('layout:h-14')
+    expect(header).toHaveClass('layout:lg:h-20')
   })
 
   it('removes scroll listener on unmount', () => {

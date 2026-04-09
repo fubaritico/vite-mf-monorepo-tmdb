@@ -1,3 +1,4 @@
+import { useIsMobile } from '@vite-mf-monorepo/shared'
 import clsx from 'clsx'
 import {
   useCallback,
@@ -111,6 +112,7 @@ function Carousel({
    */
   const currentIndex = disableScroll ? (initialIndex ?? 0) : scrollIndex
 
+  const isMobile = useIsMobile()
   const isHero = variant === 'hero'
   const isLightbox = variant === 'lightbox'
   /** Hero and lightbox both use container width for per-item scroll calculation */
@@ -321,6 +323,43 @@ function Carousel({
     }
   }, [])
 
+  /**
+   * Effect: Touch swipe navigation — swipe left/right triggers next/prev.
+   * Uses a 50px threshold to distinguish swipes from taps.
+   * Tracks touch start position and compares with touch end.
+   */
+  const touchStartXRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    const container = scrollRef.current
+    if (!container) return
+
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartXRef.current = e.touches[0].clientX
+    }
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (touchStartXRef.current === null) return
+      const deltaX = e.changedTouches[0].clientX - touchStartXRef.current
+      touchStartXRef.current = null
+
+      if (Math.abs(deltaX) < 50) return
+
+      if (deltaX < 0) {
+        handleNextRef.current()
+      } else {
+        handlePrevRef.current()
+      }
+    }
+
+    container.addEventListener('touchstart', onTouchStart, { passive: true })
+    container.addEventListener('touchend', onTouchEnd, { passive: true })
+    return () => {
+      container.removeEventListener('touchstart', onTouchStart)
+      container.removeEventListener('touchend', onTouchEnd)
+    }
+  }, [])
+
   if (errorMessage) {
     return <CarouselError message={errorMessage} />
   }
@@ -335,7 +374,7 @@ function Carousel({
       <div
         ref={scrollRef}
         className={clsx(
-          'ui:flex ui:overflow-x-auto ui:scroll-smooth ui:scrollbar-none',
+          'ui:flex ui:overflow-x-auto ui:scroll-smooth ui:scrollbar-none ui:touch-action-pan-x',
           isFullWidth && 'ui:snap-x ui:snap-mandatory',
           isLightbox && 'ui:h-full',
           rounded && 'ui:rounded-lg ui:overflow-hidden'
@@ -345,9 +384,10 @@ function Carousel({
         {children}
       </div>
 
-      {/* Standard: Arrows on sides */}
+      {/* Standard: Arrows on sides (desktop only) */}
       {showControls &&
         showArrows &&
+        !isMobile &&
         arrowPosition === 'sides' &&
         !isHero &&
         !isLightbox && (
@@ -361,15 +401,16 @@ function Carousel({
           />
         )}
 
-      {/* Hero: single container — pagination centered, arrows right-aligned */}
+      {/* Hero: single container — pagination centered, arrows right-aligned (desktop only) */}
       {showControls && isHero && (showPagination || showArrows) && (
         <div
           className={clsx(
             'ui:absolute ui:bottom-4 ui:left-1/2 ui:-translate-x-1/2 ui:w-full ui:z-10 ui:flex ui:items-end',
+            isMobile ? 'ui:justify-center' : '',
             heroControlsClassName
           )}
         >
-          <div className="ui:flex-1" />
+          {!isMobile && <div className="ui:flex-1" />}
           {showPagination && (
             <CarouselPagination
               total={totalPositions}
@@ -377,17 +418,19 @@ function Carousel({
               light
             />
           )}
-          <div className="ui:flex-1 ui:flex ui:justify-end">
-            {showArrows && (
-              <CarouselNavigation
-                onPrev={handlePrev}
-                onNext={handleNext}
-                canPrev={canScrollPrev}
-                canNext={canScrollNext}
-                size="sm"
-              />
-            )}
-          </div>
+          {!isMobile && (
+            <div className="ui:flex-1 ui:flex ui:justify-end">
+              {showArrows && (
+                <CarouselNavigation
+                  onPrev={handlePrev}
+                  onNext={handleNext}
+                  canPrev={canScrollPrev}
+                  canNext={canScrollNext}
+                  size="sm"
+                />
+              )}
+            </div>
+          )}
         </div>
       )}
 
@@ -407,7 +450,7 @@ function Carousel({
           {showPagination && (
             <CarouselPagination total={totalPositions} current={currentIndex} />
           )}
-          {showArrows && arrowPosition === 'bottom-right' && (
+          {showArrows && !isMobile && arrowPosition === 'bottom-right' && (
             <CarouselNavigation
               onPrev={handlePrev}
               onNext={handleNext}
@@ -425,7 +468,7 @@ function Carousel({
           <CarouselCounter current={currentIndex} total={totalPositions} />
         </div>
       )}
-      {showControls && isLightbox && showArrows && (
+      {showControls && isLightbox && showArrows && !isMobile && (
         <CarouselNavigation
           onPrev={handlePrev}
           onNext={handleNext}

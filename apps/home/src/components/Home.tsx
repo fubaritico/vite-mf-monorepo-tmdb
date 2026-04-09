@@ -14,21 +14,21 @@ const Home: FC = () => {
       <HeroSection />
 
       {/* Trending Section - White background */}
-      <Container variant="default">
+      <Container>
         <Section spacing="lg" maxWidth="xl">
           <TrendingSection />
         </Section>
       </Container>
 
       {/* What's Popular Section - Gray background */}
-      <Container variant="muted">
+      <Container>
         <Section spacing="lg" maxWidth="xl">
           <PopularSection />
         </Section>
       </Container>
 
       {/* Free to Watch Section - White background */}
-      <Container variant="default">
+      <Container>
         <Section spacing="lg" maxWidth="xl">
           <FreeToWatchSection />
         </Section>

@@ -46,7 +46,7 @@ export default function Section({
   return (
     <section
       className={cn(
-        'layout:mx-auto layout:px-4 sm:layout:px-5 md:layout:px-6 lg:layout:px-8',
+        'layout:mx-auto layout:px-4 layout:sm:px-5 layout:md:px-6 layout:lg:px-8',
         'layout:flex layout:flex-col layout:gap-4 layout:justify-start',
         {
           'layout:max-w-screen-sm': maxWidth === 'sm',
@@ -55,9 +55,9 @@ export default function Section({
           'layout:max-w-screen-xl': maxWidth === 'xl',
           'layout:max-w-screen-2xl': maxWidth === '2xl',
           'layout:max-w-full': maxWidth === 'full',
-          'layout:py-6': spacing === 'sm',
-          'layout:py-12': spacing === 'md',
-          'layout:py-16': spacing === 'lg',
+          'layout:py-3 layout:md:py-4 layout:lg:py-6': spacing === 'sm',
+          'layout:py-6 layout:md:py-8 layout:lg:py-12': spacing === 'md',
+          'layout:py-8 layout:md:py-12 layout:lg:py-16': spacing === 'lg',
           ...flexDirectionClass,
         },
         className

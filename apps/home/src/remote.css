@@ -41,6 +41,12 @@
   .hm\:mb-2 {
     margin-bottom: var(--hm-spacing-2);
   }
+  .hm\:line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
   .hm\:block {
     display: block;
   }
@@ -93,6 +99,14 @@
   .hm\:sm\:bottom-8 {
     @media (width >= 40rem) {
       bottom: var(--hm-spacing-8);
+    }
+  }
+  .hm\:sm\:line-clamp-none {
+    @media (width >= 40rem) {
+      overflow: visible;
+      display: block;
+      -webkit-box-orient: horizontal;
+      -webkit-line-clamp: unset;
     }
   }
   .hm\:sm\:px-5 {
