@@ -23,7 +23,7 @@ export const routes: RouteObject[] = [
     ),
     children: [
       {
-        path: '/search',
+        path: '/search/:query',
         element: <Search />,
       },
     ],

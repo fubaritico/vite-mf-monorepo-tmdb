@@ -3,7 +3,37 @@
 @import "@vite-mf-monorepo/layouts/styles.css";
 @import "@vite-mf-monorepo/ui/styles.css";
 
+@layer components {
+  /* Alterner les backgrounds des sections dans la page Media */
+  .media-section:nth-of-type(even) {
+    background-color: var(--sr-color-muted);
+  }
+
+  .media-section:nth-of-type(odd) {
+    background-color: white;
+  }
+
+  footer  .media-section {
+    background-color: transparent !important;
+  }
+}
+
 @layer utilities {
+  .sr\:text-shadow-strong {
+    text-shadow: 0 0 10px rgb(0 0 0 / 0.75);
+  }
+  .sr\:text-shadow-medium {
+    text-shadow: 0 0 5px rgb(0 0 0 / 0.5);
+  }
+  .sr\:hero-height {
+    aspect-ratio: 21/9;
+  }
+  @media (min-width: 1024px) {
+    .sr\:hero-height {
+      aspect-ratio: auto;
+      max-height: 300px;
+    }
+  }
 }
 
 :root {

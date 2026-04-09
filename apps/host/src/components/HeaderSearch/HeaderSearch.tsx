@@ -1,4 +1,5 @@
 import { Suspense, lazy } from 'react'
+import { useMatch } from 'react-router-dom'
 
 import type { FC } from 'react'
 
@@ -16,6 +17,10 @@ const SearchTypeahead = lazy(() =>
  * @constructor
  */
 const HeaderSearch: FC = () => {
+  const isSearchPage = useMatch('/search/:query')
+
+  if (isSearchPage) return null
+
   return (
     <Suspense>
       <SearchTypeahead />
