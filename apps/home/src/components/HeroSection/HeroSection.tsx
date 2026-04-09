@@ -66,7 +66,7 @@ const HeroSection: FC = () => {
                   </Typography>
                   <Typography
                     variant="body-sm"
-                    className="hm:text-white! hm:text-shadow-strong"
+                    className="hm:line-clamp-3 hm:sm:line-clamp-none hm:text-white! hm:text-shadow-strong"
                   >
                     {item.overview ?? ''}
                   </Typography>

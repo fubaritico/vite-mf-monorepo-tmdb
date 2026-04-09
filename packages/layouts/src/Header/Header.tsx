@@ -61,8 +61,8 @@ export default function Header({
         'layout:bg-black layout:text-white layout:drop-shadow-2xl',
         'layout:transition-all layout:duration-300',
         {
-          'layout:h-16': isCompact,
-          'layout:h-20': !isCompact,
+          'layout:h-12 layout:md:h-14 layout:lg:h-16': isCompact,
+          'layout:h-14 layout:md:h-16 layout:lg:h-20': !isCompact,
         },
         className
       )}
