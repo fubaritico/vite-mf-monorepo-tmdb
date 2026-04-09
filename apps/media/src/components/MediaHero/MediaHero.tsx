@@ -1,3 +1,4 @@
+import { useIsMobile } from '@vite-mf-monorepo/shared'
 import {
   Badge,
   HeroImage,
@@ -15,6 +16,7 @@ import { isTvSeries } from '../../utils/typeGuards.ts'
 import type { FC } from 'react'
 
 const MediaHero: FC = () => {
+  const isMobile = useIsMobile()
   const location = useLocation()
   const { id } = useParams<{ id: string }>()
   const contentId = Number(id)
@@ -89,13 +91,13 @@ const MediaHero: FC = () => {
             {/* Title */}
             <Typography
               variant="h1"
-              className="mda:mb-1 mda:sm:mb-2 mda:text-white! mda:text-shadow-medium"
+              className="mda:mb-1 mda:sm:mb-2 mda:text-white! mda:text-shadow-medium mda:truncate mda:sm:whitespace-normal mda:sm:overflow-visible"
             >
               {title}
             </Typography>
 
-            {/* Tagline */}
-            {media.tagline && (
+            {/* Tagline — hidden on mobile */}
+            {!isMobile && media.tagline && (
               <Typography
                 variant="lead"
                 className="mda:mb-2 mda:sm:mb-3 mda:md:mb-4 mda:italic mda:text-white! mda:opacity-90 mda:text-shadow-strong"

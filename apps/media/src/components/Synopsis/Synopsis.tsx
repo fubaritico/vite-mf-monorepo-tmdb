@@ -19,7 +19,7 @@ const Synopsis: FC = () => {
     return (
       <Container variant="default">
         <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mda:mb-6">
+          <Typography variant="h2" className="mda:mb-0 mda:md:mb-3 mda:lg:mb-6">
             Synopsis
           </Typography>
           <div className="mda:space-y-2">
@@ -36,7 +36,7 @@ const Synopsis: FC = () => {
     return (
       <Container variant="default">
         <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mda:mb-6">
+          <Typography variant="h2" className="mda:mb-0 mda:md:mb-3 mda:lg:mb-6">
             Synopsis
           </Typography>
           <Typography variant="body" className="mda:text-neutral-400">
@@ -54,7 +54,7 @@ const Synopsis: FC = () => {
   return (
     <Container variant="default">
       <Section maxWidth="xl" spacing="md">
-        <Typography variant="h2" className="mda:mb-6">
+        <Typography variant="h2" className="mda:mb-0 mda:md:mb-3 mda:lg:mb-6">
           Synopsis
         </Typography>
         <Typography variant="body">{data.overview}</Typography>
