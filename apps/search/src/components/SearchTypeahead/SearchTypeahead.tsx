@@ -1,5 +1,5 @@
 import { useIsMobile } from '@vite-mf-monorepo/shared'
-import { Drawer, Typeahead, Typography } from '@vite-mf-monorepo/ui'
+import { Button, Drawer, Typeahead, Typography } from '@vite-mf-monorepo/ui'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -85,7 +85,7 @@ const SearchTypeahead: FC = () => {
   return (
     <div
       onKeyDown={handleKeyDown}
-      className="sr:w-40 sr:sm:w-56 sr:md:w-72 sr:lg:w-96"
+      className="sr:flex sr:items-center sr:gap-1 sr:w-48 sr:sm:w-56 sr:md:w-72 sr:lg:w-96"
     >
       <Typeahead
         onSearch={handleSearch}
@@ -95,6 +95,7 @@ const SearchTypeahead: FC = () => {
         clearOnSelect={false}
         portal={!isMobile}
         variant="dark"
+        className="sr:min-w-0"
       >
         <Typeahead.Input
           placeholder="Search..."
@@ -120,6 +121,21 @@ const SearchTypeahead: FC = () => {
           </Typeahead.Menu>
         )}
       </Typeahead>
+
+      {isMobile && searchQuery.length >= 2 && (
+        <Button
+          icon="ArrowRight"
+          variant="primary"
+          size="sm"
+          className="sr:shrink-0 sr:ml-2"
+          onClick={() => {
+            setDrawerOpen(false)
+            void navigate(`/search/${encodeURIComponent(searchQuery)}`)
+          }}
+        >
+          {null}
+        </Button>
+      )}
 
       {isMobile && (
         <Drawer

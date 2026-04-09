@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import { renderReactQueryWithRouter } from '@vite-mf-monorepo/shared/test-utils'
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
 import SearchMedia from './SearchMedia'
 
@@ -25,6 +25,15 @@ const mockMovies: SearchResult[] = [
     poster_path: '/poster2.jpg',
   } as SearchResult,
 ]
+
+const mockManyMovies: SearchResult[] = Array.from({ length: 15 }, (_, i) => ({
+  id: 100 + i,
+  title: `Movie ${String(i + 1)}`,
+  media_type: 'movie',
+  release_date: '2020-01-01',
+  vote_average: 7.0,
+  poster_path: `/poster${String(i)}.jpg`,
+})) as SearchResult[]
 
 describe('SearchMedia', () => {
   it('should render nothing when items is empty', () => {
@@ -52,7 +61,7 @@ describe('SearchMedia', () => {
       '/',
       '/'
     )
-    expect(screen.getByText('2 results for movies')).toBeInTheDocument()
+    expect(screen.getByText('movies')).toBeInTheDocument()
   })
 
   it('should render with TV shows title', () => {
@@ -61,7 +70,7 @@ describe('SearchMedia', () => {
       '/',
       '/'
     )
-    expect(screen.getByText('2 results for TV shows')).toBeInTheDocument()
+    expect(screen.getByText('TV shows')).toBeInTheDocument()
   })
 
   it('should render release years', () => {
@@ -89,60 +98,46 @@ describe('SearchMedia', () => {
     )
   })
 
-  it('should render "More results" button when hasMore is true', () => {
+  it('should render "Show more" button when more than 10 items', () => {
     renderReactQueryWithRouter(
-      <SearchMedia
-        items={mockMovies}
-        title="movies"
-        hasMore
-        onLoadMore={vi.fn()}
-      />,
+      <SearchMedia items={mockManyMovies} title="movies" />,
       '/',
       '/'
     )
-    expect(screen.getByText('More results')).toBeInTheDocument()
+    expect(screen.getByText('Show more')).toBeInTheDocument()
+    expect(screen.getAllByRole('link')).toHaveLength(10)
   })
 
-  it('should not render "More results" button when hasMore is false', () => {
+  it('should not render "Show more" button when 10 or fewer items', () => {
     renderReactQueryWithRouter(
       <SearchMedia items={mockMovies} title="movies" />,
       '/',
       '/'
     )
-    expect(screen.queryByText('More results')).not.toBeInTheDocument()
+    expect(screen.queryByText('Show more')).not.toBeInTheDocument()
   })
 
-  it('should call onLoadMore when "More results" is clicked', async () => {
-    const onLoadMore = vi.fn()
+  it('should reveal next items when "Show more" is clicked', async () => {
     const user = userEvent.setup()
 
     renderReactQueryWithRouter(
-      <SearchMedia
-        items={mockMovies}
-        title="movies"
-        hasMore
-        onLoadMore={onLoadMore}
-      />,
+      <SearchMedia items={mockManyMovies} title="movies" />,
       '/',
       '/'
     )
 
-    await user.click(screen.getByText('More results'))
-    expect(onLoadMore).toHaveBeenCalledOnce()
+    expect(screen.getAllByRole('link')).toHaveLength(10)
+    await user.click(screen.getByText('Show more'))
+    expect(screen.getAllByRole('link')).toHaveLength(15)
+    expect(screen.queryByText('Show more')).not.toBeInTheDocument()
   })
 
-  it('should show "Loading..." when isLoadingMore is true', () => {
+  it('should render correct count in header with many items', () => {
     renderReactQueryWithRouter(
-      <SearchMedia
-        items={mockMovies}
-        title="movies"
-        hasMore
-        onLoadMore={vi.fn()}
-        isLoadingMore
-      />,
+      <SearchMedia items={mockManyMovies} title="movies" />,
       '/',
       '/'
     )
-    expect(screen.getByText('Loading...')).toBeInTheDocument()
+    expect(screen.getByText('movies')).toBeInTheDocument()
   })
 })

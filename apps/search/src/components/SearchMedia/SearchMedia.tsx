@@ -1,5 +1,6 @@
 import { Container, Section } from '@vite-mf-monorepo/layouts'
 import { Button, Image, Rating, Typography } from '@vite-mf-monorepo/ui'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import {
@@ -20,6 +21,8 @@ export interface SearchMediaProps {
   isLoadingMore?: boolean
 }
 
+const PAGE_SIZE = 10
+
 const SearchMedia: FC<SearchMediaProps> = ({
   items,
   title,
@@ -27,16 +30,21 @@ const SearchMedia: FC<SearchMediaProps> = ({
   onLoadMore,
   isLoadingMore,
 }) => {
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
+
   if (items.length === 0) return null
+
+  const visibleItems = items.slice(0, visibleCount)
+  const hasMoreLocal = visibleCount < items.length
 
   return (
     <Container variant="default">
       <Section spacing="lg" maxWidth="xl">
         <Typography variant="h2" className="sr:mb-6">
-          {String(items.length)} results for {title}
+          {title}
         </Typography>
         <div className="sr:flex sr:flex-col sr:divide-y sr:divide-neutral-200">
-          {items.map((item) => {
+          {visibleItems.map((item) => {
             const route = getResultRoute(item)
             const year = getResultYear(item)
             const posterUrl = getPosterUrl(item)
@@ -82,15 +90,22 @@ const SearchMedia: FC<SearchMediaProps> = ({
             )
           })}
         </div>
-        {hasMore && (
+        {(hasMoreLocal || hasMore) && (
           <div className="sr:mt-6 sr:flex sr:justify-end">
             <Button
-              onClick={onLoadMore}
+              onClick={() => {
+                if (hasMoreLocal) {
+                  setVisibleCount((prev) => prev + PAGE_SIZE)
+                } else {
+                  onLoadMore?.()
+                }
+              }}
               disabled={isLoadingMore}
               variant="secondary"
               size="sm"
+              icon="Bars3"
             >
-              {isLoadingMore ? 'Loading...' : 'More results'}
+              {isLoadingMore ? 'Loading...' : 'Show more'}
             </Button>
           </div>
         )}

@@ -22,12 +22,13 @@
     --sr-default-transition-duration: 150ms;
     --sr-default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --sr-color-muted: #f5f5f5;
+    --sr-spacing-0: 0;
     --sr-spacing-1: 0.25rem;
     --sr-spacing-2: 0.5rem;
     --sr-spacing-3: 0.75rem;
     --sr-spacing-4: 1rem;
     --sr-spacing-6: 1.5rem;
-    --sr-spacing-40: 10rem;
+    --sr-spacing-48: 12rem;
     --sr-spacing-56: 14rem;
     --sr-spacing-72: 18rem;
     --sr-spacing-96: 24rem;
@@ -51,6 +52,9 @@
   .sr\:ml-1 {
     margin-left: var(--sr-spacing-1);
   }
+  .sr\:ml-2 {
+    margin-left: var(--sr-spacing-2);
+  }
   .sr\:ml-auto {
     margin-left: auto;
   }
@@ -69,8 +73,8 @@
   .sr\:aspect-\[21\/9\] {
     aspect-ratio: 21/9;
   }
-  .sr\:w-40 {
-    width: var(--sr-spacing-40);
+  .sr\:w-48 {
+    width: var(--sr-spacing-48);
   }
   .sr\:w-\[62px\] {
     width: 62px;
@@ -80,6 +84,9 @@
   }
   .sr\:max-w-lg {
     max-width: var(--sr-container-lg);
+  }
+  .sr\:min-w-0 {
+    min-width: var(--sr-spacing-0);
   }
   .sr\:flex-1 {
     flex: 1;
