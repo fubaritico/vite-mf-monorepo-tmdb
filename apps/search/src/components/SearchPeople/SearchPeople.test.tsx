@@ -55,7 +55,7 @@ describe('SearchPeople', () => {
       '/',
       '/'
     )
-    expect(screen.getByText('2 results for actors')).toBeInTheDocument()
+    expect(screen.getByText('actors')).toBeInTheDocument()
   })
 
   it('should render department', () => {
@@ -97,7 +97,7 @@ describe('SearchPeople', () => {
       '/',
       '/'
     )
-    expect(screen.getByText('1 results for directors')).toBeInTheDocument()
+    expect(screen.getByText('directors')).toBeInTheDocument()
     expect(screen.getByText('Quentin Tarantino')).toBeInTheDocument()
     expect(screen.getByText('Directing')).toBeInTheDocument()
   })

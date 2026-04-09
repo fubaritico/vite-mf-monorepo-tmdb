@@ -356,6 +356,11 @@
       padding-inline: var(--mda-spacing-5);
     }
   }
+  .mda\:\[\.media-section\:nth-of-type\(even\)_\&\]\:bg-muted {
+    .media-section:nth-of-type(even) & {
+      background-color: var(--mda-color-muted);
+    }
+  }
   .mda\:\[\.media-section\:nth-of-type\(even\)_\&\]\:bg-white {
     .media-section:nth-of-type(even) & {
       background-color: var(--mda-color-white);

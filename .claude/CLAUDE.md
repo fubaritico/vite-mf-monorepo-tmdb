@@ -104,6 +104,12 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - PhotosModal: swipe support without triggering click-to-close (`swipedRef` pattern — touchStart resets, touchMove sets, click handler skips `onClose` when swiped)
 - `useIsMobile` SSR/jsdom guard: `typeof window.matchMedia !== 'function'` check prevents test crashes
 - CSS prefix ordering rule added to CLAUDE.md: `prefix:modifier:style` (e.g. `layout:md:py-4`)
+- iOS Safari input zoom fix: `text-base sm:text-sm` on `inputSize="sm"` — 16px mobile prevents auto-zoom
+- Mobile testing workflow: `pnpm dev:mobile` / `pnpm dev:local` — reverse proxy through host (single origin), auto LAN IP detection, `.env.local` backup/restore, `wait-on` readiness check
+- Host `server.js`: `/_remote/:app` reverse proxy (only when `DEV_MOBILE=true`) with detailed documentation
+- Search `server.js`: fixed SPA fallback for `/search/:query` route (Express 5 syntax)
+- New reference file: `testing-on-iphone-locally.md` — full guide with architecture, caveats, debugging, failed approaches
+- Troubleshooting: 3 new sections (iOS Safari zoom, cross-origin import, mobile workflow)
 
 ### Next
 - **Phase 4**: Storybook stories for SearchMedia and SearchPeople
@@ -117,6 +123,7 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `packages/ui/.npmrc` contains npm token, not in `.gitignore` — must not be committed
 - E2E "Navigating to the next photo in the carousel" scenario flaky in CI (timeout on Next button click) — skipped with `@skip` tag, needs investigation
 - Stale `apps/host/@mf-types/search/compiled-types/components/SearchMovies/` directory from rename to SearchMedia — can be deleted
+- `pnpm dev:mobile`: first load on deep route (e.g. `/tv/2345`) fails — must start from `/` to init MF runtime, then navigate
 
 ## Reference Files (load on demand — NOT auto-loaded)
 | File | When to load |
@@ -128,5 +135,6 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 | `patterns-remote-setup.md` | New remote app from scratch |
 | `architecture.md` | Stack, scripts, CSS, Module Federation |
 | `troubleshooting.md` | Debug, architectural decisions |
+| `testing-on-iphone-locally.md` | Mobile testing on iPhone via LAN |
 
 **Before coding**: ask which reference files are needed — do NOT start coding without the relevant files loaded.

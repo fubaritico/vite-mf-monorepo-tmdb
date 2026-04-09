@@ -41,7 +41,6 @@ const Search: FC = () => {
 
   const {
     results,
-    totalResults,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
@@ -108,7 +107,7 @@ const Search: FC = () => {
           )}
           {!isPending && !isError && query.length >= 2 && (
             <Typography variant="h1">
-              {String(totalResults)} search results for &ldquo;
+              Search results for &ldquo;
               <strong>{decodeURIComponent(query)}</strong>&rdquo;
             </Typography>
           )}
@@ -117,16 +116,40 @@ const Search: FC = () => {
 
       <SearchMedia
         items={movies}
-        title="movies"
+        title="Movies"
         hasMore={hasNextPage}
         onLoadMore={() => {
           void fetchNextPage()
         }}
         isLoadingMore={isFetchingNextPage}
       />
-      <SearchMedia items={tvShows} title="TV shows" />
-      <SearchPeople items={actors} title="actors" />
-      <SearchPeople items={directors} title="directors" />
+      <SearchMedia
+        items={tvShows}
+        title="TV Shows"
+        hasMore={hasNextPage}
+        onLoadMore={() => {
+          void fetchNextPage()
+        }}
+        isLoadingMore={isFetchingNextPage}
+      />
+      <SearchPeople
+        items={actors}
+        title="Actors"
+        hasMore={hasNextPage}
+        onLoadMore={() => {
+          void fetchNextPage()
+        }}
+        isLoadingMore={isFetchingNextPage}
+      />
+      <SearchPeople
+        items={directors}
+        title="Directors"
+        hasMore={hasNextPage}
+        onLoadMore={() => {
+          void fetchNextPage()
+        }}
+        isLoadingMore={isFetchingNextPage}
+      />
     </div>
   )
 }
