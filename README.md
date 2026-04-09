@@ -45,6 +45,7 @@ React · Vite · TypeScript · @module-federation/vite · Lerna · pnpm · React
 | Team | Scope | Apps |
 |---|---|---|
 | Home & Media | Home page, movie/TV detail pages | `apps/home`, `apps/media` |
+| Search | Search results page with typeahead | `apps/search` |
 | User & Wishlist | User accounts and wishlist features | Planned |
 | Talent | Person/talent detail pages | Planned (`apps/talent`) |
 
@@ -91,7 +92,8 @@ vite-mf-monorepo/
 │   ├── host/          # Host application (port 3000)
 │   ├── home/          # Home page - movies/tv series carousels (port 3001)
 │   ├── media/         # Media details page (port 3002)
-│   └── photos/        # Routed photos carousel in lightbox mode (port 3003)
+│   ├── photos/        # Routed photos carousel in lightbox mode (port 3003)
+│   └── search/        # Search results page (port 3004)
 ├── packages/
 │   ├── layouts/       # Shared component to setup page zoning
 │   ├── shared/        # Shared utils, Vite plugins, Tailwind theme
@@ -362,7 +364,7 @@ Once all 3 pass, a **Build** job runs: `pnpm prod` (all apps), uploads dist arti
 
 ### Deploy Workflows
 
-Five deploy workflows run in parallel on push to `main` after CI succeeds (`workflow_run: [\"CI\"]` with `conclusion == 'success'`).
+Six deploy workflows run in parallel on push to `main` after CI succeeds (`workflow_run: [\"CI\"]` with `conclusion == 'success'`).
 
 Each workflow:
 1. Checks out the exact SHA that triggered CI (full history)
@@ -377,6 +379,7 @@ Each workflow:
 | `deploy-host` | `apps/host/**` or `packages/**` changed |
 | `deploy-media` | `apps/media/**` or `packages/**` changed |
 | `deploy-photos` | `apps/photos/**` or `packages/**` changed |
+| `deploy-search` | `apps/search/**` or `packages/**` changed |
 | `deploy-storybook` | `packages/storybook/**`, `packages/ui/**`, or `packages/layouts/**` changed |
 
 #### Manual Workflows
@@ -398,16 +401,18 @@ All secrets are configured in **GitHub → Settings → Secrets and variables �
 | `NETLIFY_SITE_ID_HOST` | `deploy-host` | Site ID for `vite-mf-tmdb` (host app) |
 | `NETLIFY_SITE_ID_MEDIA` | `deploy-media` | Site ID for `vite-mf-tmdb-media` |
 | `NETLIFY_SITE_ID_PHOTOS` | `deploy-photos` | Site ID for `vite-mf-tmdb-photos` |
+| `NETLIFY_SITE_ID_SEARCH` | `deploy-search` | Site ID for `vite-mf-tmdb-search` |
 | `NETLIFY_SITE_ID_STORYBOOK` | `deploy-storybook` | Site ID for `vite-mf-tmdb-storybook` |
 
 #### Application (build-time variables)
 
 | Secret | Used by | Description |
 |---|---|---|
-| `VITE_TMDB_API_TOKEN` | home, media, photos, host | TMDB bearer token. Without it, all API calls return HTTP 401. |
+| `VITE_TMDB_API_TOKEN` | home, media, photos, search, host | TMDB bearer token. Without it, all API calls return HTTP 401. |
 | `VITE_HOME_URL` | host | Production URL of the home remote. If empty, host loads its own `remoteEntry.js`. |
 | `VITE_MEDIA_URL` | host | Production URL of the media remote. |
 | `VITE_PHOTOS_URL` | host | Production URL of the photos remote. |
+| `VITE_SEARCH_URL` | host | Production URL of the search remote. |
 | `VITE_SENTRY_DSN` | all deploy workflows | Sentry project DSN. Without it, Sentry is silently disabled. |
 | `VITE_SENTRY_ENVIRONMENT` | all deploy workflows | Hardcoded to `production` in CI. |
 | `VITE_GIT_SHA` | all deploy workflows | Git commit SHA used as Sentry release identifier. |
