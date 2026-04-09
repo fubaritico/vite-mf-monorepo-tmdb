@@ -124,6 +124,55 @@ wait-on http://localhost:3000 http://localhost:3001 http://localhost:3002 http:/
 **Rule**: Never `&` between build and serve — always `&&`.
 **Applied to**: All 4 apps (host, home, media, photos).
 
+### iOS Safari zoom on input focus
+**Problem**: iOS Safari auto-zooms the viewport when focusing an `<input>` with `font-size < 16px`.
+**Symptom**: Page zooms in when tapping the search input on iPhone, breaking the layout.
+**Solution**: Use `text-base` (16px) on mobile, `text-sm` (14px) from `sm:` breakpoint up.
+```typescript
+'ui:h-8 ui:px-3 ui:text-base ui:sm:text-sm': inputSize === 'sm',
+```
+**Rule**: Any input that may appear on mobile must have `font-size >= 16px` below the `sm` breakpoint.
+**Applied to**: `packages/ui/src/Input/Input.tsx` — `inputSize="sm"` variant.
+
+### iOS Safari blocks cross-origin dynamic `import()` on LAN
+**Problem**: Module Federation `import()` of `remoteEntry.js` from a different port (e.g. `192.168.1.212:3000` → `192.168.1.212:3001`) fails on iOS Safari with "Could not connect to the server" / "Importing a module script failed", even though the file is accessible via direct navigation and `fetch()`.
+**Symptom**: Host loads on iPhone but all remotes fail. Works fine on desktop browsers.
+**Root cause**: iOS Safari handles cross-port dynamic `import()` differently from desktop browsers on LAN IPs. The `<link rel="modulepreload">` tags also fail, blocking the import chain.
+**What does NOT work**:
+- `host: true` in Vite dev server — remotes use relative paths in `remoteEntry.js` that break cross-origin
+- Direct LAN IP URLs in `.env.local` for dev mode — same relative path issue
+- Direct LAN IP URLs for prod mode — iOS Safari blocks cross-port `import()`
+**Solution**: Reverse proxy all remote assets through the host Express server on a single port. The host server proxies `/_remote/:app/*` to `localhost:{port}/*` when `DEV_MOBILE=true`. Build URLs point to `http://{LAN_IP}:3000/_remote/{app}/remoteEntry.js` — same origin, no cross-port issues.
+**Workflow**: `pnpm dev:mobile` (see below).
+**Note**: First page load may fail if remote servers aren't ready yet (cold start). Reload the page — subsequent loads work from cache.
+
+### Mobile testing workflow (`pnpm dev:mobile`)
+**What it does**:
+1. Detects Mac's LAN IP automatically
+2. Backs up `.env.local` to `.env.local.bak`
+3. Rewrites `VITE_*_URL` to `http://{LAN_IP}:3000/_remote/{app}` (proxy through host)
+4. Sets `DEV_MOBILE=true` and runs `pnpm prod:server` (production builds + Express)
+5. On Ctrl+C, restores `.env.local` from backup
+
+**How to use**:
+```bash
+pnpm dev:mobile          # builds + starts servers, waits for readiness, prints iPhone URL
+# IMPORTANT: always open http://{LAN_IP}:3000 (home page) FIRST on iPhone
+# Then navigate to other routes from there
+# Ctrl+C to stop — .env.local auto-restored
+pnpm dev:local           # safety net: manual restore if trap failed
+```
+
+**Important — always start from the home page**: Opening a deep route directly (e.g. `/tv/2345`) on the first load will fail. The Module Federation runtime needs the home remote to load first to initialize shared singletons (react, react-dom, etc.). Always navigate to `/` first, then use in-app navigation to reach other pages.
+
+**Architecture**:
+- `scripts/dev-mobile.sh` — orchestrates backup, URL rewrite, build, wait-on readiness, restore
+- `scripts/dev-local.sh` — manual restore fallback
+- `apps/host/server.js` — `/_remote/:app` reverse proxy (only when `DEV_MOBILE=true`)
+- No changes to Vite configs — proxy is Express-only, production builds only
+
+**Requirements**: iPhone and Mac on the same Wi-Fi network.
+
 ---
 
 ## Key Architectural Decisions

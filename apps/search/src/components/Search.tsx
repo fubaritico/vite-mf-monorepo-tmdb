@@ -26,6 +26,7 @@ import '../remote.css'
 
 const HERO_BACKDROP = '/8OzmkRKFzZZ7FklnmzL3nFaRr4z.jpg'
 
+/** Search results page — displays movies, TV shows, actors and directors matching the query. */
 const Search: FC = () => {
   const { query = '' } = useParams<{ query: string }>()
   const navigate = useNavigate()

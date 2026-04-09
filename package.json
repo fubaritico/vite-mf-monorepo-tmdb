@@ -27,6 +27,8 @@
     "test:e2e:trace": "pnpm --filter @vite-mf-monorepo/e2e test:trace",
     "test:e2e:codegen": "pnpm --filter @vite-mf-monorepo/e2e test:codegen",
     "test:e2e:ci": "pnpm --filter @vite-mf-monorepo/e2e test:ci",
+    "dev:mobile": "./scripts/dev-mobile.sh",
+    "dev:local": "./scripts/dev-local.sh",
     "postinstall": "chmod +x scripts/*.sh"
   },
   "devDependencies": {

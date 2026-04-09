@@ -48,7 +48,7 @@ const Input: FC<InputProps> = ({
           ? 'ui:border-destructive ui:focus:outline-destructive'
           : 'ui:border-input ui:focus:outline-primary',
         {
-          'ui:h-8 ui:px-3 ui:text-sm': inputSize === 'sm',
+          'ui:h-8 ui:px-3 ui:text-base ui:sm:text-sm': inputSize === 'sm',
           'ui:h-10 ui:px-4 ui:text-base': inputSize === 'md',
           'ui:h-12 ui:px-6 ui:text-lg': inputSize === 'lg',
         },

@@ -20,7 +20,7 @@ app.get('/health', (req, res) => {
 
 app.use(express.static(path.join(__dirname, 'dist')))
 
-app.get('/search', (req, res) => {
+app.get('/search/:query', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
 

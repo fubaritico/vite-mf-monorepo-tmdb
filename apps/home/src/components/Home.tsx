@@ -7,6 +7,7 @@ import TrendingSection from './TrendingSection/TrendingSection'
 
 import type { FC } from 'react'
 
+/** Home page orchestrator — composes hero + trending/popular/free-to-watch sections. */
 const Home: FC = () => {
   return (
     <div data-testid="mf-ready-home">
