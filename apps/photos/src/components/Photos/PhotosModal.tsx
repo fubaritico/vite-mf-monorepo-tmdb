@@ -47,7 +47,6 @@ const PhotosModal: FC<PhotosModalProps> = ({
   return (
     <Modal isOpen onClose={onClose} aria-label="PhotosModal viewer">
       <Carousel
-        key={initialIndex}
         variant="lightbox"
         gap={0}
         rounded={false}
