@@ -111,8 +111,20 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - New reference file: `testing-on-iphone-locally.md` — full guide with architecture, caveats, debugging, failed approaches
 - Troubleshooting: 3 new sections (iOS Safari zoom, cross-origin import, mobile workflow)
 
+- `SearchBar` component tests: 13 tests (render, navigation, encoding, trim, min chars guard, Enter key, className/props spread)
+- Storybook stories for `SearchMedia` (Movies, TVShows, WithShowMore, Empty, LoadingMore) and `SearchPeople` (Actors, Directors, WithShowMore, Empty, LoadingMore) — barrel exports added for Storybook consumption
+- E2E functional scenarios: `search-and-browse.feature` (typeahead → Inception → photos → backdrop close), `search-results.feature` (Enter submit → sections → refine → click result), `browse-tv.feature` (Popular TV tab → TV detail page)
+- E2E page objects: `SearchPage.ts` (combobox, option items), `SearchResultsPage.ts` (heading, sections, search bar, items)
+- E2E step definitions: `search-and-browse.steps.ts`, `search-results.steps.ts`, `browse-tv.steps.ts` with world `currentSection` for cross-step scoping
+- Re-enabled previously skipped photo navigation scenario (removed `@skip` tag from `browse-media.feature`)
+- E2E a11y infrastructure: `@axe-core/playwright` installed, `a11y.steps.ts` (full page + scoped region WCAG 2.1 AA audits), `a11y-keyboard.steps.ts` (keyboard-only navigation: Tab, ArrowDown, ArrowRight, Enter, Escape)
+- E2E a11y feature files: `a11y-browse-media.feature`, `a11y-search-and-browse.feature`, `a11y-search-results.feature`, `a11y-browse-tv.feature`
+- E2E scripts: `test:a11y` / `test:ui:a11y` in e2e and root package.json (dedicated scripts — `--` separator causes cucumber to interpret `@tag` as rerun file path)
+- Design token fix: `primitive.neutral.500` changed from `#737373` to `#6b6b6b` for WCAG AA contrast compliance (4.60:1 on #f5f5f5, 5.03:1 on white), tokens rebuilt
+- Smoke steps updated: search added to remotes array
+
 ### Next
-- **Phase 4**: Storybook stories for SearchMedia and SearchPeople
+- Fix remaining a11y E2E failures: (1) `I open the application` timeout 5s→15s for a11y scenarios, (2) search typeahead contrast issues (muted-foreground on dark bg, year text opacity-50), (3) nested-interactive violation (focusable `<a>` inside `role="option"` in ListboxItem)
 
 ### Known Issues
 - packages/shared exports: add to `exports` when a new subpath is imported
@@ -121,9 +133,12 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - `packages/layouts/publish.sh` git push fails — tries to push `release/layouts` branch that doesn't exist
 - `packages/layouts/.npmrc` contains npm token, not in `.gitignore` — must not be committed
 - `packages/ui/.npmrc` contains npm token, not in `.gitignore` — must not be committed
-- E2E "Navigating to the next photo in the carousel" scenario flaky in CI (timeout on Next button click) — skipped with `@skip` tag, needs investigation
 - Stale `apps/host/@mf-types/search/compiled-types/components/SearchMovies/` directory from rename to SearchMedia — can be deleted
 - `pnpm dev:mobile`: first load on deep route (e.g. `/tv/2345`) fails — must start from `/` to init MF runtime, then navigate
+- a11y E2E: `I open the application` step times out at 5s in a11y scenarios (3 of 5 fail) — needs `{ timeout: 15_000 }`
+- Typeahead dark variant: muted-foreground (`#6b6b6b`) on dark bg (`#171717`) fails WCAG AA contrast (3.36:1 < 4.5:1) — affects group labels ("Movies", "TV Shows")
+- Typeahead dark variant: year text with `sr:opacity-50` on dark bg fails contrast (4.41:1 < 4.5:1)
+- ListboxItem with `role="option"` contains focusable `<a>` descendants — axe nested-interactive violation
 
 ## Reference Files (load on demand — NOT auto-loaded)
 | File | When to load |

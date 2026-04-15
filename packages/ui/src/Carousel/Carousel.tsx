@@ -380,6 +380,11 @@ function Carousel({
           rounded && 'ui:rounded-lg ui:overflow-hidden'
         )}
         style={{ gap: `${String(gap)}px` }}
+        {...(isFullWidth && {
+          tabIndex: 0,
+          role: 'region',
+          'aria-label': 'Image gallery',
+        })}
       >
         {children}
       </div>

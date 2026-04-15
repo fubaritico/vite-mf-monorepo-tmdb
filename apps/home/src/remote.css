@@ -153,6 +153,17 @@
     text-shadow: 0 0 5px rgb(0 0 0 / 0.5);
   }
 }
+@layer components {
+  .media-section:nth-of-type(odd) {
+    background-color: var(--mda-color-muted);
+  }
+  .media-section:nth-of-type(even) {
+    background-color: white;
+  }
+  footer .media-section {
+    background-color: transparent !important;
+  }
+}
 @layer utilities {
   .hm\:text-shadow-strong {
     text-shadow: 0 0 10px rgb(0 0 0 / 0.75);

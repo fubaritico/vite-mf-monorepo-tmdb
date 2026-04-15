@@ -191,25 +191,27 @@ describe('SearchTypeahead', () => {
     await renderAndType('test{Enter}')
   })
 
-  it('should render movies with links to /movie/:id', async () => {
+  it('should render movies as selectable options', async () => {
     vi.mocked(useSearchMulti).mockReturnValue(withData())
 
     await renderAndType()
 
-    const link = screen
-      .getAllByRole('link')
-      .find((el) => el.getAttribute('href') === '/movie/550')
-    expect(link).toBeInTheDocument()
+    const options = screen.getAllByRole('option')
+    const movieOption = options.find((el) =>
+      el.textContent?.includes('Fight Club')
+    )
+    expect(movieOption).toBeInTheDocument()
   })
 
-  it('should render tv shows with links to /tv/:id', async () => {
+  it('should render tv shows as selectable options', async () => {
     vi.mocked(useSearchMulti).mockReturnValue(withData())
 
     await renderAndType()
 
-    const link = screen
-      .getAllByRole('link')
-      .find((el) => el.getAttribute('href') === '/tv/1396')
-    expect(link).toBeInTheDocument()
+    const options = screen.getAllByRole('option')
+    const tvOption = options.find((el) =>
+      el.textContent?.includes('Breaking Bad')
+    )
+    expect(tvOption).toBeInTheDocument()
   })
 })

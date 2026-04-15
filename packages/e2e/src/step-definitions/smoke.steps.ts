@@ -17,7 +17,7 @@ Then<E2EWorld>(
 )
 
 Then<E2EWorld>('no remote is in error', async function () {
-  const remotes = ['home', 'media', 'photos']
+  const remotes = ['home', 'media', 'photos', 'search']
   for (const remote of remotes) {
     const errorSelector = `[data-testid="mf-error-${remote}"]`
     const errorElement = await this.page.$(errorSelector)

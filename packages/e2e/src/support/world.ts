@@ -1,12 +1,14 @@
 import { World, setWorldConstructor } from '@cucumber/cucumber'
 
-import type { Browser, BrowserContext, Page } from '@playwright/test'
+import type { Browser, BrowserContext, Locator, Page } from '@playwright/test'
 
 export class E2EWorld extends World {
   browser!: Browser
   context!: BrowserContext
   page!: Page
   previousUrl!: string
+  /** Stores a section locator for cross-step references (e.g. "in that section") */
+  currentSection!: Locator
 
   /**
    * Waits for a Module Federation remote to be ready by checking for the
