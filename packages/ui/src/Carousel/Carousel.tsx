@@ -176,27 +176,23 @@ function Carousel({
   }, [calculatePositions])
 
   /**
-   * Effect: Jumps to initialIndex on mount (no animation).
-   * Consumed by lightbox via key={index} remounting — refs avoid stale closure.
+   * Effect: Jumps to initialIndex on mount AND when it changes.
+   * For URL-driven carousels (lightbox with disableScroll + disableAnimation),
+   * this allows prop-driven navigation without remounting via key={}.
    */
-  const initialScrollRef = useRef({
-    index: initialIndex ?? 0,
-    isFullWidth,
-    gap,
-  })
-
   useLayoutEffect(() => {
-    const { index, isFullWidth: fw, gap: g } = initialScrollRef.current
+    const index = initialIndex ?? 0
     if (index <= 0) return
     const container = scrollRef.current
     if (!container) return
     const firstItem = container.children[0] as HTMLElement | undefined
-    const itemWidth = fw ? container.offsetWidth : (firstItem?.offsetWidth ?? 0)
-    // Override CSS scroll-behavior: smooth — jump must be instant before first paint
+    const itemWidth = isFullWidth
+      ? container.offsetWidth
+      : (firstItem?.offsetWidth ?? 0)
     container.style.scrollBehavior = 'auto'
-    container.scrollLeft = index * (itemWidth + (fw ? 0 : g))
+    container.scrollLeft = index * (itemWidth + (isFullWidth ? 0 : gap))
     container.style.scrollBehavior = ''
-  }, [])
+  }, [initialIndex, isFullWidth, gap])
 
   /**
    * Effect: Tracks scroll position to update currentIndex.

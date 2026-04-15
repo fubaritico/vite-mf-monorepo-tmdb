@@ -3,10 +3,9 @@ import clsx from 'clsx'
 import { Icon } from '../Icon'
 
 import type { IconName, IconSize } from '../Icon'
-import type { ButtonHTMLAttributes } from 'react'
+import type { ComponentProps } from 'react'
 
-export interface IconButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IconButtonProps extends ComponentProps<'button'> {
   /** Icon name to display */
   icon: IconName
   /** Visual variant of the button */
@@ -30,12 +29,14 @@ function IconButton({
   variant = 'ghost',
   size = 'md',
   disabled,
+  ref,
   ...rest
 }: Readonly<IconButtonProps>) {
   const { button: buttonSize, icon: iconSize } = sizeMap[size]
 
   return (
     <button
+      ref={ref}
       className={clsx(
         'ui:inline-flex ui:items-center ui:justify-center ui:cursor-pointer ui:rounded-full ui:transition-colors',
         'ui:focus:outline-none ui:focus:ring-2 ui:focus:ring-ring ui:focus:ring-offset-2',
