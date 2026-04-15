@@ -22,7 +22,7 @@ Feature: Accessibility — Browse media with keyboard
     And I am on a detail page
     And I click on a photo in the photos section
     Then the photo viewer is open
-    And the "[data-testid=\"mf-ready-photos\"]" region should have no accessibility violations
+    And the "photo viewer" should have no accessibility violations
     When I tab to the button labeled "Next"
     And I press Enter on the focused element
     Then the photo viewer is open

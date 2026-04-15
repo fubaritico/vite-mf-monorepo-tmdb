@@ -18,8 +18,8 @@ When<E2EWorld>(
 
 When<E2EWorld>('I press Escape', { timeout: 15_000 }, async function () {
   await this.page.keyboard.press('Escape')
-  // Wait for dialog close or dropdown dismiss
-  await this.page.waitForTimeout(300)
+  // Wait for dialog close / dropdown dismiss / navigation
+  await this.page.waitForTimeout(1000)
 })
 
 // ---------------------------------------------------------------------------
@@ -48,20 +48,32 @@ When<E2EWorld>(
 
 When<E2EWorld>(
   'I tab to the button labeled {string}',
-  { timeout: 15_000 },
+  { timeout: 30_000 },
   async function (label: string) {
-    // Wait for the target button to exist in the DOM before tabbing
+    // Wait for the button to be visible and enabled before tabbing
     await this.page
-      .locator(`button[aria-label="${label}"], button:has-text("${label}")`)
+      .locator(
+        `button[aria-label="${label}"]:not([disabled]), button:has-text("${label}"):not([disabled])`
+      )
       .first()
       .waitFor({ state: 'visible', timeout: 10_000 })
 
-    for (let i = 0; i < 30; i++) {
-      await this.page.keyboard.press('Tab')
-      const focused = this.page.locator(':focus')
-      const ariaLabel = await focused.getAttribute('aria-label')
-      const text = await focused.textContent()
-      if (ariaLabel === label || text?.trim() === label) return
+    // Try forward Tab first (enters dialog focus trap), then Shift+Tab
+    for (const key of ['Tab', 'Shift+Tab']) {
+      for (let i = 0; i < 15; i++) {
+        await this.page.keyboard.press(key)
+        const info = await this.page.evaluate(() => {
+          const el = document.activeElement
+          return {
+            ariaLabel: el?.getAttribute('aria-label'),
+            text:
+              el?.tagName === 'BUTTON' || el?.tagName === 'A'
+                ? el.textContent?.trim()
+                : null,
+          }
+        })
+        if (info.ariaLabel === label || info.text === label) return
+      }
     }
     throw new Error(
       `Could not tab to button labeled "${label}" within 30 Tab presses`

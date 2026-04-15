@@ -22,13 +22,12 @@ Feature: Accessibility — Search and browse with keyboard
     And the page should have no accessibility violations
     When I click on a photo in the photos section
     Then the photo viewer is open
+    And the "photo viewer" should have no accessibility violations
     When I tab to the button labeled "Next"
     And I press Enter on the focused element
-    And I tab to the button labeled "Next"
-    And I press Enter on the focused element
-    And I tab to the button labeled "Previous"
+    Then the photo viewer is open
+    When I tab to the button labeled "Previous"
     And I press Enter on the focused element
     Then the photo viewer is open
-    And the "[data-testid=\"mf-ready-photos\"]" region should have no accessibility violations
     When I press Escape
-    Then I am on a detail page
+    Then I am on the movie page for "Inception"

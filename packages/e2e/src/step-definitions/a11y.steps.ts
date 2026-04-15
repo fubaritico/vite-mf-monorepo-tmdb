@@ -39,13 +39,28 @@ Then<E2EWorld>(
   }
 )
 
+/** Maps user-friendly region names to CSS selectors */
+const regionSelectors: Record<string, string> = {
+  'photo viewer': '[data-testid="mf-ready-photos"]',
+  'search results': '[data-testid="mf-ready-search"]',
+  'media page': '[data-testid="mf-ready-media"]',
+  'home page': '[data-testid="mf-ready-home"]',
+}
+
 /**
- * Runs an axe-core audit scoped to a specific region of the page.
+ * Runs an axe-core audit scoped to a named region of the page.
  */
 Then<E2EWorld>(
-  'the {string} region should have no accessibility violations',
+  'the {string} should have no accessibility violations',
   { timeout: 30_000 },
-  async function (selector: string) {
+  async function (regionName: string) {
+    const selector = regionSelectors[regionName]
+    if (!selector) {
+      throw new Error(
+        `Unknown region "${regionName}". Known: ${Object.keys(regionSelectors).join(', ')}`
+      )
+    }
+
     const results = await new AxeBuilder({ page: this.page })
       .include(selector)
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
@@ -67,7 +82,7 @@ Then<E2EWorld>(
 
     expect(
       violations,
-      `Found ${String(violations.length)} a11y violation(s) in "${selector}":\n${violations
+      `Found ${String(violations.length)} a11y violation(s) in "${regionName}":\n${violations
         .map((v) => `  - ${v.id}: ${v.help}`)
         .join('\n')}`
     ).toHaveLength(0)
