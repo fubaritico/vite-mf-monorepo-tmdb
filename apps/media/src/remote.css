@@ -286,11 +286,6 @@
       grid-row: span 2 / span 2;
     }
   }
-  .mda\:md\:mb-3 {
-    @media (width >= 48rem) {
-      margin-bottom: var(--mda-spacing-3);
-    }
-  }
   .mda\:md\:mb-4 {
     @media (width >= 48rem) {
       margin-bottom: var(--mda-spacing-4);
@@ -329,11 +324,6 @@
   .mda\:lg\:bottom-8 {
     @media (width >= 64rem) {
       bottom: var(--mda-spacing-8);
-    }
-  }
-  .mda\:lg\:mb-6 {
-    @media (width >= 64rem) {
-      margin-bottom: var(--mda-spacing-6);
     }
   }
   .mda\:lg\:mb-8 {

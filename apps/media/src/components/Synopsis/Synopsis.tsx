@@ -19,9 +19,7 @@ const Synopsis: FC = () => {
     return (
       <Container variant="default">
         <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mda:mb-0 mda:md:mb-3 mda:lg:mb-6">
-            Synopsis
-          </Typography>
+          <Typography variant="h2">Synopsis</Typography>
           <div className="mda:space-y-2">
             <Skeleton variant="line" width="100%" />
             <Skeleton variant="line" width="100%" />
@@ -36,9 +34,7 @@ const Synopsis: FC = () => {
     return (
       <Container variant="default">
         <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mda:mb-0 mda:md:mb-3 mda:lg:mb-6">
-            Synopsis
-          </Typography>
+          <Typography variant="h2">Synopsis</Typography>
           <Typography variant="body" className="mda:text-neutral-400">
             Unable to load synopsis. Please try again later.
           </Typography>
@@ -54,9 +50,7 @@ const Synopsis: FC = () => {
   return (
     <Container variant="default">
       <Section maxWidth="xl" spacing="md">
-        <Typography variant="h2" className="mda:mb-0 mda:md:mb-3 mda:lg:mb-6">
-          Synopsis
-        </Typography>
+        <Typography variant="h2">Synopsis</Typography>
         <Typography variant="body">{data.overview}</Typography>
       </Section>
     </Container>

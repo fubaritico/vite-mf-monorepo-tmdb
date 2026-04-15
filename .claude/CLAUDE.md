@@ -22,6 +22,7 @@ TMDB media app. Lerna + pnpm workspaces. Module Federation.
 - **Always ask** user to run pnpm dev, pnpm prod:server and pnpm storybook after having modified a component
 - **Always create a Storybook story** after every component (`/story`)
 - **Model**: Haiku for questions/research, Sonnet for code/commits — suggest Haiku when appropriate
+- **For React**: instead of using `React.` for react types, import the type from react 
 
 ## Code Conventionsyes
 - Functional components: `const Name: FC<NameProps> = ({ ... }) => { ... }`

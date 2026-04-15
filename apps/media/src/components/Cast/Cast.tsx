@@ -24,9 +24,7 @@ const Cast: FC = () => {
     return (
       <Container variant="default">
         <Section maxWidth="xl" spacing="md">
-          <Typography variant="h2" className="mda:mb-0 mda:md:mb-3 mda:lg:mb-6">
-            Cast
-          </Typography>
+          <Typography variant="h2">Cast</Typography>
           <div className="mda:grid mda:grid-cols-2 mda:gap-6">
             {Array.from({ length: 10 }).map((_, i) => (
               <Skeleton
@@ -51,9 +49,7 @@ const Cast: FC = () => {
   return (
     <Container variant="default">
       <Section maxWidth="xl" spacing="md">
-        <Typography variant="h2" className="mda:mb-0 mda:md:mb-3 mda:lg:mb-6">
-          Cast
-        </Typography>
+        <Typography variant="h2">Cast</Typography>
         <div className="mda:grid mda:grid-cols-2 mda:gap-6 mda:mb-0 mda:md:mb-4 mda:lg:mb-8">
           {topCast.map((actor) => (
             <Talent
