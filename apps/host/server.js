@@ -86,11 +86,8 @@ if (process.env.DEV_MOBILE === 'true') {
 
 app.use(express.static(path.join(__dirname, 'dist')))
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'))
-})
-
-app.get('/detail/:id', (req, res) => {
+// SPA fallback — all routes serve index.html so React Router handles them
+app.get('/{*path}', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
 
