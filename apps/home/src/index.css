@@ -3,6 +3,21 @@
 @import "@vite-mf-monorepo/layouts/styles.css";
 @import "@vite-mf-monorepo/ui/styles.css";
 
+@layer components {
+  /* Alterner les backgrounds des sections dans la page Media */
+  .media-section:nth-of-type(odd) {
+    background-color: var(--mda-color-muted);
+  }
+
+  .media-section:nth-of-type(even) {
+    background-color: white;
+  }
+
+  footer .media-section {
+    background-color: transparent !important;
+  }
+}
+
 /* comment for test */
 @layer utilities {
   .hm\:text-shadow-strong {

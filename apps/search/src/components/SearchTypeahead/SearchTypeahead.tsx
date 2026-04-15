@@ -108,7 +108,6 @@ const SearchTypeahead: FC = () => {
               movies={movies}
               tvShows={tvShows}
               persons={persons}
-              onNavigate={handleSelect}
             />
             {!hasResults && searchQuery.length >= 2 && !isError && (
               <Typeahead.Empty>No results found</Typeahead.Empty>
@@ -164,7 +163,7 @@ const SearchTypeahead: FC = () => {
                 <div>
                   <Typography
                     variant="overline"
-                    className="sr:block sr:px-2 sr:py-0.5"
+                    className="sr:block sr:px-2 sr:py-0.5 sr:text-neutral-400"
                   >
                     Movies
                   </Typography>
@@ -181,7 +180,7 @@ const SearchTypeahead: FC = () => {
                       >
                         <span>{getResultLabel(r)}</span>
                         {r.release_date && (
-                          <span className="sr:ml-auto sr:opacity-50">
+                          <span className="sr:ml-auto sr:opacity-60">
                             {new Date(r.release_date).getFullYear()}
                           </span>
                         )}
@@ -195,7 +194,7 @@ const SearchTypeahead: FC = () => {
                 <div>
                   <Typography
                     variant="overline"
-                    className="sr:block sr:px-2 sr:py-0.5"
+                    className="sr:block sr:px-2 sr:py-0.5 sr:text-neutral-400"
                   >
                     TV Shows
                   </Typography>
@@ -221,18 +220,18 @@ const SearchTypeahead: FC = () => {
                 <div>
                   <Typography
                     variant="overline"
-                    className="sr:block sr:px-2 sr:py-0.5"
+                    className="sr:block sr:px-2 sr:py-0.5 sr:text-neutral-400"
                   >
                     People
                   </Typography>
                   {persons.map((r) => (
                     <div
                       key={r.id}
-                      className="sr:flex sr:items-center sr:gap-2 sr:px-2 sr:py-1.5 sr:opacity-50 sr:text-neutral-200 sr:text-xs"
+                      className="sr:flex sr:items-center sr:gap-2 sr:px-2 sr:py-1.5 sr:text-neutral-400 sr:text-xs"
                     >
                       <span>{getResultLabel(r)}</span>
                       {getPersonDepartment(r) && (
-                        <span className="sr:ml-auto sr:opacity-50">
+                        <span className="sr:ml-auto sr:opacity-60">
                           {getPersonDepartment(r)}
                         </span>
                       )}

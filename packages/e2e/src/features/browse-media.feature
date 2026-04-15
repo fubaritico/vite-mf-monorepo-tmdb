@@ -34,7 +34,7 @@ Feature: Browse media content
     And I click on a photo in the photos section
     Then the photo viewer is open
 
-  @photos @skip
+  @photos
   Scenario: Navigating to the next photo in the carousel
     When I click on the first poster in a carousel
     And I am on a detail page

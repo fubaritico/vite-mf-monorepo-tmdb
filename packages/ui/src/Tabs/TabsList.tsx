@@ -41,7 +41,7 @@ function TabsList({ className, children, ...rest }: Readonly<TabsListProps>) {
           'ui:flex ui:gap-1',
           variant === 'underline' && 'ui:border-b ui:border-border',
           variant === 'pills' &&
-            'ui:[.media-section:nth-of-type(odd)_&]:bg-white ui:bg-muted ui:p-1 ui:rounded-lg ui:w-fit',
+            'ui:[.media-section:nth-of-type(even)_&]:bg-white ui:[.media-section:nth-of-type(odd)_&]:bg-muted ui:bg-muted ui:p-1 ui:rounded-lg ui:w-fit',
           className
         )}
         role="tablist"

@@ -41,7 +41,7 @@
     --mda-color-badge-foreground: #404040;
     --mda-color-destructive: #ef4444;
     --mda-color-muted: #f5f5f5;
-    --mda-color-muted-foreground: #737373;
+    --mda-color-muted-foreground: #6b6b6b;
     --mda-spacing-0: 0;
     --mda-spacing-1: 0.25rem;
     --mda-spacing-2: 0.5rem;
@@ -356,14 +356,14 @@
       padding-inline: var(--mda-spacing-5);
     }
   }
-  .mda\:\[\.media-section\:nth-of-type\(even\)_\&\]\:bg-muted {
-    .media-section:nth-of-type(even) & {
-      background-color: var(--mda-color-muted);
-    }
-  }
   .mda\:\[\.media-section\:nth-of-type\(even\)_\&\]\:bg-white {
     .media-section:nth-of-type(even) & {
       background-color: var(--mda-color-white);
+    }
+  }
+  .mda\:\[\.media-section\:nth-of-type\(odd\)_\&\]\:bg-muted {
+    .media-section:nth-of-type(odd) & {
+      background-color: var(--mda-color-muted);
     }
   }
 }

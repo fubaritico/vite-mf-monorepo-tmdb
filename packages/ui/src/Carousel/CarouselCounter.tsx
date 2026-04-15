@@ -21,7 +21,7 @@ function CarouselCounter({
   return (
     <div
       className={clsx(
-        'ui:bg-black/50 ui:rounded-full ui:px-3 ui:py-1',
+        'ui:bg-black/70 ui:rounded-full ui:px-3 ui:py-1',
         'ui:text-white/90 ui:text-sm ui:font-medium ui:tabular-nums',
         className
       )}
