@@ -82,7 +82,7 @@ const MediaHero: FC = () => {
         <div
           className={clsx(
             'mda:absolute mda:left-1/2 mda:-translate-x-1/2 mda:z-2 mda:w-full mda:max-w-screen-xl',
-            'mda:px-4 mda:sm:px-5 mda:md:px-5 mda:lg:px-5',
+            'mda:px-4 mda:sm:px-5 mda:md:px-6 mda:lg:px-8',
             'mda:bottom-4 mda:sm:bottom-5 mda:md:bottom-6 mda:lg:bottom-8',
             'mda:flex mda:justify-start mda:items-end'
           )}
