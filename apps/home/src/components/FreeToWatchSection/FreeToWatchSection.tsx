@@ -8,6 +8,10 @@ import type { FC } from 'react'
 
 type MediaType = 'movie' | 'tv'
 
+/**
+ *
+ * @constructor
+ */
 const FreeToWatchSection: FC = () => {
   const [mediaType, setMediaType] = useState<MediaType>('movie')
 

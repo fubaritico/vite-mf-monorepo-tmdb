@@ -20,7 +20,7 @@ import {
 import type { FC } from 'react'
 
 /**
- * Header search typeahead exposed via Module Federation from the search remote.
+ * Header search typeahead exposed via Module Federation from the search remote
  *
  * - **Desktop (≥md)**: renders a Typeahead with a portal dropdown grouped
  *   by Movies, TV Shows, and People.
