@@ -11,6 +11,8 @@ export class E2EWorld extends World {
   currentSection!: Locator
   /** Stores focused element labels from focus-trap Tab cycling */
   focusedElements!: string[]
+  /** Stores elements that escaped the dialog focus trap */
+  focusEscaped!: { label: string; insideDialog: boolean }[]
 
   /**
    * Waits for a Module Federation remote to be ready by checking for the
