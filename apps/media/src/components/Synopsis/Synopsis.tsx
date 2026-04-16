@@ -2,7 +2,7 @@ import { Container, Section } from '@vite-mf-monorepo/layouts'
 import { Skeleton, Typography } from '@vite-mf-monorepo/ui'
 import { useLocation, useParams } from 'react-router-dom'
 
-import { useMediaDetails } from '../../hooks/useMediaDetails'
+import { useMediaDetails } from '../../hooks'
 import { getMediaTypeFromPath } from '../../utils'
 
 import type { FC } from 'react'

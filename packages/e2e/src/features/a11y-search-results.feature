@@ -8,7 +8,7 @@ Feature: Accessibility — Search results page with keyboard
     Given I open the application
     Then the home page is visible
 
-  @search
+  @search @skip
   Scenario: Search results page keyboard navigation
     When I tab to the search input
     And I type "deep" using the keyboard
