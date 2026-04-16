@@ -9,6 +9,8 @@ export class E2EWorld extends World {
   previousUrl!: string
   /** Stores a section locator for cross-step references (e.g. "in that section") */
   currentSection!: Locator
+  /** Stores focused element labels from focus-trap Tab cycling */
+  focusedElements!: string[]
 
   /**
    * Waits for a Module Federation remote to be ready by checking for the
