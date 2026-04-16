@@ -37,6 +37,7 @@ export default defineConfig({
         '**/PhotosErrorBoundary.tsx',
         '**/MediaErrorBoundary.tsx',
         '**/queryClient.ts',
+        '**/e2e/**',
       ],
       reporter: ['text', 'json-summary', 'lcov'],
       reportsDirectory: './coverage',
