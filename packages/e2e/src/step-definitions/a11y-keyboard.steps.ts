@@ -141,7 +141,7 @@ When<E2EWorld>(
   { timeout: 15_000 },
   async function (text: string) {
     // Select all + delete, then type
-    await this.page.keyboard.press('Meta+a')
+    await this.page.keyboard.press('Control+a')
     await this.page.keyboard.press('Backspace')
     await this.page.keyboard.type(text, { delay: 50 })
   }
