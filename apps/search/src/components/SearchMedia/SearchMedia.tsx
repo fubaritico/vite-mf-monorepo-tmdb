@@ -74,10 +74,7 @@ const SearchMedia: FC<SearchMediaProps> = ({
                       {getResultLabel(item)}
                     </Typography>
                     {year && (
-                      <Typography
-                        variant="caption"
-                        className="sr:shrink-0 sr:text-neutral-500"
-                      >
+                      <Typography variant="caption" className="sr:shrink-0">
                         {String(year)}
                       </Typography>
                     )}
