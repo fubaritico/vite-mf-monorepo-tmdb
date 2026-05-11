@@ -134,6 +134,14 @@ vite-mf-monorepo/
 
 ## Development
 
+While developing, each team member can test remote separately, below the example URLs:
+
+- **home**: https://vite-mf-tmdb-home.netlify.app/ in production, https://localhost:3001
+- **details**: https://vite-mf-tmdb-media.netlify.app/movie/687163 in production, https://localhost:3002/movie/687163
+- **photos**: https://vite-mf-tmdb-photos.netlify.app/movie/687163/photos/y8vQKqARUYPktoQTp1kLuHqBZkh in production, https://localhost:3003/movie/687163
+
+Note that in the url, devs have to provide the correct path so avoid router errors.
+
 ### Useful Commands
 
 | Command | Description |

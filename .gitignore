@@ -9,6 +9,7 @@ node_modules/
 
 # Where secrets are stored
 .env
+.env.bck
 /.env
 .env.local
 /.env.local
@@ -25,7 +26,6 @@ test-output.json
 # module federation hidden folder
 .__mf__temp
 **/apis.d.ts
-
 
 # Vitest coverage
 coverage
@@ -44,3 +44,7 @@ packages/e2e/src/reports/report.json
 # Claude
 /scripts/check-claude-wordcount.mjs
 /.agent-workspace
+/.claude/settings.local.json
+
+# NPM
+.npmrc
