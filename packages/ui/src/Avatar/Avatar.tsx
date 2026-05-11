@@ -20,6 +20,22 @@ export interface AvatarProps extends Omit<ComponentProps<'img'>, 'src'> {
   testId?: string
 }
 
+/**
+ * A map defining styles and sizes for different avatar sizes.
+ *
+ * The `sizeMap` object links predefined avatar size keys to their corresponding
+ * stylistic properties, including container dimensions, icon size, and text styles.
+ *
+ * Each avatar size is represented as a key-value pair, where the key is a string
+ * corresponding to the avatar size (e.g., 'xs', 'md', 'xl'), and the value is an
+ * object containing the following properties:
+ *
+ * - `container`: A string representing the CSS classes for the avatar's container dimensions.
+ * - `icon`: A number indicating the size of the icon in the avatar (in pixels).
+ * - `text`: A string specifying the CSS classes for text size.
+ *
+ * This map enables consistent and scalable styling for avatars across different sizes.
+ */
 const sizeMap: Record<
   AvatarSize,
   { container: string; icon: number; text: string }
