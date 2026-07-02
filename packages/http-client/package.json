@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
-    "@hey-api/openapi-ts": "^0.92.3",
+    "@hey-api/openapi-ts": "^0.97.3",
     "@types/node": "catalog:",
     "conventional-changelog": "catalog:",
     "eslint": "^9.0.0",
