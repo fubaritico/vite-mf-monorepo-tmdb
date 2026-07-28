@@ -65,7 +65,7 @@ catalog:
   # Build tools
   tsup: 8.4.0
   autoprefixer: 10.4.21
-  postcss: 8.5.3
+  postcss: 8.5.18
 
   # Testing
   vitest: 3.2.4
